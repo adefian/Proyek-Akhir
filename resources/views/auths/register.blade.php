@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Register &mdash; Web</title>
+  <title>Register &mdash; TS</title>
 
   <!-- General CSS Files -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -13,7 +13,11 @@
   <link rel="stylesheet" href="{{asset('assets/stisla/css/style.css')}}">
   <link rel="stylesheet" href="{{asset('assets/stisla/css/components.css')}}">
 </head>
-
+<style>
+  body {
+    background:linear-gradient(10deg, #6777ef, #fff);
+  }
+</style>
 <body>
   <div id="app">
     <section class="section">
@@ -81,7 +85,7 @@
                     <div class="d-block">
                     	<label for="alamat" class="control-label">Alamat</label>
                     </div>
-                    <input id="alamat" type="alamat" class="form-control" name="alamat" tabindex="2" required>
+                    <textarea id="alamat" type="alamat" class="form-control" name="alamat" tabindex="2" required></textarea>
                     <div class="invalid-feedback">
                       please fill in your alamat
                     </div>
@@ -114,13 +118,13 @@
 
                  <div class="form-group col-6">
                     <div class="d-block">
-                        <label>Wilayah</label>
-                        <select class="form-control selectric">
-                            <option>Indonesia</option>
-                            <option>Palestine</option>
-                            <option>Syria</option>
-                            <option>Malaysia</option>
-                            <option>Thailand</option>
+                        <label for="wilayah" class="control-label">Wilayah</label>
+                        <select name="wilayah" type="text" class="form-control">
+                            <option selected disabled>Pilih Wilayah</option>
+                            <option value="#">Palestine</option>
+                            <option value="#">Syria</option>
+                            <option value="#">Malaysia</option>
+                            <option value="#">Thailand</option>
                         </select>
                     </div>
                     <div class="invalid-feedback">
@@ -128,13 +132,6 @@
                     </div>
                   </div>
                 </div>
-
-                  <div class="form-group">
-                    <div class="custom-control custom-checkbox">
-                      <input type="checkbox" name="remember" class="custom-control-input" tabindex="3" id="remember-me">
-                      <label class="custom-control-label" for="remember-me">Remember Me</label>
-                    </div>
-                  </div>
 
                   <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">

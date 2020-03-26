@@ -11,9 +11,15 @@
 		<link rel="stylesheet" href="{{asset('assets/bootstrap/css/bootstrap.min.css')}}">
 		<!-- <link rel="stylesheet" href="sweetalert/dist/sweetalert.css"> -->
 		<link rel="stylesheet" href="{{asset('css/stisla.css')}}">
+		<link rel="shortcut icon" href="{{asset('assets/img/SmartBin.png')}}">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.14.1/css/mdb.min.css" rel="stylesheet">
+		
 	</head>
 
 	<body>
+		<div class="img-brand">
+			<img src="{{asset('assets/img/SmartBin.png')}}" alt="Brand">
+		</div>
         @include('home.include.navbar')
         
 		@yield('content')
@@ -22,8 +28,10 @@
 
 		<script src="{{asset('js/jquery.min.js')}}"></script>
 		<script src="{{asset('assets/bootstrap/js/bootstrap.min.js')}}"></script>
+		<script src="{{asset('js/stisla.js')}}"></script>
 		<script src="js/jquery.easeScroll.js"></script>
 		<script src="sweetalert/dist/sweetalert.min.js"></script>
-		<script src="{{asset('js/stisla.js')}}"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.14.1/js/mdb.min.js"></script>
 	</body>
 </html>

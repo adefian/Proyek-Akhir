@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role', 
+        'nama', 'email', 'password', 'role', 
     ];
 
     /**
@@ -39,15 +39,15 @@ class User extends Authenticatable
 
     protected $table = "user";
 
-    public function role()
-    {
-        return $this->belongsTo('App\Role', 'id_role');
-    }
+    // public function role()
+    // {
+    //     return $this->belongsTo('App\Role', 'id_role');
+    // }
 
     //membuat fungsi isPimpinan untuk Pimpinan
     public function isPimpinan(){
         //jika role_name=pimpinanecoranger maka benar
-        if($this->role->name == 'pimpinanecoranger'){
+        if($this->role == 'pimpinanecoranger'){
             return true;
         }
             return false;
@@ -56,7 +56,7 @@ class User extends Authenticatable
     //membuat fungsi isPetugaslapangan untuk Petugaslapangan
     public function isPetugaslapangan(){
         //jika role_name=Petugaslapangan maka benar
-        if($this->role->name == 'petugaslapangan'){
+        if($this->role == 'petugaslapangan'){
             return true;
         }
             return false;
@@ -64,7 +64,7 @@ class User extends Authenticatable
 
     public function isKomunitas()
     {
-        if($this->role->name == 'komunitas'){
+        if($this->role == 'komunitas'){
             return true;
         }
             return false;

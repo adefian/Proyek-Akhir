@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\PetugasLapangan;
+use App\User;
 
 class DatapetugaslapanganController extends Controller
 {
@@ -13,7 +15,8 @@ class DatapetugaslapanganController extends Controller
      */
     public function index()
     {
-        return view('admins.layouts_sidebar.datapetugaslapangan');
+        $data = PetugasLapangan::all();
+        return view('admins.layouts_sidebar.datapetugaslapangan.datapetugaslapangan', compact('data'));
     }
 
     /**
@@ -23,7 +26,7 @@ class DatapetugaslapanganController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -34,7 +37,25 @@ class DatapetugaslapanganController extends Controller
      */
     public function store(Request $request)
     {
-        //
+    $akun = ([
+        'nama' => $request->nama,
+        'role' => 'petugaslapangan',
+        'email' => $request->email,
+        'password' => bcrypt('password')
+    ]);
+    $lastid = User::create($akun)->id;
+
+        $user = new PetugasLapangan;
+        $user->nama = $request->nama;
+        $user->nohp = $request->nohp;
+        $user->alamat = $request->alamat;
+        $user->wilayah = $request->wilayah;
+        $user->id_pimpinan_ecoranger = auth()->user()->id;
+        $user->id_user = $lastid;
+        $user->save();
+
+            alert()->success('Selamat','Berhasil menambahkan');
+            return back();
     }
 
     /**
@@ -68,7 +89,27 @@ class DatapetugaslapanganController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $petugaslap = PetugasLapangan::findOrFail($id);
+        $input = ([
+            'nama' => $request->nama,
+            'nohp' => $request->nohp,
+            'alamat' => $request->alamat,
+            'wilayah' => $request->wilayah,
+            'id_pimpinan_ecoranger' => auth()->user()->id
+        ]);
+
+        $id = $petugaslap->id_user;
+        $user = User::findOrFail($id);
+        $input2 = ([
+            'nama' => $request->nama,
+            'email' => $request->email,
+        ]);
+        
+        $petugaslap->update($input);
+        $user->update($input2);
+
+        alert()->success('Berhasil','Data berhasil diedit');
+        return back();
     }
 
     /**
@@ -79,6 +120,14 @@ class DatapetugaslapanganController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $id = PetugasLapangan::find($id);
+        $id_user = $id->id_user;
+        $user = User::find($id_user);
+
+        $user->delete($user);
+        $id->delete($id);
+
+        alert()->success('Sukses','Data berhasil dihapus');
+        return back();
     }
 }

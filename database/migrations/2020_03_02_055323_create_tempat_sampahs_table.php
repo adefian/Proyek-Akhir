@@ -13,7 +13,7 @@ class CreateTempatSampahsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tempat_sampahs', function (Blueprint $table) {
+        Schema::create('tempat_sampah', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('namalokasi');
             $table->string('latitude');
@@ -42,6 +42,6 @@ class CreateTempatSampahsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tempat_sampahs');
+        Schema::dropIfExists('tempat_sampah');
     }
 }

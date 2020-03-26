@@ -1,5 +1,9 @@
 @extends('layouts_admin.admin')
 
+@section('css')
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+@endsection
+
 @section('navbar')
     @include('admins.pimpinan.navbar')
 @endsection
@@ -18,7 +22,7 @@
 
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                  <div class="card card-statistic-1">
+                  <div class="card card-statistic-1 card-primary">
                     <div class="card-icon bg-primary">
                       <i class="fas fa-trash"></i>
                     </div>
@@ -33,7 +37,7 @@
                   </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                  <div class="card card-statistic-1">
+                  <div class="card card-statistic-1 card-danger">
                     <div class="card-icon bg-danger">
                       <i class="far fa-newspaper"></i>
                     </div>
@@ -48,7 +52,7 @@
                   </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                  <div class="card card-statistic-1">
+                  <div class="card card-statistic-1 card-warning">
                     <div class="card-icon bg-warning">
                       <i class="far fa-file"></i>
                     </div>
@@ -63,7 +67,7 @@
                   </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                  <div class="card card-statistic-1">
+                  <div class="card card-statistic-1 card-success">
                     <div class="card-icon bg-success">
                       <i class="fas fa-circle"></i>
                     </div>
@@ -78,28 +82,34 @@
                   </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row justify-content-center">
               <div class="col-12">
-                <div class="card">
-                  <div class="card-wrap">
-                    <div class="card-header">
-                      <h4>statistic</h4>
-                    </div>
-                    <div class="card-body">
-                    <div class="row">
-                      <div class="col-12 col-md-8 col-lg-8">
-                        <div class="card">
+                      <div class="card card-primary">
                           <div class="card-header">
                             <h4>Bar Chart</h4>
                           </div>
                           <div class="card-body">
-                            <canvas id="myChart2"></canvas>
+                            <div class="row">
+                              <div class="col-lg-7 col-12">
+                                <canvas id="myChart2"></canvas>
+                              </div>
+                              <div class="col-lg-5 col-12">
+                                  <div class="form-group">
+                                    <label class="control-label">Date Range Picker</label>
+                                    <div class="input-group">
+                                      <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                          <i class="fas fa-calendar"></i>
+                                        </div>
+                                      </div>
+                                      <input type="text" class="form-control" name="daterange" id="daterange">
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
               
@@ -115,7 +125,7 @@
     <script src="{{asset('js/Chart.min.js')}}"></script>
     <!-- <script src="{{asset('assets/stisla/js/page/modules-chartjs.js')}}"></script> -->
     <script>
-    "use strict";
+      "use strict";
       var ctx = document.getElementById("myChart2").getContext('2d');
       var myChart = new Chart(ctx, {
         type: 'bar',
@@ -159,4 +169,18 @@
         }
       });
     </script>
+
+    <script type="text/javascript">
+            $(function() {
+        $('input[id="daterange"]').daterangepicker({
+          opens: 'left'
+        }, function(start, end, label) {
+          console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+        });
+      });
+    </script>
+@endsection
+
+@section('js')
+
 @endsection

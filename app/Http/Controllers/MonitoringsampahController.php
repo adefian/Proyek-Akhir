@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
-use App\Role;
+use App\TempatSampah;
 
 class MonitoringsampahController extends Controller
 {
@@ -15,8 +15,8 @@ class MonitoringsampahController extends Controller
      */
     public function index()
     {
-        $user = User::all();
-        return view('admins.layouts_sidebar.monitoring_sampah.indikasi', compact('user'));
+        $data = TempatSampah::all();
+        return view('admins.layouts_sidebar.monitoring_sampah.indikasi', compact('data'));
     }
 
     /**
@@ -37,7 +37,12 @@ class MonitoringsampahController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+        TempatSampah::create($input);
+
+        alert()->success('Selamat','Berhasil menambahkan');
+        return back();
+        
     }
 
     /**
@@ -82,7 +87,12 @@ class MonitoringsampahController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $id = TempatSampah::findOrFail($id);
+
+        $id->delete($id);
+
+        alert()->success('Sukses','Data berhasil dihapus');
+        return back();
     }
 
     public function lokasi()

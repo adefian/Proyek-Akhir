@@ -1,12 +1,12 @@
 @extends('layouts_admin.admin')
 
-@if(auth()->user()->id_role == 1)
+@if(auth()->user()->role == 'pimpinanecoranger')
     @include('admins.pimpinan.include')
 @endif
-@if(auth()->user()->id_role == 2)
+@if(auth()->user()->role == 'petugaslapangan')
     @include('admins.petugas_lapangan.include')
 @endif
-@if(auth()->user()->id_role == 3)
+@if(auth()->user()->role == 'komunitas')
     @include('admins.komunitas.include')
 @endif
 
