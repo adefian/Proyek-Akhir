@@ -17,21 +17,21 @@ class CreateAgendasTable extends Migration
             $table->bigIncrements('id');
             $table->string('nama');
             $table->string('keterangan');
-            $table->string('jenis_agenda');
-            $table->dateTime('tanggal');
+            $table->string('jenis_agenda')->default(0);
+            $table->string('tanggal');
             $table->timestamps();
-            $table->bigInteger('id_pimpinan_ecoranger')->unsigned();
-            $table->foreign('id_pimpinan_ecoranger')
+            $table->bigInteger('id_user')->unsigned()->nullable();
+            $table->foreign('id_user')
                     ->references('id')
-                    ->on('pimpinan_ecoranger')
+                    ->on('user')
                     ->onDelete('cascade')
                     ->onUpdate('cascade');
-            $table->bigInteger('id_komunitas')->unsigned();
-            $table->foreign('id_komunitas')
-                    ->references('id')
-                    ->on('komunitas')
-                    ->onDelete('cascade')
-                    ->onUpdate('cascade');
+            // $table->bigInteger('id_komunitas')->unsigned()->nullable();
+            // $table->foreign('id_komunitas')
+            //         ->references('id')
+            //         ->on('komunitas')
+            //         ->onDelete('cascade')
+            //         ->onUpdate('cascade');
         });
     }
 

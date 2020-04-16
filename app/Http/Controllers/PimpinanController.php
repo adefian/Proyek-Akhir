@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\TempatSampah;
+use App\User;
+use App\Komunitas;
+use App\AnggotaKomunitas;
 
 class PimpinanController extends Controller
 {
@@ -14,7 +18,11 @@ class PimpinanController extends Controller
     
     public function index()
     {
-        return view ('admins.pimpinan.index');
+        $user = User::all()->count();
+        $komunitas = Komunitas::all()->count();
+        $tempatsampah = TempatSampah::all()->count();
+        $anggotakomunitas = AnggotaKomunitas::all()->count();
+        return view ('admins.pimpinan.index',compact('tempatsampah','user','komunitas','anggotakomunitas'));
     }
 
     /**

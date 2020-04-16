@@ -30,6 +30,7 @@ Route::group(['middleware' => ['auth','pimpinanecoranger']],function(){
     Route::get('validasi', 'MonitoringkomunitasController@lokasi')->name('validasi');
     Route::resource('datapetugaslapangan', 'DatapetugaslapanganController');
     Route::resource('reviewsaranecobrick', 'EcobrickController');
+    Route::resource('daftarsampah', 'SampahController');
     Route::get('logout-pimpinan','AuthController@logout')->name('logout-pimpinan'); 
 });
 
@@ -44,6 +45,7 @@ Route::group(['middleware' => ['auth','petugaslapangan']],function(){
     Route::get('validasi-petugaslap', 'MonitoringkomunitasController@lokasi')->name('validasi-petugaslapangan');
     Route::resource('datapetugaslapangan-petugaslap', 'DatapetugaslapanganController');
     Route::resource('reviewsaranecobrick-petugaslap', 'EcobrickController');
+    Route::resource('daftarsampah-petugaslap', 'SampahController');
     Route::get('logout-petugaslap','AuthController@logout')->name('logout-petugaslapangan'); 
 });
 
@@ -58,6 +60,7 @@ Route::group(['middleware' => ['auth','komunitas']],function(){
     Route::get('validasi-komunitas', 'MonitoringkomunitasController@lokasi')->name('validasi-komunitas');
     Route::resource('datapetugaslapangan-komunitas', 'DatapetugaslapanganController');
     Route::resource('reviewsaranecobrick-komunitas', 'EcobrickController');
+    Route::resource('daftarsampah-komunitas', 'SampahController');
     Route::get('logout-komunitas','AuthController@logout')->name('logout-komunitas'); 
 });
 

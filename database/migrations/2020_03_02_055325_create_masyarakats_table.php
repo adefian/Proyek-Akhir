@@ -15,12 +15,22 @@ class CreateMasyarakatsTable extends Migration
     {
         Schema::create('masyarakat', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('username');
-            $table->string('password');
             $table->string('nama');
             $table->integer('nohp');
             $table->string('alamat');
             $table->timestamps();
+            $table->bigInteger('hadiah_id')->unsigned()->nullable();
+            $table->foreign('hadiah_id')
+                    ->references('id')
+                    ->on('hadiah')
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
+            $table->bigInteger('point_id')->unsigned()->nullable();
+            $table->foreign('point_id')
+                    ->references('id')
+                    ->on('point')
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
         });
     }
 

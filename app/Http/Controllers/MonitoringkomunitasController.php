@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Komunitas;
 
 class MonitoringkomunitasController extends Controller
 {
@@ -84,7 +85,8 @@ class MonitoringkomunitasController extends Controller
 
     public function lokasi()
     {
-        return view('admins.layouts_sidebar.monitoring_komunitas.lokasi');
+        $data = Komunitas::all();
+        return view('admins.layouts_sidebar.monitoring_komunitas.lokasi', compact('data'));
     }
 
     public function validasi()

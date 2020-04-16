@@ -7,17 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 class PetugasLapangan extends Model
 {
     protected $fillable = [
-        'nama', 'nohp', 'alamat', 'wilayah', 'id_user','id_pimpinan_ecoranger'
+        'nama', 'nohp', 'alamat', 'wilayah', 'user_id','pimpinan_ecoranger_id'
     ];
 
     protected $table = 'petugas_lapangan';
 
-    public function petugasygmengisi()
+    public function petugasygmenambahkan()
     {
-        return $this->belongsTo('App\User','id_pimpinan_ecoranger');
+        return $this->belongsTo('App\User','pimpinan_ecoranger_id');
     }
     public function akun()
     {
-        return $this->belongsTo('App\User','id_user');
+        return $this->belongsTo('App\User','user_id');
     }
 }

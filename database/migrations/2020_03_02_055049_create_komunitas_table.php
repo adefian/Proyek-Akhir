@@ -17,7 +17,7 @@ class CreateKomunitasTable extends Migration
             $table->bigIncrements('id');
             $table->string('nama');
             $table->string('daerah');
-            $table->string('keterangan');
+            $table->string('keterangan')->nullable();
             $table->string('level');
             $table->string('latitude');
             $table->string('longitude');

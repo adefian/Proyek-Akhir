@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Agenda;
-use App\User;
 
-class AgendaController extends Controller
+class SampahController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,12 +12,8 @@ class AgendaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
-        $data = Agenda::all();
-        // $data2 = Agenda::only('user_id');
-        // $data->load('petugasygmenambahkan:id,nama');
-        // return response()->json(['data' => $data]);
-        return view('admins.layouts_sidebar.monitoring_komunitas.kelola_agenda', compact('data'));
+    {
+        return view ('admins.layouts_sidebar.daftar_pembuang_sampah.index');
     }
 
     /**
@@ -40,18 +34,7 @@ class AgendaController extends Controller
      */
     public function store(Request $request)
     {
-        $user = auth()->user()->id;
-        $input = ([
-            'nama' => $request->nama,
-            'keterangan' => $request->keterangan,
-            'jenis_agenda' => $request->jenis_agenda,
-            'tanggal' => $request->tanggal,
-            'user_id' => $user,
-        ]);
-        Agenda::create($input);
-
-        alert()->success('Data berhasil ditambahkan','Selamat');
-        return back();
+        //
     }
 
     /**
@@ -85,21 +68,7 @@ class AgendaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $agenda = Agenda::findOrFail($id);
-        
-        $user =  auth()->user()->id;
-        
-        $input = ([
-            'nama' => $request->nama,
-            'keterangan' => $request->keterangan,
-            'jenis_agenda' => $request->jenis_agenda,
-            'tanggal' => $request->tanggal,
-            'user_id' => $user,
-        ]);
-
-        $agenda->update($input);
-        alert()->success('Berhasil','Data Berhasil diedit');
-        return back();
+        //
     }
 
     /**
@@ -110,10 +79,6 @@ class AgendaController extends Controller
      */
     public function destroy($id)
     {
-        $agenda = Agenda::find($id);
-
-        $agenda->delete($id);
-        alert()->success('Sukses','Data berhasil dihapus');
-        return back();
+        //
     }
 }

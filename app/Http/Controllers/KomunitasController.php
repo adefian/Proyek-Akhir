@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Komunitas;
 
 class KomunitasController extends Controller
 {
@@ -14,7 +15,8 @@ class KomunitasController extends Controller
     
     public function index()
     {
-        return view ('admins.komunitas.index');
+        $data = Komunitas::all();
+        return view ('admins.komunitas.index', compact('data'));
     }
 
     /**

@@ -36,11 +36,18 @@ class MonitoringsampahController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $input = $request->all();
+    {        
+        $user =  auth()->user()->id;
+        
+        $input = ([
+            'namalokasi' => $request->namalokasi,
+            'latitude' => $request->latitude,
+            'longitude' => $request->longitude,
+            'user_id' => $user,
+        ]);
         TempatSampah::create($input);
 
-        alert()->success('Selamat','Berhasil menambahkan');
+        alert()->success('Selamat','Data berhasil ditambahkan');
         return back();
         
     }
@@ -76,7 +83,21 @@ class MonitoringsampahController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $tempatsampah = TempatSampah::findOrFail($id);
+        
+        $user =  auth()->user()->id;
+        
+        $input = ([
+            'namalokasi' => $request->namalokasi,
+            'latitude' => $request->latitude,
+            'longitude' => $request->longitude,
+            'user_id' => $user,
+            'status' => $request->status
+        ]);
+
+        $tempatsampah->update($input);
+        alert()->success('Berhasil','Data Berhasil diedit');
+        return back();
     }
 
     /**
@@ -97,6 +118,7 @@ class MonitoringsampahController extends Controller
 
     public function lokasi()
     {
-        return view('admins.layouts_sidebar.monitoring_sampah.lokasi');
+        $data = TempatSampah::all();
+        return view('admins.layouts_sidebar.monitoring_sampah.lokasi', compact('data'));
     }
 }

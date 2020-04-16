@@ -20,8 +20,14 @@ class CreatePetugasLapangansTable extends Migration
             $table->string('alamat');
             $table->string('wilayah');
             $table->timestamps();
-            $table->bigInteger('id_user')->unsigned();
-            $table->foreign('id_user')
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')
+                    ->references('id')
+                    ->on('user')
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
+            $table->bigInteger('pimpinan_ecoranger_id')->unsigned();
+            $table->foreign('pimpinan_ecoranger_id')
                     ->references('id')
                     ->on('user')
                     ->onDelete('cascade')

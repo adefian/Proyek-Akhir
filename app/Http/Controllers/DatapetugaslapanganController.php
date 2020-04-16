@@ -50,8 +50,8 @@ class DatapetugaslapanganController extends Controller
         $user->nohp = $request->nohp;
         $user->alamat = $request->alamat;
         $user->wilayah = $request->wilayah;
-        $user->id_pimpinan_ecoranger = auth()->user()->id;
-        $user->id_user = $lastid;
+        $user->pimpinan_ecoranger_id = auth()->user()->id;
+        $user->user_id = $lastid;
         $user->save();
 
             alert()->success('Selamat','Berhasil menambahkan');
@@ -95,10 +95,10 @@ class DatapetugaslapanganController extends Controller
             'nohp' => $request->nohp,
             'alamat' => $request->alamat,
             'wilayah' => $request->wilayah,
-            'id_pimpinan_ecoranger' => auth()->user()->id
+            'pimpinan_ecoranger_id' => auth()->user()->id
         ]);
 
-        $id = $petugaslap->id_user;
+        $id = $petugaslap->user_id;
         $user = User::findOrFail($id);
         $input2 = ([
             'nama' => $request->nama,

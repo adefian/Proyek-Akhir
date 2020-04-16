@@ -24,14 +24,14 @@
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                   <div class="card card-statistic-1 card-primary">
                     <div class="card-icon bg-primary">
-                      <i class="fas fa-trash"></i>
+                      <i class="fas fa-dumpster"></i>
                     </div>
                     <div class="card-wrap">
                       <div class="card-header">
-                        <h4>Jumlah Tempat Sampah</h4>
+                        <h4>Tempat Sampah</h4>
                       </div>
                       <div class="card-body">
-                        10
+                        {{$tempatsampah}}
                       </div>
                     </div>
                   </div>
@@ -39,14 +39,14 @@
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                   <div class="card card-statistic-1 card-danger">
                     <div class="card-icon bg-danger">
-                      <i class="far fa-newspaper"></i>
+                      <i class="fas fa-users"></i>
                     </div>
                     <div class="card-wrap">
                       <div class="card-header">
-                        <h4>Jumlah Komunitas</h4>
+                        <h4>Komunitas</h4>
                       </div>
                       <div class="card-body">
-                        42
+                        {{$komunitas}}
                       </div>
                     </div>
                   </div>
@@ -54,14 +54,14 @@
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                   <div class="card card-statistic-1 card-warning">
                     <div class="card-icon bg-warning">
-                      <i class="far fa-file"></i>
+                      <i class="fas fa-id-badge"></i>
                     </div>
                     <div class="card-wrap">
                       <div class="card-header">
-                        <h4>Anggota</h4>
+                        <h4>Anggota Komunitas</h4>
                       </div>
                       <div class="card-body">
-                        1,201
+                        {{$anggotakomunitas}}
                       </div>
                     </div>
                   </div>
@@ -69,50 +69,81 @@
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                   <div class="card card-statistic-1 card-success">
                     <div class="card-icon bg-success">
-                      <i class="fas fa-circle"></i>
+                      <i class="fas fa-user-circle"></i>
                     </div>
                     <div class="card-wrap">
                       <div class="card-header">
                         <h4>User</h4>
                       </div>
                       <div class="card-body">
-                        47
+                        {{$user}}
                       </div>
                     </div>
                   </div>
                 </div>
             </div>
+
             <div class="row justify-content-center">
               <div class="col-12">
-                      <div class="card card-primary">
-                          <div class="card-header">
-                            <h4>Bar Chart</h4>
-                          </div>
-                          <div class="card-body">
-                            <div class="row">
-                              <div class="col-lg-7 col-12">
-                                <canvas id="myChart2"></canvas>
-                              </div>
-                              <div class="col-lg-5 col-12">
-                                  <div class="form-group">
-                                    <label class="control-label">Date Range Picker</label>
-                                    <div class="input-group">
-                                      <div class="input-group-prepend">
-                                        <div class="input-group-text">
-                                          <i class="fas fa-calendar"></i>
-                                        </div>
-                                      </div>
-                                      <input type="text" class="form-control" name="daterange" id="daterange">
-                                    </div>
+                <div class="card card-primary">
+                    <div class="card-header">
+                      <h4>Aksi Tempat Sampah</h4>
+                    </div>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-lg-7 col-12">
+
+                        </div>
+                        <div class="col-lg-5 col-12">
+                            <div class="form-group">
+                              <label class="control-label">Date Range Picker</label>
+                              <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text">
+                                    <i class="fas fa-calendar"></i>
                                   </div>
                                 </div>
+                                <input type="text" class="form-control" name="daterange" id="daterange">
                               </div>
+                            </div>
                           </div>
                         </div>
-                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
+
+            <div class="row justify-content-center">
+              <div class="col-12">
+                <div class="card card-primary">
+                    <div class="card-header">
+                      <h4>Bar Chart</h4>
+                    </div>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-lg-7 col-12">
+                          <canvas id="myChart2"></canvas>
+                        </div>
+                        <div class="col-lg-5 col-12">
+                            <div class="form-group">
+                              <label class="control-label">Date Range Picker</label>
+                              <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text">
+                                    <i class="fas fa-calendar"></i>
+                                  </div>
+                                </div>
+                                <input type="text" class="form-control" name="daterange" id="daterange">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
               
+            </div>
           <div class="section-body">
           </div>
         </section>
@@ -175,7 +206,7 @@
         $('input[id="daterange"]').daterangepicker({
           opens: 'left'
         }, function(start, end, label) {
-          console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+          console.log("A new date selection was made: " + start.format('DD-MM-YYYY') + ' to ' + end.format('DD-MM-YYYY'));
         });
       });
     </script>

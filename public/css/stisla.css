@@ -160,9 +160,9 @@ html, body {
 }
 .img-brand img{
 	width: 70px;
-	height: 70px;
+	height: 45px;
 	margin-left: 10px;
-	margin-top: 10px;
+	margin-top: 20px;
 }
 
 /*navbar*/
@@ -193,9 +193,12 @@ html, body {
 }
 
 .navbar.main-navbar .nav-link {
-	color: #000;
+	font-family: apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    -webkit-font-smoothing: auto;
+    font-variant: all-petite-caps;
+    color: #00000099;
 	padding: 0 20px;
-	font-size: 14px;
+	font-size: 15px;
 	letter-spacing: 1px;
 	/* color: rgba(255,255,255,.75); */
 	position: relative;
@@ -353,7 +356,7 @@ html, body {
 
 /*hero*/
 .hero {
-	height: 665px; 	
+	height: 700px; 	
 	width: auto;
 	color: #fff;
 	position: relative;
@@ -440,13 +443,13 @@ html, body {
 }
 
 .view{
-	height: 665px;
+	height: 700px;
 	width: auto;
 	overflow: hidden;
 }
 .view img{
-	min-height: 665px;
-	min-width: 500px;
+	min-height: 700px;
+	min-width: auto;
 }
 
 /*section*/
@@ -859,6 +862,16 @@ footer i {
 		height: 400px; 	
 		width: auto;
 	}
+	
+	.view{
+		height: auto;
+		width: auto;
+		overflow: hidden;
+	}
+	.view img{
+		min-height: auto;
+		min-width: auto;
+	}
 	.view .mask {
 		position: absolute;
 		top: 0;
@@ -891,6 +904,15 @@ footer i {
 	}
 	.navbar.main-navbar .form-inline {
 		margin-left: 0;
+	}
+	.view{
+		height: auto;
+		width: auto;
+		overflow: hidden;
+	}
+	.view img{
+		min-height: auto;
+		min-width: auto;
 	}
 
 }
@@ -936,11 +958,11 @@ footer i {
 		width: auto;
 	}
 	.view{
-		height: 300px;
+		height: auto;
 		width: auto;
 	}
 	.view img{
-		height: 250px;
+		height: auto;
 		width: auto;
 	}
 }

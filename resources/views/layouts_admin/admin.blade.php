@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="{{asset('assets/stisla/css/style.css')}}">
   <link rel="stylesheet" href="{{asset('assets/stisla/css/components.css')}}">
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <link rel="shortcut icon" href="{{asset('assets/img/SmartBin.png')}}">
+  <link rel="shortcut icon" href="{{asset('assets/img/pick me up.png')}}">
   
 </head>
 

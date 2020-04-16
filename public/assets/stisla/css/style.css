@@ -2760,15 +2760,14 @@ body.layout-3 .main-footer {
   display: inline-block;
   width: 100%;
   text-align: center;
-  height: 60px;
-  line-height: 60px; }
+  height: 80px;
+  line-height: 90px; }
   .main-sidebar .sidebar-brand.sidebar-brand-sm {
     display: none; }
   .main-sidebar .sidebar-brand a {
     text-decoration: none;
-    text-transform: uppercase;
     letter-spacing: 1.5px;
-    font-weight: 700;
+    font-weight: 600;
     color: #000; }
 
 .main-sidebar .sidebar-user {

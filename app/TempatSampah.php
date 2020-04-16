@@ -11,8 +11,13 @@ class TempatSampah extends Model
     use Notifiable;
 
     protected $fillable = [
-        'namalokasi', 'latitude', 'longitude', 'status', 'id_pimpinan_ecoranger', 'id_petugas_lapangan'
+        'namalokasi', 'latitude', 'longitude', 'status', 'user_id'
     ];
 
     protected $table = 'tempat_sampah';
+
+    public function petugasygmenambahkan()
+    {
+        return $this->belongsTo('App\User', 'user_id');
+    }
 }

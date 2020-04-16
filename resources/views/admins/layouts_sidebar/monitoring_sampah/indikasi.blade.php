@@ -38,41 +38,26 @@
                     <div class="card-body">
                     <div class="row">
                         <div class="col-7">
-                          <div id="map"></div>
+                          <div id="map" style="border-radius: 3px;"></div>
                         </div>
                         <div class="col-5">
                           <h6 class="text-center mb-4">Titik Lokasi yang terdaftar</h6>
                           <div class="table-responsive">
                             <table class="table">
                               <tbody>
+                              @foreach($data as $datas)
                                 <tr>
                                   <th scope="row"> <i class="fas fa-trash"></i> </th>
-                                  <td>Banyuwangi</td>
+                                  <td>{{$datas->namalokasi}}</td>
                                   <td>
+                                  @if($datas->status === 0)
                                     <button class="btn btn-success mr-1" style="width:100px;">Kosong</button>
+                                   @elseif($datas->status === 1)
+                                    <button class="btn btn-danger mr-1" style="width:100px;">Penuh</button>
                                   </td>
+                                  @endif
                                 </tr>
-                                <tr>
-                                  <th scope="row"> <i class="fas fa-trash"></i> </th>
-                                  <td>Pulau Merah</td>
-                                  <td>
-                                    <button class="btn btn-danger" style="width:100px;">Penuh</button>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <th scope="row"> <i class="fas fa-trash"></i> </th>
-                                  <td>Pancer</td>
-                                  <td>
-                                    <button class="btn btn-warning" style="width:100px;">Hampir</button>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <th scope="row"> <i class="fas fa-trash"></i> </th>
-                                  <td>Pantai Grajagan</td>
-                                  <td>
-                                    <button class="btn btn-danger" style="width:100px;">Penuh</button>
-                                  </td>
-                                </tr>
+                              @endforeach
                               </tbody>
                             </table>
                           </div>
@@ -89,54 +74,79 @@
           </div>
         </section>
     </div>
+
+    <script>
+      var array =[];
+    </script>
+
+    @foreach ($data as $datas)
+
+    <script type="text/javascript">
+
+        //Memasukkan data tabel ke array
+        array.push(['<?php echo $datas->namalokasi?>','<?php echo $datas->latitude?>','<?php echo $datas->longitude?>','<?php echo $datas->petugasygmenambahkan->nama?>']);
+
+    </script> 
+
+    @endforeach
+
 @endsection
 
 @section('js')
+    
+
+<!-- ============================ Maps ===================== -->
 
     <script>
-      // Note: This example requires that you consent to location sharing when
-      // prompted by your browser. If you see the error "The Geolocation service
-      // failed.", it means you probably did not give permission for the browser to
-      // locate you.
-      var map, infoWindow;
+     
       function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -8.408698, lng: 114.2339090},
-          zoom: 9.5
-        });
-        infoWindow = new google.maps.InfoWindow;
 
-        var marker = new google.maps.Marker({
-          position: {lat: -8.208698, lng: 114.3739090},
-          map: map,
-          title: 'Banyuwangi'
-        });
-        var marker = new google.maps.Marker({
-          position: {lat: -8.5986634, lng: 114.0048919},
-          map: map,
-          title: 'Pancer'
-        });
-        var marker = new google.maps.Marker({
-          position: {lat: -8.6083443, lng: 114.2348919},
-          map: map,
-          title: 'Pantai Grajagan Banyuwangi'
+        var bounds = new google.maps.LatLngBounds();
+
+        var peta = new google.maps.Map(document.getElementById("map"), {
+          center : {lat: -8.408698, lng: 114.2339090},
+          zoom : 9.5
         });
 
-        var marker = new google.maps.Marker({
-          position: {lat: -8.5982537, lng: 114.0294512},
-          map: map,
-          title: 'Pulau Merah'
-        });
+        var infoWindow = new google.maps.InfoWindow(), marker, i;
 
-        marker.addListener('click', function() {
-          infowindow.open(map, marker);
-        });
-        
+        for (var i = 0; i < array.length; i++) {
+          
+          var position = new google.maps.LatLng(array[i][1],array[i][2]);
 
+          bounds.extend(position);
+
+          var marker = new google.maps.Marker({
+
+            position : position,
+            map : peta,
+            icon : 'https://img.icons8.com/plasticine/40/000000/marker.png',
+          });
+
+          google.maps.event.addListener(marker, 'click', (function(marker, i) {
+
+            return function() {
+
+              var infoWindowContent = 
+              '<div class="content">'+
+              '<h6>'+array[i][0]+'</h6>'+
+              '<p>Titik Koordinat : '+array[i][1]+', '+array[i][2]+'<br/>'+
+              'Petugas yang Menambahkan : '+array[i][3]+'</p>'
+              '</div>';
+
+              infoWindow.setContent(infoWindowContent);
+
+              infoWindow.open(peta, marker);
+            }
+
+          })(marker, i));
+        }
+       
       }
-
       
     </script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnKRIk6ikiot_B-xKKZDvkzNWpYFjbgLs&callback=initMap"
-  type="text/javascript"></script>
+<!-- ============================ End Maps ===================== -->
+    
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDv-h2II7DbFQkpL9pDxNRq3GWXqS5Epts&callback=initMap" type="text/javascript"></script>
+
 @endsection

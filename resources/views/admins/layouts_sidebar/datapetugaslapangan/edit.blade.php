@@ -12,10 +12,10 @@
                 <form method="POST" action="/datapetugaslapangan" class="needs-validation" novalidate="" id="editForm" enctype="multipart/form-data">
             @endif
             @if(auth()->user()->role == 'petugaslapangan')
-                <form method="POST" action="/datapetugaslapangan-petugaslap" class="needs-validation" novalidate="" id="editFormpetugaslap" method="POST" enctype="multipart/form-data">
+                <form method="POST" action="/datapetugaslapangan-petugaslap" class="needs-validation" novalidate="" id="editFormpetugaslap" enctype="multipart/form-data">
             @endif
             @if(auth()->user()->role == 'komunitas')
-                <form method="POST" action="/datapetugaslapangan-komunitas" class="needs-validation" novalidate="" id="editFormkomunitas" method="POST" enctype="multipart/form-data">
+                <form method="POST" action="/datapetugaslapangan-komunitas" class="needs-validation" novalidate="" id="editFormkomunitas" enctype="multipart/form-data">
             @endif
                 {{ csrf_field() }}
                 {{ method_field('PATCH') }}

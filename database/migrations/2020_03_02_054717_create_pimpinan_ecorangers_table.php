@@ -19,8 +19,8 @@ class CreatePimpinanEcorangersTable extends Migration
             $table->integer('nohp');
             $table->string('alamat');
             $table->timestamps();
-            $table->bigInteger('id_user')->unsigned();
-            $table->foreign('id_user')
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')
                     ->references('id')
                     ->on('user')
                     ->onDelete('cascade')

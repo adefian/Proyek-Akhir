@@ -94,7 +94,6 @@
                                 <th>Alamat</th>
                                 <th>Wilayah</th>
                                 <th>Aksi</th>
-                                <th style="display:none;">id</th>
                             </tr>
                         </tfoot>
                     </table>
@@ -136,6 +135,8 @@
 @endsection
 
 @section('js')
+
+ <!-- ============================ Edit Data ========================== -->
     <script>
      
      $(document).ready(function() {
@@ -167,6 +168,8 @@
       });
      </script>
  
+ <!-- ============================ Hapus Data ========================== -->
+
      <script type="text/javascript">
       function deleteData(id)
       {

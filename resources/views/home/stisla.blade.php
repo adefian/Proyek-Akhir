@@ -11,14 +11,14 @@
 		<link rel="stylesheet" href="{{asset('assets/bootstrap/css/bootstrap.min.css')}}">
 		<!-- <link rel="stylesheet" href="sweetalert/dist/sweetalert.css"> -->
 		<link rel="stylesheet" href="{{asset('css/stisla.css')}}">
-		<link rel="shortcut icon" href="{{asset('assets/img/SmartBin.png')}}">
+		<link rel="shortcut icon" href="{{asset('assets/img/pick me up.png')}}">
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.14.1/css/mdb.min.css" rel="stylesheet">
 		
 	</head>
 
 	<body>
 		<div class="img-brand">
-			<img src="{{asset('assets/img/SmartBin.png')}}" alt="Brand">
+			<img src="{{asset('assets/img/pick me up.png')}}" alt="Brand">
 		</div>
         @include('home.include.navbar')
         

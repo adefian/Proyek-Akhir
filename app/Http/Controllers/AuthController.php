@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use Alert;
+use App\User;
 
 class AuthController extends Controller
 {
@@ -18,7 +19,7 @@ class AuthController extends Controller
         if(Auth::attempt($request->only('email','password'))){
             
             if(auth()->user()->role == 'pimpinanecoranger'){
-                alert()->success('Selamat datang','Berhasil');
+                alert()->success('Halo','Selamat datang');
                 return redirect()->route('pimpinan.index');
             }
             elseif (auth()->user()->role == 'petugaslapangan') {

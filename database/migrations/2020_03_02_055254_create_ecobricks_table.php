@@ -17,9 +17,9 @@ class CreateEcobricksTable extends Migration
             $table->bigIncrements('id');
             $table->string('nama_pengirimsaran');
             $table->string('foto_diusulkan');
-            $table->string('foto_diaplikasikan');
-            $table->string('keterangan');
-            $table->integer('level');
+            $table->string('foto_diaplikasikan')->nullable();
+            $table->string('keterangan')->nullable();
+            $table->integer('level')->default(0);
             $table->timestamps();
             $table->bigInteger('id_pimpinan_ecoranger')->unsigned();
             $table->foreign('id_pimpinan_ecoranger')

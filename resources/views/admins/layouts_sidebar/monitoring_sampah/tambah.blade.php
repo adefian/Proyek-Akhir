@@ -10,8 +10,8 @@
         <div class="modal-body">
          <div class="row">
           <div class="col-lg-6 col-sm-12 col-12">
-            <div id="mapInput" style="width: 100%; height: 300px; border-radius: 3px;"></div>
-            <button class="btn btn-danger mt-2" id="btn_hapus">Perbarui Lokasi</button>
+            <div id="mapInput" style="width: 100%; height: 320px; border-radius: 3px;"></div>
+            <p>klik satu kali untuk menentukan posisi</p>
           </div>
           <div class="col-lg-6 col-sm-12 col-12">
             @if(auth()->user()->role == 'pimpinanecoranger')
