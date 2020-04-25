@@ -15,7 +15,7 @@ class CreateKomunitasTable extends Migration
     {
         Schema::create('komunitas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nama');
+            $table->string('email');
             $table->string('daerah');
             $table->string('keterangan')->nullable();
             $table->string('level');

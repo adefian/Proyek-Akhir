@@ -35,7 +35,7 @@
                 <div class="form-group">
                     <label for="tanggal">Tanggal</label>
                     <div class="input-group">    
-                        <input name="tanggal" placeholder="Selected date" type="text" id="tanggal1" class="form-control" required>
+                        <input name="tanggal" placeholder="Selected date" type="date" class="form-control" required>
                     </div>
                 </div>
                 <div class="form-group">

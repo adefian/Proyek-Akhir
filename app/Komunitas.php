@@ -9,7 +9,7 @@ class Komunitas extends Model
     protected $table = 'komunitas';
 
     protected $fillable = [
-        'nama','daerah','keterangan','level','latitude','longitude','user_id'
+        'email','daerah','keterangan','level','latitude','longitude','user_id'
     ];
 
     public function petugasygmenambahkan()

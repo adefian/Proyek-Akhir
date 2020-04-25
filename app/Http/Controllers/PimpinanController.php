@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
+use Auth;
 use App\TempatSampah;
 use App\User;
 use App\Komunitas;
 use App\AnggotaKomunitas;
+use App\PimpinanEcoranger;
 
 class PimpinanController extends Controller
 {
@@ -54,11 +57,15 @@ class PimpinanController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = Auth::user();
+
+        $data = PimpinanEcoranger::where('user_id', $id)->first();
+        
+        return view('admins.pimpinan.profile', compact('data','password'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified resource. 
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -77,7 +84,41 @@ class PimpinanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // fetching the user model 
+        $user = Auth::user();
+
+        $pimpinan = PimpinanEcoranger::findOrFail($id);
+        $input = ([
+            'nama' => $request->namalengkap,
+            'nohp' => $request->nohp,
+            'alamat' => $request->alamat,
+            'bio' => $request->bio,
+        ]);
+
+        if ($file = $request->file('foto')) {
+            $nama = time() . $file->getClientOriginalName();
+            $file->move('assets/img/avatar/', $nama);  
+            $input['foto'] = $nama;
+        }
+
+        $ed = $pimpinan->user_id;
+        $user = User::findOrFail($ed);
+        $input2 = ([
+            'nama' => $request->username,
+            'email' => $request->email,
+        ]);
+
+        if ($request->password) {
+            $pass = bcrypt($request->password);
+            $input2['password'] = $pass;
+        }
+
+        
+        $pimpinan->update($input);
+        $user->update($input2);
+
+        alert()->success('Berhasil','Data berhasil diedit');
+        return back();
     }
 
     /**

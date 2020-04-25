@@ -12,17 +12,33 @@
   <link rel="stylesheet" href="{{asset('assets/stisla/css/style.css')}}">
   <!-- <link rel="stylesheet" href="{{asset('assets/stisla/css/components.css')}}"> -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+  
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <link rel="shortcut icon" href="{{asset('assets/img/pick me up.png')}}">
+
 </head>
 <style>
   body {
-    background:linear-gradient(10deg, #6777ef, #fff);
+    background-color: #6777ef; 
+    -webkit-animation: color 12s ease-in  0s infinite alternate running;
+    -moz-animation: color 12s linear  0s infinite alternate running;
+    animation: color 12s linear  0s infinite alternate running;
+    }
+
+    @-webkit-keyframes color {
+        0% { background-color: #6777ef; }
+        25% { background-color: #67b7ef; }
+        55% { background-color: #2855a7; }
+        75% { background-color: #07a3ff; }
+        100% { background-color: #2163f7f2; }
+    }
   }
+
 </style>
 
 <body>
   
-  <div id="app">
+    
     @include('sweet::alert')
     <section class="section">
       <div class="container mt-5">
@@ -32,7 +48,7 @@
               <img src="../assets/img/stisla-fill.svg" alt="logo" width="100" class="shadow-light rounded-circle">
             </div> -->
 
-            <div class="card card-primary">
+            <div class="card card-primary shadow">
               <div class="card-header"><h4>Login</h4></div>
 
               <div class="card-body">
@@ -42,7 +58,7 @@
                     <label for="email" class="control-label">Email</label>
                       <input id="email" type="email" class="form-control" name="email" tabindex="1" required autofocus>
                     <div class="invalid-feedback">
-                      Please fill in your email
+                      Silahkan isi Email Anda
                     </div>
                   </div>
 
@@ -57,7 +73,7 @@
                     </div>
                     <input id="password" type="password" class="form-control" name="password" tabindex="2" required>
                     <div class="invalid-feedback">
-                      please fill in your password
+                      Silahkan isi Password Anda
                     </div>
                   </div>
 
@@ -69,15 +85,15 @@
                   </div> -->
 
                   <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">Login</button>
+                    <button type="submit" id="klik" class="btn btn-klik btn-lg btn-block" tabindex="4">Login</button>
                   </div>
                 </form>
                 <div class="text-center mt-4 mb-3">
-                  <div class="text-job text-muted">Login With Me</div>
+                  <div class="text-job text-muted">Login disini</div>
                 </div>
                 <div class="row sm-gutters">
                     <div class="mt-5 text-muted text-center">
-                        Don't have an account community? <a href="register">Create One</a>
+                        Ingin gabung sebagai anggota komunitas ? <a href="register">Daftar</a>
                     </div>
                 </div>
 
@@ -87,7 +103,21 @@
         </div>
       </div>
     </section>
-  </div>
+    <svg class="hero-waves fixed-bottom" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28 " preserveAspectRatio="none">
+      <defs>
+        <path id="wave-path" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z">
+      </defs>
+      <g class="wave1">
+        <use xlink:href="#wave-path" x="50" y="3" fill="rgba(255,255,255, .1)">
+      </g>
+      <g class="wave2">
+        <use xlink:href="#wave-path" x="50" y="0" fill="rgba(255,255,255, .2)">
+      </g>
+      <g class="wave3">
+        <use xlink:href="#wave-path" x="50" y="9" fill="#fff">
+      </g>
+    </svg>
+  
 
   <!-- General JS Scripts -->
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>

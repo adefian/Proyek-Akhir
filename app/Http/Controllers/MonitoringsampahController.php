@@ -45,6 +45,13 @@ class MonitoringsampahController extends Controller
             'longitude' => $request->longitude,
             'user_id' => $user,
         ]);
+
+        if ($file = $request->file('foto')) {
+            $nama = time() .'_'. $file->getClientOriginalName();
+            $file->move('assets/img/tempatsampah/', $nama);  
+            $input['foto'] = $nama;
+        }
+
         TempatSampah::create($input);
 
         alert()->success('Selamat','Data berhasil ditambahkan');
@@ -94,6 +101,12 @@ class MonitoringsampahController extends Controller
             'user_id' => $user,
             'status' => $request->status
         ]);
+
+        if ($file = $request->file('foto')) {
+            $nama = time() .'_'. $file->getClientOriginalName();
+            $file->move('assets/img/tempatsampah/', $nama);  
+            $input['foto'] = $nama;
+        }
 
         $tempatsampah->update($input);
         alert()->success('Berhasil','Data Berhasil diedit');

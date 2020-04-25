@@ -12,13 +12,31 @@
   <!-- Template CSS -->
   <link rel="stylesheet" href="{{asset('assets/stisla/css/style.css')}}">
   <link rel="stylesheet" href="{{asset('assets/stisla/css/components.css')}}">
+  
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <link rel="shortcut icon" href="{{asset('assets/img/pick me up.png')}}">
 </head>
 <style>
-  body {
-    background:linear-gradient(10deg, #6777ef, #fff);
+    body {
+    background-color: #6777ef; 
+    -webkit-animation: color 12s ease-in  0s infinite alternate running;
+    -moz-animation: color 12s linear  0s infinite alternate running;
+    animation: color 12s linear  0s infinite alternate running;
+    }
+
+    @-webkit-keyframes color {
+        0% { background-color: #6777ef; }
+        25% { background-color: #67b7ef; }
+        55% { background-color: #2855a7; }
+        75% { background-color: #07a3ff; }
+        100% { background-color: #2163f7f2; }
+    }
   }
 </style>
 <body>
+
+  @include('sweet::alert')
+
   <div id="app">
     <section class="section">
       <div class="container mt-5">
@@ -32,7 +50,7 @@
               <div class="card-header"><h4>Register</h4></div>
 
               <div class="card-body">
-              <form method="POST" action="postlogin" class="needs-validation" novalidate="">
+              <form method="POST" action="postregister" class="needs-validation" novalidate="">
                   {{csrf_field()}}
 
                 <div class="row">
@@ -43,7 +61,7 @@
                     </div>
                     <input id="nama" type="nama" class="form-control" name="nama" tabindex="2" required>
                     <div class="invalid-feedback">
-                      please fill in your name
+                    Silahkan isi Nama Anda 
                     </div>
                   </div>
                  </div> 
@@ -55,7 +73,7 @@
                     </div>
                     <input id="username" type="username" class="form-control" name="username" tabindex="2" required>
                     <div class="invalid-feedback">
-                      please fill in your username
+                    Silahkan isi Username Anda
                     </div>
                   </div>
                  </div> 
@@ -65,7 +83,7 @@
                     <label for="email">Email</label>
                     <input id="email" type="email" class="form-control" name="email" tabindex="1" required autofocus>
                     <div class="invalid-feedback">
-                      Please fill in your email
+                    Silahkan isi Email Anda
                     </div>
                   </div>
 
@@ -75,7 +93,7 @@
                     </div>
                     <input id="password" type="password" class="form-control" name="password" tabindex="2" required>
                     <div class="invalid-feedback">
-                      please fill in your password
+                    Silahkan isi Password Anda
                     </div>
                   </div>
                 
@@ -87,7 +105,7 @@
                     </div>
                     <textarea id="alamat" type="alamat" class="form-control" name="alamat" tabindex="2" required></textarea>
                     <div class="invalid-feedback">
-                      please fill in your alamat
+                    Silahkan isi Alamat Anda
                     </div>
                   </div>
                  </div> 
@@ -99,7 +117,7 @@
                     </div>
                     <input id="nohp" type="nohp" class="form-control" name="nohp" tabindex="2" required>
                     <div class="invalid-feedback">
-                      please fill in your no hp
+                    Silahkan isi No Handphone Anda / yang dapat dihubungi
                     </div>
                   </div>
                  </div> 
@@ -108,33 +126,37 @@
                 <div class="row">
                   <div class="form-group col-6">
                     <div class="d-block">
-                    	<label for="jeniskelamin" class="control-label">Gender</label>
+                    	<label for="jenis_kelamin" class="control-label">Jenis Kelamin</label>
                     </div>
-                    <input id="jeniskelamin" type="jeniskelamin" class="form-control" name="jeniskelamin" tabindex="2" required>
+                      <select name="jenis_kelamin" type="text" class="form-control">
+                        <option selected disabled>Pilih Jenis kelamin</option>
+                        <option value="laki-laki">Laki-laki</option>
+                        <option value="Perempuan">Perempuan</option>
+                      </select>
                     <div class="invalid-feedback">
-                      please fill in your gender
+                    Silahkan isi Jenis Kelamin Anda
                     </div>
                   </div>
 
                  <div class="form-group col-6">
                     <div class="d-block">
-                        <label for="wilayah" class="control-label">Wilayah</label>
-                        <select name="wilayah" type="text" class="form-control">
-                            <option selected disabled>Pilih Wilayah</option>
-                            <option value="#">Palestine</option>
-                            <option value="#">Syria</option>
-                            <option value="#">Malaysia</option>
-                            <option value="#">Thailand</option>
-                        </select>
+                        <label for="daerah" class="control-label">Daerah</label>
                     </div>
+                        <select name="daerah" type="text" class="form-control">
+                            <option selected disabled>Pilih Daerah</option>
+                            @foreach($data as $datas)
+                                <option value="{{$datas->id}}">{{$datas->daerah}}</option>
+                            @endforeach
+                            
+                        </select>
                     <div class="invalid-feedback">
-                      please fill in your wilayah
+                      please fill in your daerah 
                     </div>
                   </div>
                 </div>
 
                   <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
+                    <button type="submit" class="btn btn-klik btn-lg btn-block" tabindex="4">
                       Register
                     </button>
                   </div>
@@ -144,7 +166,7 @@
                 </div>
                 <div class="row sm-gutters">
                     <div class="mt-3 mr-3 text-muted text-center">
-                        Wilayah anda belum terdaftar ? <a href="{{ route('daftarwilayah')}}">Daftarkan Wilayah</a>
+                        Daerah anda belum terdaftar ? <a href="{{ route('daftardaerah')}}">Daftarkan Daerah</a>
                     </div>
 
                     <div class="mt-2 text-muted text-center">
@@ -159,6 +181,20 @@
       </div>
     </section>
   </div>
+  <svg class="hero-waves fixed-bottom" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28 " preserveAspectRatio="none">
+      <defs>
+        <path id="wave-path" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z">
+      </defs>
+      <g class="wave1">
+        <use xlink:href="#wave-path" x="50" y="3" fill="rgba(255,255,255, .1)">
+      </g>
+      <g class="wave2">
+        <use xlink:href="#wave-path" x="50" y="0" fill="rgba(255,255,255, .2)">
+      </g>
+      <g class="wave3">
+        <use xlink:href="#wave-path" x="50" y="9" fill="#fff">
+      </g>
+    </svg>
 
   <!-- General JS Scripts -->
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>

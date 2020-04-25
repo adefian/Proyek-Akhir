@@ -11,7 +11,7 @@ class TempatSampah extends Model
     use Notifiable;
 
     protected $fillable = [
-        'namalokasi', 'latitude', 'longitude', 'status', 'user_id'
+        'namalokasi', 'latitude', 'longitude', 'status', 'user_id', 'foto',
     ];
 
     protected $table = 'tempat_sampah';

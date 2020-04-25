@@ -45,6 +45,12 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label for="foto">Foto</label> 
+                                <div class="input-group">    
+                                    <input name="foto" type="file" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <div class="input-group">   
                                     <input name="status" id="status" type="hidden" class="form-control" value="0"> 
                                 </div>

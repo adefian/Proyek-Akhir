@@ -44,14 +44,18 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label for="foto">Foto</label> 
+                    <div class="input-group">    
+                        <input name="foto" type="file" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
                     <div class="input-group">   
                         <input name="status" type="hidden" class="form-control" value="0"> 
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">Tambah</button>
-                    <button type="button" class="btn btn-secondary float-right" data-dismiss="modal">Batal</button>
-                </div>
+                    <button type="button" class="btn btn-secondary float-right ml-2" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-success float-right">Tambah</button>
             </form>
           </div>
          </div>

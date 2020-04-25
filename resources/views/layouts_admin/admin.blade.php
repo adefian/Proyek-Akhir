@@ -108,8 +108,6 @@
   <!-- Template JS File -->
   <script src="{{asset('assets/stisla/js/scripts.js')}}"></script>
   <script src="{{asset('assets/stisla/js/custom.js')}}"></script>
-
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   
   <!-- Page Specific JS File -->
 

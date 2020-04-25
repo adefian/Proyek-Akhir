@@ -84,7 +84,7 @@
     <script type="text/javascript">
 
         //Memasukkan data tabel ke array
-        array.push(['<?php echo $datas->namalokasi?>','<?php echo $datas->latitude?>','<?php echo $datas->longitude?>','<?php echo $datas->petugasygmenambahkan->nama?>']);
+        array.push(['<?php echo $datas->namalokasi?>','<?php echo $datas->latitude?>','<?php echo $datas->longitude?>','<?php echo $datas->petugasygmenambahkan->nama?>','<?php echo $datas->foto ?>']);
 
     </script> 
 
@@ -121,6 +121,7 @@
             position : position,
             map : peta,
             icon : 'https://img.icons8.com/plasticine/40/000000/marker.png',
+            title : array[i][0]
           });
 
           google.maps.event.addListener(marker, 'click', (function(marker, i) {
@@ -128,11 +129,12 @@
             return function() {
 
               var infoWindowContent = 
-              '<div class="content">'+
+              '<div class="content"><p>'+
               '<h6>'+array[i][0]+'</h6>'+
-              '<p>Titik Koordinat : '+array[i][1]+', '+array[i][2]+'<br/>'+
-              'Petugas yang Menambahkan : '+array[i][3]+'</p>'
-              '</div>';
+              '<img height="130" style="margin:0 auto; display:block;" src="assets/img/tempatsampah/'+array[i][4]+'"/><br/>'+
+              'Petugas yang Menambahkan : '+array[i][3]+'<br/>'+
+              'Titik Koordinat : '+array[i][1]+', '+array[i][2]+'<br/>'+
+              '</p></div>';
 
               infoWindow.setContent(infoWindowContent);
 

@@ -19,6 +19,7 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
+            alert()->warning('Anda telah masuk dalam akun','Maaf');
             return redirect()->back();
         }
 

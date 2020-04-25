@@ -17,7 +17,10 @@ Route::get('login','AuthController@login')->middleware('guest')->name('login');
 Route::post('postlogin','AuthController@postlogin')->middleware('guest');
 
 Route::get('register','AuthController@register')->middleware('guest')->name('register');
-Route::get('daftarwilayah','AuthController@daftarwilayah')->middleware('guest')->name('daftarwilayah');
+Route::post('postregister','AuthController@postregister')->middleware('guest');
+
+Route::get('daftardaerah','AuthController@daftardaerah')->name('daftardaerah');
+Route::post('postdaftardaerah','AuthController@postdaftardaerah');
 
 Route::group(['middleware' => ['auth','pimpinanecoranger']],function(){
     

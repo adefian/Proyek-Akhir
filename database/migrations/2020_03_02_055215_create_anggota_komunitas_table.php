@@ -16,11 +16,10 @@ class CreateAnggotaKomunitasTable extends Migration
         Schema::create('anggota_komunitas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nama');
-            $table->integer('nohp');
+            $table->bigInteger('nohp');
             $table->string('alamat');
             $table->string('jenis_kelamin');
-            $table->string('wilayah');
-            $table->string('level');
+            $table->string('level')->default(0);
             $table->timestamps();
             $table->bigInteger('id_user')->unsigned();
             $table->foreign('id_user')

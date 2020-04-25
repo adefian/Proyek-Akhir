@@ -130,6 +130,91 @@ a:not(.btn-social-icon):not(.btn-social):not(.page-link) .fab {
 .font-weight-normal {
   font-weight: 500 !important; }
 
+.hero-waves {
+    display: block;
+    margin-top: 60px;
+    width: 100%;
+    height: 60px;
+    z-index: 5;
+}
+
+.wave1 use {
+  -webkit-animation: move-forever1 10s linear infinite;
+  animation: move-forever1 10s linear infinite;
+  -webkit-animation-delay: -2s;
+  animation-delay: -2s;
+}
+
+.wave2 use {
+  -webkit-animation: move-forever2 8s linear infinite;
+  animation: move-forever2 8s linear infinite;
+  -webkit-animation-delay: -2s;
+  animation-delay: -2s;
+}
+
+.wave3 use {
+  -webkit-animation: move-forever3 6s linear infinite;
+  animation: move-forever3 6s linear infinite;
+  -webkit-animation-delay: -2s;
+  animation-delay: -2s;
+}
+
+
+@-webkit-keyframes move-forever1 {
+  0% {
+    transform: translate(85px, 0%);
+  }
+  100% {
+    transform: translate(-90px, 0%);
+  }
+}
+
+@keyframes move-forever1 {
+  0% {
+    transform: translate(85px, 0%);
+  }
+  100% {
+    transform: translate(-90px, 0%);
+  }
+}
+
+@-webkit-keyframes move-forever2 {
+  0% {
+    transform: translate(-90px, 0%);
+  }
+  100% {
+    transform: translate(85px, 0%);
+  }
+}
+
+@keyframes move-forever2 {
+  0% {
+    transform: translate(-90px, 0%);
+  }
+  100% {
+    transform: translate(85px, 0%);
+  }
+}
+
+@-webkit-keyframes move-forever3 {
+  0% {
+    transform: translate(-90px, 0%);
+  }
+  100% {
+    transform: translate(85px, 0%);
+  }
+}
+
+@keyframes move-forever3 {
+  0% {
+    transform: translate(-90px, 0%);
+  }
+  100% {
+    transform: translate(85px, 0%);
+  }
+}
+
+
 .lead {
   line-height: 34px; }
 
@@ -1338,6 +1423,28 @@ h6 .badge {
   .btn-outline-white:hover, .btn-outline-white:focus, .btn-outline-white:active, .btn-outline-white.disabled:hover, .btn-outline-white.disabled:focus, .btn-outline-white.disabled:active {
     background-color: #fff;
     color: #6777ef; }
+
+.btn-klik{
+    background-color: #6777ef; 
+    -webkit-animation: color 12s ease-in  0s infinite alternate running;
+    -moz-animation: color 12s linear  0s infinite alternate running;
+    animation: color 12s linear  0s infinite alternate running;
+    }
+
+    @-webkit-keyframes color {
+      0% { background-color: #6777ef; }
+      25% { background-color: #67b7ef; }
+      55% { background-color: #2855a7; }
+      75% { background-color: #07a3ff; }
+      100% { background-color: #2163f7f2; }
+    }
+    
+  .btn-klik:focus, .btn-klik.disabled:focus {
+    background-color: #394eea !important; }
+    .btn-klik:focus:active, .btn-klik.disabled:focus:active {
+      background-color: #394eea !important; }
+  .btn-klik:active, .btn-klik:hover, .btn-klik.disabled:active, .btn-klik.disabled:hover {
+    background-color: #394eea !important; }
 
 .btn-round {
   border-radius: 30px;

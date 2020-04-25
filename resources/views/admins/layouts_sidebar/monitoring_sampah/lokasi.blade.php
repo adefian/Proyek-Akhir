@@ -191,6 +191,7 @@
              }
  
              var data = table.row($tr).data();
+             console.log(data);
  
              $('#namalokasi').val(data[1]);
              $('.latude').val(data[2]);
