@@ -14,7 +14,7 @@ class PetugasLapangan extends Model
 
     public function petugasygmenambahkan()
     {
-        return $this->belongsTo('App\User','pimpinan_ecoranger_id');
+        return $this->belongsTo('App\PimpinanEcoranger','pimpinan_ecoranger_id');
     }
     public function akun()
     {

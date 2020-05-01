@@ -328,7 +328,7 @@
 
                 //Current Marker 
                 var currentMarker2 = new google.maps.Marker({
-                        position: { lat: latitude, lng: longitude }, 
+                        position: latlong, 
                         icon : 'https://img.icons8.com/plasticine/40/000000/marker.png',
                         map: peta2, 
                         title: "Lokasi Awal"

@@ -37,25 +37,36 @@
                   <div class="card-wrap">
                     <div class="card-body">
                     <div class="row">
-                        <div class="col-7">
+                        <div class="col-lg-6 col-12">
                           <div id="map" style="border-radius: 3px;"></div>
                         </div>
-                        <div class="col-5">
-                          <h6 class="text-center mb-4">Titik Lokasi yang terdaftar</h6>
+                        <div class="col-lg-6 col-12">
+                          <h6 class="text-center mb-4 mt-4">Titik Lokasi yang terdaftar</h6>
                           <div class="table-responsive">
-                            <table class="table">
+                            <table class="table table-sm" id="dataTable" style="width:100%;">
+                              <thead>
+                                <tr>
+                                  <th></th>
+                                  <th>daerah</th>
+                                  <th class="text-center">Status</th>
+                                  <th style="display:none;"></th>
+                                </tr>
+                              </thead>
                               <tbody>
                               @foreach($data as $datas)
                                 <tr>
-                                  <th scope="row"> <i class="fas fa-trash"></i> </th>
+                                  <td scope="row"> <i class="fas fa-trash"></i></td>
                                   <td>{{$datas->namalokasi}}</td>
-                                  <td>
+                                  <td class="text-center">
                                   @if($datas->status === 0)
-                                    <button class="btn btn-success mr-1" style="width:100px;">Kosong</button>
+                                    <button class="edit btn btn-sm btn-success" style="width:100px;" title="Ubah disini">Kosong</button>
                                    @elseif($datas->status === 1)
-                                    <button class="btn btn-danger mr-1" style="width:100px;">Penuh</button>
-                                  </td>
+                                    <button class="edit btn btn-sm btn-danger" style="width:100px;" title="Ubah disini">Penuh</button>
+                                   @elseif($datas->status === 2)
+                                    <button class="edit btn btn-sm btn-warning" style="width:100px;" title="Ubah disini">Pengambilan</button>
                                   @endif
+                                  </td>
+                                  <td style="display:none;">{{$datas->id}}</td>
                                 </tr>
                               @endforeach
                               </tbody>
@@ -68,12 +79,57 @@
               </div>
           </div>
 
-            
-              
-          <div class="section-body">
-          </div>
         </section>
     </div>
+
+<!-- Form indikasi sampah  -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="editModal">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Status</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+        <div class="modal-body">
+
+          <h3>Status saat ini <h3 id="status"></h3> </h3>
+            @if(auth()->user()->role == 'pimpinanecoranger')
+                <form method="POST" action="/ubahstatussampah" class="needs-validation" novalidate="" id="editForm" enctype="multipart/form-data">
+            @endif
+            @if(auth()->user()->role == 'petugaslapangan')
+                <form method="POST" action="/ubahstatussampah-petugaslap" class="needs-validation" novalidate="" id="editFormpetugaslap" method="POST" enctype="multipart/form-data">
+            @endif
+            @if(auth()->user()->role == 'komunitas')
+                <form method="POST" action="/ubahstatussampah-komunitas" class="needs-validation" novalidate="" id="editFormkomunitas" method="POST" enctype="multipart/form-data">
+            @endif
+                {{ csrf_field() }}
+                {{ method_field('POST') }}
+
+                <div class="form-group">
+                    <div class="input-group">                      
+                    <select name="status" type="text" class="form-control">
+                        <option selected disabled>Ubah Status</option>
+                        <option value="0">Kosong</option>
+                        <option value="2">Pengambilan</option>
+                        <option value="1">Penuh</option>
+                      </select>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-warning">Ubah</button>
+                    <button type="button" class="btn btn-secondary float-right" data-dismiss="modal">Batal</button>
+                </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- End Form indikasi sampah  -->
+
+<!-- ============= Array ============= -->
 
     <script>
       var array =[];
@@ -89,6 +145,8 @@
     </script> 
 
     @endforeach
+  
+<!-- ============= Array ============= -->
 
 @endsection
 
@@ -148,6 +206,36 @@
       
     </script>
 <!-- ============================ End Maps ===================== -->
+
+<!-- ============================ Edit Data ========================== -->
+  <script>
+     
+     $(document).ready(function() {
+ 
+         var table = $('#dataTable').DataTable();
+ 
+         table.on('click', '.edit', function (){
+ 
+             $tr = $(this).closest('tr');
+             if ($($tr).hasClass('child')) {
+                 $tr = $tr.prev('.parent');
+             }
+ 
+             var data = table.row($tr).data();
+             console.log(data);
+ 
+             var element = document.getElementById("status");
+             element.innerHTML = data[2];
+            //  
+             $('#editForm').attr('action', '/ubahstatussampah/'+data[3]);
+             $('#editFormpetugaslap').attr('action', '/ubahstatussampah-petugaslap/'+data[3]);
+             $('#editFormkomunitas').attr('action', '/ubahstatussampah-komunitas/'+data[3]);
+             $('#editModal').modal('show');
+         });
+ 
+      });
+     </script>
+<!-- ============================ End Edit Data ===================== -->
     
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDv-h2II7DbFQkpL9pDxNRq3GWXqS5Epts&callback=initMap" type="text/javascript"></script>
 

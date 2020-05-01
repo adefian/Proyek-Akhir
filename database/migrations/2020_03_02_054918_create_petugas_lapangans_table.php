@@ -29,7 +29,7 @@ class CreatePetugasLapangansTable extends Migration
             $table->bigInteger('pimpinan_ecoranger_id')->unsigned();
             $table->foreign('pimpinan_ecoranger_id')
                     ->references('id')
-                    ->on('user')
+                    ->on('pimpinan_ecoranger')
                     ->onDelete('cascade')
                     ->onUpdate('cascade');
         });

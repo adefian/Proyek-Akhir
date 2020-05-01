@@ -14,18 +14,13 @@
   <li class="nav-item dropdown">
     <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i> <span>Monitoring Komunitas</span></a>
     <ul class="dropdown-menu">
-      <li><a class="nav-link" href="/lokasiagenda">Lokasi</a></li>
+      <li><a class="nav-link" href="/daftarkomunitas">Daftar Komunitas</a></li>
       <li><a class="nav-link" href="/kelolaagenda">Kelola Agenda</a></li>
+      <li><a class="nav-link" href="/validasi">Validasi</a></li>
+
     </ul>
   </li>
   <li class="menu-header">Manajemen</li>
-  <li class="nav-item dropdown">
-    <a href="#" class="nav-link has-dropdown"><i class="fas fa-calendar-alt"></i> <span>Data Komunitas</span></a>
-    <ul class="dropdown-menu">
-      <li><a class="nav-link" href="/daftarkomunitas">Daftar Komunitas</a></li>
-      <li><a class="nav-link" href="/validasi">Validasi</a></li>
-    </ul>
-  </li>
   <li class="nav-item dropdown">
     <a class="nav-link" href="/datapetugaslapangan"><i class="fas fa-user-shield"></i><span>Data Petugas Lapangan</span></a>
   </li>

@@ -14,7 +14,8 @@ class MonitoringkomunitasController extends Controller
      */
     public function index()
     {
-        return view('admins.layouts_sidebar.data_komunitas.daftar_komunitas');
+        $data = Komunitas::where('level', 1)->get();
+        return view('admins.layouts_sidebar.monitoring_komunitas.daftar_komunitas', compact('data'));
     }
 
     /**
@@ -35,7 +36,20 @@ class MonitoringkomunitasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $input = ([
+            'daerah' => $request->daerah,
+            'email' => auth()->user()->email,
+            'keterangan' => $request->keterangan,
+            'latitude' => $request->latitude,
+            'longitude' => $request->longitude,
+            'level' => 1
+        ]);
+
+        Komunitas::create($input);
+
+        alert()->success('Selamat','Data berhasil ditambahkan');
+        return back();
     }
 
     /**
@@ -69,7 +83,18 @@ class MonitoringkomunitasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $komunitas = Komunitas::findOrFail($id);
+        
+        $input = ([
+            'daerah' => $request->daerah,
+            'keterangan' => $request->keterangan,
+            'latitude' => $request->latitude,
+            'longitude' => $request->longitude,
+        ]);
+
+        $komunitas->update($input);
+        alert()->success('Berhasil','Data Berhasil diedit');
+        return back();
     }
 
     /**
@@ -80,17 +105,39 @@ class MonitoringkomunitasController extends Controller
      */
     public function destroy($id)
     {
-        //
-    }
+        $id = Komunitas::findOrFail($id);
 
-    public function lokasi()
-    {
-        $data = Komunitas::all();
-        return view('admins.layouts_sidebar.monitoring_komunitas.lokasi', compact('data'));
+        $id->delete($id);
+
+        alert()->success('Berhasil','Data berhasil dihapus');
+        return back();
     }
 
     public function validasi()
     {
-        # code...
+        $data = Komunitas::where('level', 0)->get();
+        return view('admins.layouts_sidebar.monitoring_komunitas.validasi', compact('data'));
+    }
+
+    public function editvalidasi(Request $request, $id)
+    {
+        $komunitas = Komunitas::findOrFail($id);
+        
+        $input = ([
+            'level' => $request->level
+        ]);
+
+        $komunitas->update($input);
+        alert()->success('Berhasil validasi data', 'telah tervalidasi');
+        return redirect('daftarkomunitas');
+    }
+
+    public function hapusvalidasi($id)
+    {
+        $id = Komunitas::findOrFail($id);
+        $id->delete();
+
+        alert()->success('Berhasil','Data Berhasil dihapus');
+        return back();
     }
 }

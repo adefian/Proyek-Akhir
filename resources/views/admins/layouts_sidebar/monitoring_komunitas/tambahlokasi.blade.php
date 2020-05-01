@@ -2,53 +2,59 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title">Tambahkan Agenda</h5>
+            <h5 class="modal-title">Tambahkan Komunitas</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
         <div class="modal-body">
+          <div class="row">
+            <div class="col-lg-6 col-sm-12 col-12">
+                <div id="mapInput" style="width: 100%; height: 320px; border-radius: 3px;"></div>
+                <p>klik satu kali untuk menentukan posisi</p>
+            </div>
+            <div class="col-lg-6 col-sm-12 col-12">
+                @if(auth()->user()->role == 'pimpinanecoranger')
+                    <form class="needs-validation" novalidate="" action="daftarkomunitas" method="POST" enctype="multipart/form-data">
+                @endif
+                @if(auth()->user()->role == 'petugaslapangan')
+                    <form class="needs-validation" novalidate="" action="daftarkomunitas-petugaslap" method="POST" enctype="multipart/form-data">
+                @endif
+                @if(auth()->user()->role == 'komunitas')
+                    <form class="needs-validation" novalidate="" action="daftarkomunitas-komunitas" method="POST" enctype="multipart/form-data">
+                @endif
+                    {{csrf_field()}}
 
-            @if(auth()->user()->role == 'pimpinanecoranger')
-                <form class="needs-validation" novalidate="" action="daftarkomunitas" method="POST" enctype="multipart/form-data">
-            @endif
-            @if(auth()->user()->role == 'petugaslapangan')
-                <form class="needs-validation" novalidate="" action="daftarkomunitas-petugaslap" method="POST" enctype="multipart/form-data">
-            @endif
-            @if(auth()->user()->role == 'komunitas')
-                <form class="needs-validation" novalidate="" action="daftarkomunitas-komunitas" method="POST" enctype="multipart/form-data">
-            @endif
-                {{csrf_field()}}
-
-                <div class="form-group">
-                    <label for="nama">Nama Agenda</label> 
-                    <div class="input-group">   
-                        <input name="nama" type="text" class="form-control" placeholder="Nama Agenda" required>      
+                    <div class="form-group">
+                        <label for="daerah">Daerah</label> 
+                        <div class="input-group">   
+                            <input name="daerah" type="text" class="form-control" placeholder="Daerah" required>      
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="keterangan">Keterangan</label> 
-                    <div class="input-group">  	
-                        <textarea type="text" name="keterangan" class="form-control" placeholder="Keterangan" style="min-height:43px;" required></textarea>
+                    <div class="form-group">
+                        <label for="keterangan">Keterangan</label> 
+                        <div class="input-group">   
+                            <textarea name="keterangan" type="text" class="form-control" placeholder="Keterangan" required></textarea>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="tanggal">Tanggal</label>
-                    <div class="input-group">    
-                        <input name="tanggal" placeholder="Selected date" type="text" id="tanggal1" class="form-control datetimepicker" required>
+                    <div class="form-group">
+                        <label for="latitude">Latitude</label> 
+                        <div class="input-group">  	
+                            <input type="number" step="any" id="lat" name="latitude" class="form-control" required>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="jenis_agenda">Jenis Agenda</label>
-                    <div class="input-group">    
-                        <input name="jenis_agenda" type="text" class="form-control" placeholder="Jenis Agenda" required>
+                    <div class="form-group">
+                        <label for="longitude">Longitude</label> 
+                        <div class="input-group">    
+                            <input name="longitude" step="any" id="leng" type="number" class="form-control" required>
+                        </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">Tambah</button>
-                    <button type="button" class="btn btn-secondary float-right" data-dismiss="modal">Batal</button>
-                </div>
-            </form>
+                        <button type="button" class="btn btn-secondary float-right ml-2" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-success float-right">Tambah</button>
+                </form>
+            </div>
+          </div>
+        </div>
     </div>
   </div>
 </div>

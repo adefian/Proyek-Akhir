@@ -37,19 +37,27 @@
                   <div class="card-wrap">
                     <div class="card-body">
                     <div class="row">
-                        <div class="col-7">
+                        <div class="col-lg-6 col-12">
                           <div id="map" style="border-radius: 3px;"></div>
                         </div>
-                        <div class="col-5">
-                          <h6 class="text-center mb-4">Titik Lokasi Komunitas</h6>
+                        <div class="col-lg-6 col-12">
+                          <h6 class="text-center mb-4 mt-4">Titik Lokasi Komunitas</h6>
                               <button data-toggle="modal" data-target="#modalCreate" class="btn btn-success btn-sm fas fa-user-plus float-right mr-4" title="Tambahkan disini" style="margin-left: auto;"></button>
                           <div class="table-responsive">
-                            <table class="table">
+                            <table class="table table-sm" id="dataTable">
+                              <thead>
+                                <tr>
+                                  <th></th>
+                                  <th>Daerah</th>
+                                  <th></th>
+                                  <th style="display:none;"></th>
+                                </tr>
+                              </thead>
                               <tbody>
                               @foreach($data as $datas)
                                 <tr>
                                   <th scope="row"> <i class="fas fa-users"></i> </th>
-                                  <td style="max-width:165px;">{{$datas->nama}}</td>
+                                  <td style="max-width:165px;">{{$datas->daerah}}</td>
                                   <td class="text-right">
                                   <button class="edit btn btn-warning btn-sm fa fa-edit" title="Edit disini"></button>
 
@@ -70,6 +78,7 @@
                                       @endif
 
                                   </td>
+                                  <td style="display:none;">{{$datas->id}}</td>
                                 </tr>
                               @endforeach
                               </tbody>
@@ -122,7 +131,7 @@
     <script>
 
       //Memasukkan data tabel ke array 
-      array.push(['<?php echo $datas->latitude ?>','<?php echo $datas->longitude ?>','<?php echo $datas->nama ?>','<?php echo $datas->daerah ?>','<?php echo $datas->keterangan ?>']);
+      array.push(['<?php echo $datas->latitude ?>','<?php echo $datas->longitude ?>','<?php echo $datas->daerah ?>','<?php echo $datas->keterangan ?>']);
     </script>
     @endforeach
   <!-- ====================== end Array ================== -->
@@ -130,62 +139,195 @@
 
 @section('js')
 
-<!-- ============================ Maps ===================== -->
+<!-- ====================== Maps ====================== -->
 
     <script>
-     
-      function initMap() {
 
-        var bounds = new google.maps.LatLngBounds();
+        function initialize() {
+            //Cek Support Geolocation
+            if(navigator.geolocation){
 
-        var peta = new google.maps.Map(document.getElementById("map"), {
-          center : {lat: -8.408698, lng: 114.2339090},
-          zoom : 9.5
-        });
+            //Mengambil Fungsi golocation
+            navigator.geolocation.getCurrentPosition(lokasi);
 
-        var infoWindow = new google.maps.InfoWindow(), marker, i;
+            }
+            else{
 
-        for (var i = 0; i < array.length; i++) {
-          
-          var position = new google.maps.LatLng(array[i][0],array[i][1]);
-
-          bounds.extend(position);
-
-          var marker = new google.maps.Marker({
-
-            position : position,
-            map : peta,
-            icon : 'https://img.icons8.com/plasticine/40/000000/marker.png',
-          });
-
-          google.maps.event.addListener(marker, 'click', (function(marker, i) {
-
-            return function() {
-
-              var infoWindowContent = 
-              '<div class="content">'+
-              '<h6>'+array[i][2]+'</h6>'+
-              '<p>Titik Koordinat : '+array[i][0]+', '+array[i][1]+'<br/>'+
-              'Daerah : '+array[i][3]+'<br/>'
-              'Keterangan : '+array[i][4]+'</p>'+
-              '</div>';
-
-              infoWindow.setContent(infoWindowContent);
-
-              infoWindow.open(peta, marker);
+            swal("Maaf Browser tidak Support HTML 5");
             }
 
-          })(marker, i));
-        }
-       
-      }
-      
-    </script>
-<!-- ============================ End Maps ===================== -->
+    //maps 
+            var bounds = new google.maps.LatLngBounds();
+
+            var maps = new google.maps.Map(document.getElementById("map"), {
+              center : {lat: -8.408698, lng: 114.2339090},
+              zoom : 9.5
+            });
+
+            var infoWindow = new google.maps.InfoWindow(), marker, i;
+
+            for (var i = 0; i < array.length; i++) {
+              
+              var position = new google.maps.LatLng(array[i][0],array[i][1]);
+
+              bounds.extend(position);
+
+              var marker = new google.maps.Marker({
+
+                position : position,
+                map : maps,
+                icon : 'https://img.icons8.com/plasticine/40/000000/marker.png',
+                title : array[i][2]
+              });
+
+              google.maps.event.addListener(marker, 'click', (function(marker, i) {
+
+                return function() {
+
+                  var infoWindowContent = 
+                  '<div class="content">'+
+                  '<h6>'+array[i][2]+'</h6>'+
+                  '<p>Titik Koordinat : '+array[i][0]+', '+array[i][1]+'<br/>'+
+                  'Daerah : '+array[i][2]+'<br/>'
+                  'Keterangan : '+array[i][3]+'</p>'+
+                  '</div>';
+
+                  infoWindow.setContent(infoWindowContent);
+
+                  infoWindow.open(maps, marker);
+                }
+
+              })(marker, i));
+            }
+          
+        //maps
+
+            //Variabel Marker
+
+            var markers;
+            var marker2;
+
+            function taruhMarker(peta, posisiTitik){
+                
+                if( markers ){
+                // pindahkan marker
+                markers.setPosition(posisiTitik);
+                } else {
+                // buat marker baru
+                markers = new google.maps.Marker({
+                    position: posisiTitik,
+                    map: peta,
+                    icon : 'https://img.icons8.com/plasticine/40/000000/marker.png',
+                });
+                }
+                
+            }
+
+            function taruhMarker2(peta2, posisiTitik2){
+                
+                if( marker2 ){
+                // pindahkan marker
+                marker2.setPosition(posisiTitik2);
+                } else {
+                // buat marker baru
+                marker2 = new google.maps.Marker({
+                    position: posisiTitik2,
+                    map: peta2,
+                    icon : 'https://img.icons8.com/plasticine/40/000000/marker.png',
+                });
+                }
+                
+            }
+
+            //Buat Peta Input
+
+            var peta = new google.maps.Map(document.getElementById("mapInput"), {
+                    center: {lat: -8.408698, lng: 114.2339090},
+                    zoom: 9
+                });
+
+            var peta2 = new google.maps.Map(document.getElementById("mapInput2"), {
+                    center: {lat: -8.408698, lng: 114.2339090},
+                    zoom: 9
+                });
+
+
+            //Fungsi untuk geolocation
+            function lokasi(position){
+
+                //Mengirim data koordinat ke form input
+                document.getElementById("lat").value = position.coords.latitude;
+                document.getElementById("leng").value = position.coords.longitude;
+
+                //Current Location
+                var lat = position.coords.latitude;
+                var long = position.coords.longitude;
+                var latlong = new google.maps.LatLng(lat, long);
+
+                
+
+                //Current Marker 
+                var currentMarker = new google.maps.Marker({
+                        position: latlong, 
+                        icon : 'https://img.icons8.com/plasticine/40/000000/user-location.png',
+                        map: peta, 
+                        title: "Anda Disini"
+                    }); 
+
+                //Membuat Marker Map dengan Klik
+
+                var latLng = new google.maps.LatLng(-8.408698,114.2339090);
+
+                
+                var addMarkerClick = google.maps.event.addListener(peta,'click',function(event) {
+                    
+                    
+                    taruhMarker(this, event.latLng);
+
+                
+                    //Kirim data ke form input dari klik
+                    document.getElementById("lat").value = event.latLng.lat();
+                    document.getElementById("leng").value = event.latLng.lng(); 
+                    
+                });
+
+                //============================== Edit ========================================================
+
+                // Mengambil latitude longitude
+                var latitude = parseFloat($('.latude').val());
+                var longitude = parseFloat($('.longit').val());
+
+                //Current Marker 
+                var currentMarker2 = new google.maps.Marker({
+                        position: { lat: latitude, lng: longitude }, 
+                        icon : 'https://img.icons8.com/plasticine/40/000000/marker.png',
+                        map: peta2, 
+                        title: "Anda Disini"
+                    }); 
+
+                
+                var addMarkerClick2 = google.maps.event.addListener(peta2,'click',function(event) {
+                    
+                    
+                    taruhMarker2(this, event.latLng);
+
+                    currentMarker2.setMap(null);
+
+                    //Kirim data ke form input dari klik
+                    document.getElementById("lat2").value = event.latLng.lat();
+                    document.getElementById("leng2").value = event.latLng.lng(); 
+                    
+                });
+
+                }
+                
+            }
+        </script>
+<!-- ======================== End Maps ====================== -->
 
 
 <!-- ============================ Edit Data ========================== -->
-<script>
+  <script>
      
      $(document).ready(function() {
  
@@ -201,10 +343,7 @@
              var data = table.row($tr).data();
              console.log(data);
  
-             $('#nama').val(data[1]);
-             $('#keterangan').val(data[2]);
-             $('#jenis_agenda').val(data[3]);
-             $('#tanggal').val(data[4]);
+             $('#daerah').val(data[1]);
              
              $('#editForm').attr('action', '/daftarkomunitas/'+data[6]);
              $('#editFormpetugaslap').attr('action', '/daftarkomunitas-petugaslap/'+data[6]);
@@ -251,6 +390,6 @@
 <!-- ============================ End Hapus Data ========================== -->
 
     
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDv-h2II7DbFQkpL9pDxNRq3GWXqS5Epts&callback=initMap"
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDv-h2II7DbFQkpL9pDxNRq3GWXqS5Epts&callback=initialize"
   type="text/javascript"></script>
 @endsection

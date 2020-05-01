@@ -105,8 +105,9 @@
         </section>
     </div>
 
+<!-- ======================== Hapus Data ======================== -->
     <div id="DeleteModal" class="modal fade" role="dialog">
-    <div class="modal-dialog ">
+      <div class="modal-dialog ">
         <!-- Modal content-->
         <form action="" id="deleteForm" method="post">
             <div class="modal-content">
@@ -125,8 +126,9 @@
                 </div>
             </div>
         </form>
+      </div>
     </div>
-    </div>
+<!-- ======================== End Hapus Data ======================== -->
 
     @include('admins.layouts_sidebar.datapetugaslapangan.tambah')
     @include('admins.layouts_sidebar.datapetugaslapangan.edit')

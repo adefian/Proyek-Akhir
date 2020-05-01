@@ -49,6 +49,7 @@
                                 <th>Tanggal</th>
                                 <th>Yang Menambahkan</th>
                                 <th class="text-center">Aksi</th>
+                                <th></th>
                                 <th style="display:none;">id</th>
                             </tr>
                         </thead>
@@ -60,10 +61,17 @@
                                 <td class="text-center">{{$no++}}</td>
                                 <td>{{$datas->nama}}</td>
                                 <td>{{$datas->keterangan}}</td>
-                                <td>{{$datas->jenis_agenda}}</td>
+                                <td>
+                                @if($datas->jenis_agenda == 1)
+                                    <span style="width:100%; align:center;" class="badge badge-warning">Agenda Mendesak</span>
+                                    @else
+                                    <span style="width:100%; align:center;" class="badge badge-success">Agenda tidak Mendesak</span>
+                                @endif
+                                </td>
                                 <td>{{$datas->tanggal}}</td>
                                 <td>{{$datas->petugasygmenambahkan->nama}}</td>
                                 <td style="display:none;">{{$datas->id}}</td>
+                                <td style="display:none;">{{$datas->jenis_agenda}}</td>
                                 <td class="text-center">
 
                                     <button class="edit btn btn-warning btn-sm fa fa-edit" title="Edit disini"></button>
@@ -161,8 +169,11 @@
  
              $('#nama').val(data[1]);
              $('#keterangan').val(data[2]);
-             $('#jenis_agenda').val(data[3]);
+             $('#jenis_agenda').val(data[7]);
              $('#tanggal').val(data[4]);
+
+             var element = document.getElementById("jenis_agenda");
+             element.innerHTML = data[3];
              
              $('#editForm').attr('action', '/kelolaagenda/'+data[6]);
              $('#editFormpetugaslap').attr('action', '/kelolaagenda-petugaslap/'+data[6]);

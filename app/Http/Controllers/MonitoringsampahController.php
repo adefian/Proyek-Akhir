@@ -65,9 +65,17 @@ class MonitoringsampahController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function ubahstatus(Request $request, $id)
     {
-        //
+        $tempatsampah = TempatSampah::findOrFail($id);
+
+        $data = [
+            'status' => $request->status,
+        ];
+        $tempatsampah->update($data);
+
+        alert()->success('Berhasil','Data Berhasil diubah');
+        return back();
     }
 
     /**

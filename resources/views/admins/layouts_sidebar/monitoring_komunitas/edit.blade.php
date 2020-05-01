@@ -39,9 +39,14 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="jenis_agenda">Jenis Agenda</label>
+                    <label for="jenis_agenda">Jenis Agenda saat ini <p id="jenis_agenda"></p>
+                    </label>
                     <div class="input-group">    
-                        <input name="jenis_agenda" id="jenis_agenda" type="text" class="form-control" placeholder="Jenis Agenda" required>
+                        <select name="jenis_kelamin" type="text" class="form-control">
+                            <option selected disabled>Pilih Jenis Agenda</option>
+                            <option value="1">Mendesak</option>
+                            <option value="0">Tidak Mendesak</option>
+                        </select>
                     </div>
                 </div>
                 <div class="modal-footer">
