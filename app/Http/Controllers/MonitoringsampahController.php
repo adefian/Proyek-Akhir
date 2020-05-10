@@ -15,7 +15,7 @@ class MonitoringsampahController extends Controller
      */
     public function index()
     {
-        $data = TempatSampah::all();
+        $data = TempatSampah::orderBy('status', 'DESC')->get();
         return view('admins.layouts_sidebar.monitoring_sampah.indikasi', compact('data'));
     }
 
@@ -139,7 +139,7 @@ class MonitoringsampahController extends Controller
 
     public function lokasi()
     {
-        $data = TempatSampah::all();
+        $data = TempatSampah::orderBy('status', 'DESC')->get();
         return view('admins.layouts_sidebar.monitoring_sampah.lokasi', compact('data'));
     }
 }

@@ -1,4 +1,4 @@
-<ul class="sidebar-menu">
+<ul class="sidebar-menu-petugaslap">
   <li class="menu-header">Dashboard</li>
   <li class="active">
       <a class="nav-link active-petugaslapangan" href="{{ route('petugaslapangan.index')}}"><i class="fas fa-fire"></i><span>Dashboard</span></a>
@@ -12,24 +12,22 @@
     </ul>
   </li>
   <li class="nav-item dropdown">
-    <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i> <span>Monitoring Komunitas</span></a>
+    <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i> <span>Monitoring Komunitas</span></a>
     <ul class="dropdown-menu">
-      <li><a class="nav-link" href="kelolaagenda-petugaslap">Kelola Agenda</a></li>
-      <li><a class="nav-link" href="lokasiagenda-petugaslap">Lokasi</a></li>
+      <li><a class="nav-link" href="/daftarkomunitas-petugaslap">Daftar Komunitas</a></li>
     </ul>
   </li>
-  <li class="menu-header">Management</li>
+  <li class="menu-header">Manajemen</li>
   <li class="nav-item dropdown">
-    <a href="#" class="nav-link has-dropdown"><i class="fas fa-th-large"></i> <span>Data Komunitas</span></a>
-    <ul class="dropdown-menu">
-      <li><a class="nav-link" href="daftarkomunitas-petugaslap">Daftar Komunitas</a></li>
-      <li><a class="nav-link" href="validasi-petugaslap">Validasi</a></li>
-    </ul>
+    <a class="nav-link" href="/datapetugaslapangan-petugaslap"><i class="fas fa-user-shield"></i><span>Data Petugas Lapangan</span></a>
   </li>
   <li class="nav-item dropdown">
-    <a class="nav-link" href="datapetugaslapangan-petugaslap"><i class="fas fa-file-alt"></i><span>Data Petugas Lapangan</span></a>
-  </li>
-  <li class="nav-item dropdown">
-    <a class="nav-link" href="reviewsaranecobrick-petugaslap"><i class="far fa-file-alt"></i><span>Review Saran Ecobrick</span></a>
+    <a class="nav-link" href="/daftarsampah-petugaslap"><i class="fas fa-box-open"></i><span>Daftar Sampah Masuk</span></a>
   </li>
 </ul>
+
+  <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
+    <a href="/" class="btn btn-primary-petugaslap btn-lg btn-block btn-icon-split">
+      <i class="fas fa-rocket"></i> Halaman Awal
+    </a>
+  </div>

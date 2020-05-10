@@ -12,7 +12,7 @@ class AnggotaKomunitas extends Model
         'nama', 'nohp', 'alamat', 'jenis_kelamin', 'level', 'user_id', 'komunitas_id'
     ];
 
-    public function user()
+    public function akun()
     {
         return $this->belongsTo('App\User','user_id');
     }

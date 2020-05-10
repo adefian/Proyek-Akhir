@@ -22,6 +22,9 @@
   </li>
   <li class="menu-header">Manajemen</li>
   <li class="nav-item dropdown">
+    <a class="nav-link" href="/dataanggotakomunitas"><i class="fas fa-user-tag"></i><span>Data Anggota Komunitas</span></a>
+  </li>
+  <li class="nav-item dropdown">
     <a class="nav-link" href="/datapetugaslapangan"><i class="fas fa-user-shield"></i><span>Data Petugas Lapangan</span></a>
   </li>
   <li class="nav-item dropdown">
@@ -32,3 +35,9 @@
   </li>
 
 </ul>
+
+  <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
+    <a href="/" class="btn btn-primary btn-lg btn-block btn-icon-split">
+      <i class="fas fa-rocket"></i> Halaman Awal
+    </a>
+  </div>

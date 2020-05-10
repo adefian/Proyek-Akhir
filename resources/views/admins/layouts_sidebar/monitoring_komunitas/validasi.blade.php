@@ -164,7 +164,7 @@
                 <form method="POST" action="/editvalidasi-komunitas" class="needs-validation" novalidate="" id="editFormkomunitas" method="POST" enctype="multipart/form-data">
             @endif
                 {{ csrf_field() }}
-                {{ method_field('POST') }}
+                {{ method_field('PATCH') }}
 
                 <div class="form-group">
                     <div class="input-group">                      
@@ -283,9 +283,9 @@
              var element = document.getElementById("daerah");
              element.innerHTML = data[1];
             //  
-             $('#editForm').attr('action', '/editvalidasi/'+data[6]);
-             $('#editFormpetugaslap').attr('action', '/editvalidasi-petugaslap/'+data[6]);
-             $('#editFormkomunitas').attr('action', '/editvalidasi-komunitas/'+data[6]);
+             $('#editForm').attr('action', '/validasi/'+data[6]);
+             $('#editFormpetugaslap').attr('action', '/validasi-petugaslap/'+data[6]);
+             $('#editFormkomunitas').attr('action', '/validasi-komunitas/'+data[6]);
              $('#editModal').modal('show');
          });
  
@@ -299,7 +299,7 @@
       function deleteData(id)
       {
           var id = id;
-          var url = '{{ route("hapusvalidasi", ":id") }}';
+          var url = '{{ route("validasi.destroy", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }
@@ -307,7 +307,7 @@
       function deleteDatakomunitas(id)
       {
           var id = id;
-          var url = '{{ route("hapusvalidasi-komunitas", ":id") }}';
+          var url = '{{ route("validasi-komunitas.destroy", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }
@@ -315,7 +315,7 @@
       function deleteDatapetugaslap(id)
       {
           var id = id;
-          var url = '{{ route("hapusvalidasi-petugaslap", ":id") }}';
+          var url = '{{ route("validasi-petugaslap.destroy", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }

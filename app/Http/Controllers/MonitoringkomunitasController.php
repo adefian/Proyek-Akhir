@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 use App\Komunitas;
+use App\AnggotaKomunitas;
 
 class MonitoringkomunitasController extends Controller
 {
@@ -113,31 +115,40 @@ class MonitoringkomunitasController extends Controller
         return back();
     }
 
-    public function validasi()
+    public function dataanggotakomunitas()
     {
-        $data = Komunitas::where('level', 0)->get();
-        return view('admins.layouts_sidebar.monitoring_komunitas.validasi', compact('data'));
+        $data = AnggotaKomunitas::all();
+        return view('admins.layouts_sidebar.dataanggotakomunitas.index', compact('data'));
     }
-
-    public function editvalidasi(Request $request, $id)
+    
+    public function editanggota(Request $request, $id)
     {
-        $komunitas = Komunitas::findOrFail($id);
-        
+        $komunitas = AnggotaKomunitas::findOrFail($id);
+
         $input = ([
-            'level' => $request->level
-        ]);
+            'nama' => $request->nama,
+            'nohp' => $request->nohp,
+            'alamat' => $request->alamat,
+            ]);
+            
+        $user = User::findOrFail($komunitas->user_id);
+
+        $input2 = (['email' => $request->email]);
 
         $komunitas->update($input);
-        alert()->success('Berhasil validasi data', 'telah tervalidasi');
-        return redirect('daftarkomunitas');
+        $user->update($input2);
+
+        alert()->success('Berhasil','Data Berhasil diedit');
+        return back();
     }
 
-    public function hapusvalidasi($id)
+    public function hapusanggota($id)
     {
-        $id = Komunitas::findOrFail($id);
-        $id->delete();
+        $id = AnggotaKomunitas::findOrFail($id);
 
-        alert()->success('Berhasil','Data Berhasil dihapus');
+        $id->delete($id);
+
+        alert()->success('Berhasil','Data berhasil dihapus');
         return back();
     }
 }

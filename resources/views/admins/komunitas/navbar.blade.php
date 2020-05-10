@@ -14,7 +14,7 @@
         </a>
         <div class="dropdown-divider"></div>
             
-            <a class="dropdown-item has-icon text-danger" data-toggle="modal" data-target="#logout">
+            <a href="#" data-id="logout-komunitas" class="dropdown-item has-icon text-danger" data-confirm="Keluar|Apakah anda yakin ingin keluar sekarang ?">
                 <button class="btn btn-danger fas fa-sign-out-alt">Logout
                 </button>
             </a>

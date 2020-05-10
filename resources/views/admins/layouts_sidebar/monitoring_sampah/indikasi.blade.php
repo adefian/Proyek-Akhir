@@ -43,7 +43,7 @@
                         <div class="col-lg-6 col-12">
                           <h6 class="text-center mb-4 mt-4">Titik Lokasi yang terdaftar</h6>
                           <div class="table-responsive">
-                            <table class="table table-sm" id="dataTable" style="width:100%;">
+                            <table class="table table-sm" id="dataTable">
                               <thead>
                                 <tr>
                                   <th></th>

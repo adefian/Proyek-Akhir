@@ -4,35 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Komunitas;
-use App\User;
-use App\TempatSampah;
-use App\AnggotaKomunitas;
-use App\Agenda;
-use App\Ecobrick;
 
-class KomunitasController extends Controller
+class ValidasiController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    
     public function index()
     {
-        $komunitas = Komunitas::all()->count();
-        $tempatsampah = TempatSampah::all()->count();
-        
-        $namakomunitas = AnggotaKomunitas::where('user_id', auth()->user()->id)->first();
-        $komunitas_id = $namakomunitas->komunitas_id;
-        
-        $anggotakomunitas = AnggotaKomunitas::where('komunitas_id', $komunitas_id)->count();
-        
-        $agenda = Agenda::where('komunitas_id', $komunitas_id)->count();
-
-        $ecobrick = Ecobrick::all()->count();
-
-        return view ('admins.komunitas.index',compact('tempatsampah','komunitas','anggotakomunitas','namakomunitas','agenda','ecobrick'));
+        $data = Komunitas::where('level', 0)->get();
+        return view('admins.layouts_sidebar.monitoring_komunitas.validasi', compact('data'));
     }
 
     /**
@@ -87,7 +70,15 @@ class KomunitasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $komunitas = Komunitas::findOrFail($id);
+        
+        $input = ([
+            'level' => $request->level
+        ]);
+
+        $komunitas->update($input);
+        alert()->success('Berhasil validasi data', 'telah tervalidasi');
+        return redirect('daftarkomunitas');
     }
 
     /**
@@ -98,6 +89,10 @@ class KomunitasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $id = Komunitas::findOrFail($id);
+        $id->delete();
+
+        alert()->success('Berhasil','Data Berhasil dihapus');
+        return back();
     }
 }

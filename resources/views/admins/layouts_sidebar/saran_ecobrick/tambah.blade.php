@@ -2,7 +2,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title">Tambahkan Agenda</h5>
+            <h5 class="modal-title">Tambah Pengaplikasian Ecobrick</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -10,42 +10,26 @@
         <div class="modal-body">
 
             @if(auth()->user()->role == 'pimpinanecoranger')
-                <form class="needs-validation" novalidate="" action="kelolaagenda" method="POST" enctype="multipart/form-data">
+                <form class="needs-validation" novalidate="" action="reviewsaranecobrick" method="POST" enctype="multipart/form-data">
             @endif
             @if(auth()->user()->role == 'petugaslapangan')
-                <form class="needs-validation" novalidate="" action="kelolaagenda-petugaslap" method="POST" enctype="multipart/form-data">
+                <form class="needs-validation" novalidate="" action="reviewsaranecobrick-petugaslap" method="POST" enctype="multipart/form-data">
             @endif
             @if(auth()->user()->role == 'komunitas')
-                <form class="needs-validation" novalidate="" action="kelolaagenda-komunitas" method="POST" enctype="multipart/form-data">
+                <form class="needs-validation" novalidate="" action="reviewsaranecobrick-komunitas" method="POST" enctype="multipart/form-data">
             @endif
                 {{csrf_field()}}
 
                 <div class="form-group">
-                    <label for="nama">Nama Agenda</label> 
+                    <label for="foto_diaplikasikan">Foto</label> 
                     <div class="input-group">   
-                        <input name="nama" type="text" class="form-control" placeholder="Nama Agenda" required>      
+                        <input name="foto_diaplikasikan" type="file" class="form-control" placeholder="Foto" required>      
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="keterangan">Keterangan</label> 
                     <div class="input-group">  	
                         <textarea type="text" name="keterangan" class="form-control" placeholder="Keterangan" style="min-height:43px;" required></textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="tanggal">Tanggal</label>
-                    <div class="input-group">    
-                        <input name="tanggal" placeholder="Pilih Tanggal" type="datetime-local" class="form-control" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="jenis_agenda">Jenis Agenda</label>
-                    <div class="input-group">    
-                      <select name="jenis_agenda" type="text" class="form-control">
-                        <option selected disabled>Pilih Jenis Agenda</option>
-                        <option value="1">Mendesak</option>
-                        <option value="0">Tidak Mendesak</option>
-                      </select>
                     </div>
                 </div>
                 <div class="modal-footer">

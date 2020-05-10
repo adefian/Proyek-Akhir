@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Agenda;
 use App\User;
+use App\AnggotaKomunitas;
 
 class AgendaController extends Controller
 {
@@ -16,10 +17,13 @@ class AgendaController extends Controller
     public function index()
     {   
         $data = Agenda::all();
-        // $data2 = Agenda::only('user_id');
-        // $data->load('petugasygmenambahkan:id,nama');
-        // return response()->json(['data' => $data]);
-        return view('admins.layouts_sidebar.monitoring_komunitas.kelola_agenda', compact('data'));
+
+        $user = AnggotaKomunitas::where('user_id', auth()->user()->id)->first();
+        $komunitas_id = $user->komunitas_id;
+
+        $komunitas  = Agenda::where('komunitas_id', $komunitas_id)->get();
+
+        return view('admins.layouts_sidebar.monitoring_komunitas.kelola_agenda', compact('data','komunitas'));
     }
 
     /**
@@ -41,6 +45,12 @@ class AgendaController extends Controller
     public function store(Request $request)
     {
         $user = auth()->user()->id;
+        
+        if (auth()->user()->role == 'komunitas') {
+            $anggota = AnggotaKomunitas::where('user_id', $user)->first();
+            $komunitas_id = $anggota->komunitas_id;
+        }
+
         $input = ([
             'nama' => $request->nama,
             'keterangan' => $request->keterangan,
@@ -48,6 +58,13 @@ class AgendaController extends Controller
             'tanggal' => $request->tanggal,
             'user_id' => $user,
         ]);
+        
+        if (auth()->user()->role == 'komunitas') {
+            $input = [
+                'komunitas_id' => $komunitas_id
+            ];
+        }
+
         Agenda::create($input);
 
         alert()->success('Data berhasil ditambahkan','Selamat');
@@ -92,11 +109,14 @@ class AgendaController extends Controller
         $input = ([
             'nama' => $request->nama,
             'keterangan' => $request->keterangan,
-            'jenis_agenda' => $request->jenis_agenda,
-            'tanggal' => $request->tanggal,
             'user_id' => $user,
+            'tanggal' => $request->tanggal
         ]);
 
+        if ($request->jenis_agenda) {
+            $input['jenis_agenda'] = $jenis_agenda;
+        }
+        
         $agenda->update($input);
         alert()->success('Berhasil','Data Berhasil diedit');
         return back();

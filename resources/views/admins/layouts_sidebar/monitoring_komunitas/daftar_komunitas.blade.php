@@ -42,7 +42,9 @@
                         </div>
                         <div class="col-lg-6 col-12">
                           <h6 class="text-center mb-4 mt-4">Titik Lokasi Komunitas</h6>
+                          @if(auth()->user()->role == 'pimpinanecoranger')
                               <button data-toggle="modal" data-target="#modalCreate" class="btn btn-success btn-sm fas fa-plus float-right mr-4" title="Tambahkan disini" style="margin-left: auto;"></button>
+                          @endif
                           <div class="table-responsive">
                             <table class="table table-sm" id="dataTable">
                               <thead>
@@ -63,6 +65,7 @@
                                   <td>{{$datas->daerah}}</td>
                                   <td>{{$datas->keterangan}}</td>
                                   <td class="text-right">
+                                  @if(auth()->user()->role == 'pimpinanecoranger')
                                   <button class="edit btn btn-warning btn-sm fa fa-edit" title="Edit disini"></button>
 
                                       @if(auth()->user()->role == 'pimpinanecoranger')
@@ -80,7 +83,7 @@
                                           <button class="btn btn-danger btn-sm fa fa-trash" title="Hapus disini"></button>
                                           </a>
                                       @endif
-
+                                  @endif
                                   </td>
                                   <td style="display:none;">{{$datas->id}}</td>
                                   <td style="display:none;">{{$datas->latitude}}</td>

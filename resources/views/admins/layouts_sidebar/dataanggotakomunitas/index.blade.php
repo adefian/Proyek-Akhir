@@ -14,7 +14,7 @@
     <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>Data Petugas Lapangan</h1>
+            <h1>Data Anggota Komunitas</h1>
           </div>
               
           <div class="section-body">
@@ -30,10 +30,7 @@
                 <div class="row">
                   <div class="col-12">
                   <div class="card-header">
-                    <h4>Data petugas lapangan</h4>
-                    @if(auth()->user()->role == 'pimpinanecoranger')
-                        <button data-toggle="modal" data-target="#modalCreate" class="btn btn-success fas fa-user-plus fa-2x" title="Tambahkan disini" style="margin-left: auto;"></button>
-                    @endif
+                    <h4>Data anggota komunitas</h4>
                   </div>
                   <div class="card-body pr-3 pl-4 m-1 table-responsive">
                     <table id="dataTable" class="table table-sm" style="width:100%">
@@ -44,10 +41,8 @@
                                 <th>Email</th>
                                 <th>No HP</th>
                                 <th>Alamat</th>
-                                <th>Wilayah</th>
-                                @if(auth()->user()->role == 'pimpinanecoranger')
-                                    <th>Aksi</th>
-                                @endif
+                                <th>Daerah</th>
+                                <th>Aksi</th>
                                 <th style="display:none;">id</th>
                             </tr>
                         </thead>
@@ -61,9 +56,8 @@
                                 <td>{{$datas->akun->email}}</td>
                                 <td>+62 {{$datas->nohp}}</td>
                                 <td>{{$datas->alamat}}</td>
-                                <td>{{$datas->wilayah}}</td>
+                                <td>{{$datas->daerahygdipilih->daerah}}</td>
                                 <td style="display:none;">{{$datas->id}}</td>
-                                @if(auth()->user()->role == 'pimpinanecoranger')
                                 <td class="text-center">
 
                                     <button class="edit btn btn-warning btn-sm fa fa-user-edit" title="Edit disini"></button>
@@ -83,8 +77,9 @@
                                         <button class="btn btn-danger btn-sm fa fa-trash" title="Hapus disini"></button>
                                         </a>
                                     @endif
+                                    
+                                    
                                 </td>
-                                @endif
                             </tr>
                         @endforeach
                         @endif
@@ -96,10 +91,8 @@
                                 <th>Email</th>
                                 <th>No HP</th>
                                 <th>Alamat</th>
-                                <th>Wilayah</th>
-                                @if(auth()->user()->role == 'pimpinanecoranger')
-                                    <th>Aksi</th>
-                                @endif
+                                <th>Daerah</th>
+                                <th>Aksi</th>
                             </tr>
                         </tfoot>
                     </table>
@@ -136,8 +129,7 @@
     </div>
 <!-- ======================== End Hapus Data ======================== -->
 
-    @include('admins.layouts_sidebar.datapetugaslapangan.tambah')
-    @include('admins.layouts_sidebar.datapetugaslapangan.edit')
+    @include('admins.layouts_sidebar.dataanggotakomunitas.edit')
     
 
 @endsection
@@ -165,11 +157,10 @@
              $('#email').val(data[2]);
              $('#nohp').val(data[3]);
              $('#alamat').val(data[4]);
-             $('#wilayah').val(data[5]);
              
-             $('#editForm').attr('action', '/datapetugaslapangan/'+data[6]);
-             $('#editFormpetugaslap').attr('action', '/datapetugaslapangan-petugaslap/'+data[6]);
-             $('#editFormkomunitas').attr('action', '/datapetugaslapangan-komunitas/'+data[6]);
+             $('#editForm').attr('action', '/editdataanggotakomunitas/'+data[6]);
+             $('#editFormpetugaslap').attr('action', '/editdataanggotakomunitas-petugaslap/'+data[6]);
+             $('#editFormkomunitas').attr('action', '/editdataanggotakomunitas-komunitas/'+data[6]);
              $('#editModal').modal('show');
          });
  
@@ -182,7 +173,7 @@
       function deleteData(id)
       {
           var id = id;
-          var url = '{{ route("datapetugaslapangan.destroy", ":id") }}';
+          var url = '{{ route("hapusanggotakomunitas", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }
@@ -190,7 +181,7 @@
       function deleteDatakomunitas(id)
       {
           var id = id;
-          var url = '{{ route("datapetugaslapangan-komunitas.destroy", ":id") }}';
+          var url = '{{ route("hapusanggotakomunitas-komunitas", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }
@@ -198,7 +189,7 @@
       function deleteDatapetugaslap(id)
       {
           var id = id;
-          var url = '{{ route("datapetugaslapangan-petugaslap.destroy", ":id") }}';
+          var url = '{{ route("hapusanggotakomunitas-petugaslap", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }

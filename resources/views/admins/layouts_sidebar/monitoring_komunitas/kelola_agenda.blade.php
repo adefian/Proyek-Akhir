@@ -12,6 +12,7 @@
 
 @section('css')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker-standalone.min.css">
 @endsection
 
 @section('content')
@@ -33,7 +34,6 @@
             @endif
             <div class="row">
               <div class="col-12">
-                <div class="card">
                   <div class="card-header">
                     <h4>Kelola Agenda</h4>
                     <button data-toggle="modal" data-target="#modalCreate" class="btn btn-success fas fa-plus fa-2x" title="Tambahkan disini" style="margin-left: auto;"></button>
@@ -54,48 +54,94 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @if($data)
-                        @php $no = 1 @endphp
-                        @foreach($data as $datas)
-                            <tr>
-                                <td class="text-center">{{$no++}}</td>
-                                <td>{{$datas->nama}}</td>
-                                <td>{{$datas->keterangan}}</td>
-                                <td>
-                                @if($datas->jenis_agenda == 1)
-                                    <span style="width:100%; align:center;" class="badge badge-warning">Agenda Mendesak</span>
-                                    @else
-                                    <span style="width:100%; align:center;" class="badge badge-success">Agenda tidak Mendesak</span>
-                                @endif
-                                </td>
-                                <td>{{$datas->tanggal}}</td>
-                                <td>{{$datas->petugasygmenambahkan->nama}}</td>
-                                <td style="display:none;">{{$datas->id}}</td>
-                                <td style="display:none;">{{$datas->jenis_agenda}}</td>
-                                <td class="text-center">
+                        @if(auth()->user()->role == 'pimpinanecoranger')
+                            @if($data)
+                                @php $no = 1 @endphp
+                                @foreach($data as $datas)
+                                    <tr>
+                                        <td class="text-center">{{$no++}}</td>
+                                        <td>{{$datas->nama}}</td>
+                                        <td>{{$datas->keterangan}}</td>
+                                        <td>
+                                        @if($datas->jenis_agenda == 1)
+                                            <span style="width:100%; align:center;" class="badge badge-warning">Agenda Mendesak</span>
+                                            @else
+                                            <span style="width:100%; align:center;" class="badge badge-success">Agenda tidak Mendesak</span>
+                                        @endif
+                                        </td>
+                                        <td>{{$datas->tanggal}}</td>
+                                        <td>{{$datas->petugasygmenambahkan->nama}}</td>
+                                        <td style="display:none;">{{$datas->id}}</td>
+                                        <td style="display:none;">{{$datas->jenis_agenda}}</td>
+                                        <td class="text-center">
 
-                                    <button class="edit btn btn-warning btn-sm fa fa-edit" title="Edit disini"></button>
+                                            <button class="edit btn btn-warning btn-sm fa fa-edit" title="Edit disini"></button>
 
-                                    @if(auth()->user()->role == 'pimpinanecoranger')
-                                        <a href="javascript:;" data-toggle="modal" onclick="deleteData({{$datas->id}})" data-target="#DeleteModal">
-                                        <button class="btn btn-danger btn-sm fa fa-trash" title="Hapus disini"></button>
-                                        </a>
-                                    @endif
-                                    @if(auth()->user()->role == 'petugaslapangan')
-                                        <a href="javascript:;" data-toggle="modal" onclick="deleteDatapetugaslap({{$datas->id}})" data-target="#DeleteModal">
-                                        <button class="btn btn-danger btn-sm fa fa-trash" title="Hapus disini"></button>
-                                        </a>
-                                    @endif
-                                    @if(auth()->user()->role == 'komunitas')
-                                        <a href="javascript:;" data-toggle="modal" onclick="deleteDatakomunitas({{$datas->id}})" data-target="#DeleteModal">
-                                        <button class="btn btn-danger btn-sm fa fa-trash" title="Hapus disini"></button>
-                                        </a>
-                                    @endif
-                                    
-                                    
-                                </td>
-                            </tr>
-                        @endforeach
+                                            @if(auth()->user()->role == 'pimpinanecoranger')
+                                                <a href="javascript:;" data-toggle="modal" onclick="deleteData({{$datas->id}})" data-target="#DeleteModal">
+                                                <button class="btn btn-danger btn-sm fa fa-trash" title="Hapus disini"></button>
+                                                </a>
+                                            @endif
+                                            @if(auth()->user()->role == 'petugaslapangan')
+                                                <a href="javascript:;" data-toggle="modal" onclick="deleteDatapetugaslap({{$datas->id}})" data-target="#DeleteModal">
+                                                <button class="btn btn-danger btn-sm fa fa-trash" title="Hapus disini"></button>
+                                                </a>
+                                            @endif
+                                            @if(auth()->user()->role == 'komunitas')
+                                                <a href="javascript:;" data-toggle="modal" onclick="deleteDatakomunitas({{$datas->id}})" data-target="#DeleteModal">
+                                                <button class="btn btn-danger btn-sm fa fa-trash" title="Hapus disini"></button>
+                                                </a>
+                                            @endif
+                                            
+                                            
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endif
+                        @elseif(auth()->user()->role == 'komunitas')
+                            @if($komunitas)
+                                @php $no = 1 @endphp
+                                @foreach($komunitas as $kom)
+                                    <tr>
+                                        <td class="text-center">{{$no++}}</td>
+                                        <td>{{$kom->nama}}</td>
+                                        <td>{{$kom->keterangan}}</td>
+                                        <td>
+                                        @if($kom->jenis_agenda == 1)
+                                            <span style="width:100%; align:center;" class="badge badge-warning">Agenda Mendesak</span>
+                                            @else
+                                            <span style="width:100%; align:center;" class="badge badge-success">Agenda tidak Mendesak</span>
+                                        @endif
+                                        </td>
+                                        <td>{{$kom->tanggal}}</td>
+                                        <td>{{$kom->petugasygmenambahkan->nama}}</td>
+                                        <td style="display:none;">{{$kom->id}}</td>
+                                        <td style="display:none;">{{$kom->jenis_agenda}}</td>
+                                        <td class="text-center">
+
+                                            <button class="edit btn btn-warning btn-sm fa fa-edit" title="Edit disini"></button>
+
+                                            @if(auth()->user()->role == 'pimpinanecoranger')
+                                                <a href="javascript:;" data-toggle="modal" onclick="deleteData({{$kom->id}})" data-target="#DeleteModal">
+                                                <button class="btn btn-danger btn-sm fa fa-trash" title="Hapus disini"></button>
+                                                </a>
+                                            @endif
+                                            @if(auth()->user()->role == 'petugaslapangan')
+                                                <a href="javascript:;" data-toggle="modal" onclick="deleteDatapetugaslap({{$kom->id}})" data-target="#DeleteModal">
+                                                <button class="btn btn-danger btn-sm fa fa-trash" title="Hapus disini"></button>
+                                                </a>
+                                            @endif
+                                            @if(auth()->user()->role == 'komunitas')
+                                                <a href="javascript:;" data-toggle="modal" onclick="deleteDatakomunitas({{$kom->id}})" data-target="#DeleteModal">
+                                                <button class="btn btn-danger btn-sm fa fa-trash" title="Hapus disini"></button>
+                                                </a>
+                                            @endif
+                                            
+                                            
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endif
                         @endif
                         </tbody>
                         <tfoot>
@@ -113,7 +159,6 @@
                     
                 </div>
                   </div>
-                </div>
               </div>
             </div>
         </div>
@@ -220,6 +265,7 @@
 <!-- ============================ End Hapus Data ========================== -->
 
 <!-- ============================ Datetimepicker ========================== -->
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
       <script>
         $(function(){

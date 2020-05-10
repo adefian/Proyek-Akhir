@@ -42,7 +42,7 @@
     <section class="section">
       <div class="container mt-5">
         <div class="row justify-content-center">
-          <div class="col-12 col-sm-11 col-md-10 col-lg-9 col-xl-8">
+          <div class="col-12 col-sm-11 col-md-10 col-lg-10 col-xl-10">
             <div class="card card-primary mb-5">
               <div class="card-header"><h4>Daftarkan Komunitas</h4></div>
                 <div class="card-body">

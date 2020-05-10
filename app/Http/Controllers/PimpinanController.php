@@ -10,9 +10,14 @@ use App\User;
 use App\Komunitas;
 use App\AnggotaKomunitas;
 use App\PimpinanEcoranger;
+use App\Agenda;
 
 class PimpinanController extends Controller
 {
+
+    public function __construct(){
+        parent::__construct();
+     }
     /**
      * Display a listing of the resource.
      *
@@ -25,6 +30,7 @@ class PimpinanController extends Controller
         $komunitas = Komunitas::all()->count();
         $tempatsampah = TempatSampah::all()->count();
         $anggotakomunitas = AnggotaKomunitas::all()->count();
+
         return view ('admins.pimpinan.index',compact('tempatsampah','user','komunitas','anggotakomunitas'));
     }
 

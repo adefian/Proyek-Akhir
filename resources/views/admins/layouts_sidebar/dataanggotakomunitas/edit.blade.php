@@ -9,44 +9,39 @@
               </div>
         <div class="modal-body">
             @if(auth()->user()->role == 'pimpinanecoranger')
-                <form method="POST" action="/kelolaagenda" class="needs-validation" novalidate="" id="editForm" enctype="multipart/form-data">
+                <form method="POST" action="/datapetugaslapangan" class="needs-validation" novalidate="" id="editForm" enctype="multipart/form-data">
             @endif
             @if(auth()->user()->role == 'petugaslapangan')
-                <form method="POST" action="/kelolaagenda-petugaslap" class="needs-validation" novalidate="" id="editFormpetugaslap" method="POST" enctype="multipart/form-data">
+                <form method="POST" action="/datapetugaslapangan-petugaslap" class="needs-validation" novalidate="" id="editFormpetugaslap" enctype="multipart/form-data">
             @endif
             @if(auth()->user()->role == 'komunitas')
-                <form method="POST" action="/kelolaagenda-komunitas" class="needs-validation" novalidate="" id="editFormkomunitas" method="POST" enctype="multipart/form-data">
+                <form method="POST" action="/datapetugaslapangan-komunitas" class="needs-validation" novalidate="" id="editFormkomunitas" enctype="multipart/form-data">
             @endif
                 {{ csrf_field() }}
-                {{ method_field('PATCH') }}
+                {{ method_field('POST') }}
 
                 <div class="form-group">
-                    <label for="nama">Nama Agenda</label> 
+                    <label for="nama">Nama</label> 
                     <div class="input-group">   
-                        <input name="nama" id="nama" type="text" class="form-control" placeholder="Nama Agenda" required>      
+                        <input name="nama" type="text" id="nama" class="form-control" placeholder="Nama" required>      
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="keterangan">Keterangan</label> 
+                    <label for="email">Email</label> 
                     <div class="input-group">  	
-                        <textarea type="text" name="keterangan" id="keterangan" class="form-control" placeholder="Keterangan" style="min-height:43px;" required></textarea>
+                        <input name="email" type="email" id="email" class="form-control" placeholder="Email" required>  	
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="tanggal">Tanggal</label>
+                    <label for="nohp">No Hp</label>
                     <div class="input-group">    
-                        <input name="tanggal" placeholder="Pilih Tanggal" id="tanggal" type="datetime-local" class="form-control">
+                        <input name="nohp" type="text" id="nohp" class="form-control" placeholder="No Hp">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="jenis_agenda">Jenis Agenda saat ini <p id="jenis_agenda"></p>
-                    </label>
+                    <label for="alamat">Alamat</label>
                     <div class="input-group">    
-                        <select name="jenis_agenda" type="text" class="form-control">
-                            <option selected disabled>Pilih Jenis Agenda</option>
-                            <option value="1">Mendesak</option>
-                            <option value="0">Tidak Mendesak</option>
-                        </select>
+                        <input name="alamat" type="text" id="alamat" class="form-control" placeholder="Alamat">
                     </div>
                 </div>
                 <div class="modal-footer">

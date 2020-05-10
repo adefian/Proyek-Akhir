@@ -115,7 +115,12 @@
                     <div class="d-block">
                     	<label for="nohp" class="control-label">No Hp</label>
                     </div>
-                    <input id="nohp" type="nohp" class="form-control" name="nohp" tabindex="2" required>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">+62</span>
+                      </div>
+                      <input id="nohp" type="nohp" class="form-control" name="nohp" tabindex="2" required>
+                    </div>
                     <div class="invalid-feedback">
                     Silahkan isi No Handphone Anda / yang dapat dihubungi
                     </div>
@@ -169,7 +174,7 @@
                         Daerah anda belum terdaftar ? <a href="{{ route('daftardaerah')}}">Daftarkan Daerah</a>
                     </div>
 
-                    <div class="mt-2 text-muted text-center">
+                    <div class="mt-3 text-muted text-center">
                         Sudah memiliki akun ?  <a href="login">Login</a>
                     </div>
                 </div>

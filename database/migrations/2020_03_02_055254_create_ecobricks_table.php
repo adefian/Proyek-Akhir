@@ -15,22 +15,16 @@ class CreateEcobricksTable extends Migration
     {
         Schema::create('ecobrick', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nama_pengirimsaran');
-            $table->string('foto_diusulkan');
+            $table->string('nama_pengirimsaran')->nullable();
+            $table->string('foto_diusulkan')->nullable();
             $table->string('foto_diaplikasikan')->nullable();
             $table->string('keterangan')->nullable();
             $table->integer('level')->default(0);
             $table->timestamps();
-            $table->bigInteger('id_pimpinan_ecoranger')->unsigned();
-            $table->foreign('id_pimpinan_ecoranger')
+            $table->bigInteger('user_id')->unsigned()->nullable();
+            $table->foreign('user_id')
                     ->references('id')
-                    ->on('pimpinan_ecoranger')
-                    ->onDelete('cascade')
-                    ->onUpdate('cascade');
-            $table->bigInteger('id_komunitas')->unsigned();
-            $table->foreign('id_komunitas')
-                    ->references('id')
-                    ->on('komunitas')
+                    ->on('user')
                     ->onDelete('cascade')
                     ->onUpdate('cascade');
         });

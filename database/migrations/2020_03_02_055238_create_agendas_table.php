@@ -26,12 +26,12 @@ class CreateAgendasTable extends Migration
                     ->on('user')
                     ->onDelete('cascade')
                     ->onUpdate('cascade');
-            // $table->bigInteger('id_komunitas')->unsigned()->nullable();
-            // $table->foreign('id_komunitas')
-            //         ->references('id')
-            //         ->on('komunitas')
-            //         ->onDelete('cascade')
-            //         ->onUpdate('cascade');
+            $table->bigInteger('komunitas_id')->unsigned()->nullable();
+            $table->foreign('komunitas_id')
+                    ->references('id')
+                    ->on('komunitas')
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
         });
     }
 

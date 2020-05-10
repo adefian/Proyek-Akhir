@@ -60,8 +60,10 @@
                                 <td>
                                     @if($datas->status === 0)
                                         <span class="badge badge-success">Kosong</span>
-                                        @else
+                                        @elseif($datas->status === 1)
                                         <span class="badge badge-danger">Penuh</span>
+                                        @else
+                                        <span class="badge badge-warning">Pengambilan</span>
                                     @endif
                                 </td>
                                 <td class="text-center">
