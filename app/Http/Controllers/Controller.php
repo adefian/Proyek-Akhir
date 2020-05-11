@@ -18,12 +18,17 @@ class Controller extends BaseController
 
     public function __construct()
     {
+        setlocale(LC_TIME, 'nl_NL.utf8');
+        Carbon::setLocale('id');
+
         $tgl = Carbon::now();
         $tgl1 = $tgl->subDays(1);
         
         $notiftempatsampah = TempatSampah::where('status', 1)->orderBy('updated_at', 'DESC')->get();
         
         $notifagenda = Agenda::where('created_at', '>', $tgl1)->get();
+
+        $user = Agenda::find(1);
         
         $notifagendamendesak = Agenda::where('jenis_agenda', 1)->get();
 

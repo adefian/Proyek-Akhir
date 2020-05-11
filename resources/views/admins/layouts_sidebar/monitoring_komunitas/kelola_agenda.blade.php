@@ -44,13 +44,14 @@
                             <tr>
                                 <th>No</th>
                                 <th>Nama kegiatan</th>
+                                <th>Komunitas</th>
                                 <th>Keterangan</th>
                                 <th>Jenis Agenda</th>
                                 <th>Tanggal</th>
                                 <th>Yang Menambahkan</th>
                                 <th class="text-center">Aksi</th>
-                                <th></th>
                                 <th style="display:none;">id</th>
+                                <th style="display:none;">tanggal</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -61,6 +62,7 @@
                                     <tr>
                                         <td class="text-center">{{$no++}}</td>
                                         <td>{{$datas->nama}}</td>
+                                        <td>{{$datas->komunitas->daerah}}</td>
                                         <td>{{$datas->keterangan}}</td>
                                         <td>
                                         @if($datas->jenis_agenda == 1)
@@ -69,10 +71,9 @@
                                             <span style="width:100%; align:center;" class="badge badge-success">Agenda tidak Mendesak</span>
                                         @endif
                                         </td>
-                                        <td>{{$datas->tanggal}}</td>
+                                        <td>{{ Carbon\Carbon::parse($datas->tanggal)->isoFormat('LLLL') }} WIB</td>
                                         <td>{{$datas->petugasygmenambahkan->nama}}</td>
                                         <td style="display:none;">{{$datas->id}}</td>
-                                        <td style="display:none;">{{$datas->jenis_agenda}}</td>
                                         <td class="text-center">
 
                                             <button class="edit btn btn-warning btn-sm fa fa-edit" title="Edit disini"></button>
@@ -92,9 +93,8 @@
                                                 <button class="btn btn-danger btn-sm fa fa-trash" title="Hapus disini"></button>
                                                 </a>
                                             @endif
-                                            
-                                            
                                         </td>
+                                        <td style="display:none;">{{date("Y-m-d\TH:i",strtotime($datas->tanggal))}}</td>
                                     </tr>
                                 @endforeach
                             @endif
@@ -105,6 +105,7 @@
                                     <tr>
                                         <td class="text-center">{{$no++}}</td>
                                         <td>{{$kom->nama}}</td>
+                                        <td>{{$kom->komunitas->daerah}}</td>
                                         <td>{{$kom->keterangan}}</td>
                                         <td>
                                         @if($kom->jenis_agenda == 1)
@@ -113,7 +114,7 @@
                                             <span style="width:100%; align:center;" class="badge badge-success">Agenda tidak Mendesak</span>
                                         @endif
                                         </td>
-                                        <td>{{$kom->tanggal}}</td>
+                                        <td>{{ Carbon\Carbon::parse($kom->tanggal)->isoFormat('LLLL') }}</td>
                                         <td>{{$kom->petugasygmenambahkan->nama}}</td>
                                         <td style="display:none;">{{$kom->id}}</td>
                                         <td style="display:none;">{{$kom->jenis_agenda}}</td>
@@ -136,9 +137,8 @@
                                                 <button class="btn btn-danger btn-sm fa fa-trash" title="Hapus disini"></button>
                                                 </a>
                                             @endif
-                                            
-                                            
                                         </td>
+                                        <td style="display:none;">{{date("Y-m-d\TH:i",strtotime($kom->tanggal))}}</td>
                                     </tr>
                                 @endforeach
                             @endif
@@ -148,6 +148,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Nama kegiatan</th>
+                                <th>Komunitas</th>
                                 <th>Keterangan</th>
                                 <th>Jenis Agenda</th>
                                 <th>Tanggal</th>
@@ -213,16 +214,15 @@
              console.log(data);
  
              $('#nama').val(data[1]);
-             $('#keterangan').val(data[2]);
-             $('#jenis_agenda').val(data[7]);
-             $('#tanggal').val(data[4]);
+             $('#keterangan').val(data[3]);
+             $('#tanggal').val(data[9]);
 
              var element = document.getElementById("jenis_agenda");
-             element.innerHTML = data[3];
+             element.innerHTML = data[4];
              
-             $('#editForm').attr('action', '/kelolaagenda/'+data[6]);
-             $('#editFormpetugaslap').attr('action', '/kelolaagenda-petugaslap/'+data[6]);
-             $('#editFormkomunitas').attr('action', '/kelolaagenda-komunitas/'+data[6]);
+             $('#editForm').attr('action', '/kelolaagenda/'+data[7]);
+             $('#editFormpetugaslap').attr('action', '/kelolaagenda-petugaslap/'+data[7]);
+             $('#editFormkomunitas').attr('action', '/kelolaagenda-komunitas/'+data[7]);
              $('#editModal').modal('show');
          });
  

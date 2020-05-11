@@ -35,7 +35,7 @@
                 <div class="form-group">
                     <label for="tanggal">Tanggal</label>
                     <div class="input-group">    
-                        <input name="tanggal" placeholder="Pilih Tanggal" type="datetime-local" class="form-control" required>
+                        <input name="tanggal" placeholder="Pilih Tanggal" type="datetime-local" class="form-control" min="{{Carbon\Carbon::now()->format('Y-m-d\TH:i')}}" required>
                     </div>
                 </div>
                 <div class="form-group">
@@ -48,6 +48,19 @@
                       </select>
                     </div>
                 </div>
+                @if(auth()->user()->role === 'pimpinanecoranger')
+                <div class="form-group">
+                    <label for="komunitas_id">Dari Komunitas</label>
+                    <div class="input-group">    
+                      <select name="komunitas_id" type="text" class="form-control">
+                        <option selected disabled>Pilih</option>
+                            @foreach($daerah as $datas)
+                                <option value="{{$datas->id}}">{{$datas->daerah}}</option>
+                            @endforeach
+                      </select>
+                    </div>
+                </div>
+                @endif
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-success">Tambah</button>
                     <button type="button" class="btn btn-secondary float-right" data-dismiss="modal">Batal</button>

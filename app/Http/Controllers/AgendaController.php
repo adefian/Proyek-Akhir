@@ -6,9 +6,12 @@ use Illuminate\Http\Request;
 use App\Agenda;
 use App\User;
 use App\AnggotaKomunitas;
+use App\Komunitas;
+use Carbon\Carbon;
 
 class AgendaController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *
@@ -16,14 +19,21 @@ class AgendaController extends Controller
      */
     public function index()
     {   
+        \Carbon\Carbon::setLocale('id');
+
         $data = Agenda::all();
 
-        $user = AnggotaKomunitas::where('user_id', auth()->user()->id)->first();
-        $komunitas_id = $user->komunitas_id;
+        if (auth()->user()->role == 'komunitas') {
+            
+            $user = AnggotaKomunitas::where('user_id', auth()->user()->id)->first();
+            $komunitas_id = $user->komunitas_id;
+            
+            $komunitas  = Agenda::where('komunitas_id', $komunitas_id)->get();
+        }
 
-        $komunitas  = Agenda::where('komunitas_id', $komunitas_id)->get();
+        $daerah = Komunitas::all();
 
-        return view('admins.layouts_sidebar.monitoring_komunitas.kelola_agenda', compact('data','komunitas'));
+        return view('admins.layouts_sidebar.monitoring_komunitas.kelola_agenda', compact('data','komunitas','daerah'));
     }
 
     /**
@@ -59,11 +69,9 @@ class AgendaController extends Controller
             'user_id' => $user,
         ]);
         
-        if (auth()->user()->role == 'komunitas') {
             $input = [
                 'komunitas_id' => $komunitas_id
             ];
-        }
 
         Agenda::create($input);
 
@@ -113,11 +121,14 @@ class AgendaController extends Controller
             'tanggal' => $request->tanggal
         ]);
 
-        if ($request->jenis_agenda) {
-            $input['jenis_agenda'] = $jenis_agenda;
+        $a = $request->jenis_agenda;
+        
+        if ($request->jenis_agenda === '1') {
+            $input['jenis_agenda'] = $a;
         }
         
         $agenda->update($input);
+
         alert()->success('Berhasil','Data Berhasil diedit');
         return back();
     }

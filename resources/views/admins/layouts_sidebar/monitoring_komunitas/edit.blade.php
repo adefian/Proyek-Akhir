@@ -35,7 +35,7 @@
                 <div class="form-group">
                     <label for="tanggal">Tanggal</label>
                     <div class="input-group">    
-                        <input name="tanggal" placeholder="Pilih Tanggal" id="tanggal" type="datetime-local" class="form-control">
+                        <input name="tanggal" placeholder="Pilih Tanggal" id="tanggal" type="datetime-local" class="form-control" min="{{Carbon\Carbon::now()->format('Y-m-d\TH:i')}}"  required>
                     </div>
                 </div>
                 <div class="form-group">

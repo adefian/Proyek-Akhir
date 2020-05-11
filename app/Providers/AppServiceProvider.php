@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 
+use Carbon\Carbon;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -24,6 +26,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        config(['app.locale' => 'id']);
+        Carbon::setLocale(LC_TIME, 'id_ID.utf-8');
+        date_default_timezone_set('Asia/Jakarta');
+
         Schema::defaultStringLength(191);
+
     }
 }

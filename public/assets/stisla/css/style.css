@@ -2331,11 +2331,11 @@ pre {
   .beep:after {
     content: '';
     position: absolute;
-    top: 2px;
-    right: 8px;
+    top: 6px;
+    right: 12px;
     width: 7px;
     height: 7px;
-    background-color: #ffa426;
+    background-color: #ff0000;
     border-radius: 50%;
     -webkit-animation: pulsate 1s ease-out;
             animation: pulsate 1s ease-out;

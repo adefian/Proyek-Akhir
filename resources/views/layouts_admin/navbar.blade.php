@@ -32,47 +32,6 @@
                     <div class="time">10 Hours Ago</div>
                   </div>
                 </a>
-                <a href="#" class="dropdown-item dropdown-item-unread">
-                  <div class="dropdown-item-avatar">
-                    <img alt="image" src="{{asset('assets/img/avatar/avatar-2.png')}}" class="rounded-circle">
-                  </div>
-                  <div class="dropdown-item-desc">
-                    <b>Dedik Sugiharto</b>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
-                    <div class="time">12 Hours Ago</div>
-                  </div>
-                </a>
-                <a href="#" class="dropdown-item dropdown-item-unread">
-                  <div class="dropdown-item-avatar">
-                    <img alt="image" src="{{asset('assets/img/avatar/avatar-3.png')}}" class="rounded-circle">
-                    <div class="is-online"></div>
-                  </div>
-                  <div class="dropdown-item-desc">
-                    <b>Agung Ardiansyah</b>
-                    <p>Sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    <div class="time">12 Hours Ago</div>
-                  </div>
-                </a>
-                <a href="#" class="dropdown-item">
-                  <div class="dropdown-item-avatar">
-                    <img alt="image" src="{{asset('assets/img/avatar/avatar-4.png')}}" class="rounded-circle">
-                  </div>
-                  <div class="dropdown-item-desc">
-                    <b>Ardian Rahardiansyah</b>
-                    <p>Duis aute irure dolor in reprehenderit in voluptate velit ess</p>
-                    <div class="time">16 Hours Ago</div>
-                  </div>
-                </a>
-                <a href="#" class="dropdown-item">
-                  <div class="dropdown-item-avatar">
-                    <img alt="image" src="{{asset('assets/img/avatar/avatar-5.png')}}" class="rounded-circle">
-                  </div>
-                  <div class="dropdown-item-desc">
-                    <b>Alfa Zulkarnain</b>
-                    <p>Exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>
-                    <div class="time">Yesterday</div>
-                  </div>
-                </a>
               </div>
               <div class="dropdown-footer text-center">
                 <a href="#">View All <i class="fas fa-chevron-right"></i></a>
@@ -80,13 +39,14 @@
             </div>
           </li>
 
-          @if(is_null($notiftempatsampah))
-            <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg beep"><i class="far fa-bell"></i></a>
+
+          @if(count($notiftempatsampah) >= 1 || count($notifagendamendesak) >= 1)
+            <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" title="Notifikasi" class="nav-link notification-toggle nav-link-lg beep"><i class="far fa-bell"></i></a>
            @else
-            <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg"><i class="far fa-bell"></i></a>
+            <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" title="Notifikasi" class="nav-link notification-toggle nav-link-lg"><i class="far fa-bell"></i></a>
           @endif
 
-          @if(is_null($notiftempatsampah))
+          @if(count($notiftempatsampah) >= 1 || count($notifagendamendesak) >= 1)
             <div class="dropdown-menu dropdown-list dropdown-menu-right">
             <div class="dropdown-header">Notifikasi
               <div class="float-right">
@@ -94,6 +54,18 @@
               </div>
             </div>
             <div class="dropdown-list-content dropdown-list-icons">
+            @foreach($notifagendamendesak as $data)
+                  <a href="kelolaagenda" class="dropdown-item dropdown">
+                    <div class="dropdown-item-icon bg-primary text-white">
+                      <i class="fas fa-calendar"></i>
+                    </div>
+                    <div class="dropdown-item-desc">
+                      {{$data->nama}}, Komunitas {{$data->komunitas->daerah}}
+                      <p>{{ Carbon\Carbon::parse($data->tanggal)->isoFormat('LLLL') }} WIB</p>
+                      <div class="time text-primary">Agenda Penting, Yuk Ikutan !</div>
+                    </div>
+                  </a>
+            @endforeach
             @foreach($notiftempatsampah as $data)
                   <a href="indikasi" class="dropdown-item dropdown">
                     <div class="dropdown-item-icon bg-danger text-white">
@@ -101,7 +73,7 @@
                     </div>
                     <div class="dropdown-item-desc">
                       {{$data->namalokasi}}
-                      <div class="time text-danger">Penuh</div>
+                      <div class="time text-danger">Penuh, {{$data->updated_at->diffForHumans()}}</div>
                     </div>
                   </a>
             @endforeach

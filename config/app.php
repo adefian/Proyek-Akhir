@@ -228,6 +228,9 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Input' => Illuminate\Support\Facades\Input::class,
         'Alert' => UxWeb\SweetAlert\SweetAlert::class,
+        'timezone' => 'Asia/Jakarta',
+        'locale' => 'id',
+        'faker_locale' => 'id_ID',
 
     ],
 
