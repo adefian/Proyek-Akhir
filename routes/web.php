@@ -79,6 +79,8 @@ Route::group(['middleware' => ['auth','komunitas']],function(){
     Route::get('logout-komunitas','AuthController@logout')->name('logout-komunitas'); 
 });
 
+Route::get('tukarcode','SampahController@tukarcode');
+Route::get('/api','MonitoringsampahController@PushNotifSampah');
 
 
 // Auth::routes();

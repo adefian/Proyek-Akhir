@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\TempatSampah;
+use App\Token;
 
 class MonitoringsampahController extends Controller
 {
@@ -142,4 +143,55 @@ class MonitoringsampahController extends Controller
         $data = TempatSampah::orderBy('status', 'DESC')->get();
         return view('admins.layouts_sidebar.monitoring_sampah.lokasi', compact('data'));
     }
+
+    public function PushNotifSampah()
+	{
+			
+    	$fcmUrl = 'https://fcm.googleapis.com/fcm/send';
+        $tok = Token::all();
+
+        $array = array('name' => 'Joe', 'age' => 27, 'votes' => 1);
+
+$array = array_only($array, array('name', 'votes'));
+
+dd($array);
+        // $tokenList = 0;
+        // foreach ($tok as $value){
+        //     $tokenList = $value->token;
+        // }
+        // dd($tokenList);
+
+            $notification = [
+                'title'=> 'a',
+                'body' => 'v',
+                'sound' => true,
+            ];
+        
+        $extraNotificationData = ["message" => $notification,"moredata" =>'dd'];
+
+            $fcmNotification = [
+                'registration_ids' => $tokenList, //multple token array
+                // 'to'        => $tok, //single token
+                'notification' => $notification,
+                'data' => $extraNotificationData
+            ];
+        $headers = [
+            'Authorization: key=AAAABP4uS2A:APA91bEewylScLI5MFdjyQ_Tt67vwzZcsfqa-1d43F-6tKT98aRXbt7yAtnbQyqMT2E_uipViUYaHIDJ04Nbwcft55o0x69XIPj-WsE_jvclXoxrAqJWXK4hICYFy2dPAtcpXxKAfcdS',
+            'Content-Type: application/json'
+        ];
+
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL,$fcmUrl);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fcmNotification));
+        $result = curl_exec($ch);
+        curl_close($ch);
+
+
+        return response()->json($result);
+	}
 }

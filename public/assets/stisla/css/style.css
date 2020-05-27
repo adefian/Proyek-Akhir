@@ -2024,7 +2024,10 @@ a.dropdown-item {
       font-weight: 600; }
   .dropdown-list .dropdown-list-content {
     height: auto;
-    overflow: hidden; }
+    overflow: hidden;
+    overflow-y: scroll;
+    max-height: 550px;
+    position: relative; }
     .dropdown-list .dropdown-list-content:not(.is-end):after {
       content: ' ';
       position: absolute;

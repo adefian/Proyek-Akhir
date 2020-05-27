@@ -26,12 +26,10 @@ class Controller extends BaseController
         
         $notiftempatsampah = TempatSampah::where('status', 1)->orderBy('updated_at', 'DESC')->get();
         
-        $notifagenda = Agenda::where('created_at', '>', $tgl1)->get();
-
-        $user = Agenda::find(1);
+        $notifagenda = Agenda::where('created_at', '>', $tgl1)->orWhere('updated_at', '>', $tgl1)->orderBy('updated_at', 'DESC')->get();
         
-        $notifagendamendesak = Agenda::where('jenis_agenda', 1)->get();
-
+        $notifagendamendesak = Agenda::where('jenis_agenda', 1)->orderBy('updated_at', 'DESC')->get();
+        
         View::share ( 'notiftempatsampah', $notiftempatsampah );
         View::share ( 'notifagenda', $notifagenda );
         View::share ( 'notifagendamendesak', $notifagendamendesak );

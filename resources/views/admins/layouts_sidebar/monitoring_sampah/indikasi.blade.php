@@ -37,10 +37,10 @@
                   <div class="card-wrap">
                     <div class="card-body">
                     <div class="row">
-                        <div class="col-lg-6 col-12">
+                        <div class="col-lg-7 col-12">
                           <div id="map" style="border-radius: 3px;"></div>
                         </div>
-                        <div class="col-lg-6 col-12">
+                        <div class="col-lg-5 col-12">
                           <h6 class="text-center mb-4 mt-4">Titik Lokasi yang terdaftar</h6>
                           <div class="table-responsive">
                             <table class="table table-sm" id="dataTable">

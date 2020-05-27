@@ -117,7 +117,6 @@
                                         <td>{{ Carbon\Carbon::parse($kom->tanggal)->isoFormat('LLLL') }}</td>
                                         <td>{{$kom->petugasygmenambahkan->nama}}</td>
                                         <td style="display:none;">{{$kom->id}}</td>
-                                        <td style="display:none;">{{$kom->jenis_agenda}}</td>
                                         <td class="text-center">
 
                                             <button class="edit btn btn-warning btn-sm fa fa-edit" title="Edit disini"></button>

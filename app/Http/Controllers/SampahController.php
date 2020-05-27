@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Transaksi;
+
+
 class SampahController extends Controller
 {
     /**
@@ -13,7 +16,8 @@ class SampahController extends Controller
      */
     public function index()
     {
-        return view ('admins.layouts_sidebar.daftar_pembuang_sampah.index');
+        $data = Transaksi::all();
+        return view ('admins.layouts_sidebar.daftar_pembuang_sampah.index', compact('data'));
     }
 
     /**
@@ -80,5 +84,10 @@ class SampahController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function tukarcode()
+    {
+        return view ('tukarcode');
     }
 }

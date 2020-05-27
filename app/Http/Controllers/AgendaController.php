@@ -67,11 +67,9 @@ class AgendaController extends Controller
             'jenis_agenda' => $request->jenis_agenda,
             'tanggal' => $request->tanggal,
             'user_id' => $user,
+            'komunitas_id' => $komunitas_id
+
         ]);
-        
-            $input = [
-                'komunitas_id' => $komunitas_id
-            ];
 
         Agenda::create($input);
 
@@ -123,7 +121,7 @@ class AgendaController extends Controller
 
         $a = $request->jenis_agenda;
         
-        if ($request->jenis_agenda === '1') {
+        if ($request->jenis_agenda === '1' || $request->jenis_agenda === '0') {
             $input['jenis_agenda'] = $a;
         }
         

@@ -53,7 +53,7 @@
                                         <td class="text-center">{{$no++}}</td>
                                         <td>{{$agendas->nama}}</td>
                                         <td>{{$agendas->keterangan}}</td>
-                                        <td>{{$agendas->tanggal}}</td>
+                                        <td>{{ Carbon\Carbon::parse($agendas->tanggal)->isoFormat('LLLL') }} WIB</td>
                                         <td>{{$agendas->komunitas->daerah}}</td>
                                     </tr>
                                 @endforeach
