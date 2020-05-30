@@ -6,6 +6,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Str;
 
 use View;
 use App\TempatSampah;
@@ -29,7 +30,8 @@ class Controller extends BaseController
         $notifagenda = Agenda::where('created_at', '>', $tgl1)->orWhere('updated_at', '>', $tgl1)->orderBy('updated_at', 'DESC')->get();
         
         $notifagendamendesak = Agenda::where('jenis_agenda', 1)->orderBy('updated_at', 'DESC')->get();
-        
+
+
         View::share ( 'notiftempatsampah', $notiftempatsampah );
         View::share ( 'notifagenda', $notifagenda );
         View::share ( 'notifagendamendesak', $notifagendamendesak );

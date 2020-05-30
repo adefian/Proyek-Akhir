@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Arr;
 
 use Illuminate\Http\Request;
 use App\User;
 use App\TempatSampah;
 use App\Token;
+use App\Agenda;
 
 class MonitoringsampahController extends Controller
 {
@@ -148,22 +150,19 @@ class MonitoringsampahController extends Controller
 	{
 			
     	$fcmUrl = 'https://fcm.googleapis.com/fcm/send';
-        $tok = Token::all();
+        // $tok = User::all(); //ambil data user
+        $tok = Token::all()->except(3,4); //ambil data user
 
-        $array = array('name' => 'Joe', 'age' => 27, 'votes' => 1);
+        $notif = Agenda::where('jenis_agenda', 1)->orderBy('updated_at', 'DESC')->first();
 
-$array = array_only($array, array('name', 'votes'));
-
-dd($array);
-        // $tokenList = 0;
-        // foreach ($tok as $value){
-        //     $tokenList = $value->token;
-        // }
-        // dd($tokenList);
-
+        $tokenList = Arr::pluck($tok,'token');  // Array data token 
+        
+        // dd($notif->nama);
+        $dat = \Carbon\Carbon::parse($notif->tanggal)->isoFormat('LLLL'); //buat tanggal sesuai format Indonesia
+           
             $notification = [
-                'title'=> 'a',
-                'body' => 'v',
+                'title'=> $notif->nama,
+                'body' => $notif->keterangan.'. '.$dat,
                 'sound' => true,
             ];
         
