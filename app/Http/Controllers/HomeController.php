@@ -13,7 +13,17 @@ class HomeController extends Controller
     {
         $tempatsampah = TempatSampah::all();
         $komunitas = Komunitas::where('level', 1)->get();
-        $agenda = Agenda::all();
+        $agenda = Agenda::orderBy('tanggal', 'ASC')->get();
         return view ('home.index', compact('tempatsampah','komunitas','agenda'));
+    }
+
+    public function feedback(Request $request)
+    {
+        $input = ([
+            'nama' => $request->nama,
+        ]);
+
+        Feedback::create($input);
+        return back();
     }
 }

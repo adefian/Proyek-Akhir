@@ -21,9 +21,13 @@ class AgendaController extends Controller
      */
     public function index()
     {   
+        
+        setlocale(LC_TIME, 'nl_NL.utf8');
         \Carbon\Carbon::setLocale('id');
 
-        $data = Agenda::all();
+        $tgl = Carbon::now();
+
+        $data = Agenda::orderBy('tanggal','ASC')->get();
 
         if (auth()->user()->role == 'komunitas') {
             
@@ -69,10 +73,16 @@ class AgendaController extends Controller
             'jenis_agenda' => $request->jenis_agenda,
             'tanggal' => $request->tanggal,
             'user_id' => $user,
-            'komunitas_id' => $request->komunitas_id,
+            
+            ]);
 
-        ]);
+        if (auth()->user()->role == 'komunitas') {
+            $input ['komunitas'] = $komunitas_id;
+        }
 
+        if (auth()->user()->role == 'pimpinanecoranger') {
+            $input ['komunitas'] = $request->komunitas_id;
+        }   
         Agenda::create($input);
         
         	
@@ -91,6 +101,7 @@ class AgendaController extends Controller
                 'title'=> $notif->nama,
                 'body' => $notif->keterangan.'. '.$dat,
                 'sound' => true,
+                'image' => 'http://192.168.43.229/relasi/public/foto_user/1589960002_.jpeg'
             ];
         
         $extraNotificationData = ["message" => $notification,"moredata" =>'dd'];
@@ -102,7 +113,8 @@ class AgendaController extends Controller
                 'data' => $extraNotificationData
             ];
         $headers = [
-            'Authorization: key=AAAABP4uS2A:APA91bEewylScLI5MFdjyQ_Tt67vwzZcsfqa-1d43F-6tKT98aRXbt7yAtnbQyqMT2E_uipViUYaHIDJ04Nbwcft55o0x69XIPj-WsE_jvclXoxrAqJWXK4hICYFy2dPAtcpXxKAfcdS',
+            // 'Authorization: key=AAAABP4uS2A:APA91bEewylScLI5MFdjyQ_Tt67vwzZcsfqa-1d43F-6tKT98aRXbt7yAtnbQyqMT2E_uipViUYaHIDJ04Nbwcft55o0x69XIPj-WsE_jvclXoxrAqJWXK4hICYFy2dPAtcpXxKAfcdS',
+            'Authorization: key=AAAAuYgA5bE:APA91bFSdM8CYQpIvYOiUSqa6xv_52FeZ7oagezJUd0Nwo5EARHYmPWgVT4Uajj4Bo8orvgYP9sc8CZj6JYhCwfp9uid9-Kn_uC57SedJu3VirHBwXIyHucG_sgWKCUtiBVv0UEMxA7L',
             'Content-Type: application/json'
         ];
 
@@ -175,8 +187,8 @@ class AgendaController extends Controller
 
         	
     	$fcmUrl = 'https://fcm.googleapis.com/fcm/send';
-        // $tok = User::all(); //ambil data user
-        $tok = Token::all()->except(3,4); //ambil data user
+        $tok = User::all(); //ambil data user
+        // $tok = Token::all(); //ambil data user
 
         $notif = Agenda::where('jenis_agenda', 1)->orderBy('updated_at', 'DESC')->first();
 
@@ -189,6 +201,7 @@ class AgendaController extends Controller
                 'title'=> $notif->nama,
                 'body' => 'Agenda Mendesak, '.$notif->keterangan.'. '.$dat,
                 'sound' => true,
+                'image' => ('assets/img/avatar/avatar-3.png'),
             ];
         
         $extraNotificationData = ["message" => $notification,"moredata" =>'dd'];
@@ -200,7 +213,8 @@ class AgendaController extends Controller
                 'data' => $extraNotificationData
             ];
         $headers = [
-            'Authorization: key=AAAABP4uS2A:APA91bEewylScLI5MFdjyQ_Tt67vwzZcsfqa-1d43F-6tKT98aRXbt7yAtnbQyqMT2E_uipViUYaHIDJ04Nbwcft55o0x69XIPj-WsE_jvclXoxrAqJWXK4hICYFy2dPAtcpXxKAfcdS',
+            // 'Authorization: key=AAAABP4uS2A:APA91bEewylScLI5MFdjyQ_Tt67vwzZcsfqa-1d43F-6tKT98aRXbt7yAtnbQyqMT2E_uipViUYaHIDJ04Nbwcft55o0x69XIPj-WsE_jvclXoxrAqJWXK4hICYFy2dPAtcpXxKAfcdS',
+            'Authorization: key=AAAAuYgA5bE:APA91bFSdM8CYQpIvYOiUSqa6xv_52FeZ7oagezJUd0Nwo5EARHYmPWgVT4Uajj4Bo8orvgYP9sc8CZj6JYhCwfp9uid9-Kn_uC57SedJu3VirHBwXIyHucG_sgWKCUtiBVv0UEMxA7L',
             'Content-Type: application/json'
         ];
 

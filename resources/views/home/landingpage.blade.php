@@ -160,7 +160,6 @@
   </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
-  <div id="preloader"></div>
 
   <!-- Vendor JS Files -->
   <script src="{{asset('assets-landingpage/vendor/jquery/jquery.min.js')}}"></script>
@@ -177,6 +176,15 @@
 
   <!-- Template Main JS File -->
   <script src="{{asset('assets-landingpage/js/main.js')}}"></script>
+
+  <script type="text/javascript">
+    window.setInterval('refresh()', 300000); 	// Call a function every 10000 milliseconds (OR 10 seconds).
+
+    // Refresh or reload page.
+    function refresh() {
+        window .location.reload();
+    }
+  </script>
 
 </body>
 

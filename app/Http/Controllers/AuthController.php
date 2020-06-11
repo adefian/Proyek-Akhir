@@ -18,7 +18,14 @@ class AuthController extends Controller
 
     public function postlogin(Request $request)
     {
-        if(Auth::attempt($request->only('email','password'))){
+        $logintype = filter_var($request->email, FILTER_VALIDATE_EMAIL) ? 'email' : 'nama';
+
+        $login = [
+            $logintype => $request->email,
+            'password' => $request->password,
+        ];
+
+        if(Auth::attempt($login)){
             
             if(auth()->user()->role == 'pimpinanecoranger'){
                 alert()->success('Selamat datang', 'Haloo !!');
@@ -51,6 +58,12 @@ class AuthController extends Controller
     }
     public function postregister(Request $request)
     {
+        $cekemail = User::where('email', $request->email)->first();
+
+        if ($cekemail) {
+            alert()->error('Email yang anda gunakan sudah terdaftar', 'Gagal');
+            return back();
+        } else {
         $data = [
             'nama' => $request->username,
             'role' => 'komunitas',
@@ -71,6 +84,7 @@ class AuthController extends Controller
 
             alert()->success('Selamat Berhasil Membuat Akun', 'Silahkan Login disini');
             return redirect()->route('login');
+        }
     }
 
     public function daftardaerah()
@@ -80,6 +94,12 @@ class AuthController extends Controller
 
     public function postdaftardaerah (Request $request)
     {
+        $cekemail = User::where('email', $request->email)->first();
+
+        if ($cekemail) {
+            alert()->error('Email yang anda gunakan sudah terdaftar', 'Gagal');
+            return back();
+        } else {
         $data = [
             'email' => $request->email,
             'daerah' => $request->daerah,
@@ -93,6 +113,6 @@ class AuthController extends Controller
         alert()->info('Tunggu Proses Validasi, Akan segera diproses','Berhasil ditambahkan');
 
         return back();
-
+        }
     }
 }

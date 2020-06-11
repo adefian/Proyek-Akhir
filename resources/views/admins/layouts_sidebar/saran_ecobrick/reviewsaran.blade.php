@@ -54,7 +54,7 @@
                                         <tr>
                                             <td class="text-center align-middle">{{$no++}}</td>
                                             <td class="align-middle">{{$datas->nama_pengirimsaran}}</td>
-                                            <td class="align-middle">
+                                            <td class="text-center align-middle">
                                             @if($datas->foto_diusulkan)
                                                 <img height="100" id="myImg" src="{{asset('assets/img/ecobrick')}}/{{$datas->foto_diusulkan}}" data-toggle="modal" data-target="#myModal"></img>
                                                 @else
@@ -71,7 +71,7 @@
                                             </td>
                                             <td class="text-center align-middle">
                                             @if($datas->foto_diaplikasikan)
-                                                <img height="100" src="{{asset('assets/img/ecobrick')}}/{{$datas->foto_diaplikasikan}}" alt=""></img>
+                                                <img height="100" id="myImg" src="{{asset('assets/img/ecobrick')}}/{{$datas->foto_diaplikasikan}}" data-toggle="modal" data-target="#myModal"></img>
                                                 @else
                                                 -
                                             @endif
@@ -167,10 +167,7 @@
              var data = table.row($tr).data();
              console.log(data);
  
-             $('#nama').val(data[1]);
-             $('#keterangan').val(data[2]);
-             $('#jenis_agenda').val(data[7]);
-             $('#tanggal').val(data[4]);
+             $('#keterangan').val(data[3]);
              
              $('#editForm').attr('action', '/reviewsaranecobrick/'+data[6]);
              $('#editFormpetugaslap').attr('action', '/reviewsaranecobrick-petugaslap/'+data[6]);

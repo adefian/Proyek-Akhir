@@ -35,40 +35,40 @@
         <div class="row" data-aos="fade-left">
           <div class="col-12">
             <div id="kalender"></div>
-            <table class="table table-responsive" style="width:100%">
-                        <thead>
+              <table class="table table-hover" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama kegiatan</th>
+                        <th>Keterangan</th>
+                        <th>Tanggal</th>
+                        <th>Komunitas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if($agenda)
+                        @php $no = 1 @endphp
+                        @foreach($agenda as $agendas)
                             <tr>
-                                <th>No</th>
-                                <th>Nama kegiatan</th>
-                                <th>Keterangan</th>
-                                <th>Tanggal</th>
-                                <th>Komunitas</th>
+                                <td class="text-center">{{$no++}}</td>
+                                <td>{{$agendas->nama}}</td>
+                                <td>{{$agendas->keterangan}}</td>
+                                <td>{{ Carbon\Carbon::parse($agendas->tanggal)->isoFormat('LLLL') }} WIB</td>
+                                <td>{{$agendas->komunitas->daerah}}</td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            @if($agenda)
-                                @php $no = 1 @endphp
-                                @foreach($agenda as $agendas)
-                                    <tr>
-                                        <td class="text-center">{{$no++}}</td>
-                                        <td>{{$agendas->nama}}</td>
-                                        <td>{{$agendas->keterangan}}</td>
-                                        <td>{{ Carbon\Carbon::parse($agendas->tanggal)->isoFormat('LLLL') }} WIB</td>
-                                        <td>{{$agendas->komunitas->daerah}}</td>
-                                    </tr>
-                                @endforeach
-                            @endif
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>No</th>
-                                <th>Nama kegiatan</th>
-                                <th>Keterangan</th>
-                                <th>Tanggal</th>
-                                <th>Komunitas</th>
-                            </tr>
-                        </tfoot>
-                    </table>
+                        @endforeach
+                    @endif
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama kegiatan</th>
+                        <th>Keterangan</th>
+                        <th>Tanggal</th>
+                        <th>Komunitas</th>
+                    </tr>
+                </tfoot>
+            </table>
           </div>
         </div>
 
@@ -125,6 +125,47 @@
     </section><!-- End map -->
 
 <!-- ============= Array ============= -->
+
+<!-- ============= Feedback ============= -->
+<section id="contact" class="contact">
+      <div class="container">
+
+        <div class="section-title aos-init aos-animate" data-aos="fade-up">
+          <h2>Kritik & Saran</h2>
+          <p>Feedback</p>
+        </div>
+
+        <div class="row justify-content-center">
+
+          <div class="col-lg-10 mt-5 mt-lg-0 aos-init aos-animate" data-aos="fade-left" data-aos-delay="200">
+
+            <form action="kirimfeedback" method="post">
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <input type="text" name="name" class="form-control" id="name" placeholder="Nama Anda"  required>
+                </div>
+                <div class="col-md-6 form-group">
+                  <input type="email" class="form-control" name="email" id="email" placeholder="Email Anda" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="file" class="form-control" name="subject" id="subject">
+              </div>
+              <div class="form-group">
+                <textarea class="form-control" name="message" rows="5" placeholder="Masukkan Usulan Anda" required></textarea>
+              </div>
+            
+              <div class="text-center"><button class="btn btn-primary" type="submit">Kirim</button></div>
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+<!-- ============= End Feedback ============= -->
+
 
     <script>
       var array =[];
@@ -343,5 +384,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/moment/main.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/rrule/main.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/timegrid/main.min.js"></script>
+
 
 @endsection

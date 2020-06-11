@@ -125,7 +125,15 @@
   <!-- Template JS File -->
   <script src="{{asset('assets/stisla/js/scripts.js')}}"></script>
   <script src="{{asset('assets/stisla/js/custom.js')}}"></script>
-  
+
+  <script type="text/javascript">
+    window.setInterval('refresh()', 300000); 	// Call a function every 60000 milliseconds (OR 60 seconds).
+
+    // Refresh or reload page.
+    function refresh() {
+        window .location.reload();
+    }
+  </script>
   <!-- Page Specific JS File -->
 
   

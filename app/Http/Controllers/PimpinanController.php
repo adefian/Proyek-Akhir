@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 use Auth;
 use App\TempatSampah;
@@ -11,13 +12,11 @@ use App\Komunitas;
 use App\AnggotaKomunitas;
 use App\PimpinanEcoranger;
 use App\Agenda;
+use App\Point;
 
 class PimpinanController extends Controller
 {
 
-    public function __construct(){
-        parent::__construct();
-     }
     /**
      * Display a listing of the resource.
      *
@@ -30,8 +29,18 @@ class PimpinanController extends Controller
         $komunitas = Komunitas::all()->count();
         $tempatsampah = TempatSampah::all()->count();
         $anggotakomunitas = AnggotaKomunitas::all()->count();
+        $pimpinan = PimpinanEcoranger::where('user_id', auth()->user()->id)->first();
 
-        return view ('admins.pimpinan.index',compact('tempatsampah','user','komunitas','anggotakomunitas'));
+        $ts = TempatSampah::all();
+        $tempat = Arr::pluck($ts ,'namalokasi');
+
+        $b = Point::where('status', 1)->count();
+        $s = Point::where('status', 0)->count();
+
+        $nilai = [$b, $s];
+        // dd($nilai);
+
+        return view ('admins.pimpinan.index2',compact('tempatsampah','user','komunitas','anggotakomunitas', 'tempat', 'nilai','pimpinan'));
     }
 
     /**
@@ -91,7 +100,7 @@ class PimpinanController extends Controller
     public function update(Request $request, $id)
     {
         // fetching the user model 
-        $user = Auth::user();
+        // $user = Auth::user();
 
         $pimpinan = PimpinanEcoranger::findOrFail($id);
         $input = ([
@@ -123,7 +132,7 @@ class PimpinanController extends Controller
         $pimpinan->update($input);
         $user->update($input2);
 
-        alert()->success('Berhasil','Data berhasil diedit');
+        alert()->success('Berhasil','Berhasil merubah profile anda');
         return back();
     }
 

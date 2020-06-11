@@ -82,21 +82,21 @@
                   </div>
                 </div>
             </div>
-<!-- 
+
             <div class="row justify-content-center">
               <div class="col-12">
                 <div class="card card-primary">
                     <div class="card-header">
-                      <h4>Aksi Tempat Sampah</h4>
+                      <h4>Data Pembuang Sampah</h4>
                     </div>
                     <div class="card-body">
                       <div class="row">
                         <div class="col-lg-7 col-12">
-
+                          <canvas id="myChart3"></canvas>
                         </div>
                           <div class="col-lg-5 col-12">
                             <div class="form-group">
-                              <label class="control-label">Date Range Picker</label>
+                              <label class="control-label">Date</label>
                               <div class="input-group">
                                 <div class="input-group-prepend">
                                   <div class="input-group-text">
@@ -112,39 +112,7 @@
                 </div>
               </div>
             </div>
-
-            <div class="row justify-content-center">
-              <div class="col-12">
-                <div class="card card-primary">
-                    <div class="card-header">
-                      <h4>Bar Chart</h4>
-                    </div>
-                    <div class="card-body">
-                      <div class="row">
-                        <div class="col-lg-7 col-12">
-                          <canvas id="myChart2"></canvas>
-                        </div>
-                        <div class="col-lg-5 col-12">
-                            <div class="form-group">
-                              <label class="control-label">Date Range Picker</label>
-                              <div class="input-group">
-                                <div class="input-group-prepend">
-                                  <div class="input-group-text">
-                                    <i class="fas fa-calendar"></i>
-                                  </div>
-                                </div>
-                                <input type="text" class="form-control" name="daterange" id="daterange">
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-            </div>
-             -->
+            
           <div class="section-body">
           </div>
         </section>
@@ -154,52 +122,137 @@
 
 @section('js')
 
-    <script src="{{asset('js/Chart.min.js')}}"></script>
-    <!-- <script src="{{asset('assets/stisla/js/page/modules-chartjs.js')}}"></script> -->
+<script src="{{asset('js/Chart.min.js')}}"></script>
+<!-- <script src="{{asset('assets/stisla/js/page/modules-chartjs.js')}}"></script> -->
     <script>
       "use strict";
-      var ctx = document.getElementById("myChart2").getContext('2d');
+
+      var ctx = document.getElementById("myChart3").getContext('2d');
       var myChart = new Chart(ctx, {
-        type: 'bar',
+        type: 'doughnut',
         data: {
-          labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
           datasets: [{
-            label: 'Statistics',
-            data: [460, 458, 330, 502, 430, 610, 488],
-            borderWidth: 2,
-            backgroundColor: '#086bc4',
-            borderColor: '#086bc4',
-            borderWidth: 2.5,
-            pointBackgroundColor: '#ffffff',
-            pointRadius: 4
-          }]
+            data: {!! json_encode($nilai) !!},
+            backgroundColor: [
+              '#47c363',
+              '#fc544b'
+            ],
+            label: 'Dataset 1'
+          }],
+          labels: [
+            'Benar',
+            'Salah'
+          ],
         },
         options: {
+          responsive: true,
           legend: {
-            display: false
-          },
-          scales: {
-            yAxes: [{
-              gridLines: {
-                drawBorder: false,
-                color: '#f2f2f2',
-              },
-              ticks: {
-                beginAtZero: true,
-                stepSize: 150
-              }
-            }],
-            xAxes: [{
-              ticks: {
-                display: false
-              },
-              gridLines: {
-                display: false
-              }
-            }]
+            position: 'bottom',
           },
         }
       });
+    
+    //
+      // var ctx = document.getElementById("myChart3").getContext('2d');
+      // var myChart = new Chart(ctx, {
+      //   type: 'bar',
+      //   data: {
+      //     datasets: [{
+      //       label: 'Jumlah',
+      //       data: {!! json_encode($nilai) !!},
+      //       borderWidth: 2,
+      //       backgroundColor: ['#47c363','#fc544b'],
+      //       borderColor: ['#47c363','#fc544b'],
+      //       borderWidth: 2,
+      //       pointBackgroundColor: '#ffffff',
+      //       pointRadius: 4,
+      //     }],
+      //     labels: ["Benar", "Salah"],
+      //   },
+
+      //   options: {
+      //     legend: {
+      //       display: false
+      //     },
+      //     scales: {
+      //       yAxes: [{
+      //         gridLines: {
+      //           drawBorder: false,
+      //           color: '#f2f2f2',
+      //         },
+      //         ticks: {
+      //           beginAtZero: true,
+      //           stepSize: 2
+      //         }
+      //       }],
+      //       xAxes: [{
+      //         ticks: {
+      //           display: true
+      //         },
+      //         gridLines: {
+      //           display: true
+      //         },
+      //       }]
+      //     },
+      //   }
+      // });
+    //
+  //
+      // var ctx = document.getElementById("myChart3").getContext('2d');
+      // var myChart = new Chart(ctx, {
+      //   type: 'bar',
+      //   data: {
+      //     datasets: [{
+      //       label: 'Salah',
+      //       data: [46, 48, 30, 52],
+      //       borderWidth: 2,
+      //       backgroundColor: '#fc544b',
+      //       borderColor: '#fc544b',
+      //       borderWidth: 2,
+      //       pointBackgroundColor: '#ffffff',
+      //       pointRadius: 4,
+      //     }, {
+      //       label: 'Benar',
+      //       data: [4, 8, 2, 22],
+      //       borderWidth: 2,
+      //       backgroundColor: '#47c363',
+      //       borderColor: '#47c363',
+      //       borderWidth: 2,
+      //       pointBackgroundColor: '#ffffff',
+      //       pointRadius: 4,
+      //     }],
+      //     labels: {!! json_encode($tempat) !!},
+      //   },
+
+      //   options: {
+      //     legend: {
+      //       responsive: true,
+      //       rounded: true,
+      //       position: 'bottom',
+      //     },
+      //     scales: {
+      //       yAxes: [{
+      //         gridLines: {
+      //           drawBorder: false,
+      //           color: '#f2f2f2',
+      //         },
+      //         ticks: {
+      //           beginAtZero: true,
+      //           stepSize: 15
+      //         }
+      //       }],
+      //       xAxes: [{
+      //         ticks: {
+      //           display: true
+      //         },
+      //         gridLines: {
+      //           display: false
+      //         },
+      //       }]
+      //     },
+      //   }
+      // });
+  //
     </script>
 
     <script type="text/javascript">
@@ -211,8 +264,4 @@
         });
       });
     </script>
-@endsection
-
-@section('js')
-
 @endsection

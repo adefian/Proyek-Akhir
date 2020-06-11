@@ -21,8 +21,8 @@ class CreateTempatSampahsTable extends Migration
             $table->string('foto')->default('default.jpg');
             $table->integer('status')->default(0);
             $table->timestamps();
-            $table->bigInteger('id_user')->unsigned()->nullable();
-            $table->foreign('id_user')
+            $table->bigInteger('user_id')->unsigned()->nullable();
+            $table->foreign('user_id')
                     ->references('id')
                     ->on('user')
                     ->onDelete('cascade')

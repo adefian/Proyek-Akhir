@@ -3,6 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
+use App\Komunitas;
+use App\User;
+use App\TempatSampah;
+use App\AnggotaKomunitas;
+use App\Agenda;
+use App\Ecobrick;
+use App\PetugasLapangan;
+use App\Point;
 
 class PetugaslapanganController extends Controller
 {
@@ -14,7 +23,13 @@ class PetugaslapanganController extends Controller
 
     public function index()
     {
-        return view ('admins.petugas_lapangan.index');
+        $petugaslapangan = PetugasLapangan::all()->count();
+        $sampahpenuh = TempatSampah::where('status',1)->count();
+        $tempatsampah = TempatSampah::all()->count();
+        $sampah = Point::all()->count();
+
+
+        return view ('admins.petugas_lapangan.index', compact('tempatsampah','petugaslapangan','sampah','sampahpenuh'));
     }
 
     /**
@@ -46,7 +61,11 @@ class PetugaslapanganController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = Auth::user();
+
+        $data = PetugasLapangan::where('user_id', $id)->first();
+        
+        return view('admins.petugas_lapangan.profile', compact('data'));
     }
 
     /**
@@ -69,7 +88,38 @@ class PetugaslapanganController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $petugas_lapangan = PetugasLapangan::findOrFail($id);
+        $input = ([
+            'nama' => $request->namalengkap,
+            'nohp' => $request->nohp,
+            'alamat' => $request->alamat,
+            'bio' => $request->bio,
+        ]);
+
+        if ($file = $request->file('foto')) {
+            $nama = time() . $file->getClientOriginalName();
+            $file->move('assets/img/avatar/', $nama);  
+            $input['foto'] = $nama;
+        }
+
+        $ed = $petugas_lapangan->user_id;
+        $user = User::findOrFail($ed);
+        $input2 = ([
+            'nama' => $request->username,
+            'email' => $request->email,
+        ]);
+
+        if ($request->password) {
+            $pass = bcrypt($request->password);
+            $input2['password'] = $pass;
+        }
+
+        
+        $petugas_lapangan->update($input);
+        $user->update($input2);
+
+        alert()->success('Berhasil','Berhasil merubah profile anda');
+        return back();
     }
 
     /**

@@ -1,7 +1,7 @@
 @extends('layouts_admin.admin')
 
-@if(auth()->user()->role == 'pimpinanecoranger')
-    @include('admins.pimpinan.include')
+@if(auth()->user()->role == 'akunecoranger')
+    @include('admins.akun.include')
 @endif
 @if(auth()->user()->role == 'petugaslapangan')
     @include('admins.petugas_lapangan.include')
@@ -17,15 +17,16 @@
             <h1>Profile</h1>
           </div>
 
-        <form action="/pimpinan/{{$data->id}}" method="POST" class="needs-validation" novalidate="" enctype="multipart/form-data">
-          <div class="section-body"> 
+        <form action="/komunitas/{{$data->id}}" method="POST" class="needs-validation" novalidate="" enctype="multipart/form-data">
+          <div class="section-body">
             <div class="row">
               <div class="col-12 col-md-12 col-lg-5">
-                <div class="card profile-widget card-primary">
-                    <h2 class="section-title">Hi, {{auth()->user()->nama}}!</h2>
+                <div class="card profile-widget card-warning">
+                    <h2 class="section-title-warning">Hi, {{auth()->user()->nama}}!</h2>
                     <p class="section-lead">
                         Ubah informasi tentang diri Anda di halaman ini.
                     </p>
+                  <form action="/komunitas/{{$data->id}}" method="POST" class="needs-validation" novalidate="" enctype="multipart/form-data">
                     <div class="row justify-content-center">
                       <div class="col-12 col-md-12 col-lg-6">
                         <div class="profile-widget-header">
@@ -40,14 +41,14 @@
                       </div>
                     </div>
                   <div class="profile-widget-description">
-                    <div class="profile-widget-name">{{$data->nama}} <div class="text-muted d-inline font-weight-normal"><div class="slash"></div>Pimpinan Ecoranger</div></div>
+                    <div class="profile-widget-name">{{$data->nama}} <div class="text-muted d-inline font-weight-normal"><div class="slash"></div>Anggota Komunitas {{$data->daerahygdipilih->daerah}}</div></div>
+                        <p>{{$data->jenis_kelamin}}</p>
                         {{$data->bio}}
                 </div>
                 </div>
               </div>
               <div class="col-12 col-md-12 col-lg-7">
-                <div class="card card-primary">
-                
+                <div class="card card-warning">
                   {{csrf_field()}}
                   {{method_field('PATCH')}}  
 
@@ -65,7 +66,7 @@
                           </div>
                           <div class="form-group col-md-5 col-12">
                             <label>Username</label>
-                            <input name="username" type="text" class="form-control" value="{{$data->pimpinan->nama}}" required="">
+                            <input name="username" type="text" class="form-control" value="{{$data->akun->nama}}" required="">
                             <div class="invalid-feedback">
                               Silahkan isi Username Anda
                             </div>
@@ -74,7 +75,7 @@
                         <div class="row">
                           <div class="form-group col-md-7 col-12">
                             <label>Email</label>
-                            <input name="email" type="email" class="form-control" value="{{$data->pimpinan->email}}" required="">
+                            <input name="email" type="email" class="form-control" value="{{$data->akun->email}}" required="">
                             <div class="invalid-feedback">
                               Silahkan isi Email Anda
                             </div>
@@ -107,13 +108,13 @@
                         </div>
                         
                         <div class="text-right">
-                          <button class="btn btn-primary">Simpan Perubahan</button>
+                          <button class="btn btn-warning">Simpan Perubahan</button>
                         </div>
                     </div>
                 </div>
               </div>
             </div>
-            </div>
+          </div>
           </form>
         </section>
     </div>

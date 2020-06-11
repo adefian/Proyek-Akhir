@@ -18,17 +18,18 @@ class CreateAnggotaKomunitasTable extends Migration
             $table->string('nama');
             $table->bigInteger('nohp');
             $table->string('alamat');
+            $table->string('foto');
             $table->string('jenis_kelamin');
             $table->string('level')->default(0);
             $table->timestamps();
-            $table->bigInteger('id_user')->unsigned();
-            $table->foreign('id_user')
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')
                     ->references('id')
                     ->on('user')
                     ->onDelete('cascade')
                     ->onUpdate('cascade');
-            $table->bigInteger('id_komunitas')->unsigned();
-            $table->foreign('id_komunitas')
+            $table->bigInteger('komunitas_id')->unsigned();
+            $table->foreign('komunitas_id')
                     ->references('id')
                     ->on('komunitas')
                     ->onDelete('cascade')

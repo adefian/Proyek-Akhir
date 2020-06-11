@@ -40,7 +40,8 @@ class EcobrickController extends Controller
         $input = [
             'keterangan' => $request->keterangan,
             'level' => 1,
-            'user_id' => auth()->user()->id
+            'user_id' => auth()->user()->id,
+            'nama_pengirimsaran' => auth()->user()->nama,
         ];
 
         if ($file = $request->file('foto_diaplikasikan')) {
@@ -88,15 +89,18 @@ class EcobrickController extends Controller
     {
         $agenda = Ecobrick::findOrFail($id);
         
-        $user =  auth()->user()->id;
-        
         $input = ([
-            'nama' => $request->nama,
             'keterangan' => $request->keterangan,
-            'user_id' => $user,
-            'tanggal' => $request->tanggal
+            'user_id' => auth()->user()->id,
         ]);
+
+        if ($file = $request->file('foto_diaplikasikan')) {
+            $nama = time() .'_'. $file->getClientOriginalName();
+            $file->move('assets/img/ecobrick/', $nama);  
+            $input['foto_diaplikasikan'] = $nama;
+        }
         
+        // dd($nama);
         $agenda->update($input);
         alert()->success('Berhasil','Data Berhasil diedit');
         return back();

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Login &mdash; TS</title>
+  <title>Page Not Found</title>
   
   <!-- General CSS Files -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -32,75 +32,30 @@
         75% { background-color: #07a3ff; }
         100% { background-color: #2163f7f2; }
     }
+
+    h1, h2{
+        font-size:40px;
+        color:white;
+    }
+    h1{
+        font-size:120px;
+        margin-top:18%
+    }
   }
 
 </style>
 
 <body>
   
-    
-    @include('sweet::alert')
     <section class="section">
-      <div class="container mt-5">
-        <div class="row">
-          <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
-            <!-- <div class="login-brand">
-              <img src="../assets/img/stisla-fill.svg" alt="logo" width="100" class="shadow-light rounded-circle">
-            </div> -->
-
-            <div class="card card-primary shadow">
-              <div class="card-header"><h4>Login</h4></div>
-
-              <div class="card-body">
-              <form method="POST" action="postlogin" class="needs-validation" novalidate="">
-                  {{csrf_field()}}
-                  <div class="form-group">
-                    <label for="email" class="control-label">Email / Username</label>
-                      <input id="email" type="text" class="form-control" name="email" tabindex="1" required autofocus>
-                    <div class="invalid-feedback">
-                      Silahkan isi Email / Username Anda
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <div class="d-block">
-                    	<label for="password" class="control-label">Password</label>
-                      <div class="float-right">
-                        <!-- <a href="auth-forgot-password.html" class="text-small">
-                          Forgot Password?
-                        </a> -->
-                      </div>
-                    </div>
-                    <input id="password" type="password" class="form-control" name="password" tabindex="2" required>
-                    <div class="invalid-feedback">
-                      Silahkan isi Password Anda
-                    </div>
-                  </div>
-
-                  <!-- <div class="form-group">
-                    <div class="custom-control custom-checkbox">
-                      <input type="checkbox" name="remember" class="custom-control-input" tabindex="3" id="remember-me">
-                      <label class="custom-control-label" for="remember-me">Remember Me</label>
-                    </div>
-                  </div> -->
-
-                  <div class="form-group">
-                    <button type="submit" id="klik" class="btn btn-klik btn-lg btn-block" tabindex="4">Login</button>
-                  </div>
-                </form>
-                <div class="text-center mt-4 mb-3">
-                  <div class="text-job text-muted">Login disini</div>
-                </div>
-                <div class="row sm-gutters">
-                    <div class="mt-5 text-muted text-center">
-                        Ingin gabung sebagai anggota komunitas ? <a href="register">Daftar</a>
-                    </div>
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="container">
+        <h1 class="text-center">-404-</h1>
+        <h2 class="text-center">Oops. Page Not Found</h2>
+        <!-- <div class="align-center">
+          <a href="{{ URL::previous() }}">
+            <button class="btn btn-info">Kembali</button>
+          </a>
+        </div> -->
       </div>
     </section>
     <svg class="hero-waves fixed-bottom" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28 " preserveAspectRatio="none">

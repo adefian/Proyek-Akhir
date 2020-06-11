@@ -2,7 +2,7 @@
         <form class="form-inline mr-auto">
           <ul class="navbar-nav mr-3">
             <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
-            <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a></li>
+            <!-- <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a></li> -->
           </ul>
           <!-- <div class="search-element">
             <input class="form-control" type="search" placeholder="Search" aria-label="Search" data-width="250">
@@ -14,6 +14,10 @@
         <ul class="navbar-nav navbar-right">
         @if(count($notifagenda) >= 1)
           <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" title="Pesan" class="nav-link nav-link-lg message-toggle beep"><i class="far fa-envelope"></i></a>
+          @elseif(count($notifsampahmasuk) >= 1)
+            @if(auth()->user()->role == 'pimpinanecoranger' || auth()->user()->role == 'petugaslapangan')
+              <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" title="Pesan" class="nav-link nav-link-lg message-toggle beep"><i class="far fa-envelope"></i></a>
+            @endif
          @else
           <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" title="Pesan" class="nav-link nav-link-lg message-toggle"><i class="far fa-envelope"></i></a>
         @endif
@@ -43,6 +47,34 @@
                   </div>
                 </a>
               @endforeach
+                @elseif(count($notifsampahmasuk) >= 1)
+                  @if(auth()->user()->role == 'pimpinanecoranger' || auth()->user()->role == 'petugaslapangan')
+                  <div class="dropdown-menu dropdown-list dropdown-menu-right">
+                    <div class="dropdown-header">Pesan
+                      <div class="float-right">
+                        <!-- <a href="#">Mark All As Read</a> -->
+                      </div>
+                    </div>
+                    <div class="dropdown-list-content dropdown-list-icons">
+                      @foreach($notifsampahmasuk as $data)
+                        <a href="daftarmasuk" class="dropdown-item dropdown-item">
+                          <div class="dropdown-item-icon bg-danger text-white">
+                            <i class="fas fa-trash"></i>
+                          </div>
+                          <div class="dropdown-item-desc">
+                            @if($data->status === 1)
+                              <b>Sampah Masuk dengan Benar</b> 
+                              @else
+                              <b>Sampah Salah dimasukkan</b> 
+                            @endif
+                            <p>Tempat Sampah</p>
+                            @if($data->created_at == $data->updated_at)
+                              <div class="time">{{$data->updated_at->diffForHumans()}}</div>
+                            @endif
+                          </div>
+                        </a>
+                      @endforeach
+                  @endif
                 @else
                   <div class="dropdown-menu dropdown-list dropdown-menu-right">
                   <div class="dropdown-header">Tidak ada Notifikasi
@@ -55,6 +87,8 @@
             </div>
           </li>
         @endif
+
+<!-- ass -->
 
           @if(count($notiftempatsampah) >= 1 || count($notifagendamendesak) >= 1)
             <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" title="Notifikasi" class="nav-link notification-toggle nav-link-lg beep"><i class="far fa-bell"></i></a>
@@ -71,7 +105,7 @@
             </div>
             <div class="dropdown-list-content dropdown-list-icons">
             @foreach($notifagendamendesak as $data)
-                  <a href="kelolaagenda" class="dropdown-item dropdown">
+                  <a href="/kelolaagenda" class="dropdown-item dropdown">
                     <div class="dropdown-item-icon bg-primary text-white">
                       <i class="fas fa-calendar"></i>
                     </div>
@@ -84,7 +118,7 @@
                   </a>
             @endforeach
             @foreach($notiftempatsampah as $data)
-                  <a href="indikasi" class="dropdown-item dropdown">
+                  <a href="/indikasi" class="dropdown-item dropdown">
                     <div class="dropdown-item-icon bg-danger text-white">
                       <i class="fas fa-trash"></i>
                     </div>

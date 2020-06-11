@@ -120,9 +120,9 @@
                         <span class="input-group-text">+62</span>
                       </div>
                       <input id="nohp" type="nohp" class="form-control" name="nohp" tabindex="2" required>
-                    </div>
                     <div class="invalid-feedback">
                     Silahkan isi No Handphone Anda / yang dapat dihubungi
+                    </div>
                     </div>
                   </div>
                  </div> 

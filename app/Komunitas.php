@@ -9,7 +9,13 @@ class Komunitas extends Model
     protected $table = 'komunitas';
 
     protected $fillable = [
-        'email','daerah','keterangan','level','latitude','longitude'
+        'email','daerah','keterangan','level','latitude','longitude','foto', 'user_id'
     ];
+
+
+    public function komunitas()
+    {
+        return $this->belongsTo('App\User', 'user_id');
+    }
 
 }

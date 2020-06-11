@@ -46,7 +46,7 @@
             <div class="card card-primary mb-5">
               <div class="card-header"><h4>Daftarkan Komunitas</h4></div>
                 <div class="card-body">
-                  <form method="POST" action="postdaftarwilayah" class="needs-validation" novalidate="">
+                  <form method="POST" action="postdaftardaerah" class="needs-validation" novalidate="">
                       {{csrf_field()}}
                     <div class="row">
                       <div class="col-12 col-lg-6">

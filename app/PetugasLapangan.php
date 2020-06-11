@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class PetugasLapangan extends Model
 {
-    protected $fillable = [
-        'nama', 'nohp', 'alamat', 'wilayah', 'user_id','pimpinan_ecoranger_id'
-    ];
-
     protected $table = 'petugas_lapangan';
+
+    protected $fillable = [
+        'nama', 'nohp', 'alamat', 'wilayah', 'user_id','pimpinan_ecoranger_id', 'foto', 'bio'
+    ];
 
     public function petugasygmenambahkan()
     {
@@ -19,5 +19,14 @@ class PetugasLapangan extends Model
     public function akun()
     {
         return $this->belongsTo('App\User','user_id');
+    }
+    
+    public function ambilFoto()
+    {
+        if (!$this->foto) {
+            return asset('assets/img/avatar/avatar-2.png');
+        }
+
+        return asset('assets/img/avatar/'.$this->foto);
     }
 }

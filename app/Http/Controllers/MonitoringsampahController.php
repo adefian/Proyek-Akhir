@@ -150,17 +150,22 @@ class MonitoringsampahController extends Controller
 	{
 			
     	$fcmUrl = 'https://fcm.googleapis.com/fcm/send';
-        // $tok = User::all(); //ambil data user
-        $tok = Token::all()->except(3,4); //ambil data user
+        $tok = User::all(); //ambil data user
+        // $tok = Token::all()->except(3,4); //ambil data user
 
         $notif = Agenda::where('jenis_agenda', 1)->orderBy('updated_at', 'DESC')->first();
 
         $tokenList = Arr::pluck($tok,'token');  // Array data token 
+
+        // dd($tokenList);
+
+
         
         // dd($notif->nama);
         $dat = \Carbon\Carbon::parse($notif->tanggal)->isoFormat('LLLL'); //buat tanggal sesuai format Indonesia
            
             $notification = [
+                'image' => 'https://cdnaz.cekaja.com/media/2019/11/324_Artikel_CA19_Deretan-Hotel-Murah-untuk-Keluarga-di-Kota-Banyuwangi.-Mulai-dari-Rp.-75-Ribu-Saja.jpg',
                 'title'=> $notif->nama,
                 'body' => $notif->keterangan.'. '.$dat,
                 'sound' => true,
@@ -189,6 +194,8 @@ class MonitoringsampahController extends Controller
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fcmNotification));
         $result = curl_exec($ch);
         curl_close($ch);
+
+        dd($result);
 
 
         return response()->json($result);

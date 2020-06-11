@@ -25,6 +25,8 @@ Route::post('postdaftardaerah','AuthController@postdaftardaerah');
 Route::get('ecobrick', 'EcobrickController@ecobrick');
 Route::post('kirimsaranecobrick', 'EcobrickController@TambahSaran');
 
+Route::post('kirimfeedback', 'HomeController@feedback');
+
 Route::group(['middleware' => ['auth','pimpinanecoranger']],function(){
     
     Route::resource('pimpinan', 'PimpinanController');
@@ -80,6 +82,7 @@ Route::group(['middleware' => ['auth','komunitas']],function(){
 });
 
 Route::get('tukarcode','SampahController@tukarcode');
+Route::post('pushtukarcode/{id}','SampahController@pushtukarcode');
 Route::get('/api','MonitoringsampahController@PushNotifSampah');
 
 

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Transaksi;
+use App\Point;
+use App\Masyarakat;
 
 
 class SampahController extends Controller
@@ -16,7 +18,7 @@ class SampahController extends Controller
      */
     public function index()
     {
-        $data = Transaksi::all();
+        $data = Point::all();
         return view ('admins.layouts_sidebar.daftar_pembuang_sampah.index', compact('data'));
     }
 
@@ -88,6 +90,30 @@ class SampahController extends Controller
 
     public function tukarcode()
     {
-        return view ('tukarcode');
+        $masyarakat = Masyarakat::find(1);
+        return view('tukarcode', compact('masyarakat'));
+    }
+
+    public function pushtukarcode(Request $request)
+    {
+        $poin = Point::where('kode_reward', $request->kode_reward)->first();
+
+        $data = ([
+            'masyarakat_id' => 1,
+            'kode_reward' => null ,
+        ]);
+        
+        $poin->update($data);
+
+        $poin_baru = $poin->nilai;
+        $masyarakat = Masyarakat::findOrFail(1);
+        $poin_lama = $masyarakat->total_poin;
+        $total_poin = $poin_baru + $poin_lama;
+
+        // dd($total_poin);
+
+        $masyarakat->update(['total_poin' => $total_poin]);
+        alert()->success('Sukses');
+        return back();
     }
 }

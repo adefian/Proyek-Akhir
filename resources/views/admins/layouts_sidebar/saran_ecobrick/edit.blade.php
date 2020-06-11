@@ -21,32 +21,15 @@
                 {{ method_field('PATCH') }}
 
                 <div class="form-group">
-                    <label for="nama">Nama Agenda</label> 
+                    <label for="foto_diaplikasikan">Foto yang diaplikasikan</label> 
                     <div class="input-group">   
-                        <input name="nama" id="nama" type="text" class="form-control" placeholder="Nama Agenda" required>      
+                        <input name="foto_diaplikasikan" id="foto_diaplikasikan" type="file" class="form-control" required>      
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="keterangan">Keterangan</label> 
                     <div class="input-group">  	
                         <textarea type="text" name="keterangan" id="keterangan" class="form-control" placeholder="Keterangan" style="min-height:43px;" required></textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="tanggal">Tanggal</label>
-                    <div class="input-group">    
-                        <input name="tanggal" placeholder="Pilih Tanggal" id="tanggal" type="datetime-local" class="form-control">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="jenis_agenda">Jenis Agenda saat ini <p id="jenis_agenda"></p>
-                    </label>
-                    <div class="input-group">    
-                        <select name="jenis_agenda" type="text" class="form-control">
-                            <option selected disabled>Pilih Jenis Agenda</option>
-                            <option value="1">Mendesak</option>
-                            <option value="0">Tidak Mendesak</option>
-                        </select>
                     </div>
                 </div>
                 <div class="modal-footer">

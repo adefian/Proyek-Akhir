@@ -3,6 +3,7 @@
           <li class="active"><a href="#header">Home</a></li>
           <li><a href="#features">Agenda</a></li>
           <li><a href="#details">Maps</a></li>
+          <li><a href="#contact">Feedback</a></li>
           <li><a href="/ecobrick">Ecobrick</a></li>
               @if (Route::has('register'))
                 <li><a href="{{ route('register') }}">Daftar Komunitas</a></li>

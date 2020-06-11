@@ -12,10 +12,7 @@
     </ul>
   </li>
   <li class="nav-item dropdown">
-    <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i> <span>Monitoring Komunitas</span></a>
-    <ul class="dropdown-menu">
-      <li><a class="nav-link" href="/daftarkomunitas-petugaslap">Daftar Komunitas</a></li>
-    </ul>
+      <a class="nav-link" href="/daftarkomunitas-petugaslap"><i class="fas fa-users"></i><span>Daftar Komunitas</span></a>
   </li>
   <li class="menu-header">Manajemen</li>
   <li class="nav-item dropdown">
