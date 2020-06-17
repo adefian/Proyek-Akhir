@@ -39,7 +39,7 @@
             <h1>Manfaatkan Sampah Sebagai <span>Ecobrick</span></h1>
             <h2>Selamatkan bumi dengan mengurangi Sampah</h2>
             <div class="text-center text-lg-left">
-              <a href="#about" class="btn-get-started scrollto">Get Started</a>
+              <a href="#about" class="btn-get-started scrollto">Mulai</a>
             </div>
           </div>
         </div>

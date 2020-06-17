@@ -6,6 +6,7 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
   <title>Pick Me Up - Landing Page</title>
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
 

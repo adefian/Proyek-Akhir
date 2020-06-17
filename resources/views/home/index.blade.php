@@ -1,16 +1,23 @@
 @extends('home.landingpage')
 
 @section('css')
+
+    <link rel="stylesheet" href="{{asset('assets/fullcalendar/packages/core/main.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/fullcalendar/packages/daygrid/main.css')}}">
     <style>
-      #map {height:450px;};
-      #mapkomunitas {height:450px;};
+      #map {
+        height:450px;
+      };
+      #mapkomunitas {
+        height:450px;
+      };
+      #calendar {
+        max-width: 900px;
+        margin: 0 auto;
+      }
     </style>
 
-    <style href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/bootstrap/main.min.css"></style>
-    <style href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/core/main.min.css"></style>
-    <style href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/daygrid/main.min.css"></style>
-    <style href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/list/main.min.css"></style>
-    <style href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/timegrid/main.min.css"></style>
+
 @endsection
 
 @section('navbar')
@@ -34,7 +41,8 @@
 
         <div class="row" data-aos="fade-left">
           <div class="col-12">
-            <div id="kalender"></div>
+            <div class="response"></div>
+              <div id="calendar"></div>
               <table class="table table-hover" style="width:100%">
                 <thead>
                     <tr>
@@ -139,23 +147,24 @@
 
           <div class="col-lg-10 mt-5 mt-lg-0 aos-init aos-animate" data-aos="fade-left" data-aos-delay="200">
 
-            <form action="kirimfeedback" method="post">
+            <form action="kirimfeedback" method="POST" enctype="multipart/form-data">
+              {{csrf_field()}}
               <div class="row">
                 <div class="col-md-6 form-group">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Nama Anda"  required>
+                  <input type="text" name="nama" class="form-control" id="name" placeholder="Nama Anda"  required>
                 </div>
                 <div class="col-md-6 form-group">
                   <input type="email" class="form-control" name="email" id="email" placeholder="Email Anda" required>
                 </div>
               </div>
               <div class="form-group">
-                <input type="file" class="form-control" name="subject" id="subject">
+                <input type="file" class="form-control" name="gambar" id="subject">
               </div>
               <div class="form-group">
-                <textarea class="form-control" name="message" rows="5" placeholder="Masukkan Usulan Anda" required></textarea>
+                <textarea class="form-control" name="usulan" rows="5" placeholder="Masukkan Usulan Anda" required></textarea>
               </div>
             
-              <div class="text-center"><button class="btn btn-primary" type="submit">Kirim</button></div>
+              <div class="text-center"><button class="btn btn-primary" style="width:100%" type="submit">Kirim</button></div>
             </form>
 
           </div>
@@ -198,6 +207,11 @@
 @endsection
 
 @section('js')
+
+    <script src="{{asset('assets/fullcalendar/packages/core/main.js')}}"></script>
+    <script src="{{asset('assets/fullcalendar/packages/interaction/main.js')}}"></script>
+    <script src="{{asset('assets/fullcalendar/packages/daygrid/main.js')}}"></script>
+
 <!-- ============================ Maps ===================== -->
 
   <script>
@@ -292,98 +306,34 @@
 <!-- ============================ End Maps ===================== -->
 
 <!-- ============================ Kalender ===================== -->
+    
 <script>
-    $('#kalender').fullCalendar({
-        defaultView: 'month',
-        defaultDate: '2018-11-12',
 
-        eventRender: function (eventObj, $el) {
-            $el.popover({
-                title: eventObj.title,
-                content: eventObj.description,
-                trigger: 'hover',
-                placement: 'top',
-                container: 'body'
-            });
-        },
+  document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
 
-        events: [{
-                title: 'All Day Event',
-                description: 'description for All Day Event',
-                start: '2018-11-01'
-            },
-            {
-                title: 'Long Event',
-                description: 'description for Long Event',
-                start: '2018-10-07',
-                end: '2018-11-10'
-            },
-            {
-                id: 999,
-                title: 'Repeating Event',
-                description: 'description for Repeating Event',
-                start: '2018-11-09T16:00:00'
-            },
-            {
-                id: 999,
-                title: 'Repeating Event',
-                description: 'description for Repeating Event',
-                start: '2018-11-16T16:00:00'
-            },
-            {
-                title: 'Conference',
-                description: 'description for Conference',
-                start: '2018-11-11',
-                end: '2018-11-13'
-            },
-            {
-                title: 'Meeting',
-                description: 'description for Meeting',
-                start: '2018-11-12T10:30:00',
-                end: '2018-11-12T12:30:00'
-            },
-            {
-                title: 'Lunch',
-                description: 'description for Lunch',
-                start: '2018-11-12T12:00:00'
-            },
-            {
-                title: 'Meeting',
-                description: 'description for Meeting',
-                start: '2018-11-12T14:30:00'
-            },
-            {
-                title: 'Birthday Party',
-                description: 'description for Birthday Party',
-                start: '2018-11-13T07:00:00'
-            },
-            {
-                title: 'Click for Google',
-                description: 'description for Click for Google',
-                url: 'http://google.com/',
-                start: '2018-11-28'
-            }
-        ]
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      plugins: [ 'interaction', 'dayGrid' ],
+      header: {
+        left: 'prevYear,prev,next,nextYear today',
+        center: 'title',
+        right: 'dayGridMonth,dayGridWeek,dayGridDay'
+      },
+      defaultDate: {!! json_encode($tgl) !!},
+      navLinks: true, // can click day/week names to navigate views
+      editable: false,
+      eventLimit: true, // allow "more" link when too many events
+      events: {!! json_encode($listagenda) !!},
     });
-    </script>
+
+    calendar.render();
+  });
+
+</script>
 <!-- ============================ End Kalender ===================== -->
 
 
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDv-h2II7DbFQkpL9pDxNRq3GWXqS5Epts&callback=initMap" type="text/javascript"></script>
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/bootstrap/main.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/core/locales-all.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/core/main.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/daygrid/main.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/google-calendar/main.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/interaction/main.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/list/main.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/luxon/main.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/moment-timezone/main.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/moment/main.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/rrule/main.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/timegrid/main.min.js"></script>
 
 
 @endsection

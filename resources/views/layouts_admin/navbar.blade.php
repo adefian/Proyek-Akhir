@@ -18,6 +18,10 @@
             @if(auth()->user()->role == 'pimpinanecoranger' || auth()->user()->role == 'petugaslapangan')
               <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" title="Pesan" class="nav-link nav-link-lg message-toggle beep"><i class="far fa-envelope"></i></a>
             @endif
+          @elseif(count($notifvalidasi) >= 1)
+            @if(auth()->user()->role == 'pimpinanecoranger')
+              <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" title="Pesan" class="nav-link nav-link-lg message-toggle beep"><i class="far fa-envelope"></i></a>
+            @endif
          @else
           <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" title="Pesan" class="nav-link nav-link-lg message-toggle"><i class="far fa-envelope"></i></a>
         @endif
@@ -62,12 +66,35 @@
                             <i class="fas fa-trash"></i>
                           </div>
                           <div class="dropdown-item-desc">
-                            @if($data->status === 1)
+                            @if($data->status == 'penuh')
                               <b>Sampah Masuk dengan Benar</b> 
                               @else
                               <b>Sampah Salah dimasukkan</b> 
                             @endif
                             <p>Tempat Sampah</p>
+                            @if($data->created_at == $data->updated_at)
+                              <div class="time">{{$data->updated_at->diffForHumans()}}</div>
+                            @endif
+                          </div>
+                        </a>
+                      @endforeach
+                  @endif
+                  @elseif(count($notifvalidasi) >= 1)
+                  @if(auth()->user()->role == 'pimpinanecoranger')
+                  <div class="dropdown-menu dropdown-list dropdown-menu-right">
+                    <div class="dropdown-header">Pesan
+                      <div class="float-right">
+                        <!-- <a href="#">Mark All As Read</a> -->
+                      </div>
+                    </div>
+                    <div class="dropdown-list-content dropdown-list-icons">
+                      @foreach($notifvalidasi as $data)
+                        <a href="daftarmasuk" class="dropdown-item dropdown-item">
+                          <div class="dropdown-item-icon bg-warning text-white">
+                            <i class="fas fa-validate"></i>
+                          </div>
+                          <div class="dropdown-item-desc">
+                            <p>Perlu Validasi</p>
                             @if($data->created_at == $data->updated_at)
                               <div class="time">{{$data->updated_at->diffForHumans()}}</div>
                             @endif

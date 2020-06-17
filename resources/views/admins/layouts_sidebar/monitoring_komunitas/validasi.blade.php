@@ -54,7 +54,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            @if($data)
                             @php $no = 1 @endphp
                             @foreach($data as $datas)
                                 <tr>
@@ -62,7 +61,7 @@
                                     <td>{{$datas->daerah}}</td>
                                     <td>{{$datas->keterangan}}</td>
                                     <td>{{$datas->email}}</td>
-                                    <td>{{$datas->created_at}}</td>
+                                    <td>{{$datas->created_at->diffForHumans()}}</td>
                                     <td>
                                         <span class="badge badge-warning">Belum Tervalidasi</span>
                                     </td>
@@ -86,12 +85,9 @@
                                             <button class="btn btn-danger btn-sm fa fa-trash" title="Validasi ditolak"></button>
                                             </a>
                                         @endif
-                                        
-                                        
                                     </td>
                                 </tr>
                             @endforeach
-                            @endif
                             </tbody>
                             <tfoot>
                                 <tr>
@@ -188,7 +184,7 @@
 
 <!-- ============= Array ============= -->
 
-<script>
+    <script>
       var array =[];
     </script>
 

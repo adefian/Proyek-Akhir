@@ -58,11 +58,11 @@
                                   <td scope="row"> <i class="fas fa-trash"></i></td>
                                   <td>{{$datas->namalokasi}}</td>
                                   <td class="text-center">
-                                  @if($datas->status === 0)
+                                  @if($datas->status == 'kosong')
                                     <button class="edit btn btn-sm btn-success" style="width:100px;" title="Ubah disini">Kosong</button>
-                                   @elseif($datas->status === 1)
+                                   @elseif($datas->status == 'penuh')
                                     <button class="edit btn btn-sm btn-danger" style="width:100px;" title="Ubah disini">Penuh</button>
-                                   @elseif($datas->status === 2)
+                                   @elseif($datas->status == 'ambil')
                                     <button class="edit btn btn-sm btn-warning" style="width:100px;" title="Ubah disini">Pengambilan</button>
                                   @endif
                                   </td>
@@ -111,9 +111,9 @@
                     <div class="input-group">                      
                     <select name="status" type="text" class="form-control">
                         <option selected disabled>Ubah Status</option>
-                        <option value="0">Kosong</option>
-                        <option value="2">Pengambilan</option>
-                        <option value="1">Penuh</option>
+                        <option value="kososng">Kosong</option>
+                        <option value="penuh">Pengambilan</option>
+                        <option value="ambil">Penuh</option>
                       </select>
                     </div>
                 </div>
@@ -147,12 +147,9 @@
     @endforeach
   
 <!-- ============= Array ============= -->
-
 @endsection
 
 @section('js')
-    
-
 <!-- ============================ Maps ===================== -->
 
     <script>

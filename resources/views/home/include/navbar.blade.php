@@ -1,6 +1,6 @@
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-          <li class="active"><a href="#header">Home</a></li>
+          <!-- <li class="active"><a href="#header">Home</a></li> -->
           <li><a href="#features">Agenda</a></li>
           <li><a href="#details">Maps</a></li>
           <li><a href="#contact">Feedback</a></li>

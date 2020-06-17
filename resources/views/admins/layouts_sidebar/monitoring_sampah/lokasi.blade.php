@@ -58,9 +58,9 @@
                                 <td>{{$datas->longitude}}</td>
                                 <td style="display:none;">{{$datas->id}}</td>
                                 <td>
-                                    @if($datas->status === 0)
+                                    @if($datas->status === 'kosong')
                                         <span class="badge badge-success">Kosong</span>
-                                        @elseif($datas->status === 1)
+                                        @elseif($datas->status === 'penuh')
                                         <span class="badge badge-danger">Penuh</span>
                                         @else
                                         <span class="badge badge-warning">Pengambilan</span>

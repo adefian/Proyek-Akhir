@@ -33,6 +33,9 @@
   <li class="nav-item dropdown">
     <a class="nav-link" href="/daftarsampah"><i class="fas fa-box-open"></i><span>Daftar Sampah Masuk</span></a>
   </li>
+  <li class="nav-item dropdown">
+    <a class="nav-link" href="/feedbacks"><i class="fas fa-folder"></i><span>Feedback</span></a>
+  </li>
 
 </ul>
 

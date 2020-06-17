@@ -77,12 +77,14 @@ class AgendaController extends Controller
             ]);
 
         if (auth()->user()->role == 'komunitas') {
-            $input ['komunitas'] = $komunitas_id;
+            $input ['komunitas_id'] = $komunitas_id;
         }
 
         if (auth()->user()->role == 'pimpinanecoranger') {
-            $input ['komunitas'] = $request->komunitas_id;
+            $input ['komunitas_id'] = $request->komunitas_id;
         }   
+
+        // dd($input);
         Agenda::create($input);
         
         	
@@ -90,7 +92,7 @@ class AgendaController extends Controller
         $tok = User::all(); //ambil data user
         // $tok = Token::all()->except(3,4); //ambil data user
 
-        $notif = Agenda::where('jenis_agenda', 1)->orderBy('updated_at', 'DESC')->first();
+        $notif = Agenda::all()->orderBy('updated_at', 'DESC')->first();
 
         $tokenList = Arr::pluck($tok,'token');  // Array data token 
         
