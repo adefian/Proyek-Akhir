@@ -90,7 +90,7 @@
 
         <div class="row content" style="margin-top:-50px; margin-bottom:-40px;">
           <div class="col-md-6 mb-4" data-aos="fade-up">
-            <h3 class="text-center mb-3">Tempat Sampah Pintar <img src="https://img.icons8.com/plasticine/50/000000/order-shipped.png"/></h3>
+            <h3 class="text-center mb-3">Tempat Sampah Pintar <img src="{{asset('assets-landingpage/img/marker_ts2.png')}}"/></h3>
             <p class="font-italic">
               Daftar Tempat Sampah Pintar yang sudah ada di wilayah Kabupaten Banyuwangi
             </p>
@@ -106,7 +106,7 @@
             </p>
           </div>
           <div class="col-md-6 order-2 order-md-1" data-aos="fade-up">
-            <h3>Daftar Komunitas <img src="https://img.icons8.com/plasticine/50/000000/marker.png"/></h3>
+            <h3>Daftar Komunitas   <img src="{{asset('assets-landingpage/img/marker_km2.png')}}"/></h3>
             <p class="font-italic">
               Daftar yang tergabung dalam komunitas Ecoranger sesuai dengan daerahnya masing-masing 
             </p>
@@ -237,7 +237,7 @@
 
            position : position,
            map : peta,
-           icon : 'https://img.icons8.com/plasticine/40/000000/order-shipped.png',
+           icon : '{{asset('assets-landingpage/img/marker_ts.png')}}',
            title : array[i][0]
          });
 
@@ -274,7 +274,7 @@
 
                 position : position2,
                 map : peta,
-                icon : 'https://img.icons8.com/plasticine/40/000000/marker.png',
+                icon : '{{asset('assets-landingpage/img/marker_km.png')}}',
                 title : array2[a][2]
               });
 

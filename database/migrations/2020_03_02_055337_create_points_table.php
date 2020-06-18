@@ -17,11 +17,18 @@ class CreatePointsTable extends Migration
             $table->bigIncrements('id');
             $table->string('status');
             $table->string('kode_reward');
+            $table->string('nilai');
             $table->timestamps();
-            $table->bigInteger('id_masyarakat')->unsigned();
-            $table->foreign('id_masyarakat')
+            $table->bigInteger('masyarakat_id')->unsigned();
+            $table->foreign('masyarakat_id')
                     ->references('id')
                     ->on('masyarakat')
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
+            $table->bigInteger('tempat_sampah_id')->unsigned();
+            $table->foreign('tempat_sampah_id')
+                    ->references('id')
+                    ->on('tempat_sampah')
                     ->onDelete('cascade')
                     ->onUpdate('cascade');
         });

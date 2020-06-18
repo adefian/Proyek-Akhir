@@ -36,7 +36,9 @@
               <div class="col-12">
                   <div class="card-header">
                     <h4>Kelola Agenda</h4>
+                @if(auth()->user()->role == 'pimpinanecoranger')
                     <button data-toggle="modal" data-target="#modalCreate" class="btn btn-success fas fa-plus fa-2x" title="Tambahkan disini" style="margin-left: auto;"></button>
+                @endif
                   </div>
                 <div class="card-body pr-3 pl-4 m-1 table-responsive">
                     <table id="dataTable" class="table table-sm" style="width:100%">
@@ -143,18 +145,6 @@
                             @endif
                         @endif
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>No</th>
-                                <th>Nama kegiatan</th>
-                                <th>Komunitas</th>
-                                <th>Keterangan</th>
-                                <th>Jenis Agenda</th>
-                                <th>Tanggal</th>
-                                <th>Yang Menambahkan</th>
-                                <th class="text-center">Aksi</th>
-                            </tr>
-                        </tfoot>
                     </table>
                     
                 </div>

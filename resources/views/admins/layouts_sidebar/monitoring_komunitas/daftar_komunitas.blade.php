@@ -41,7 +41,7 @@
                           <div id="map" style="border-radius: 3px;"></div>
                         </div>
                         <div class="col-lg-6 col-12">
-                          <h6 class="text-center mb-4 mt-4">Titik Lokasi Komunitas</h6>
+                          <h7 class="text-center mb-4 mt-4">Titik Lokasi Komunitas</h7>
                           @if(auth()->user()->role == 'pimpinanecoranger')
                               <button data-toggle="modal" data-target="#modalCreate" class="btn btn-success btn-sm fas fa-plus float-right mr-4" title="Tambahkan disini" style="margin-left: auto;"></button>
                           @endif

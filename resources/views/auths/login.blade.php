@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Login &mdash; TS</title>
+  <title>Login &mdash; </title>
   
   <!-- General CSS Files -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -92,7 +92,7 @@
                   <div class="text-job text-muted">Login disini</div>
                 </div>
                 <div class="row sm-gutters">
-                    <div class="mt-5 text-muted text-center">
+                    <div class="mt-4 mb-2 text-muted text-center">
                         Ingin gabung sebagai anggota komunitas ? <a href="register">Daftar</a>
                     </div>
                 </div>

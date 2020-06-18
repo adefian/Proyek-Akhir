@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Register &mdash; TS</title>
+  <title>Daftar Anggota Komunitas &mdash;</title>
 
   <!-- General CSS Files -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -47,9 +47,10 @@
             </div> -->
 
             <div class="card card-primary">
-              <div class="card-header"><h4>Register</h4></div>
+              <div class="card-header"><h4>Daftar Anggota Komunitas</h4></div>
 
               <div class="card-body">
+              
               <form method="POST" action="postregister" class="needs-validation" novalidate="">
                   {{csrf_field()}}
 
@@ -162,20 +163,17 @@
 
                   <div class="form-group">
                     <button type="submit" class="btn btn-klik btn-lg btn-block" tabindex="4">
-                      Register
+                      Daftar
                     </button>
                   </div>
                 </form>
-                <div class="text-center mt-4 mb-3">
-                  <div class="text-job text-muted">Register With Me</div>
-                </div>
                 <div class="row sm-gutters">
                     <div class="mt-3 mr-3 text-muted text-center">
                         Daerah anda belum terdaftar ? <a href="{{ route('daftardaerah')}}">Daftarkan Daerah</a>
                     </div>
 
                     <div class="mt-3 text-muted text-center">
-                        Sudah memiliki akun ?  <a href="login">Login</a>
+                        Sudah memiliki akun ?  <a href="login">Masuk</a>
                     </div>
                 </div>
 

@@ -1,6 +1,6 @@
 @extends('layouts_admin.admin')
 
-@if(auth()->user()->role == 'pimpinanecoranger')
+@if(auth()->user()->role == 'pimpinankomunitas' || auth()->user()->role == 'pimpinankomunitas')
     @include('admins.pimpinan.include')
 @endif
 @if(auth()->user()->role == 'petugaslapangan')
@@ -18,7 +18,7 @@
           </div>
 
           <div class="section-body">
-            @if(auth()->user()->role == 'pimpinanecoranger')
+            @if(auth()->user()->role == 'pimpinankomunitas' || auth()->user()->role == 'pimpinankomunitas')
                 <div class="card card-primary">
             @endif
             @if(auth()->user()->role == 'petugaslapangan')

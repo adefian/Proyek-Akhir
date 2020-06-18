@@ -42,9 +42,8 @@ class Controller extends BaseController
 
         $notifvalidasi = Komunitas::where('level', 0)->orderBy('updated_at', 'DESC')->get();
 
-        //Hapus Agenda Kadaluarsa
-
-        Agenda::where('tanggal','<',$h5jam)->delete();
+        //Hapus Agenda Kadaluarsa//////////////////
+        // Agenda::where('tanggal','<',$h5jam)->delete();
 
         View::share ( 'notiftempatsampah', $notiftempatsampah );
         View::share ( 'tgl', $tgl );

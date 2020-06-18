@@ -39,6 +39,10 @@ class AuthController extends Controller
                 alert()->success('Selamat datang','Haloo !!');
                 return redirect()->route('komunitas.index');
             }
+            elseif (auth()->user()->role == 'pimpinankomunitas'){
+                alert()->success('Selamat datang','Haloo !!');
+                return redirect()->route('pimpinan-komunitas.index');
+            }
         }
         alert()->error('Akun tidak ditemukan','Gagal');
         return redirect('login');

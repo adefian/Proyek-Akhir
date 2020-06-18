@@ -69,6 +69,13 @@ class User extends Authenticatable
         }
             return false;
     }
-
+    
+    public function isPimpinanKomunitas()
+    {
+        if($this->role == 'pimpinankomunitas'){
+            return true;
+        }
+            return false;
+    }
 }
 
