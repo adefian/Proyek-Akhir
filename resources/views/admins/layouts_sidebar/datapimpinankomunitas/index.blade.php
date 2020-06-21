@@ -34,6 +34,7 @@
                                 <th>Alamat</th>
                                 <th>Dari Komunitas</th>
                                 <th style="display:none;">id</th>
+                                <th style="display:none;"></th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -49,6 +50,7 @@
                                 <td>{{$datas->alamat}}</td>
                                 <td>{{$datas->daerahygdipilih->daerah}}</td>
                                 <td style="display:none;">{{$datas->id}}</td>
+                                <td style="display:none;">{{$datas->nohp}}</td>
                                 @if(auth()->user()->role == 'pimpinanecoranger')
                                 <td class="text-center">
 
@@ -57,16 +59,6 @@
                                     @if(auth()->user()->role == 'pimpinanecoranger')
                                         <a href="javascript:;" data-toggle="modal" onclick="deleteData({{$datas->id}})" data-target="#DeleteModal">
                                         <button class="btn btn-danger btn-sm fa fa-user-minus" title="Hapus disini"></button>
-                                        </a>
-                                    @endif
-                                    @if(auth()->user()->role == 'petugaslapangan')
-                                        <a href="javascript:;" data-toggle="modal" onclick="deleteDatapetugaslap({{$datas->id}})" data-target="#DeleteModal">
-                                        <button class="btn btn-danger btn-sm fa fa-trash" title="Hapus disini"></button>
-                                        </a>
-                                    @endif
-                                    @if(auth()->user()->role == 'komunitas')
-                                        <a href="javascript:;" data-toggle="modal" onclick="deleteDatakomunitas({{$datas->id}})" data-target="#DeleteModal">
-                                        <button class="btn btn-danger btn-sm fa fa-trash" title="Hapus disini"></button>
                                         </a>
                                     @endif
                                 </td>
@@ -109,8 +101,8 @@
     </div>
 <!-- ======================== End Hapus Data ======================== -->
 
-    @include('admins.layouts_sidebar.datapetugaslapangan.tambah')
-    @include('admins.layouts_sidebar.datapetugaslapangan.edit')
+    @include('admins.layouts_sidebar.datapimpinankomunitas.tambah')
+    @include('admins.layouts_sidebar.datapimpinankomunitas.edit')
     
 
 @endsection
@@ -136,13 +128,11 @@
  
              $('#nama').val(data[1]);
              $('#email').val(data[2]);
-             $('#nohp').val(data[3]);
+             $('#nohp').val(data[7]);
              $('#alamat').val(data[4]);
              $('#wilayah').val(data[5]);
              
-             $('#editForm').attr('action', '/datapetugaslapangan/'+data[6]);
-             $('#editFormpetugaslap').attr('action', '/datapetugaslapangan-petugaslap/'+data[6]);
-             $('#editFormkomunitas').attr('action', '/datapetugaslapangan-komunitas/'+data[6]);
+             $('#editForm').attr('action', '/datapimpinankomunitas/'+data[6]);
              $('#editModal').modal('show');
          });
  
@@ -155,23 +145,7 @@
       function deleteData(id)
       {
           var id = id;
-          var url = '{{ route("datapetugaslapangan.destroy", ":id") }}';
-          url = url.replace(':id', id);
-          $("#deleteForm").attr('action', url);
-      }
-
-      function deleteDatakomunitas(id)
-      {
-          var id = id;
-          var url = '{{ route("datapetugaslapangan-komunitas.destroy", ":id") }}';
-          url = url.replace(':id', id);
-          $("#deleteForm").attr('action', url);
-      }
-
-      function deleteDatapetugaslap(id)
-      {
-          var id = id;
-          var url = '{{ route("datapetugaslapangan-petugaslap.destroy", ":id") }}';
+          var url = '{{ route("datapimpinankomunitas.destroy", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }

@@ -18,8 +18,8 @@ class CreatePimpinanKomunitasTable extends Migration
             $table->string('nama');
             $table->biginteger('nohp');
             $table->string('alamat');   
-            $table->string('bio');
-            $table->string('foto');
+            $table->string('bio')->nullable();
+            $table->string('foto')->nullable();
             $table->timestamps();
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')
@@ -31,6 +31,12 @@ class CreatePimpinanKomunitasTable extends Migration
             $table->foreign('komunitas_id')
                     ->references('id')
                     ->on('komunitas')
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
+            $table->bigInteger('pimpinan_ecoranger_id')->unsigned();
+            $table->foreign('pimpinan_ecoranger_id')
+                    ->references('id')
+                    ->on('pimpinan_ecoranger')
                     ->onDelete('cascade')
                     ->onUpdate('cascade');
         });

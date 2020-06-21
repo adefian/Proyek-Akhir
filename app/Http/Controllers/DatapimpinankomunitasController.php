@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\PimpinanKomunitas;
+use App\PimpinanEcoranger;
+use App\Komunitas;
 
 class DatapimpinankomunitasController extends Controller
 {
@@ -16,7 +18,8 @@ class DatapimpinankomunitasController extends Controller
     public function index()
     {
         $data = PimpinanKomunitas::all();
-        return view('admins.layouts_sidebar.datapimpinankomunitas.index', compact('data'));
+        $komunitas = Komunitas::all();
+        return view('admins.layouts_sidebar.datapimpinankomunitas.index', compact('data','komunitas'));
     }
 
     /**
@@ -37,25 +40,33 @@ class DatapimpinankomunitasController extends Controller
      */
     public function store(Request $request)
     {
+        $cekemail = User::where('email', $request->email)->first();
+
+        if ($cekemail) {
+            alert()->error('Email yang digunakan sudah terdaftar', 'Gagal');
+            return back();
+        } else {
         $akun = ([
             'nama' => $request->nama,
             'role' => 'petugaslapangan',
             'email' => $request->email,
-            'password' => bcrypt('password')
+            'password' => bcrypt('rahasia')
         ]);
         $lastid = User::create($akun)->id;
     
+        $p = PimpinanEcoranger::where('user_id', auth()->user()->id)->first();
             $user = new PimpinanKomunitas;
             $user->nama = $request->nama;
             $user->nohp = $request->nohp;
             $user->alamat = $request->alamat;
-            $user->wilayah = $request->wilayah;
-            $user->pimpinan_ecoranger_id = auth()->user()->id;
+            $user->pimpinan_ecoranger_id = $p->id;
             $user->user_id = $lastid;
+            $user->komunitas_id = $request->komunitas_id;
             $user->save();
     
                 alert()->success('Selamat','Berhasil menambahkan');
                 return back();
+        }
     }
 
     /**
@@ -90,13 +101,17 @@ class DatapimpinankomunitasController extends Controller
     public function update(Request $request, $id)
     {
         $petugaslap = PimpinanKomunitas::findOrFail($id);
+        $p = PimpinanEcoranger::where('user_id', auth()->user()->id)->first();
         $input = ([
             'nama' => $request->nama,
             'nohp' => $request->nohp,
             'alamat' => $request->alamat,
-            'wilayah' => $request->wilayah,
-            'pimpinan_ecoranger_id' => auth()->user()->id
+            'pimpinan_ecoranger_id' => $p->id
         ]);
+
+        if ($request->wilayah) {
+            $input['wilayah']=$request->wilayah;
+        }
 
         $id = $petugaslap->user_id;
         $user = User::findOrFail($id);
@@ -121,8 +136,8 @@ class DatapimpinankomunitasController extends Controller
     public function destroy($id)
     {
         $id = PimpinanKomunitas::find($id);
-        $id_user = $id->id_user;
-        $user = User::find($id_user);
+        $user_id = $id->user_id;
+        $user = User::find($user_id);
 
         $user->delete($user);
         $id->delete($id);

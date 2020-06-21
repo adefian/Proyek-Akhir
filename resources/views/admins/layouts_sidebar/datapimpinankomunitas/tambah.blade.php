@@ -2,20 +2,14 @@
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title">Tambahkan User</h5>
+                <h5 class="modal-title">Tambahkan</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
         <div class="modal-body">
             @if(auth()->user()->role == 'pimpinanecoranger')
-                <form class="needs-validation" novalidate="" action="datapetugaslapangan" method="POST" enctype="multipart/form-data">
-            @endif
-            @if(auth()->user()->role == 'petugaslapangan')
-                <form class="needs-validation" novalidate="" action="datapetugaslapangan-petugaslap" method="POST" enctype="multipart/form-data">
-            @endif
-            @if(auth()->user()->role == 'komunitas')
-                <form class="needs-validation" novalidate="" action="datapetugaslapangan-komunitas" method="POST" enctype="multipart/form-data">
+                <form class="needs-validation" novalidate="" action="datapimpinankomunitas" method="POST" enctype="multipart/form-data">
             @endif
                 {{csrf_field()}}
 
@@ -48,18 +42,17 @@
                 </div>
                 <div class="form-group">
                     <div class="d-block">
-                        <label for="wilayah" class="control-label">Wilayah</label>
-                        <select name="wilayah" type="text" class="form-control">
-                            <option selected disabled>Pilih Wilayah</option>
-                            <option value="#">Palestine</option>
-                            <option value="#">Syria</option>
-                            <option value="#">Malaysia</option>
-                            <option value="#">Thailand</option>
+                        <label for="komunitas_id" class="control-label">Dari Komunitas</label>
+                        <select name="komunitas_id" type="text" class="form-control">
+                            <option selected disabled>Pilih Komunitas</option>
+                            @foreach($komunitas as $datas)
+                                <option value="{{$datas->id}}">{{$datas->daerah}}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Tambahkan User</button>
+                    <button type="submit" class="btn btn-info">Tambahkan</button>
                     <button type="button" class="btn btn-secondary float-right" data-dismiss="modal">Batal</button>
                 </div>
             </form>

@@ -49,6 +49,7 @@
                                     <th>Aksi</th>
                                 @endif
                                 <th style="display:none;">id</th>
+                                <th style="display:none"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -63,6 +64,7 @@
                                 <td>{{$datas->alamat}}</td>
                                 <td>{{$datas->wilayah}}</td>
                                 <td style="display:none;">{{$datas->id}}</td>
+                                <td style="display:none;">{{$datas->nohp}}</td>
                                 @if(auth()->user()->role == 'pimpinanecoranger')
                                 <td class="text-center">
 
@@ -150,7 +152,7 @@
  
              $('#nama').val(data[1]);
              $('#email').val(data[2]);
-             $('#nohp').val(data[3]);
+             $('#nohp').val(data[7]);
              $('#alamat').val(data[4]);
              $('#wilayah').val(data[5]);
              

@@ -18,6 +18,8 @@ class CreatePetugasLapangansTable extends Migration
             $table->string('nama');
             $table->integer('nohp');
             $table->string('alamat');
+            $table->string('bio')->nullable();
+            $table->string('foto')->nullable();
             $table->string('wilayah');
             $table->timestamps();
             $table->bigInteger('user_id')->unsigned();

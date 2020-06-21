@@ -40,7 +40,7 @@ Route::group(['middleware' => ['auth','pimpinanecoranger']],function(){
     Route::resource('datapetugaslapangan', 'DatapetugaslapanganController');
     Route::resource('dataanggotakomunitas', 'DatakomunitasController');
     Route::resource('reviewsaranecobrick', 'EcobrickController');
-    Route::resource('daftarsampah', 'SampahController');
+    Route::resource('riwayatpembuangsampah', 'SampahController');
     Route::get('feedbacks', 'HomeController@feedbacks');
     Route::get('logout-pimpinan','AuthController@logout')->name('logout-pimpinan'); 
 });
