@@ -114,41 +114,4 @@ class MonitoringkomunitasController extends Controller
         alert()->success('Berhasil','Data berhasil dihapus');
         return back();
     }
-
-    public function dataanggotakomunitas()
-    {
-        $data = AnggotaKomunitas::all();
-        return view('admins.layouts_sidebar.dataanggotakomunitas.index', compact('data'));
-    }
-    
-    public function editanggota(Request $request, $id)
-    {
-        $komunitas = AnggotaKomunitas::findOrFail($id);
-
-        $input = ([
-            'nama' => $request->nama,
-            'nohp' => $request->nohp,
-            'alamat' => $request->alamat,
-            ]);
-            
-        $user = User::findOrFail($komunitas->user_id);
-
-        $input2 = (['email' => $request->email]);
-
-        $komunitas->update($input);
-        $user->update($input2);
-
-        alert()->success('Berhasil','Data Berhasil diedit');
-        return back();
-    }
-
-    public function hapusanggota($id)
-    {
-        $id = AnggotaKomunitas::findOrFail($id);
-
-        $id->delete($id);
-
-        alert()->success('Berhasil','Data berhasil dihapus');
-        return back();
-    }
 }

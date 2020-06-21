@@ -43,6 +43,10 @@
       <div class="navbar-komunitas"></div>
     @endif  
     
+    @if(auth()->user()->role == 'pimpinankomunitas')
+      <div class="navbar-pimpinankomunitas"></div>
+    @endif  
+
       @include('layouts_admin.navbar')
 
       @include('layouts_admin.sidebar')
@@ -55,33 +59,6 @@
     </div>
   </div>
 
-<div class="modal fade" id="logout" tabindex="-1" role="dialog" aria-labelledby="logoutLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-      </div>
-      <div class="modal-body">
-        <h5>Apakah anda yakin ingin keluar ?</h5>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      @if(auth()->user()->role == 'pimpinanecoranger')
-        <a href="logout-pimpinan">
-      @endif
-
-      @if(auth()->user()->role == 'petugaslapangan')
-        <a href="logout-petugaslap">
-      @endif
-
-      @if(auth()->user()->role == 'komunitas')
-        <a href="logout-komunitas">
-      @endif  
-          <button type="button" class="btn btn-danger">Logout</button>
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
 
   <!-- The Modal -->
     <div id="myModal" class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="logoutLabel" aria-hidden="true">

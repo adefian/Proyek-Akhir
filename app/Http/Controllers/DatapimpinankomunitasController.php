@@ -3,12 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-use App\AnggotaKomunitas;
 use App\User;
 use App\PimpinanKomunitas;
 
-class DatakomunitasController extends Controller
+class DatapimpinankomunitasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,14 +15,8 @@ class DatakomunitasController extends Controller
      */
     public function index()
     {
-        $data = AnggotaKomunitas::all();
-
-        if (auth()->user()->role == 'pimpinankomunitas') {
-        $pimpinankomunitas = PimpinanKomunitas::where('user_id',auth()->user()->id)->first();
-        $komunitas_id = $pimpinankomunitas->komunitas_id;
-        $dataperkomunitas = AnggotaKomunitas::where('komunitas_id', $komunitas_id)->get();
-        }
-        return view('admins.layouts_sidebar.dataanggotakomunitas.index', compact('data', 'dataperkomunitas'));
+        $data = PimpinanKomunitas::all();
+        return view('admins.layouts_sidebar.datapimpinankomunitas.index', compact('data'));
     }
 
     /**
@@ -45,7 +37,25 @@ class DatakomunitasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $akun = ([
+            'nama' => $request->nama,
+            'role' => 'petugaslapangan',
+            'email' => $request->email,
+            'password' => bcrypt('password')
+        ]);
+        $lastid = User::create($akun)->id;
+    
+            $user = new PimpinanKomunitas;
+            $user->nama = $request->nama;
+            $user->nohp = $request->nohp;
+            $user->alamat = $request->alamat;
+            $user->wilayah = $request->wilayah;
+            $user->pimpinan_ecoranger_id = auth()->user()->id;
+            $user->user_id = $lastid;
+            $user->save();
+    
+                alert()->success('Selamat','Berhasil menambahkan');
+                return back();
     }
 
     /**
@@ -67,7 +77,7 @@ class DatakomunitasController extends Controller
      */
     public function edit($id)
     {
-        
+        //
     }
 
     /**
@@ -79,22 +89,26 @@ class DatakomunitasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $komunitas = AnggotaKomunitas::findOrFail($id);
-
+        $petugaslap = PimpinanKomunitas::findOrFail($id);
         $input = ([
             'nama' => $request->nama,
             'nohp' => $request->nohp,
             'alamat' => $request->alamat,
-            ]);
-            
-        $user = User::findOrFail($komunitas->user_id);
+            'wilayah' => $request->wilayah,
+            'pimpinan_ecoranger_id' => auth()->user()->id
+        ]);
 
-        $input2 = (['email' => $request->email]);
-
-        $komunitas->update($input);
+        $id = $petugaslap->user_id;
+        $user = User::findOrFail($id);
+        $input2 = ([
+            'nama' => $request->nama,
+            'email' => $request->email,
+        ]);
+        
+        $petugaslap->update($input);
         $user->update($input2);
 
-        alert()->success('Berhasil','Data Berhasil diedit');
+        alert()->success('Berhasil','Data berhasil diedit');
         return back();
     }
 
@@ -106,11 +120,14 @@ class DatakomunitasController extends Controller
      */
     public function destroy($id)
     {
-        $id = AnggotaKomunitas::findOrFail($id);
+        $id = PimpinanKomunitas::find($id);
+        $id_user = $id->id_user;
+        $user = User::find($id_user);
 
+        $user->delete($user);
         $id->delete($id);
 
-        alert()->success('Berhasil','Data berhasil dihapus');
+        alert()->success('Sukses','Data berhasil dihapus');
         return back();
     }
 }

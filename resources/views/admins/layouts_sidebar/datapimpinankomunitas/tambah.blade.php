@@ -2,7 +2,7 @@
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title">Tambahkan</h5>
+                <h5 class="modal-title">Tambahkan User</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -51,14 +51,15 @@
                         <label for="wilayah" class="control-label">Wilayah</label>
                         <select name="wilayah" type="text" class="form-control">
                             <option selected disabled>Pilih Wilayah</option>
-                            @foreach($komunitas as $datas)
-                                <option value="{{$datas->daerah}}">{{$datas->daerah}}</option>
-                            @endforeach
+                            <option value="#">Palestine</option>
+                            <option value="#">Syria</option>
+                            <option value="#">Malaysia</option>
+                            <option value="#">Thailand</option>
                         </select>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">Tambahkan</button>
+                    <button type="submit" class="btn btn-primary">Tambahkan User</button>
                     <button type="button" class="btn btn-secondary float-right" data-dismiss="modal">Batal</button>
                 </div>
             </form>

@@ -89,19 +89,6 @@
                         @endforeach
                         @endif
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>No</th>
-                                <th>Nama</th>
-                                <th>Email</th>
-                                <th>No HP</th>
-                                <th>Alamat</th>
-                                <th>Wilayah</th>
-                                @if(auth()->user()->role == 'pimpinanecoranger')
-                                    <th>Aksi</th>
-                                @endif
-                            </tr>
-                        </tfoot>
                     </table>
                   </div>
                   </div>

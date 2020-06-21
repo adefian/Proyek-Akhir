@@ -9,6 +9,9 @@
 @if(auth()->user()->role == 'komunitas')
     @include('admins.komunitas.include')
 @endif
+@if(auth()->user()->role == 'pimpinankomunitas')
+    @include('admins.pimpinan_komunitas.include')
+@endif
 
 @section('css')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
@@ -31,6 +34,9 @@
             @endif
             @if(auth()->user()->role == 'komunitas')
                 <div class="card card-warning">
+            @endif
+            @if(auth()->user()->role == 'pimpinankomunitas')
+                <div class="card">
             @endif
             <div class="row">
               <div class="col-12">

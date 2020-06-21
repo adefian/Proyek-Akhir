@@ -3,12 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
-use App\AnggotaKomunitas;
+use Auth;
+use App\TempatSampah;
 use App\User;
+use App\Komunitas;
+use App\AnggotaKomunitas;
 use App\PimpinanKomunitas;
+use App\Agenda;
+use App\Point;
 
-class DatakomunitasController extends Controller
+class PimpinanKomunitasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,14 +23,22 @@ class DatakomunitasController extends Controller
      */
     public function index()
     {
-        $data = AnggotaKomunitas::all();
+        $user = User::all()->count();
+        $komunitas = Komunitas::all()->count();
+        $tempatsampah = TempatSampah::all()->count();
+        $anggotakomunitas = AnggotaKomunitas::all()->count();
+        $namakomunitas = PimpinanKomunitas::where('user_id', auth()->user()->id)->first();
 
-        if (auth()->user()->role == 'pimpinankomunitas') {
-        $pimpinankomunitas = PimpinanKomunitas::where('user_id',auth()->user()->id)->first();
-        $komunitas_id = $pimpinankomunitas->komunitas_id;
-        $dataperkomunitas = AnggotaKomunitas::where('komunitas_id', $komunitas_id)->get();
-        }
-        return view('admins.layouts_sidebar.dataanggotakomunitas.index', compact('data', 'dataperkomunitas'));
+        $ts = TempatSampah::all();
+        $tempat = Arr::pluck($ts ,'namalokasi');
+
+        $b = Point::where('status', 1)->count();
+        $s = Point::where('status', 0)->count();
+
+        $nilai = [$b, $s];
+        // dd($nilai);
+
+        return view ('admins.pimpinan_komunitas.index',compact('tempatsampah','user','komunitas','anggotakomunitas', 'tempat', 'nilai', 'namakomunitas'));
     }
 
     /**
@@ -67,7 +81,7 @@ class DatakomunitasController extends Controller
      */
     public function edit($id)
     {
-        
+        //
     }
 
     /**
@@ -79,23 +93,7 @@ class DatakomunitasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $komunitas = AnggotaKomunitas::findOrFail($id);
-
-        $input = ([
-            'nama' => $request->nama,
-            'nohp' => $request->nohp,
-            'alamat' => $request->alamat,
-            ]);
-            
-        $user = User::findOrFail($komunitas->user_id);
-
-        $input2 = (['email' => $request->email]);
-
-        $komunitas->update($input);
-        $user->update($input2);
-
-        alert()->success('Berhasil','Data Berhasil diedit');
-        return back();
+        //
     }
 
     /**
@@ -106,11 +104,6 @@ class DatakomunitasController extends Controller
      */
     public function destroy($id)
     {
-        $id = AnggotaKomunitas::findOrFail($id);
-
-        $id->delete($id);
-
-        alert()->success('Berhasil','Data berhasil dihapus');
-        return back();
+        //
     }
 }

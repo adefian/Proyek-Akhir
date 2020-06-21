@@ -36,10 +36,9 @@ Route::group(['middleware' => ['auth','pimpinanecoranger']],function(){
     Route::resource('kelolaagenda', 'AgendaController');
     Route::resource('daftarkomunitas', 'MonitoringkomunitasController');
     Route::resource('validasi', 'ValidasiController');
-        Route::get('dataanggotakomunitas', 'MonitoringkomunitasController@dataanggotakomunitas');
-        Route::post('editdataanggotakomunitas/{id}', 'MonitoringkomunitasController@editanggota');
-        Route::post('hapusdataanggotakomunitas/{id}', 'MonitoringkomunitasController@hapusanggota')->name('hapusanggotakomunitas');
+    Route::resource('datapimpinankomunitas', 'DatapimpinankomunitasController');
     Route::resource('datapetugaslapangan', 'DatapetugaslapanganController');
+    Route::resource('dataanggotakomunitas', 'DatakomunitasController');
     Route::resource('reviewsaranecobrick', 'EcobrickController');
     Route::resource('daftarsampah', 'SampahController');
     Route::get('feedbacks', 'HomeController@feedbacks');
@@ -55,10 +54,8 @@ Route::group(['middleware' => ['auth','petugaslapangan']],function(){
     Route::resource('kelolaagenda-petugaslap', 'AgendaController');
     Route::resource('daftarkomunitas-petugaslap', 'MonitoringkomunitasController');
     Route::resource('validasi-petugaslap', 'ValidasiController');
-        Route::get('dataanggotakomunitas-petugaslap', 'MonitoringkomunitasController@dataanggotakomunitas');
-        Route::post('editdataanggotakomunitas-petugaslap/{id}', 'MonitoringkomunitasController@editanggota');
-        Route::post('hapusdataanggotakomunitas-petugaslap/{id}', 'MonitoringkomunitasController@hapusanggota')->name('hapusanggotakomunitas-petugaslap');
     Route::resource('datapetugaslapangan-petugaslap', 'DatapetugaslapanganController');
+    Route::resource('dataanggotakomunitas-petugaslap', 'DatakomunitasController');
     Route::resource('reviewsaranecobrick-petugaslap', 'EcobrickController');
     Route::resource('daftarsampah-petugaslap', 'SampahController');
     Route::get('logout-petugaslap','AuthController@logout')->name('logout-petugaslapangan'); 
@@ -73,10 +70,8 @@ Route::group(['middleware' => ['auth','komunitas']],function(){
     Route::resource('kelolaagenda-komunitas', 'AgendaController');
     Route::resource('daftarkomunitas-komunitas', 'MonitoringkomunitasController');
     Route::resource('validasi-komunitas', 'ValidasiController');
-        Route::get('dataanggotakomunitas-komunitas', 'MonitoringkomunitasController@dataanggotakomunitas');
-        Route::post('editdataanggotakomunitas-komunitas/{id}', 'MonitoringkomunitasController@editanggota');
-        Route::post('hapusdataanggotakomunitas-komunitas/{id}', 'MonitoringkomunitasController@hapusanggota')->name('hapusanggotakomunitas-komunitas');
     Route::resource('datapetugaslapangan-komunitas', 'DatapetugaslapanganController');
+    Route::resource('dataanggotakomunitas-komunitas', 'DatakomunitasController');
     Route::resource('reviewsaranecobrick-komunitas', 'EcobrickController');
     Route::resource('daftarsampah-komunitas', 'SampahController');
     Route::get('logout-komunitas','AuthController@logout')->name('logout-komunitas'); 
@@ -91,10 +86,8 @@ Route::group(['middleware' => ['auth','pimpinankomunitas']],function(){
     Route::resource('kelolaagenda-pimpinankom', 'AgendaController');
     Route::resource('daftarkomunitas-pimpinankom', 'MonitoringkomunitasController');
     Route::resource('validasi-pimpinankom', 'ValidasiController');
-        Route::get('dataanggotakomunitas-pimpinankom', 'MonitoringkomunitasController@dataanggotakomunitas');
-        Route::post('editdataanggotakomunitas-pimpinankom/{id}', 'MonitoringkomunitasController@editanggota');
-        Route::post('hapusdataanggotakomunitas-pimpinankom/{id}', 'MonitoringkomunitasController@hapusanggota')->name('hapusanggotakomunitas');
     Route::resource('datapetugaslapangan-pimpinankom', 'DatapetugaslapanganController');
+    Route::resource('dataanggotakomunitas-pimpinankom', 'DatakomunitasController');
     Route::resource('reviewsaranecobrick-pimpinankom', 'EcobrickController');
     Route::resource('daftarsampah-pimpinankom', 'SampahController');
     Route::get('feedbacks-pimpinankom', 'HomeController@feedbacks');

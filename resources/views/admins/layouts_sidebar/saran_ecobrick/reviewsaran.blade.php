@@ -9,6 +9,9 @@
 @if(auth()->user()->role == 'komunitas')
     @include('admins.komunitas.include')
 @endif
+@if(auth()->user()->role == 'pimpinankomunitas')
+    @include('admins.pimpinan_komunitas.include')
+@endif
 
 @section('content')
     <div class="main-content">
@@ -26,6 +29,9 @@
             @endif
             @if(auth()->user()->role == 'komunitas')
                 <div class="card card-warning">
+            @endif
+            @if(auth()->user()->role == 'pimpinankomunitas')
+                <div class="card">
             @endif
             <div class="row">
               <div class="col-12">
@@ -101,18 +107,6 @@
                                     @endforeach
                                 @endif
                             </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Nama Pengirim</th>
-                                    <th>Foto Yang Diusulkan</th>
-                                    <th>Keterangan</th>
-                                    <th class="text-center">Level</th>
-                                    <th>Foto Yang Diaplikasikan</th>
-                                    <th class="text-center">Aksi</th>
-                                    <th style="display:none;">id</th>
-                                </tr>
-                            </tfoot>
                         </table>            
                     </div>
                 </div>

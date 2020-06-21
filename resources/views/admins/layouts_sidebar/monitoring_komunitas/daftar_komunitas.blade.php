@@ -16,6 +16,10 @@
     @include('admins.komunitas.include')
 @endif
 
+@if(auth()->user()->role == 'pimpinankomunitas')
+    @include('admins.pimpinan_komunitas.include')
+@endif
+
 @section('content')
     <div class="main-content">
         <section class="section">
@@ -33,6 +37,9 @@
               @endif
               @if(auth()->user()->role == 'komunitas')
                   <div class="card card-warning">
+              @endif
+              @if(auth()->user()->role == 'pimpinankomunitas')
+                  <div class="card">
               @endif
                   <div class="card-wrap">
                     <div class="card-body">

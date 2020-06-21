@@ -89,17 +89,6 @@
                                 </tr>
                             @endforeach
                             </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Daerah</th>
-                                    <th>Keterangan</th>
-                                    <th>Email yang Menambahkan</th>
-                                    <th>diajukan pada</th>
-                                    <th class="text-center">Aksi</th>
-                                    <th style="display:none;">id</th>
-                                </tr>
-                            </tfoot>
                         </table>
                     </div>
                     <div class="card-footer">

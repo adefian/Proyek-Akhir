@@ -733,7 +733,7 @@ select.form-control:not([size]):not([multiple]) {
     .card .card-header h4 {
       font-size: 19px;
       line-height: 28px;
-      color: #6777ef;
+      color: #34395e;
       padding-right: 10px;
       margin-bottom: 0; }
       .card .card-header h4 + .card-header-action,
@@ -1449,6 +1449,23 @@ h6 .badge {
     color: white; }
 /* ============== End Komunitas ============ */
 
+/* ============== Pimpinan Komunitas ============ */
+.btn-primary-pimpinankomunitas, .btn-primary-pimpinankomunitas.disabled {
+  box-shadow: 0 2px 6px #acb5f6;
+  background-color: #1bbadd;
+  border-color: #1bbadd;
+  color: white; }
+  .btn-primary-pimpinankomunitas:focus, .btn-primary-pimpinankomunitas.disabled:focus {
+    background-color: #1bbadd !important; 
+    color: white; }
+    .btn-primary-pimpinankomunitas:focus:active, .btn-primary-pimpinankomunitas.disabled:focus:active {
+      background-color: #1bbadd !important; 
+      color: white; }
+  .btn-primary-pimpinankomunitas:active, .btn-primary-pimpinankomunitas:hover, .btn-primary-pimpinankomunitas.disabled:active, .btn-primary-pimpinankomunitas.disabled:hover {
+    background-color: #1bbadd !important; 
+    color: white; }
+/* ============== End Pimpinan Komunitas ============ */
+
 .btn-outline-primary, .btn-outline-primary.disabled {
   border-color: #6777ef;
   color: #6777ef; }
@@ -1703,6 +1720,16 @@ h6 .badge {
   width: 100%;
   height: 115px;
   background-color: #ffa426;
+  z-index: -1; }
+
+.navbar-pimpinankomunitas {
+  content: ' ';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 115px;
+  background-color: #1bbadd;
   z-index: -1; }
 
 .navbar {
@@ -3031,6 +3058,13 @@ body.layout-3 .main-footer {
           .main-sidebar .sidebar-menu li.active a.has-dropdown:after {
             transform: translate(0, -50%) rotate(90deg); }
 
+        .main-sidebar .sidebar-menu li.active-pimpinankomunitas a {
+          color: #1bbadd;
+          font-weight: 600;
+          background-color: #f8fafb; }
+          .main-sidebar .sidebar-menu li.active a.has-dropdown:after {
+            transform: translate(0, -50%) rotate(90deg); }
+
     .main-sidebar .sidebar-menu li.active ul.dropdown-menu {
       background-color: #f8fafb; }
     .main-sidebar .sidebar-menu li a.has-dropdown:after {
@@ -3263,13 +3297,6 @@ margin: 0; }
         background-color: #f8fafb; }
         .main-sidebar .sidebar-menu-petugaslap li.active a.has-dropdown:after {
           transform: translate(0, -50%) rotate(90deg); }
-          
-      .main-sidebar .sidebar-menu-petugaslap li.active-komunitas a {
-        color: #ffa426;
-        font-weight: 600;
-        background-color: #f8fafb; }
-        .main-sidebar .sidebar-menu-petugaslap li.active a.has-dropdown:after {
-          transform: translate(0, -50%) rotate(90deg); }
 
   .main-sidebar .sidebar-menu-petugaslap li.active ul.dropdown-menu {
     background-color: #f8fafb; }
@@ -3498,13 +3525,6 @@ margin: 0; }
     background-color: #f8fafb; }
     .main-sidebar .sidebar-menu-komunitas li.active a.has-dropdown:after {
       transform: translate(0, -50%) rotate(90deg); }
-  
-      .main-sidebar .sidebar-menu-komunitas li.active-petugas a {
-        color: #47c363;
-        font-weight: 600;
-        background-color: #f8fafb; }
-        .main-sidebar .sidebar-menu-komunitas li.active a.has-dropdown:after {
-          transform: translate(0, -50%) rotate(90deg); }
           
       .main-sidebar .sidebar-menu-komunitas li.active-komunitas a {
         color: #ffa426;
@@ -3609,6 +3629,241 @@ padding-left: 61px;
 background-color: #fff; }
 
 /* =================== End Komunitas =================== */
+
+/* =================== Pimpinan Komunitas =================== */
+
+
+body.sidebar-mini .main-sidebar .sidebar-menu-pimpinankomunitas > li {
+  padding: 10px; }
+  body.sidebar-mini .main-sidebar .sidebar-menu-pimpinankomunitas > li.menu-header {
+    padding: 0;
+    font-size: 0;
+    height: 2px; }
+  body.sidebar-mini .main-sidebar .sidebar-menu-pimpinankomunitas > li > a {
+    border-radius: 3px;
+    height: 45px;
+    padding: 0;
+    justify-content: center; }
+    body.sidebar-mini .main-sidebar .sidebar-menu-pimpinankomunitas > li > a .ion, body.sidebar-mini .main-sidebar .sidebar-menu-pimpinankomunitas > li > a .fas, body.sidebar-mini .main-sidebar .sidebar-menu-pimpinankomunitas > li > a .far, body.sidebar-mini .main-sidebar .sidebar-menu-pimpinankomunitas > li > a .fab, body.sidebar-mini .main-sidebar .sidebar-menu-pimpinankomunitas > li > a .fal {
+      margin: 0;
+      font-size: 20px; }
+    body.sidebar-mini .main-sidebar .sidebar-menu-pimpinankomunitas > li > a span {
+      display: none; }
+    body.sidebar-mini .main-sidebar .sidebar-menu-pimpinankomunitas > li > a .badge {
+      padding: 5px;
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      font-size: 10px; }
+    body.sidebar-mini .main-sidebar .sidebar-menu-pimpinankomunitas > li > a.has-dropdown:after {
+      content: initial; }
+  body.sidebar-mini .main-sidebar .sidebar-menu-pimpinankomunitas > li.active > a {
+    box-shadow: 0 4px 8px #acb5f6;
+    background-color: #1bbadd;
+    color: #fff; }
+  body.sidebar-mini .main-sidebar .sidebar-menu-pimpinankomunitas > li ul.dropdown-menu {
+    position: absolute;
+    background-color: #fff;
+    left: 65px;
+    top: 10px;
+    width: 200px;
+    display: none;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.03); }
+    body.sidebar-mini .main-sidebar .sidebar-menu-pimpinankomunitas > li ul.dropdown-menu li > a:focus,
+    body.sidebar-mini .main-sidebar .sidebar-menu-pimpinankomunitas > li ul.dropdown-menu li.active > a,
+    body.sidebar-mini .main-sidebar .sidebar-menu-pimpinankomunitas > li ul.dropdown-menu li.active > a:hover {
+      color: #fff;
+      background-color: #1bbadd !important; }
+    body.sidebar-mini .main-sidebar .sidebar-menu-pimpinankomunitas > li ul.dropdown-menu li a {
+      height: 40px;
+      padding: 0 20px;
+      background-color: #fff; }
+      body.sidebar-mini .main-sidebar .sidebar-menu-pimpinankomunitas > li ul.dropdown-menu li a.has-dropdown:after {
+        content: "";
+        font-family: 'Font Awesome 5 Free';
+        font-weight: 900;
+        position: absolute;
+        top: 50%;
+        right: 20px;
+        transform: translate(0, -50%);
+        font-size: 14px;
+        transition: all .5s; }
+body.sidebar-mini .main-sidebar .sidebar-menu-pimpinankomunitas li:hover > ul.dropdown-menu {
+  display: block !important; }
+  body.sidebar-mini .main-sidebar .sidebar-menu-pimpinankomunitas li:hover > ul.dropdown-menu li:hover > a {
+    background-color: #fcfcfd; }
+  body.sidebar-mini .main-sidebar .sidebar-menu-pimpinankomunitas li:hover > ul.dropdown-menu li .dropdown-menu {
+    left: 200px;
+    padding: 0; }
+
+body.layout-2 .main-sidebar .sidebar-menu-pimpinankomunitas li.menu-header {
+  padding: 0; }
+body.layout-2 .main-sidebar .sidebar-menu-pimpinankomunitas li a {
+  padding: 0; }
+  body.layout-2 .main-sidebar .sidebar-menu-pimpinankomunitas li a i {
+    width: 10px; }
+  body.layout-2 .main-sidebar .sidebar-menu-pimpinankomunitas li a.has-dropdown:after {
+    right: 0; }
+  body.layout-2 .main-sidebar .sidebar-menu-pimpinankomunitas li a:hover {
+    color: #1bbadd;
+    background-color: transparent; }
+body.layout-2 .main-sidebar .sidebar-menu-pimpinankomunitas li ul.dropdown-menu li a {
+  padding-left: 34px; }
+body.layout-2 .main-sidebar .sidebar-menu-pimpinankomunitas li.active a {
+  background-color: transparent; }
+body.layout-2 .main-sidebar .sidebar-menu-pimpinankomunitas li.active ul.dropdown-menu {
+  background-color: transparent; }
+  body.layout-2 .main-sidebar .sidebar-menu-pimpinankomunitas li.active ul.dropdown-menu a {
+    background-color: transparent; }
+
+
+.main-sidebar .sidebar-menu-pimpinankomunitas {
+padding: 0;
+margin: 0; }
+.main-sidebar .sidebar-menu-pimpinankomunitas li {
+  display: block; }
+  .main-sidebar .sidebar-menu-pimpinankomunitas li.menu-header {
+    padding: 3px 15px;
+    color: #a1a8ae;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+    font-weight: 600; }
+    .main-sidebar .sidebar-menu-pimpinankomunitas li.menu-header:not(:first-child) {
+      margin-top: 10px; }
+  .main-sidebar .sidebar-menu-pimpinankomunitas li a {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 50px;
+    padding: 0 20px;
+    width: 100%;
+    letter-spacing: .3px;
+    color: #78828a;
+    text-decoration: none; }
+    .main-sidebar .sidebar-menu-pimpinankomunitas li a .badge {
+      float: right;
+      padding: 5px 10px;
+      margin-top: 2px; }
+    .main-sidebar .sidebar-menu-pimpinankomunitas li a i {
+      width: 28px;
+      margin-right: 20px;
+      text-align: center; }
+    .main-sidebar .sidebar-menu-pimpinankomunitas li a span {
+      margin-top: 3px;
+      width: 100%; }
+    .main-sidebar .sidebar-menu-pimpinankomunitas li a:hover {
+      background-color: #f8fafb; }
+  .main-sidebar .sidebar-menu-pimpinankomunitas li.active a {
+    color: #1bbadd;
+    font-weight: 600;
+    background-color: #f8fafb; }
+    .main-sidebar .sidebar-menu-pimpinankomunitas li.active a.has-dropdown:after {
+      transform: translate(0, -50%) rotate(90deg); }
+          
+      .main-sidebar .sidebar-menu-pimpinankomunitas li.active-pimpinankomunitas a {
+        color: #1bbadd;
+        font-weight: 600;
+        background-color: #f8fafb; }
+        .main-sidebar .sidebar-menu-pimpinankomunitas li.active a.has-dropdown:after {
+          transform: translate(0, -50%) rotate(90deg); }
+
+  .main-sidebar .sidebar-menu-pimpinankomunitas li.active ul.dropdown-menu {
+    background-color: #f8fafb; }
+  .main-sidebar .sidebar-menu-pimpinankomunitas li a.has-dropdown:after {
+    content: "";
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translate(0, -50%);
+    font-size: 14px;
+    transition: all .5s; }
+  .main-sidebar .sidebar-menu-pimpinankomunitas li.active > ul.dropdown-menu li a:hover {
+    background-color: #f8fafb; }
+  .main-sidebar .sidebar-menu-pimpinankomunitas li ul.dropdown-menu {
+    padding: 0;
+    margin: 0;
+    display: none;
+    position: static;
+    float: none;
+    width: 100%;
+    box-shadow: none;
+    background-color: transparent; }
+    .main-sidebar .sidebar-menu-pimpinankomunitas li ul.dropdown-menu li a {
+      color: #868e96;
+      height: 35px;
+      padding-left: 65px;
+      font-weight: 400; }
+      .main-sidebar .sidebar-menu-pimpinankomunitas li ul.dropdown-menu li a:hover {
+        color: #1bbadd;
+        background-color: inherit; }
+    .main-sidebar .sidebar-menu-pimpinankomunitas li ul.dropdown-menu li.active > a {
+      color: #1bbadd;
+      font-weight: 600; }
+    .main-sidebar .sidebar-menu-pimpinankomunitas li ul.dropdown-menu li a i {
+      margin-top: 1px;
+      text-align: center; }
+    .main-sidebar .sidebar-menu-pimpinankomunitas li ul.dropdown-menu li ul.dropdown-menu {
+      padding-left: 10px; }
+
+.main-content {
+padding-left: 280px;
+padding-right: 30px;
+padding-top: 80px;
+width: 100%;
+position: relative; }
+
+.main-footer {
+padding: 20px 30px 20px 280px;
+margin-top: 40px;
+color: #98a6ad;
+border-top: 1px solid #e3eaef;
+display: inline-block;
+width: 100%; }
+.main-footer .footer-left {
+  float: left; }
+.main-footer .footer-right {
+  float: right; }
+
+.simple-footer {
+text-align: center;
+margin-top: 40px;
+margin-bottom: 40px; }
+
+body:not(.sidebar-mini) .sidebar-style-1 .sidebar-menu-pimpinankomunitas li.active a {
+background-color: #1bbadd;
+color: #fff; }
+
+body:not(.sidebar-mini) .sidebar-style-1 .sidebar-menu-pimpinankomunitas li.active ul.dropdown-menu li a {
+color: #e8ebfd; }
+body:not(.sidebar-mini) .sidebar-style-1 .sidebar-menu-pimpinankomunitas li.active ul.dropdown-menu li a:hover {
+  background-color: #1bbadd;
+  color: #fff; }
+
+body:not(.sidebar-mini) .sidebar-style-1 .sidebar-menu-pimpinankomunitas li.active ul.dropdown-menu li.active a {
+color: #fff; }
+
+body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu-pimpinankomunitas > li.active > a {
+padding-left: 16px;
+background-color: transparent;
+position: relative; }
+body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu-pimpinankomunitas > li.active > a:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 25px;
+  width: 4px;
+  background-color: #1bbadd; }
+
+body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu-pimpinankomunitas li.active ul.dropdown-menu li a {
+padding-left: 61px;
+background-color: #fff; }
+
+/* =================== End Pimpinan Komunitas =================== */
 
 @media (max-width: 1024px) {
   .sidebar-gone-hide {

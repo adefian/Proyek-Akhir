@@ -67,15 +67,6 @@
                         @endforeach
                     @endif
                 </tbody>
-                <tfoot>
-                    <tr>
-                        <th>No</th>
-                        <th>Nama kegiatan</th>
-                        <th>Keterangan</th>
-                        <th>Tanggal</th>
-                        <th>Komunitas</th>
-                    </tr>
-                </tfoot>
             </table>
           </div>
         </div>

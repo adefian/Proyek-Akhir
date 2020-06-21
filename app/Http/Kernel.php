@@ -64,6 +64,7 @@ class Kernel extends HttpKernel
         'pimpinanecoranger' => \App\Http\Middleware\AuthPimpinan::class,
         'petugaslapangan' => \App\Http\Middleware\AuthPetugaslapangan::class,
         'komunitas' => \App\Http\Middleware\AuthKomunitas::class,
+        'pimpinankomunitas' => \App\Http\Middleware\AuthPimpinanKomunitas::class,
         
     ];
 

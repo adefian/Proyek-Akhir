@@ -23,13 +23,13 @@ class PetugaslapanganController extends Controller
 
     public function index()
     {
+        $data = PetugasLapangan::where('user_id',auth()->user()->id)->first();
         $petugaslapangan = PetugasLapangan::all()->count();
         $sampahpenuh = TempatSampah::where('status',1)->count();
         $tempatsampah = TempatSampah::all()->count();
         $sampah = Point::all()->count();
 
-
-        return view ('admins.petugas_lapangan.index', compact('tempatsampah','petugaslapangan','sampah','sampahpenuh'));
+        return view ('admins.petugas_lapangan.index', compact('tempatsampah','petugaslapangan','sampah','sampahpenuh','data'));
     }
 
     /**

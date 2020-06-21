@@ -17,6 +17,18 @@
           </div>
 
           <div class="row">
+                <div class="col-12">
+                  <div class="card card-statistic-1">
+                    <div class="card-icon bg-success">
+                      <i class="fas fa-users"></i>
+                    </div>
+                    <div class="card-wrap">
+                      <div class="card-body" style="padding:31px">
+                        <h5>Petugas dari Daerah {{$data->wilayah}}</h5>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                   <div class="card card-statistic-1 card-success">
                     <div class="card-icon bg-success">

@@ -26,8 +26,8 @@ class KomunitasController extends Controller
         $tempatsampah = TempatSampah::all()->count();
         
         $namakomunitas = AnggotaKomunitas::where('user_id', auth()->user()->id)->first();
-        $komunitas_id = $namakomunitas->komunitas_id;
         
+        $komunitas_id = $namakomunitas->komunitas_id;
         $anggotakomunitas = AnggotaKomunitas::where('komunitas_id', $komunitas_id)->count();
         
         $agenda = Agenda::where('komunitas_id', $komunitas_id)->count();

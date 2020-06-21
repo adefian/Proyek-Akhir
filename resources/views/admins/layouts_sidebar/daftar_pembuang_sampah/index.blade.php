@@ -1,6 +1,6 @@
 @extends('layouts_admin.admin')
 
-@if(auth()->user()->role == 'pimpinankomunitas' || auth()->user()->role == 'pimpinankomunitas')
+@if(auth()->user()->role == 'pimpinanecoranger' || auth()->user()->role == 'pimpinankomunitas')
     @include('admins.pimpinan.include')
 @endif
 @if(auth()->user()->role == 'petugaslapangan')
@@ -18,7 +18,7 @@
           </div>
 
           <div class="section-body">
-            @if(auth()->user()->role == 'pimpinankomunitas' || auth()->user()->role == 'pimpinankomunitas')
+            @if(auth()->user()->role == 'pimpinanecoranger' || auth()->user()->role == 'pimpinankomunitas')
                 <div class="card card-primary">
             @endif
             @if(auth()->user()->role == 'petugaslapangan')
@@ -69,16 +69,6 @@
                                     @endforeach
                                 @endif
                             </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th class="text-center">No</th>
-                                    <th class="text-center">Status</th>
-                                    <th class="text-center">Point</th>
-                                    <th class="text-center">Tempat Sampah</th>
-                                    <th class="text-center">Pada</th>
-                                    <th class="text-center">Oleh</th>
-                                </tr>
-                            </tfoot>
                         </table>            
                     </div>
                 </div>

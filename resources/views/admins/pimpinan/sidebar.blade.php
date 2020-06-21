@@ -22,11 +22,15 @@
   </li>
   <li class="menu-header">Manajemen</li>
   <li class="nav-item dropdown">
-    <a class="nav-link" href="/dataanggotakomunitas"><i class="fas fa-user-tag"></i><span>Data Anggota Komunitas</span></a>
+    <a href="#" class="nav-link has-dropdown"><i class="fas fa-user-tag"></i> <span>Data</span></a>
+    <ul class="dropdown-menu">
+      <li><a class="nav-link" href="/datapimpinankomunitas">Data Pimpinan Komunitas</a></li>
+      <li><a class="nav-link" href="/dataanggotakomunitas">Data Anggota Komunitas</a></li>
+      <li><a class="nav-link" href="/datapetugaslapangan">Data Petugas Lapangan</a></li>
+
+    </ul>
   </li>
-  <li class="nav-item dropdown">
-    <a class="nav-link" href="/datapetugaslapangan"><i class="fas fa-user-shield"></i><span>Data Petugas Lapangan</span></a>
-  </li>
+
   <li class="nav-item dropdown">
     <a class="nav-link" href="/reviewsaranecobrick"><i class="fas fa-leaf"></i><span>Review Saran Ecobrick</span></a>
   </li>

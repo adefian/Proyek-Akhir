@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\PetugasLapangan;
+use App\Komunitas;
 use App\User;
 
 class DatapetugaslapanganController extends Controller
@@ -16,7 +17,8 @@ class DatapetugaslapanganController extends Controller
     public function index()
     {
         $data = PetugasLapangan::all();
-        return view('admins.layouts_sidebar.datapetugaslapangan.datapetugaslapangan', compact('data'));
+        $komunitas = Komunitas::all();
+        return view('admins.layouts_sidebar.datapetugaslapangan.index', compact('data','komunitas'));
     }
 
     /**
@@ -52,6 +54,7 @@ class DatapetugaslapanganController extends Controller
         $user->wilayah = $request->wilayah;
         $user->pimpinan_ecoranger_id = auth()->user()->id;
         $user->user_id = $lastid;
+        dd($user);
         $user->save();
 
             alert()->success('Selamat','Berhasil menambahkan');
