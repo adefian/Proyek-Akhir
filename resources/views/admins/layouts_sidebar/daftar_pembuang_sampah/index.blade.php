@@ -14,11 +14,11 @@
     <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>Daftar Sampah Masuk</h1>
+            <h1>Riwayat Pembuang Sampah</h1>
           </div>
 
           <div class="section-body">
-            @if(auth()->user()->role == 'pimpinanecoranger' || auth()->user()->role == 'pimpinankomunitas')
+            @if(auth()->user()->role == 'pimpinanecoranger')
                 <div class="card card-primary">
             @endif
             @if(auth()->user()->role == 'petugaslapangan')
@@ -27,12 +27,17 @@
             @if(auth()->user()->role == 'komunitas')
                 <div class="card card-warning">
             @endif
+            @if(auth()->user()->role == 'pimpinankom')
+                <div class="card card-info">
+            @endif
             <div class="row">
               <div class="col-12">
                   <div class="card-header">
                     <h4>Data Pembuang Sampah</h4>
                   </div>
-                    <div class="card-body pr-3 pl-4 m-1 table-responsive">
+                    <div class="card-body pr-3 pl-4 m-1 table-responsive">          
+                    <a href="/poin"><button class="btn btn-primary mb-3">Poin Terbesar</button></a>
+                    
                         <table id="dataTable" class="table table-sm" style="width:100%">
                             <thead>
                                 <tr>

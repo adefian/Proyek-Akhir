@@ -55,6 +55,7 @@
                             @endif
                                 <th>Aksi</th>
                                 <th style="display:none;">id</th>
+                                <th style="display:none;"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -69,6 +70,7 @@
                                 <td>{{$datas->alamat}}</td>
                                 <td>{{$datas->daerahygdipilih->daerah}}</td>
                                 <td style="display:none;">{{$datas->id}}</td>
+                                <td style="display:none;">{{$datas->nohp}}</td>
                                 <td class="text-center">
 
                                     <button class="edit btn btn-warning btn-sm fa fa-user-edit" title="Edit disini"></button>
@@ -103,6 +105,7 @@
                                 <td>{{$datas->alamat}}</td>
                                 <td style="display:none;">{{$datas->daerahygdipilih->daerah}}</td>
                                 <td style="display:none;">{{$datas->id}}</td>
+                                <td style="display:none;">{{$datas->nohp}}</td>
                                 <td class="text-center">
 
                                     <button class="edit btn btn-warning btn-sm fa fa-user-edit" title="Edit disini"></button>
@@ -187,12 +190,12 @@
  
              $('#nama').val(data[1]);
              $('#email').val(data[2]);
-             $('#nohp').val(data[3]);
+             $('#nohp').val(data[7]);
              $('#alamat').val(data[4]);
              
-             $('#editForm').attr('action', '/editdataanggotakomunitas/'+data[6]);
-             $('#editFormpimpinankom').attr('action', '/editdataanggotakomunitas-pimpinankom/'+data[6]);
-             $('#editFormkomunitas').attr('action', '/editdataanggotakomunitas-komunitas/'+data[6]);
+             $('#editForm').attr('action', '/dataanggotakomunitas/'+data[6]);
+             $('#editFormpimpinankom').attr('action', '/dataanggotakomunitas-pimpinankom/'+data[6]);
+             $('#editFormkomunitas').attr('action', '/dataanggotakomunitas-komunitas/'+data[6]);
              $('#editModal').modal('show');
          });
  

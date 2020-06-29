@@ -43,7 +43,6 @@
 
 <body>
 @include('sweet::alert')
- 
 
 
 <!--Start of Tawk.to Script-->
@@ -198,7 +197,7 @@ s0.parentNode.insertBefore(s1,s0);
   <script src="{{asset('assets-landingpage/js/main.js')}}"></script>
 
   <script type="text/javascript">
-    window.setInterval('refresh()', 300000); 	// Call a function every 10000 milliseconds (OR 10 seconds).
+    window.setInterval('refresh()', 300000); 	// Call a function every 300000 milliseconds (OR 300 seconds / 5 minutes).
 
     // Refresh or reload page.
     function refresh() {

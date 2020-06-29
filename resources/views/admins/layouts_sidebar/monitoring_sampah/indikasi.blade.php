@@ -111,9 +111,9 @@
                     <div class="input-group">                      
                     <select name="status" type="text" class="form-control">
                         <option selected disabled>Ubah Status</option>
-                        <option value="kososng">Kosong</option>
-                        <option value="penuh">Pengambilan</option>
-                        <option value="ambil">Penuh</option>
+                        <option value="kosong">Kosong</option>
+                        <option value="ambil">Pengambilan</option>
+                        <option value="penuh">Penuh</option>
                       </select>
                     </div>
                 </div>

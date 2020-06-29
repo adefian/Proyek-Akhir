@@ -9,14 +9,16 @@ use App\TempatSampah;
 use App\Komunitas;
 use App\Feedback;
 use App\Agenda;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
     public function index()
     {
+        $tgl = Carbon::now();
         $tempatsampah = TempatSampah::all();
         $komunitas = Komunitas::where('level', 1)->get();
-        $agenda = Agenda::orderBy('tanggal', 'ASC')->get();
+        $agenda = Agenda::where('tanggal', '>',$tgl)->orderBy('tanggal', 'ASC')->get();
 
         
         $list = Agenda::all();
@@ -56,5 +58,20 @@ class HomeController extends Controller
         $data = Feedback::all();
 
         return view ('admins.layouts_sidebar.feedback.index', compact('data'));
+    }
+
+    public function hapusfeedback($id)
+    {
+        $id = Feedback::findOrFail($id);
+
+        $id->delete($id);
+
+        alert()->success('Sukses','Data berhasil dihapus');
+        return back();
+    }
+
+    public function webview()
+    {
+        return view('webview');
     }
 }

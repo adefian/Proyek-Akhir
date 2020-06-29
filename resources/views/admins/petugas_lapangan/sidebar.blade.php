@@ -19,7 +19,7 @@
     <a class="nav-link" href="/datapetugaslapangan-petugaslap"><i class="fas fa-user-shield"></i><span>Data Petugas Lapangan</span></a>
   </li>
   <li class="nav-item dropdown">
-    <a class="nav-link" href="/daftarsampah-petugaslap"><i class="fas fa-box-open"></i><span>Daftar Sampah Masuk</span></a>
+    <a class="nav-link" href="/riwayatpembuangan-petugaslap"><i class="fas fa-box-open"></i><span>Daftar Sampah Masuk</span></a>
   </li>
 </ul>
 

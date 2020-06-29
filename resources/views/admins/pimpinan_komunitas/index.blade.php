@@ -95,11 +95,11 @@
                 </div>
             </div>
 
-            <div class="row justify-content-center">
+            <!-- <div class="row justify-content-center">
               <div class="col-12">
                 <div class="card card-primary">
                     <div class="card-header">
-                      <h4>Data Pembuang Sampah</h4>
+                      <h4>Data Agenda</h4>
                     </div>
                     <div class="card-body">
                       <div class="row">
@@ -124,7 +124,7 @@
                 </div>
               </div>
             </div>
-            
+             -->
           <div class="section-body">
           </div>
         </section>
@@ -139,30 +139,30 @@
     <script>
       "use strict";
 
-      var ctx = document.getElementById("myChart3").getContext('2d');
-      var myChart = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-          datasets: [{
-            data: {!! json_encode($nilai) !!},
-            backgroundColor: [
-              '#47c363',
-              '#fc544b'
-            ],
-            label: 'Dataset 1'
-          }],
-          labels: [
-            'Benar',
-            'Salah'
-          ],
-        },
-        options: {
-          responsive: true,
-          legend: {
-            position: 'bottom',
-          },
-        }
-      });
+      // var ctx = document.getElementById("myChart3").getContext('2d');
+      // var myChart = new Chart(ctx, {
+      //   type: 'doughnut',
+      //   data: {
+      //     datasets: [{
+      //       data: {!! json_encode($nilai) !!},
+      //       backgroundColor: [
+      //         '#47c363',
+      //         '#fc544b'
+      //       ],
+      //       label: 'Dataset 1'
+      //     }],
+      //     labels: [
+      //       'Benar',
+      //       'Salah'
+      //     ],
+      //   },
+      //   options: {
+      //     responsive: true,
+      //     legend: {
+      //       position: 'bottom',
+      //     },
+      //   }
+      // });
     
     //
       // var ctx = document.getElementById("myChart3").getContext('2d');
@@ -194,7 +194,7 @@
       //         },
       //         ticks: {
       //           beginAtZero: true,
-      //           stepSize: 2
+      //           stepSize: 50
       //         }
       //       }],
       //       xAxes: [{

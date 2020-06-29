@@ -17,11 +17,11 @@
     <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>Feedback</h1>
+            <h1>Manajemen / Laporan</h1>
           </div>
 
           <div class="section-body">
-            @if(auth()->user()->role == 'pimpinanecoranger' || auth()->user()->role == 'pimpinankomunitas')
+            @if(auth()->user()->role == 'pimpinanecoranger')
                 <div class="card card-primary">
             @endif
             @if(auth()->user()->role == 'petugaslapangan')
@@ -30,61 +30,64 @@
             @if(auth()->user()->role == 'komunitas')
                 <div class="card card-warning">
             @endif
+            @if(auth()->user()->role == 'pimpinankomunitas')
+                <div class="card card-info">
+            @endif
             <div class="row">
               <div class="col-12">
                   <div class="card-header">
-                    <h4>Feedback</h4>
+                    <h4>Laporan Agenda</h4>
                   </div>
                     <div class="card-body pr-3 pl-4 m-1 table-responsive">
                         <table id="dataTable" class="table table-sm" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Nama</th>
-                                    <th>Email</th>
-                                    <th>Kritik & Saran</th>
+                                    <th>Nama kegiatan</th>
+                                    <th>Komunitas</th>
+                                    <th>Keterangan</th>
                                     <th>Tanggal</th>
+                                    <th>Yang Menambahkan</th>
+                                    <th style="display:none;">id</th>
+                                    <th style="display:none;"></th>
                                 </tr>
                             </thead>
                             <tbody>
+                            @if(auth()->user()->role == 'pimpinanecoranger')
                                 @if($data)
                                     @php $no = 1 @endphp
                                     @foreach($data as $datas)
                                         <tr>
-                                            <td>{{$no++}}</td>
+                                            <td class="text-center">{{$no++}}</td>
                                             <td>{{$datas->nama}}</td>
-                                            <td>{{$datas->email}}</td>
-                                            <td>{{$datas->kritik_saran}}</td>
-                                            <td>{{$datas->created_at->diffForhumans()}}</td>
-                                            <td class="text-center align-middle">
-
-                                                @if(auth()->user()->role == 'pimpinanecoranger')
-                                                    <a href="javascript:;" data-toggle="modal" onclick="deleteData({{$datas->id}})" data-target="#DeleteModal">
-                                                    <button class="btn btn-danger btn-sm fa fa-trash" title="Hapus disini"></button>
-                                                    </a>
-                                                @endif
-                                                @if(auth()->user()->role == 'petugaslapangan')
-                                                    <a href="javascript:;" data-toggle="modal" onclick="deleteDatapetugaslap({{$datas->id}})" data-target="#DeleteModal">
-                                                    <button class="btn btn-danger btn-sm fa fa-trash" title="Hapus disini"></button>
-                                                    </a>
-                                                @endif
-                                                @if(auth()->user()->role == 'komunitas')
-                                                    <a href="javascript:;" data-toggle="modal" onclick="deleteDatakomunitas({{$datas->id}})" data-target="#DeleteModal">
-                                                    <button class="btn btn-danger btn-sm fa fa-trash" title="Hapus disini"></button>
-                                                    </a>
-                                                @endif
-                                                @if(auth()->user()->role == 'pimpinankomunitas')
-                                                    <a href="javascript:;" data-toggle="modal" onclick="deleteDatapimpinankomunitas({{$datas->id}})" data-target="#DeleteModal">
-                                                    <button class="btn btn-danger btn-sm fa fa-trash" title="Hapus disini"></button>
-                                                    </a>
-                                                @endif
-                                            </td>
+                                            <td>{{$datas->komunitas->daerah}}</td>
+                                            <td>{{$datas->keterangan}}</td>
+                                            <td>{{ Carbon\Carbon::parse($datas->tanggal)->isoFormat('LLLL') }} WIB</td>
+                                            <td>{{$datas->petugasygmenambahkan->nama}}</td>
+                                            <td style="display:none;">{{$datas->id}}</td>
+                                            <td style="display:none;">{{date("Y-m-d\TH:i",strtotime($datas->tanggal))}}</td>
                                         </tr>
                                     @endforeach
                                 @endif
+                            @elseif(auth()->user()->role == 'pimpinankomunitas')
+                                @if($agenda)
+                                    @php $no = 1 @endphp
+                                    @foreach($agenda as $datas)
+                                        <tr>
+                                            <td class="text-center">{{$no++}}</td>
+                                            <td>{{$datas->nama}}</td>
+                                            <td>{{$datas->komunitas->daerah}}</td>
+                                            <td>{{$datas->keterangan}}</td>
+                                            <td>{{ Carbon\Carbon::parse($datas->tanggal)->isoFormat('LLLL') }}</td>
+                                            <td>{{$datas->petugasygmenambahkan->nama}}</td>
+                                            <td style="display:none;">{{$datas->id}}</td>
+                                            <td style="display:none;">{{date("Y-m-d\TH:i",strtotime($datas->tanggal))}}</td>
+                                        </tr>
+                                    @endforeach
+                                @endif
+                            @endif
                             </tbody>
-
-                        </table>            
+                        </table>          
                     </div>
                 </div>
               </div>

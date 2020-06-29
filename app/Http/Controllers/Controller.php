@@ -34,9 +34,11 @@ class Controller extends BaseController
         
         $notiftempatsampah = TempatSampah::where('status', 'penuh')->orderBy('updated_at', 'DESC')->get();
         
-        $notifagenda = Agenda::where('created_at', '>', $tgl1)->orWhere('updated_at', '>', $tgl1)->orderBy('updated_at', 'DESC')->get();
+        $notifambilsampah = TempatSampah::where('status', 'ambil')->orderBy('updated_at', 'DESC')->get();
         
-        $notifagendamendesak = Agenda::where('jenis_agenda', 1)->orderBy('updated_at', 'DESC')->get();
+        $notifagenda = Agenda::where('created_at', '>', $tgl1)->where('tanggal', '>',$tgl)->orWhere('updated_at', '>', $tgl1)->orderBy('updated_at', 'DESC')->get();
+        
+        $notifagendamendesak = Agenda::where('jenis_agenda', 1)->where('tanggal', '>',$tgl)->orderBy('updated_at', 'DESC')->get();
         
         $notifsampahmasuk = Point::where('created_at', '>', $tgl1)->orderBy('updated_at', 'DESC')->get();
 
@@ -46,6 +48,7 @@ class Controller extends BaseController
         // Agenda::where('tanggal','<',$h5jam)->delete();
 
         View::share ( 'notiftempatsampah', $notiftempatsampah );
+        View::share ( 'notifambilsampah', $notifambilsampah );
         View::share ( 'tgl', $tgl );
         View::share ( 'notifagenda', $notifagenda );
         View::share ( 'notifagendamendesak', $notifagendamendesak );
@@ -55,13 +58,17 @@ class Controller extends BaseController
         $fcmUrl = 'https://fcm.googleapis.com/fcm/send';
         $tok = User::all(); //ambil data user
         // $tok = Token::all()->except(3,4); //ambil data user
-
         $notif = TempatSampah::where('status', 'penuh')->orderBy('updated_at', 'DESC')->first();
-
+        
         $tokenList = Arr::pluck($tok,'token');  // Array data token 
         
-        $dat = \Carbon\Carbon::parse($notif->updated_at)->isoFormat('LLLL'); //buat tanggal sesuai format Indonesia
-           
+        if($notif){
+
+            $dat = \Carbon\Carbon::parse($notif->updated_at)->isoFormat('LLLL'); //buat tanggal sesuai format Indonesia
+        }else {
+            $dat ='';
+        }
+        
             $notification = [
                 'title'=> 'Sampah Penuh',
                 'body' => $dat,

@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-use App\AnggotaKomunitas;
-use App\User;
+use Carbon\Carbon;
+use App\Agenda;
 use App\PimpinanKomunitas;
 
-class DatakomunitasController extends Controller
+class LaporanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,14 +16,17 @@ class DatakomunitasController extends Controller
      */
     public function index()
     {
-        $data = AnggotaKomunitas::all();
-
+        $tgl = Carbon::now();
         if (auth()->user()->role == 'pimpinankomunitas') {
-        $pimpinankomunitas = PimpinanKomunitas::where('user_id',auth()->user()->id)->first();
-        $komunitas_id = $pimpinankomunitas->komunitas_id;
-        $dataperkomunitas = AnggotaKomunitas::where('komunitas_id', $komunitas_id)->get();
+            
+            $user = PimpinanKomunitas::where('user_id', auth()->user()->id)->first();
+            $komunitas_id = $user->komunitas_id;
+            
+            $agenda = Agenda::where('tanggal', '<',$tgl)->where('komunitas_id', $komunitas_id)->orderBy('updated_at', 'DESC')->get();
         }
-        return view('admins.layouts_sidebar.dataanggotakomunitas.index', compact('data', 'dataperkomunitas'));
+        $data = Agenda::orderBy('tanggal','ASC')->get();
+
+        return view ('admins.layouts_sidebar.laporan.index', compact('agenda', 'data'));
     }
 
     /**
@@ -67,7 +69,7 @@ class DatakomunitasController extends Controller
      */
     public function edit($id)
     {
-        
+        //
     }
 
     /**
@@ -79,33 +81,7 @@ class DatakomunitasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = AnggotaKomunitas::findOrFail($id);
-        $email = User::all()->except($user->user_id);
-        $cekemail = $email->where('email', $request->email)->first();
-
-        dd($cekemail);
-        if ($cekemail) {
-            alert()->error('Email yang digunakan sudah terdaftar', 'Gagal');
-            return back();
-        } else {
-        $komunitas = AnggotaKomunitas::findOrFail($id);
-
-        $input = ([
-            'nama' => $request->nama,
-            'nohp' => $request->nohp,
-            'alamat' => $request->alamat,
-            ]);
-            
-        $user = User::findOrFail($komunitas->user_id);
-
-        $input2 = (['email' => $request->email]);
-
-        $komunitas->update($input);
-        $user->update($input2);
-
-        alert()->success('Berhasil','Data Berhasil diedit');
-        return back();
-        }
+        //
     }
 
     /**
@@ -116,11 +92,6 @@ class DatakomunitasController extends Controller
      */
     public function destroy($id)
     {
-        $id = AnggotaKomunitas::findOrFail($id);
-
-        $id->delete($id);
-
-        alert()->success('Berhasil','Data berhasil dihapus');
-        return back();
+        //
     }
 }

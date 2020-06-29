@@ -93,6 +93,14 @@ class KomunitasController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $user = AnggotaKomunitas::findOrFail($id);
+        $email = User::all()->except($user->user_id);
+        $cekemail = $email->where('email', $request->email)->first();
+
+        if ($cekemail) {
+            alert()->error('Email yang digunakan sudah terdaftar', 'Gagal');
+            return back();
+        } else {
         $komunitas = AnggotaKomunitas::findOrFail($id);
         $input = ([
             'nama' => $request->namalengkap,
@@ -125,6 +133,7 @@ class KomunitasController extends Controller
 
         alert()->success('Berhasil','Berhasil merubah profile anda');
         return back();
+        }
     }
 
     /**

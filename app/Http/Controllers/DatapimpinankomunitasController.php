@@ -48,7 +48,7 @@ class DatapimpinankomunitasController extends Controller
         } else {
         $akun = ([
             'nama' => $request->nama,
-            'role' => 'petugaslapangan',
+            'role' => 'pimpinankomunitas',
             'email' => $request->email,
             'password' => bcrypt('rahasia')
         ]);
@@ -100,6 +100,14 @@ class DatapimpinankomunitasController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $user = PimpinanKomunitas::findOrFail($id);
+        $email = User::all()->except($user->user_id);
+        $cekemail = $email->where('email', $request->email)->first();
+
+        if ($cekemail) {
+            alert()->error('Email yang digunakan sudah terdaftar', 'Gagal');
+            return back();
+        } else {
         $petugaslap = PimpinanKomunitas::findOrFail($id);
         $p = PimpinanEcoranger::where('user_id', auth()->user()->id)->first();
         $input = ([
@@ -125,6 +133,7 @@ class DatapimpinankomunitasController extends Controller
 
         alert()->success('Berhasil','Data berhasil diedit');
         return back();
+        }
     }
 
     /**

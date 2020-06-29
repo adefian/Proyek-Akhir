@@ -52,7 +52,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="input-group">   
-                                    <input name="status" id="status" type="hidden" class="form-control" value="0"> 
+                                    <input name="status" id="status" type="hidden" class="form-control" value="kosong"> 
                                 </div>
                             </div>
                             <div class="modal-footer">

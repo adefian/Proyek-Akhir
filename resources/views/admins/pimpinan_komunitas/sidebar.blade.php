@@ -18,13 +18,14 @@
       <li><a class="nav-link" href="/dataanggotakomunitas-pimpinankom">Data Anggota Komunitas</a></li>
       <li><a class="nav-link" href="/reviewsaranecobrick-pimpinankom">Review Saran Ecobrick</a></li>
       <li><a class="nav-link" href="/feedbacks-pimpinankom">Feedback</a></li>
+      <li><a class="nav-link" href="/laporan-pimpinankom">Laporan</a></li>
     </ul>
   </li>
 
-  <li class="menu-header">Laporan</li>
+  <!-- <li class="menu-header">Laporan</li>
   <li class="nav-item dropdown">
-    <a class="nav-link" href="/dataanggotakomunitas-pimpinankom"><i class="fas fa-file"></i><span>Laporan Agenda</span></a>
-  </li>
+    <a class="nav-link" href="/laporan-pimpinankom"><i class="fas fa-file"></i><span>Laporan Agenda</span></a>
+  </li> -->
 
 </ul>
 

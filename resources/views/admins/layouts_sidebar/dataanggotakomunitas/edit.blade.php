@@ -18,7 +18,7 @@
                 <form method="POST" action="/datapetugaslapangan-komunitas" class="needs-validation" novalidate="" id="editFormkomunitas" enctype="multipart/form-data">
             @endif
                 {{ csrf_field() }}
-                {{ method_field('POST') }}
+                {{ method_field('PATCH') }}
 
                 <div class="form-group">
                     <label for="nama">Nama</label> 
@@ -35,6 +35,9 @@
                 <div class="form-group">
                     <label for="nohp">No Hp</label>
                     <div class="input-group">    
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">+62</span>
+                        </div>
                         <input name="nohp" type="text" id="nohp" class="form-control" placeholder="No Hp">
                     </div>
                 </div>

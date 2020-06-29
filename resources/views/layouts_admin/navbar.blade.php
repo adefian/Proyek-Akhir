@@ -91,12 +91,13 @@
                       @foreach($notifvalidasi as $data)
                         <a href="daftarmasuk" class="dropdown-item dropdown-item">
                           <div class="dropdown-item-icon bg-warning text-white">
-                            <i class="fas fa-validate"></i>
+                            <i class="fas fa-tag"></i>
                           </div>
                           <div class="dropdown-item-desc">
-                            <p>Perlu Validasi</p>
+                            <b>Perlu Validasi</b>
+                            <p>Daerah {{$data->daerah}}</p>
                             @if($data->created_at == $data->updated_at)
-                              <div class="time">{{$data->updated_at->diffForHumans()}}</div>
+                              <div class="time">Diajukan {{$data->updated_at->diffForHumans()}}</div>
                             @endif
                           </div>
                         </a>
@@ -117,7 +118,7 @@
 
 <!-- ass -->
 
-          @if(count($notiftempatsampah) >= 1 || count($notifagendamendesak) >= 1)
+          @if(count($notiftempatsampah) >= 1 || count($notifagendamendesak) >= 1 || count($notifambilsampah) >= 1)
             <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" title="Notifikasi" class="nav-link notification-toggle nav-link-lg beep"><i class="far fa-bell"></i></a>
            @else
             <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" title="Notifikasi" class="nav-link notification-toggle nav-link-lg"><i class="far fa-bell"></i></a>
@@ -144,17 +145,33 @@
                     </div>
                   </a>
             @endforeach
-            @foreach($notiftempatsampah as $data)
+              @if(auth()->user()->role == 'pimpinanecoranger' || auth()->user()->role == 'petugaslapangan')
+                @foreach($notiftempatsampah as $data)
                   <a href="/indikasi" class="dropdown-item dropdown">
                     <div class="dropdown-item-icon bg-danger text-white">
                       <i class="fas fa-trash"></i>
                     </div>
                     <div class="dropdown-item-desc">
+                      <b>Sampah Penuh<br></b>
                       {{$data->namalokasi}}
                       <div class="time text-danger">Penuh, {{$data->updated_at->diffForHumans()}}</div>
                     </div>
                   </a>
-            @endforeach
+                @endforeach
+                  @foreach($notifambilsampah as $data)
+                    <a href="/indikasi" class="dropdown-item dropdown">
+                      <div class="dropdown-item-icon bg-warning text-white">
+                        <i class="fas fa-trash"></i>
+                      </div>
+                      <div class="dropdown-item-desc">
+                        <b>Pengambilan Sampah Penuh<br></b>
+                        {{$data->namalokasi}}
+                        <div class="time">{{$data->petugasygmenambahkan->nama}}</div>
+                        <div class="time text-danger">{{$data->updated_at->diffForHumans()}}</div>
+                      </div>
+                    </a>
+                  @endforeach
+              @endif
             @else
             <div class="dropdown-menu dropdown-list dropdown-menu-right">
             <div class="dropdown-header">Tidak ada Notifikasi

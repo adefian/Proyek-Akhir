@@ -99,7 +99,15 @@ class DatapetugaslapanganController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {       
+        $user = PetugasLapangan::findOrFail($id);
+        $email = User::all()->except($user->user_id);
+        $cekemail = $email->where('email', $request->email)->first();
+
+        if ($cekemail) {
+            alert()->error('Email yang digunakan sudah terdaftar', 'Gagal');
+            return back();
+        } else {
         $petugaslap = PetugasLapangan::findOrFail($id);
         $p = PimpinanEcoranger::where('user_id', auth()->user()->id)->first();
         $input = ([
@@ -124,6 +132,7 @@ class DatapetugaslapanganController extends Controller
 
         alert()->success('Berhasil','Data berhasil diedit');
         return back();
+        }
     }
 
     /**

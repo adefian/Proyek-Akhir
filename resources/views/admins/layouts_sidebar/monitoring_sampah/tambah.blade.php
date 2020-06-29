@@ -51,7 +51,7 @@
                 </div>
                 <div class="form-group">
                     <div class="input-group">   
-                        <input name="status" type="hidden" class="form-control" value="0"> 
+                        <input name="status" type="hidden" class="form-control" value="kosong"> 
                     </div>
                 </div>
                     <button type="button" class="btn btn-secondary float-right ml-2" data-dismiss="modal">Batal</button>

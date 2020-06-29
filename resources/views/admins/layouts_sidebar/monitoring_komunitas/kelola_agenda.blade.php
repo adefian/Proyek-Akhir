@@ -36,7 +36,7 @@
                 <div class="card card-warning">
             @endif
             @if(auth()->user()->role == 'pimpinankomunitas')
-                <div class="card">
+                <div class="card card-info">
             @endif
             <div class="row">
               <div class="col-12">
@@ -47,6 +47,40 @@
                 @endif
                   </div>
                 <div class="card-body pr-3 pl-4 m-1 table-responsive">
+                  @if(auth()->user()->role == 'pimpinankomunitas' || auth()->user()->role == 'pimpinanecoranger')
+                    <div class="col-12">
+                        @if(auth()->user()->role == 'pimpinanecoranger')
+                        <form action="/kelolaagenda" method="get">
+                        @endif
+                        @if(auth()->user()->role == 'pimpinankomunitas')
+                        <form action="/kelolaagenda-pimpinankom" method="get">
+                        @endif
+                            <div class="form-group" style="display:inline-block">
+                                <div class="input-group">    
+                                <select name="tahun" type="text" class="form-control">
+                                    <option value="" selected disabled>- Tahun -</option>
+                                    <option value="">Semua</option>
+                                    @foreach($option as $datas)
+                                        <option value="{{$datas->year}}" @if($datas->year == $tahun) {{'selected="selected"'}} @endif >{{$datas->year}}</option>
+                                    @endforeach
+                                </select>
+                                </div>
+                            </div>
+                            <div class="form-group ml-3" style="display:inline-block">
+                                <div class="input-group">    
+                                <select name="periode" type="text" class="form-control">
+                                    <option value="" selected disabled>- Periode -</option>
+                                    <option value="">Semua</option>
+                                    <option value="hari" @if($p == 'hari') {{'selected="selected"'}} @endif >Hari ini</option>
+                                    <option value="minggu" @if($p == 'minggu') {{'selected="selected"'}} @endif >Minggu ini</option>
+                                    <option value="bulan" @if($p == 'bulan') {{'selected="selected"'}} @endif>Bulan ini</option>
+                                </select>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary fa fa-filter ml-3" title="Filter"></button>
+                        </form>  
+                    </div>
+                  @endif
                     <table id="dataTable" class="table table-sm" style="width:100%">
                         <thead>
                             <tr>
@@ -106,7 +140,7 @@
                                     </tr>
                                 @endforeach
                             @endif
-                        @elseif(auth()->user()->role == 'komunitas')
+                        @elseif(auth()->user()->role == 'komunitas' || auth()->user()->role == 'pimpinankomunitas')
                             @if($komunitas)
                                 @php $no = 1 @endphp
                                 @foreach($komunitas as $kom)
@@ -129,18 +163,8 @@
 
                                             <button class="edit btn btn-warning btn-sm fa fa-edit" title="Edit disini"></button>
 
-                                            @if(auth()->user()->role == 'pimpinanecoranger')
-                                                <a href="javascript:;" data-toggle="modal" onclick="deleteData({{$kom->id}})" data-target="#DeleteModal">
-                                                <button class="btn btn-danger btn-sm fa fa-trash" title="Hapus disini"></button>
-                                                </a>
-                                            @endif
-                                            @if(auth()->user()->role == 'petugaslapangan')
-                                                <a href="javascript:;" data-toggle="modal" onclick="deleteDatapetugaslap({{$kom->id}})" data-target="#DeleteModal">
-                                                <button class="btn btn-danger btn-sm fa fa-trash" title="Hapus disini"></button>
-                                                </a>
-                                            @endif
-                                            @if(auth()->user()->role == 'komunitas')
-                                                <a href="javascript:;" data-toggle="modal" onclick="deleteDatakomunitas({{$kom->id}})" data-target="#DeleteModal">
+                                            @if(auth()->user()->role == 'pimpinankomunitas')
+                                                <a href="javascript:;" data-toggle="modal" onclick="deleteDatapimpinankom({{$kom->id}})" data-target="#DeleteModal">
                                                 <button class="btn btn-danger btn-sm fa fa-trash" title="Hapus disini"></button>
                                                 </a>
                                             @endif
@@ -216,7 +240,7 @@
              element.innerHTML = data[4];
              
              $('#editForm').attr('action', '/kelolaagenda/'+data[7]);
-             $('#editFormpetugaslap').attr('action', '/kelolaagenda-petugaslap/'+data[7]);
+             $('#editFormpimpinankom').attr('action', '/kelolaagenda-pimpinankom/'+data[7]);
              $('#editFormkomunitas').attr('action', '/kelolaagenda-komunitas/'+data[7]);
              $('#editModal').modal('show');
          });
@@ -236,18 +260,10 @@
           $("#deleteForm").attr('action', url);
       }
 
-      function deleteDatakomunitas(id)
+      function deleteDatapimpinankom(id)
       {
           var id = id;
           var url = '{{ route("kelolaagenda-komunitas.destroy", ":id") }}';
-          url = url.replace(':id', id);
-          $("#deleteForm").attr('action', url);
-      }
-
-      function deleteDatapetugaslap(id)
-      {
-          var id = id;
-          var url = '{{ route("kelolaagenda-petugaslap.destroy", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }

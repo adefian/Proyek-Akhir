@@ -99,9 +99,14 @@ class PimpinanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // fetching the user model 
-        // $user = Auth::user();
+        $user = PimpinanEcoranger::findOrFail($id);
+        $email = User::all()->except($user->user_id);
+        $cekemail = $email->where('email', $request->email)->first();
 
+        if ($cekemail) {
+            alert()->error('Email yang digunakan sudah terdaftar', 'Gagal');
+            return back();
+        } else {
         $pimpinan = PimpinanEcoranger::findOrFail($id);
         $input = ([
             'nama' => $request->namalengkap,
@@ -134,6 +139,7 @@ class PimpinanController extends Controller
 
         alert()->success('Berhasil','Berhasil merubah profile anda');
         return back();
+        }
     }
 
     /**
