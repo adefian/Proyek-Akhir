@@ -125,56 +125,115 @@ class SampahController extends Controller
         $periode = $request->periode;
         $list = $request->list;
 
-        if ($request->list == '10')  {
-            if ($request->periode == 'hari')  {
-                $data = Masyarakat::whereDate('updated_at', Carbon::today())->orderBy('total_poin', 'desc')->paginate(10);
+            if ($request->list == '10')  {
+                if ($request->periode == 'hari')  {
+                    $data = Masyarakat::whereDate('updated_at', Carbon::today())->orderBy('total_poin', 'desc')->paginate(10);
+                } elseif ($request->periode == 'minggu') {
+                    Carbon::setWeekStartsAt(Carbon::SUNDAY);
+                    Carbon::setWeekEndsAt(Carbon::SATURDAY);
+                    $data = Masyarakat::whereBetween('updated_at',[Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->orderBy('total_poin', 'desc')->paginate(10);
+                } elseif ($request->periode == 'bulan') {
+                    $period = $tgl->format('m'); 
+                    $data = Masyarakat::whereMonth('updated_at',$period)->orderBy('total_poin', 'desc')->paginate(10);
+                } elseif ($request->periode == 'tahun') {
+                    $period = $tgl->format('Y'); 
+                    $data = Masyarakat::whereYear('updated_at',$period)->orderBy('total_poin', 'desc')->paginate(10);
+                } else {
+                    $data = Masyarakat::orderBy('total_poin', 'desc')->paginate(10);
+                }
+
+            } elseif ($request->list == '20') {
+                if ($request->periode == 'hari')  {
+                    $data = Masyarakat::whereDate('updated_at', Carbon::today())->orderBy('total_poin', 'desc')->paginate(20);
+                } elseif ($request->periode == 'minggu') {
+                    Carbon::setWeekStartsAt(Carbon::SUNDAY);
+                    Carbon::setWeekEndsAt(Carbon::SATURDAY);
+                    $data = Masyarakat::whereBetween('updated_at',[Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->orderBy('total_poin', 'desc')->paginate(20);
+                } elseif ($request->periode == 'bulan') {
+                    $period = $tgl->format('m'); 
+                    $data = Masyarakat::whereMonth('updated_at',$period)->orderBy('total_poin', 'desc')->paginate(20);
+                } elseif ($request->periode == 'tahun') {
+                    $period = $tgl->format('Y'); 
+                    $data = Masyarakat::whereYear('updated_at',$period)->orderBy('total_poin', 'desc')->paginate(20);
+                } else {
+                    $data = Masyarakat::orderBy('total_poin', 'desc')->paginate(20);
+                }
+
+            } elseif ($request->periode == 'hari')  {
+                $data = Masyarakat::whereDate('updated_at', Carbon::today())->orderBy('total_poin', 'desc')->input();
             } elseif ($request->periode == 'minggu') {
                 Carbon::setWeekStartsAt(Carbon::SUNDAY);
                 Carbon::setWeekEndsAt(Carbon::SATURDAY);
-                $data = Masyarakat::whereBetween('updated_at',[Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->orderBy('total_poin', 'desc')->paginate(10);
+                $data = Masyarakat::whereBetween('updated_at',[Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->orderBy('total_poin', 'desc')->get();
             } elseif ($request->periode == 'bulan') {
                 $period = $tgl->format('m'); 
-                $data = Masyarakat::whereMonth('updated_at',$period)->orderBy('total_poin', 'desc')->paginate(10);
+                $data = Masyarakat::whereMonth('updated_at',$period)->orderBy('total_poin', 'desc')->get();
             } elseif ($request->periode == 'tahun') {
                 $period = $tgl->format('Y'); 
-                $data = Masyarakat::whereYear('updated_at',$period)->orderBy('total_poin', 'desc')->paginate(10);
+                $data = Masyarakat::whereYear('updated_at',$period)->orderBy('total_poin', 'desc')->get();
             } else {
-                $data = Masyarakat::orderBy('total_poin', 'desc')->paginate(10);
+                $data = Masyarakat::orderBy('total_poin', 'desc')->get();
             }
+                    
+        if($request->input('cetakPdf')){
+            $tgl = Carbon::now();
 
-        } elseif ($request->list == '20') {
-            if ($request->periode == 'hari')  {
-                $data = Masyarakat::whereDate('updated_at', Carbon::today())->orderBy('total_poin', 'desc')->paginate(20);
+            if ($request->list == '10')  {
+                if ($request->periode == 'hari')  {
+                    $data = Masyarakat::whereDate('updated_at', Carbon::today())->orderBy('total_poin', 'desc')->paginate(10);
+                } elseif ($request->periode == 'minggu') {
+                    Carbon::setWeekStartsAt(Carbon::SUNDAY);
+                    Carbon::setWeekEndsAt(Carbon::SATURDAY);
+                    $data = Masyarakat::whereBetween('updated_at',[Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->orderBy('total_poin', 'desc')->paginate(10);
+                } elseif ($request->periode == 'bulan') {
+                    $period = $tgl->format('m'); 
+                    $data = Masyarakat::whereMonth('updated_at',$period)->orderBy('total_poin', 'desc')->paginate(10);
+                } elseif ($request->periode == 'tahun') {
+                    $period = $tgl->format('Y'); 
+                    $data = Masyarakat::whereYear('updated_at',$period)->orderBy('total_poin', 'desc')->paginate(10);
+                } else {
+                    $data = Masyarakat::orderBy('total_poin', 'desc')->paginate(10);
+                }
+
+            } elseif ($request->list == '20') {
+                if ($request->periode == 'hari')  {
+                    $data = Masyarakat::whereDate('updated_at', Carbon::today())->orderBy('total_poin', 'desc')->paginate(20);
+                } elseif ($request->periode == 'minggu') {
+                    Carbon::setWeekStartsAt(Carbon::SUNDAY);
+                    Carbon::setWeekEndsAt(Carbon::SATURDAY);
+                    $data = Masyarakat::whereBetween('updated_at',[Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->orderBy('total_poin', 'desc')->paginate(20);
+                } elseif ($request->periode == 'bulan') {
+                    $period = $tgl->format('m'); 
+                    $data = Masyarakat::whereMonth('updated_at',$period)->orderBy('total_poin', 'desc')->paginate(20);
+                } elseif ($request->periode == 'tahun') {
+                    $period = $tgl->format('Y'); 
+                    $data = Masyarakat::whereYear('updated_at',$period)->orderBy('total_poin', 'desc')->paginate(20);
+                } else {
+                    $data = Masyarakat::orderBy('total_poin', 'desc')->paginate(20);
+                }
+
+            } elseif ($request->periode == 'hari')  {
+                $data = Masyarakat::whereDate('updated_at', Carbon::today())->orderBy('total_poin', 'desc')->get();
             } elseif ($request->periode == 'minggu') {
                 Carbon::setWeekStartsAt(Carbon::SUNDAY);
                 Carbon::setWeekEndsAt(Carbon::SATURDAY);
-                $data = Masyarakat::whereBetween('updated_at',[Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->orderBy('total_poin', 'desc')->paginate(20);
+                $data = Masyarakat::whereBetween('updated_at',[Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->orderBy('total_poin', 'desc')->get();
             } elseif ($request->periode == 'bulan') {
                 $period = $tgl->format('m'); 
-                $data = Masyarakat::whereMonth('updated_at',$period)->orderBy('total_poin', 'desc')->paginate(20);
+                $data = Masyarakat::whereMonth('updated_at',$period)->orderBy('total_poin', 'desc')->get();
             } elseif ($request->periode == 'tahun') {
                 $period = $tgl->format('Y'); 
-                $data = Masyarakat::whereYear('updated_at',$period)->orderBy('total_poin', 'desc')->paginate(20);
+                $data = Masyarakat::whereYear('updated_at',$period)->orderBy('total_poin', 'desc')->get();
             } else {
-                $data = Masyarakat::orderBy('total_poin', 'desc')->paginate(20);
+                $data = Masyarakat::orderBy('total_poin', 'desc')->get();
             }
-
-        } elseif ($request->periode == 'hari')  {
-            $data = Masyarakat::whereDate('updated_at', Carbon::today())->orderBy('total_poin', 'desc')->get();
-        } elseif ($request->periode == 'minggu') {
-            Carbon::setWeekStartsAt(Carbon::SUNDAY);
-            Carbon::setWeekEndsAt(Carbon::SATURDAY);
-            $data = Masyarakat::whereBetween('updated_at',[Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->orderBy('total_poin', 'desc')->get();
-        } elseif ($request->periode == 'bulan') {
-            $period = $tgl->format('m'); 
-            $data = Masyarakat::whereMonth('updated_at',$period)->orderBy('total_poin', 'desc')->get();
-        } elseif ($request->periode == 'tahun') {
-            $period = $tgl->format('Y'); 
-            $data = Masyarakat::whereYear('updated_at',$period)->orderBy('total_poin', 'desc')->get();
-        } else {
-            $data = Masyarakat::orderBy('total_poin', 'desc')->get();
+            
+            return view ('admins.layouts_sidebar.daftar_pembuang_sampah.cetakPdf', compact('data','list','periode'));
         }
-        
-        return view ('admins.layouts_sidebar.daftar_pembuang_sampah.poin', compact('data','list','periode'));
+
+        else {
+            return view ('admins.layouts_sidebar.daftar_pembuang_sampah.poin', compact('data','list','periode'));
+
+        }
     }
 }

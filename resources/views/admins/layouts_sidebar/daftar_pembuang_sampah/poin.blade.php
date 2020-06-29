@@ -59,6 +59,7 @@
                                 <div class="input-group">    
                                 <select name="periode" type="text" class="form-control">
                                     <option value="" selected disabled>- Periode -</option>
+                                    <option value="">Semua</option>
                                     <option value="hari" @if($periode == 'hari') {{'selected="selected"'}} @endif >Hari ini</option>
                                     <option value="minggu" @if($periode == 'minggu') {{'selected="selected"'}} @endif >Minggu ini</option>
                                     <option value="bulan" @if($periode == 'bulan') {{'selected="selected"'}} @endif >Bulan ini</option>
@@ -67,6 +68,7 @@
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary fa fa-filter ml-3" title="Filter"></button>
+                            <button type="submit" class="btn btn-danger fa fa-print ml-3" name="cetakPdf" value="cetakPdf" title="Print"></button>
                         </form>  
                         </div>
                     @endif
