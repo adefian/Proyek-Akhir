@@ -15,7 +15,7 @@ class CreateTempatSampahsTable extends Migration
     {
         Schema::create('tempat_sampah', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('namalokasi');
+            $table->string('nama');
             $table->string('latitude');
             $table->string('longitude');
             $table->string('foto')->default('default.jpg');

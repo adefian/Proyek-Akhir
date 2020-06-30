@@ -27,7 +27,7 @@
 		<div class="container-fluid">	
 			<div class="row justify-content-center">
 				<div class="col-10">
-					<h4 class="m-4" style="text-align: center; font:">List Poin Tertinggi
+					<h4 class="m-4" style="text-align: center; font:">List Agenda
                         @if($periode == 'hari')
                             Hari ini
                         @elseif ($periode == 'minggu')
@@ -44,26 +44,33 @@
 						<thead>
 							<tr align="center" height="20">
 								<th>No</th>
-								<th>Nama</th>
-								<th>No Handphone</th>
-								<th>Alamat</th>
-								<th>Total Poin</th>
+								<th>Nama Kegiatan</th>
+								<th>Komunitas</th>
+								<th>Keterangan</th>
+								<th width="50">Jenis Kegiatan</th>
+								<th>Tanggal</th>
+								<th>Yang</br>Menambahkan</th>
 							</tr>
 						</thead>
-
 						<tbody>
-
 							@php $i=1 @endphp
-
 							@foreach($data as $datas)
 
 								<tr align="center">
 									<!-- Nomor -->
 									<td width="15">{{$i++}}</td>
-									<td width="70">{{$datas->nama}}</td>
-									<td width="80">+62 {{$datas->nohp}}</td>							
-									<td width="85">{{$datas->alamat}}</td>							
-									<td width="80">{{$datas->total_poin}}</td>							
+									<td width="90">{{$datas->nama}}</td>
+									<td width="90">{{$datas->komunitas->daerah}}</td>							
+									<td width="85">{{$datas->keterangan}}</td>							
+									<td width="50">
+										@if($datas->jenis_agenda == 1)
+                                            <span style="width:80%; align:center;" class="badge badge-warning">Agenda Mendesak</span>
+                                            @else
+                                            <span style="width:80%; align:center;" class="badge badge-success">Agenda tidak Mendesak</span>
+                                        @endif
+									</td>		
+									<td width="80">{{ Carbon\Carbon::parse($datas->tanggal)->isoFormat('LLLL') }} WIB</td>
+									<td width="50">{{$datas->petugasygmenambahkan->nama}}</td>    					
 								</tr>
 							@endforeach
 
@@ -79,8 +86,8 @@
 	 			</div>
 	 		</div>
 		</div>
-	 <!-- <script type="text/javascript">
+	 <script type="text/javascript">
 	 	window.print();
-	 </script> -->
+	 </script>
 	</body>
 </html>

@@ -153,7 +153,7 @@
                     </div>
                     <div class="dropdown-item-desc">
                       <b>Sampah Penuh<br></b>
-                      {{$data->namalokasi}}
+                      {{$data->nama}}
                       <div class="time text-danger">Penuh, {{$data->updated_at->diffForHumans()}}</div>
                     </div>
                   </a>
@@ -165,7 +165,7 @@
                       </div>
                       <div class="dropdown-item-desc">
                         <b>Pengambilan Sampah Penuh<br></b>
-                        {{$data->namalokasi}}
+                        {{$data->nama}}
                         <div class="time">{{$data->petugasygmenambahkan->nama}}</div>
                         <div class="time text-danger">{{$data->updated_at->diffForHumans()}}</div>
                       </div>

@@ -88,7 +88,7 @@
             <ul>
              @if($tempatsampah)
               @foreach($tempatsampah as $tempatsampahs)
-              <li><i class="icofont-check"></i> {{$tempatsampahs->namalokasi}}</li>
+              <li><i class="icofont-check"></i> {{$tempatsampahs->nama}}</li>
               @endforeach
              @endif
             </ul>
@@ -99,7 +99,7 @@
           <div class="col-md-6 order-2 order-md-1" data-aos="fade-up">
             <h3>Daftar Komunitas   <img src="{{asset('assets-landingpage/img/marker_km2.png')}}"/></h3>
             <p class="font-italic">
-              Daftar yang tergabung dalam komunitas Ecoranger sesuai dengan daerahnya masing-masing 
+              Daftar yang tergabung dalam Komunitas Ecoranger sesuai dengan daerahnya masing-masing 
             </p>
             <ul>
              @if($komunitas)
@@ -109,7 +109,7 @@
              @endif
             </ul>
             <p>
-              Inventore id enim dolor dicta qui et magni molestiae. Mollitia optio officia illum ut cupiditate eos autem. Soluta dolorum repellendus repellat amet autem rerum illum in. Quibusdam occaecati est nisi esse. Saepe aut dignissimos distinctio id enim.
+              Komunitas ini Tergabung dalam Komunitas EcoRanger yang menaungi setiap daerahnya masing-masing. 
             </p>
           </div>
         </div>
@@ -177,7 +177,7 @@
     <script type="text/javascript">
 
         //Memasukkan data tabel tempat sampah ke array
-        array.push(['<?php echo $tempatsampahs->namalokasi?>','<?php echo $tempatsampahs->latitude?>','<?php echo $tempatsampahs->longitude?>','<?php echo $tempatsampahs->petugasygmenambahkan->nama?>','<?php echo $tempatsampahs->foto ?>']);
+        array.push(['<?php echo $tempatsampahs->nama?>','<?php echo $tempatsampahs->latitude?>','<?php echo $tempatsampahs->longitude?>','<?php echo $tempatsampahs->petugasygmenambahkan->nama?>','<?php echo $tempatsampahs->foto ?>']);
 
     </script> 
 

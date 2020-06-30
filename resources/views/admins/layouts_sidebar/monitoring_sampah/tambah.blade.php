@@ -26,9 +26,9 @@
                 {{csrf_field()}}
 
                 <div class="form-group">
-                    <label for="namalokasi">Nama Lokasi</label> 
+                    <label for="nama">Nama Lokasi</label> 
                     <div class="input-group">   
-                        <input name="namalokasi" type="text" class="form-control" placeholder="Nama Lokasi" required>      
+                        <input name="nama" type="text" class="form-control" placeholder="Nama Lokasi" required>      
                     </div>
                 </div>
                 <div class="form-group">

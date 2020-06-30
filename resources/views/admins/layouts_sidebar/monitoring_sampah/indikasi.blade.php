@@ -56,7 +56,7 @@
                               @foreach($data as $datas)
                                 <tr>
                                   <td scope="row"> <i class="fas fa-trash"></i></td>
-                                  <td>{{$datas->namalokasi}}</td>
+                                  <td>{{$datas->nama}}</td>
                                   <td class="text-center">
                                   @if($datas->status == 'kosong')
                                     <button class="edit btn btn-sm btn-success" style="width:100px;" title="Ubah disini">Kosong</button>
@@ -140,7 +140,7 @@
     <script type="text/javascript">
 
         //Memasukkan data tabel ke array
-        array.push(['<?php echo $datas->namalokasi?>','<?php echo $datas->latitude?>','<?php echo $datas->longitude?>','<?php echo $datas->petugasygmenambahkan->nama?>','<?php echo $datas->foto ?>']);
+        array.push(['<?php echo $datas->nama?>','<?php echo $datas->latitude?>','<?php echo $datas->longitude?>','<?php echo $datas->petugasygmenambahkan->nama?>','<?php echo $datas->foto ?>']);
 
     </script> 
 

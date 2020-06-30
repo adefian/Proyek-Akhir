@@ -101,7 +101,9 @@ s0.parentNode.insertBefore(s1,s0);
                     Silahkan isi Email Anda
                     </div>
                   </div>
-
+                
+                <div class="row">
+                 <div class="col-6">
                   <div class="form-group">
                     <div class="d-block">
                     	<label for="password" class="control-label">Password</label>
@@ -111,7 +113,22 @@ s0.parentNode.insertBefore(s1,s0);
                     Silahkan isi Password Anda
                     </div>
                   </div>
-                
+                 </div> 
+
+                  <div class="col-6">
+                    <div class="form-group">
+                      <div class="d-block">
+                        <label for="konfirmasipassword" class="control-label">Konfirmasi Password</label>
+                      </div>
+                      <input id="konfirmasipassword" type="password" class="form-control" tabindex="2" required>
+                      <p style="font-size: 11px;" id="message"></p>
+                      <div class="invalid-feedback">
+                      Silahkan isi Konfirmasi Password Anda
+                      </div>
+                    </div>
+                  </div> 
+                </div>
+
                 <div class="row">
                  <div class="col-6">
                   <div class="form-group">
@@ -176,7 +193,7 @@ s0.parentNode.insertBefore(s1,s0);
                 </div>
 
                   <div class="form-group">
-                    <button type="submit" class="btn btn-klik btn-lg btn-block" tabindex="4">
+                    <button id="button" type="submit" class="btn btn-klik btn-lg btn-block" tabindex="4" disabled>
                       Daftar
                     </button>
                   </div>
@@ -213,6 +230,8 @@ s0.parentNode.insertBefore(s1,s0);
       </g>
     </svg>
 
+    
+
   <!-- General JS Scripts -->
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -221,6 +240,19 @@ s0.parentNode.insertBefore(s1,s0);
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
   <script src="{{asset('assets/stisla/js/stisla.js')}}"></script>
 
+    <script>
+      $('#password, #konfirmasipassword').on('keyup', function () {
+        if ($('#password').val() == $('#konfirmasipassword').val()) {
+          $('#message').html('Password Cocok').css('color', 'green');
+          $('#button').removeAttr("disabled");
+        } else {
+          $('#message').html('Password Tidak Cocok').css('color', 'red');
+        
+          var element = document.getElementById('button');
+          element.setAttribute("disabled", "disabled");
+        }
+      });
+    </script>
   <!-- JS Libraies -->
 
   <!-- Template JS File -->

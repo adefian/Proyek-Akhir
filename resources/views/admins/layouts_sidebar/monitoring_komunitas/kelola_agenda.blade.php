@@ -57,7 +57,7 @@
                         @endif
                             <div class="form-group" style="display:inline-block">
                                 <div class="input-group">    
-                                <select name="tahun" type="text" class="form-control">
+                                <select name="tahun" id="tahun" type="text" class="form-control">
                                     <option value="" selected disabled>- Tahun -</option>
                                     <option value="">Semua</option>
                                     @foreach($option as $datas)
@@ -68,19 +68,42 @@
                             </div>
                             <div class="form-group ml-3" style="display:inline-block">
                                 <div class="input-group">    
-                                <select name="periode" type="text" class="form-control">
+                                <select name="periode" id="periode" type="text" class="form-control">
                                     <option value="" selected disabled>- Periode -</option>
                                     <option value="">Semua</option>
-                                    <option value="hari" @if($p == 'hari') {{'selected="selected"'}} @endif >Hari ini</option>
-                                    <option value="minggu" @if($p == 'minggu') {{'selected="selected"'}} @endif >Minggu ini</option>
-                                    <option value="bulan" @if($p == 'bulan') {{'selected="selected"'}} @endif>Bulan ini</option>
+                                    <option value="hari" @if($periode == 'hari') {{'selected="selected"'}} @endif >Hari ini</option>
+                                    <option value="minggu" @if($periode == 'minggu') {{'selected="selected"'}} @endif >Minggu ini</option>
+                                    <option value="bulan" @if($periode == 'bulan') {{'selected="selected"'}} @endif>Bulan ini</option>
                                 </select>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary fa fa-filter ml-3" title="Filter"></button>
+                            <div class="form-group ml-3" style="display:inline-block">
+                                <div class="input-group">    
+                                <select name="tahun" id="tahun" type="text" class="form-control">
+                                    <option value="" selected disabled>- Komunitas -</option>
+                                    <option value="">Semua</option>
+                                    @foreach($daerah as $datas)
+                                        <option value="{{$datas->id}}" @if($datas->daerah == $kom) {{'selected="selected"'}} @endif >{{$datas->daerah}}</option>
+                                    @endforeach
+                                </select>
+                                </div>
+                            </div>
+                            <div class="form-group ml-3" style="display:inline-block">
+                                <div class="input-group">    
+                                <select name="tahun" id="tahun" type="text" class="form-control">
+                                    <option value="" selected disabled>- Jenis Agenda -</option>
+                                    <option value="">Semua</option>
+                                    <option value="mendesak" @if($periode == 'mendesak') {{'selected="selected"'}} @endif >Mendesak</option>
+                                    <option value="tidakmendesak" @if($periode == 'tidakmendesak') {{'selected="selected"'}} @endif >Tidak Mendesak</option>
+                                </select>
+                                </div>
+                            </div>
+                            <button id="button" type="submit" class="btn btn-primary fa fa-filter ml-3" title="Filter"></button>
+                            <button id="button" type="submit" class="btn btn-danger fa fa-print ml-3" name="cetakPdf" value="cetakPdf" title="Print"></button>
                         </form>  
                     </div>
                   @endif
+
                     <table id="dataTable" class="table table-sm" style="width:100%">
                         <thead>
                             <tr>
@@ -214,6 +237,35 @@
 @endsection
 
 @section('js')
+
+    <script>
+        $(document).ready(function(){
+
+            $("#tahun").change(function(){
+            if($(this).val() !== ""){
+                $("#periode").prop("disabled",true);
+            }
+            else{
+                $("#periode").prop("disabled",false);
+            }
+
+            checkIfEverythingIsFilledIn();
+            });
+
+            $("#periode").change(function(){
+            checkIfEverythingIsFilledIn();
+            });
+
+            function checkIfEverythingIsFilledIn(){
+            if($("#tahun").val() !== "" && $("#periode").val() !== ""){
+                $("#periode").prop("disabled",true);
+            }
+            else{
+                $("#periode").prop("disabled",false);
+            }
+            }
+        });
+    </script>
 
 <!-- ============================ Edit Data ========================== -->
     <script>

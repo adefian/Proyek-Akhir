@@ -33,7 +33,7 @@
             <div class="row">
               <div class="col-12">
                   <div class="card-header">
-                    <h4>Data Pembuang Sampah Dengan Poin Terbesar</h4>
+                    <h4>Data Pembuang Sampah Dengan Poin Tertinggi</h4>
                   </div>
                     <div class="card-body pr-3 pl-4 m-1 table-responsive">          
                     <a href="/riwayatpembuangan"><button class="btn btn-primary mb-3">Riwayat Pembuangan Sampah</button></a>

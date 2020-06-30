@@ -28,7 +28,8 @@ class AgendaController extends Controller
         \Carbon\Carbon::setLocale('id');
 
         $tgl = Carbon::now();
-        $p = $request->periode;        
+        $periode = $request->periode;        
+        $kom = $request->komunitas;        
 
         if($request->tahun == 0){
             if ($request->periode == 'minggu') {
@@ -113,8 +114,83 @@ class AgendaController extends Controller
                 ->groupBy('year')->orderBy('year','ASC')->get();
         
         $daerah = Komunitas::all();
+
+        if($request->input('cetakPdf')){
+            if($request->tahun == 0){
+                if ($request->periode == 'minggu') {
+                    Carbon::setWeekStartsAt(Carbon::SUNDAY);
+                    Carbon::setWeekEndsAt(Carbon::SATURDAY);
+                    $data = Agenda::whereBetween('tanggal',[Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->where('tanggal', '>',$tgl)->orderBy('tanggal','ASC')->get();
+                    if (auth()->user()->role == 'pimpinankomunitas') {
+                
+                        $user = PimpinanKomunitas::where('user_id', auth()->user()->id)->first();
+                        $komunitas_id = $user->komunitas_id;
+                        
+                        $komunitas  = Agenda::whereBetween('tanggal',[Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->where('komunitas_id', $komunitas_id)->where('tanggal', '>',$tgl)->orderBy('tanggal','ASC')->get();
+                    }
+                } elseif($request->periode == 'bulan') {
+                    $period = $tgl->format('m'); 
+                    $data = Agenda::whereMonth('tanggal',$period)->where('tanggal', '>',$tgl)->orderBy('tanggal','ASC')->get();
+                    if (auth()->user()->role == 'pimpinankomunitas') {
+                
+                        $user = PimpinanKomunitas::where('user_id', auth()->user()->id)->first();
+                        $komunitas_id = $user->komunitas_id;
         
-        return view('admins.layouts_sidebar.monitoring_komunitas.kelola_agenda', compact('data','komunitas','daerah','option','tahun','p'));
+                        $komunitas  = Agenda::whereMonth('tanggal',$period)->where('komunitas_id', $komunitas_id)->where('tanggal', '>',$tgl)->orderBy('tanggal','ASC')->get();
+        
+                    }
+                } elseif($request->periode == 'tahun') {
+                    $period = $tgl->format('Y'); 
+                    $data = Agenda::whereYear('tanggal',$period)->where('tanggal', '>',$tgl)->orderBy('tanggal','ASC')->get();
+                    if (auth()->user()->role == 'pimpinankomunitas') {
+                
+                        $user = PimpinanKomunitas::where('user_id', auth()->user()->id)->first();
+                        $komunitas_id = $user->komunitas_id;
+        
+                        $komunitas  = Agenda::whereYear('tanggal',$period)->where('komunitas_id', $komunitas_id)->where('tanggal', '>',$tgl)->orderBy('tanggal','ASC')->get();
+        
+                    }
+                } elseif($request->periode == 'hari') {
+                    $data = Agenda::whereDate('tanggal', Carbon::today())->where('tanggal', '>',$tgl)->orderBy('tanggal','ASC')->get();
+                    if (auth()->user()->role == 'pimpinankomunitas') {
+                
+                        $user = PimpinanKomunitas::where('user_id', auth()->user()->id)->first();
+                        $komunitas_id = $user->komunitas_id;
+        
+                        $komunitas  = Agenda::whereDate('tanggal',Carbon::today())->where('komunitas_id', $komunitas_id)->where('tanggal', '>',$tgl)->orderBy('tanggal','ASC')->get();
+        
+                    }
+                } else {
+                    $data = Agenda::where('tanggal', '>',$tgl)->orderBy('tanggal','ASC')->get();
+                    if (auth()->user()->role == 'pimpinankomunitas') {
+                
+                        $user = PimpinanKomunitas::where('user_id', auth()->user()->id)->first();
+                        $komunitas_id = $user->komunitas_id;
+        
+                        $komunitas  = Agenda::where('komunitas_id', $komunitas_id)->where('tanggal', '>',$tgl)->orderBy('tanggal','ASC')->get();
+        
+                    }
+                }
+                $tahun = 0;
+            }
+            else{
+                $tahun = $request->tahun;
+                $data = Agenda::whereYear('tanggal', $tahun)->where('tanggal', '>',$tgl)->orderBy('tanggal','ASC')->get();
+                if (auth()->user()->role == 'pimpinankomunitas') {
+                
+                    $user = PimpinanKomunitas::where('user_id', auth()->user()->id)->first();
+                    $komunitas_id = $user->komunitas_id;
+    
+                    $komunitas  = Agenda::whereYear('tanggal', $tahun)->where('komunitas_id', $komunitas_id)->where('tanggal', '>',$tgl)->orderBy('tanggal','ASC')->get();
+    
+                }
+            }
+            return view('admins.layouts_sidebar.monitoring_komunitas.cetakPdf', compact('data','komunitas','daerah','option','tahun','periode','kom'));
+        }
+        else {
+            return view('admins.layouts_sidebar.monitoring_komunitas.kelola_agenda', compact('data','komunitas','daerah','option','tahun','periode','kom'));
+        }
+
     }
 
     /**

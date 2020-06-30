@@ -21,7 +21,7 @@ class HomeController extends Controller
         $agenda = Agenda::where('tanggal', '>',$tgl)->orderBy('tanggal', 'ASC')->get();
 
         
-        $list = Agenda::all();
+        $list = Agenda::where('tanggal', '>',$tgl)->get();
         
         foreach($list as $data=>$v){
 

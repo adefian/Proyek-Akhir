@@ -14,7 +14,7 @@
                 {{csrf_field()}}
 
                 <div class="form-group">
-                    <label for="namalokasi">Nama Lengkap</label> 
+                    <label for="nama">Nama Lengkap</label> 
                     <div class="input-group">   
                         <input name="nama_pengirimsaran" type="text" class="form-control" placeholder="Nama Lengkap" required>      
                     </div>

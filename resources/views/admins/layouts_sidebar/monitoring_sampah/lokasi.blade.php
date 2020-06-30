@@ -53,7 +53,7 @@
                         @foreach($data as $datas)
                             <tr>
                                 <td class="text-center">{{$no++}}</td>
-                                <td>{{$datas->namalokasi}}</td>
+                                <td>{{$datas->nama}}</td>
                                 <td>{{$datas->latitude}}</td>
                                 <td>{{$datas->longitude}}</td>
                                 <td style="display:none;">{{$datas->id}}</td>
@@ -185,7 +185,7 @@
              var data = table.row($tr).data();
              console.log(data);
  
-             $('#namalokasi').val(data[1]);
+             $('#nama').val(data[1]);
              $('.latude').val(data[2]);
              $('.longit').val(data[3]);
             //  $('#status').val(data[5]);

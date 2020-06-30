@@ -63,7 +63,7 @@
                                             @endif
                                             </td>
                                             <td class="text-center align-middle">{{$datas->nilai}}</td>
-                                            <td class="text-center">{{$datas->dari_tempatsampah->namalokasi}}</td>
+                                            <td class="text-center">{{$datas->dari_tempatsampah->nama}}</td>
                                             <td class="text-center">{{$datas->created_at->diffForHumans()}}</td>
                                             @if($datas->masyarakat_id === null)
                                             <td class="text-center">-</td>

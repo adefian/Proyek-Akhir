@@ -30,7 +30,7 @@ class PimpinanKomunitasController extends Controller
         $namakomunitas = PimpinanKomunitas::where('user_id', auth()->user()->id)->first();
 
         $ts = TempatSampah::all();
-        $tempat = Arr::pluck($ts ,'namalokasi');
+        $tempat = Arr::pluck($ts ,'nama');
 
         $b = Point::where('status', 1)->count();
         $s = Point::where('status', 0)->count();

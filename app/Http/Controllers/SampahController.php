@@ -19,7 +19,7 @@ class SampahController extends Controller
      */
     public function index(Request $request)
     {
-        $data = Point::all();
+        $data = Point::orderBy('updated_at','DESC')->get();
         
         return view ('admins.layouts_sidebar.daftar_pembuang_sampah.index', compact('data','data2'));
     }

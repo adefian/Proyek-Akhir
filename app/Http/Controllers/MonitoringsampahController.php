@@ -43,7 +43,7 @@ class MonitoringsampahController extends Controller
         $user =  auth()->user()->id;
         
         $input = ([
-            'namalokasi' => $request->namalokasi,
+            'nama' => $request->nama,
             'latitude' => $request->latitude,
             'longitude' => $request->longitude,
             'user_id' => $user,
@@ -106,7 +106,7 @@ class MonitoringsampahController extends Controller
         $user =  auth()->user()->id;
         
         $input = ([
-            'namalokasi' => $request->namalokasi,
+            'nama' => $request->nama,
             'latitude' => $request->latitude,
             'longitude' => $request->longitude,
             'user_id' => $user,

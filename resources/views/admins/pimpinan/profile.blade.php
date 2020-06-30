@@ -91,6 +91,7 @@
                           <div class="form-group col-md-12 col-12">
                             <label>Password</label>
                             <input name="password" type="password" class="form-control">
+                            <small class="text-danger">Isi form diatas jika ingin mengganti password</small>
                           </div>
                         </div>
                         <div class="row">
