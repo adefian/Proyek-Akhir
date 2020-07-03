@@ -9,7 +9,7 @@ class AnggotaKomunitas extends Model
     protected $table = 'anggota_komunitas';
 
     protected $fillable = [
-        'nama', 'nohp', 'alamat', 'jenis_kelamin', 'level', 'user_id', 'komunitas_id', 'foto', 'bio'
+        'nama', 'nohp', 'alamat', 'jenis_kelamin', 'level', 'user_id', 'komunitas_id', 'file_gambar', 'bio'
     ];
 
     public function akun()
@@ -24,10 +24,10 @@ class AnggotaKomunitas extends Model
 
     public function ambilFoto()
     {
-        if (!$this->foto) {
+        if (!$this->file_gambar) {
             return asset('assets/img/avatar/avatar-4.png');
         }
 
-        return asset('assets/img/avatar/'.$this->foto);
+        return asset('assets/img/avatar/'.$this->file_gambar);
     }
 }

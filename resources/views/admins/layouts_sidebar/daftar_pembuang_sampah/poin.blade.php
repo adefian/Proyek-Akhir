@@ -35,20 +35,25 @@
                   <div class="card-header">
                     <h4>Data Pembuang Sampah Dengan Poin Tertinggi</h4>
                   </div>
-                    <div class="card-body pr-3 pl-4 m-1 table-responsive">          
+                    <div class="card-body pr-3 pl-4 m-1 table-responsive">        
+                    @if(auth()->user()->role == 'pimpinanecoranger')
                     <a href="/riwayatpembuangan"><button class="btn btn-primary mb-3">Riwayat Pembuangan Sampah</button></a>
-                    @if(auth()->user()->role == 'pimpinankomunitas' || auth()->user()->role == 'pimpinanecoranger')
+                    @elseif(auth()->user()->role == 'petugaslapangan')
+                    <a href="/riwayatpembuangan-petugaslap"><button class="btn btn-success mb-3">Riwayat Pembuangan Sampah</button></a>
+                    @endif
+
+                    @if(auth()->user()->role == 'petugaslapangan' || auth()->user()->role == 'pimpinanecoranger')
                       <div class="col-12">
                         @if(auth()->user()->role == 'pimpinanecoranger')
                         <form action="/poin" method="get">
                         @endif
-                        @if(auth()->user()->role == 'pimpinankomunitas')
-                        <form action="/poin-pimpinankom" method="get">
+                        @if(auth()->user()->role == 'petugaslapangan')
+                        <form action="/poin-petugaslap" method="get">
                         @endif
                             <div class="form-group" style="display:inline-block">
                                 <div class="input-group">    
                                 <select name="list" type="text" class="form-control">
-                                        <option value="" selected disabled>- List -</option>
+                                        <option value="" selected disabled>- Daftar -</option>
                                         <option value="">Semua</option>
                                         <option value="10" @if($list == '10') {{'selected="selected"'}} @endif >10 Besar</option>
                                         <option value="20" @if($list == '20') {{'selected="selected"'}} @endif >20 Besar</option>
@@ -90,7 +95,7 @@
                                         <tr>
                                             <td class="text-center">{{$no++}}</td>
                                             <td>{{$datas->nama}}</td>
-                                            <td>+62 {{$datas->nohp}}</td>
+                                            <td> {{$datas->nohp}}</td>
                                             <td class="text-center">{{$datas->alamat}}</td>
                                             <td class="text-center">{{$datas->total_poin}}</td>
                                             <td class="text-center">{{$datas->updated_at->diffForHumans()}}</td>

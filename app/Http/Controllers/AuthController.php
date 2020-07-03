@@ -18,7 +18,7 @@ class AuthController extends Controller
 
     public function postlogin(Request $request)
     {
-        $logintype = filter_var($request->email, FILTER_VALIDATE_EMAIL) ? 'email' : 'nama';
+        $logintype = filter_var($request->email, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 
         $login = [
             $logintype => $request->email,
@@ -69,7 +69,7 @@ class AuthController extends Controller
             return back();
         } else {
         $data = [
-            'nama' => $request->username,
+            'username' => $request->username,
             'role' => 'komunitas',
             'email' => $request->email,
             'password' => bcrypt($request->password),

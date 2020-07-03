@@ -42,12 +42,11 @@
               <div class="col-12">
                   <div class="card-header">
                     <h4>Kelola Agenda</h4>
-                @if(auth()->user()->role == 'pimpinanecoranger')
+                @if(auth()->user()->role == 'pimpinanecoranger' || auth()->user()->role == 'pimpinankomunitas')
                     <button data-toggle="modal" data-target="#modalCreate" class="btn btn-success fas fa-plus fa-2x" title="Tambahkan disini" style="margin-left: auto;"></button>
                 @endif
                   </div>
                 <div class="card-body pr-3 pl-4 m-1 table-responsive">
-                  @if(auth()->user()->role == 'pimpinankomunitas' || auth()->user()->role == 'pimpinanecoranger')
                     <div class="col-12">
                         @if(auth()->user()->role == 'pimpinanecoranger')
                         <form action="/kelolaagenda" method="get">
@@ -55,18 +54,11 @@
                         @if(auth()->user()->role == 'pimpinankomunitas')
                         <form action="/kelolaagenda-pimpinankom" method="get">
                         @endif
+                        @if(auth()->user()->role == 'komunitas')
+                        <form action="/kelolaagenda-komunitas" method="get">
+                        @endif
+                            
                             <div class="form-group" style="display:inline-block">
-                                <div class="input-group">    
-                                <select name="tahun" id="tahun" type="text" class="form-control">
-                                    <option value="" selected disabled>- Tahun -</option>
-                                    <option value="">Semua</option>
-                                    @foreach($option as $datas)
-                                        <option value="{{$datas->year}}" @if($datas->year == $tahun) {{'selected="selected"'}} @endif >{{$datas->year}}</option>
-                                    @endforeach
-                                </select>
-                                </div>
-                            </div>
-                            <div class="form-group ml-3" style="display:inline-block">
                                 <div class="input-group">    
                                 <select name="periode" id="periode" type="text" class="form-control">
                                     <option value="" selected disabled>- Periode -</option>
@@ -77,32 +69,47 @@
                                 </select>
                                 </div>
                             </div>
+                            @if(auth()->user()->role == 'pimpinanecoranger')
                             <div class="form-group ml-3" style="display:inline-block">
                                 <div class="input-group">    
-                                <select name="tahun" id="tahun" type="text" class="form-control">
+                                <select name="komunitas" id="komunitas" type="text" class="form-control">
                                     <option value="" selected disabled>- Komunitas -</option>
                                     <option value="">Semua</option>
                                     @foreach($daerah as $datas)
-                                        <option value="{{$datas->id}}" @if($datas->daerah == $kom) {{'selected="selected"'}} @endif >{{$datas->daerah}}</option>
+                                        <option value="{{$datas->id}}" @if($datas->id == $kom) {{'selected="selected"'}} @endif >{{$datas->daerah}}</option>
                                     @endforeach
                                 </select>
                                 </div>
                             </div>
+                            @endif
+                            <div class="form-group ml-3" style="display:inline-block">
+                                <div class="input-group">    
+                                <select name="jenis_agenda" id="jenis_agenda" type="text" class="form-control">
+                                    <option value="" selected disabled>- Jenis Agenda -</option>
+                                    <option value="">Semua</option>
+                                    <option value="1" @if(1 == $jenis_agenda) {{'selected="selected"'}} @endif >Mendesak</option>
+                                    <option value="2" @if(2 == $jenis_agenda) {{'selected="selected"'}} @endif >Penting</option>
+                                    <option value="3" @if(3 == $jenis_agenda) {{'selected="selected"'}} @endif >Rutin</option>
+                                </select>
+                                </div>
+                            </div>
                             <div class="form-group ml-3" style="display:inline-block">
                                 <div class="input-group">    
                                 <select name="tahun" id="tahun" type="text" class="form-control">
-                                    <option value="" selected disabled>- Jenis Agenda -</option>
+                                    <option value="" selected disabled>- Tahun -</option>
                                     <option value="">Semua</option>
-                                    <option value="mendesak" @if($periode == 'mendesak') {{'selected="selected"'}} @endif >Mendesak</option>
-                                    <option value="tidakmendesak" @if($periode == 'tidakmendesak') {{'selected="selected"'}} @endif >Tidak Mendesak</option>
+                                    @foreach($option as $datas)
+                                        <option value="{{$datas->year}}" @if($datas->year == $tahun) {{'selected="selected"'}} @endif >{{$datas->year}}</option>
+                                    @endforeach
                                 </select>
                                 </div>
                             </div>
                             <button id="button" type="submit" class="btn btn-primary fa fa-filter ml-3" title="Filter"></button>
+                            @if(auth()->user()->role == 'pimpinanecoranger' || auth()->user()->role == 'pimpinankomunitas')
                             <button id="button" type="submit" class="btn btn-danger fa fa-print ml-3" name="cetakPdf" value="cetakPdf" title="Print"></button>
+                            @endif
                         </form>  
                     </div>
-                  @endif
 
                     <table id="dataTable" class="table table-sm" style="width:100%">
                         <thead>
@@ -113,7 +120,7 @@
                                 <th>Keterangan</th>
                                 <th>Jenis Agenda</th>
                                 <th>Tanggal</th>
-                                <th>Yang Menambahkan</th>
+                                <th>Penanggung Jawab</th>
                                 <th class="text-center">Aksi</th>
                                 <th style="display:none;">id</th>
                                 <th style="display:none;">tanggal</th>
@@ -131,9 +138,11 @@
                                         <td>{{$datas->keterangan}}</td>
                                         <td>
                                         @if($datas->jenis_agenda == 1)
-                                            <span style="width:100%; align:center;" class="badge badge-warning">Agenda Mendesak</span>
-                                            @else
-                                            <span style="width:100%; align:center;" class="badge badge-success">Agenda tidak Mendesak</span>
+                                            <span style="width:100%; align:center;" class="badge badge-danger">Agenda Mendesak</span>
+                                        @elseif($datas->jenis_agenda == 2)
+                                            <span style="width:100%; align:center;" class="badge badge-warning">Agenda Penting</span>
+                                        @elseif($datas->jenis_agenda == 3)
+                                            <span style="width:100%; align:center;" class="badge badge-success">Agenda Rutin</span>
                                         @endif
                                         </td>
                                         <td>{{ Carbon\Carbon::parse($datas->tanggal)->isoFormat('LLLL') }} WIB</td>
@@ -174,9 +183,11 @@
                                         <td>{{$kom->keterangan}}</td>
                                         <td>
                                         @if($kom->jenis_agenda == 1)
-                                            <span style="width:100%; align:center;" class="badge badge-warning">Agenda Mendesak</span>
-                                            @else
-                                            <span style="width:100%; align:center;" class="badge badge-success">Agenda tidak Mendesak</span>
+                                            <span style="width:100%; align:center;" class="badge badge-danger">Agenda Mendesak</span>
+                                        @elseif($kom->jenis_agenda == 2)
+                                            <span style="width:100%; align:center;" class="badge badge-warning">Agenda Penting</span>
+                                        @elseif($kom->jenis_agenda == 3)
+                                            <span style="width:100%; align:center;" class="badge badge-success">Agenda Rutin</span>
                                         @endif
                                         </td>
                                         <td>{{ Carbon\Carbon::parse($kom->tanggal)->isoFormat('LLLL') }}</td>
@@ -238,34 +249,49 @@
 
 @section('js')
 
+<!-- ========= Filter ==========  -->
     <script>
-        $(document).ready(function(){
-
-            $("#tahun").change(function(){
-            if($(this).val() !== ""){
-                $("#periode").prop("disabled",true);
-            }
-            else{
-                $("#periode").prop("disabled",false);
-            }
-
-            checkIfEverythingIsFilledIn();
-            });
-
+        $(document).ready(function () {
             $("#periode").change(function(){
-            checkIfEverythingIsFilledIn();
-            });
 
-            function checkIfEverythingIsFilledIn(){
-            if($("#tahun").val() !== "" && $("#periode").val() !== ""){
-                $("#periode").prop("disabled",true);
-            }
-            else{
-                $("#periode").prop("disabled",false);
-            }
-            }
+                if ($('#periode').val() !== "" || $('#periode').val() == null) {
+                    $("#tahun").prop("disabled",true);
+                } else{
+                    $("#tahun").prop("disabled",false);
+                }
+            });
+            $("#tahun").change(function(){
+
+                if ($('#tahun').val() !== "" || $('#tahun').val() == null) {
+                    $("#periode").prop("disabled",true);
+                } else{
+                    $("#periode").prop("disabled",false);
+                }
+            });
         });
     </script>
+<!-- ========= End Filter ==========  -->
+
+<!-- ========= Fungsi JS dalam Modal ==========  -->
+   <script>
+        $(document).ready(function () {
+            $("#jenisagenda").change(function(){
+
+                if ($('#jenisagenda').val() == "3") {
+                    $('#pemberitahuan').html('Pilih hari dan tanggal untuk memulai Agenda rutin selama 4 minggu ke depan ').css('color', 'green');
+                } else{
+                    $('#pemberitahuan').html('').css('color', 'red');
+                }
+
+                if($('#jenisagenda').val() == "1") {
+                    document.getElementById('tanggal-max').setAttribute("max", "{{Carbon\Carbon::now()->addDays(1)->format('Y-m-d\TH:i')}}");
+                }else{
+                    $('#tanggal-max').removeAttr("max");
+                }
+            });
+        });
+   </script>     
+<!-- ========= End Fungsi JS dalam Modal ==========  -->
 
 <!-- ============================ Edit Data ========================== -->
     <script>
@@ -288,7 +314,7 @@
              $('#keterangan').val(data[3]);
              $('#tanggal').val(data[9]);
 
-             var element = document.getElementById("jenis_agenda");
+             var element = document.getElementById('jenis_ag');
              element.innerHTML = data[4];
              
              $('#editForm').attr('action', '/kelolaagenda/'+data[7]);

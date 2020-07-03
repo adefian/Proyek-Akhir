@@ -47,7 +47,7 @@
                                     <th>Komunitas</th>
                                     <th>Keterangan</th>
                                     <th>Tanggal</th>
-                                    <th>Yang Menambahkan</th>
+                                    <th>Penanggung Jawab</th>
                                     <th style="display:none;">id</th>
                                     <th style="display:none;"></th>
                                 </tr>

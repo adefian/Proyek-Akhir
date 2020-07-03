@@ -16,11 +16,11 @@ class CreatePetugasLapangansTable extends Migration
         Schema::create('petugas_lapangan', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nama');
-            $table->integer('nohp');
-            $table->string('alamat');
+            $table->string('nohp');
+            $table->string('alamat');  
             $table->string('bio')->nullable();
-            $table->string('foto')->nullable();
-            $table->string('wilayah');
+            $table->string('file_gambar')->nullable();
+            $table->string('wilayah')->nullable();
             $table->timestamps();
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')

@@ -149,7 +149,7 @@ s0.parentNode.insertBefore(s1,s0);
                     </div>
                     <div class="input-group">
                       <div class="input-group-prepend">
-                        <span class="input-group-text">+62</span>
+                        <span class="input-group-text"></span>
                       </div>
                       <input id="nohp" type="nohp" class="form-control" name="nohp" tabindex="2" required>
                     <div class="invalid-feedback">

@@ -1,14 +1,6 @@
 @extends('layouts_admin.admin')
 
-@if(auth()->user()->role == 'pimpinanecoranger')
-    @include('admins.pimpinan.include')
-@endif
-@if(auth()->user()->role == 'petugaslapangan')
-    @include('admins.petugas_lapangan.include')
-@endif
-@if(auth()->user()->role == 'komunitas')
-    @include('admins.komunitas.include')
-@endif
+@include('admins.pimpinan.include')
 
 @section('content')
     <div class="main-content">
@@ -17,31 +9,31 @@
             <h1>Profile</h1>
           </div>
 
-        <form action="/pimpinan/{{$data->id}}" method="POST" class="needs-validation" novalidate="" enctype="multipart/form-data">
+        <form action="/pimpinan/{{$pimpinan->id}}" method="POST" class="needs-validation" novalidate="" enctype="multipart/form-data">
           <div class="section-body"> 
             <div class="row">
               <div class="col-12 col-md-12 col-lg-5">
                 <div class="card profile-widget card-primary">
-                    <h2 class="section-title">Hi, {{auth()->user()->nama}}!</h2>
+                    <h2 class="section-title">Hi, {{auth()->user()->username}}!</h2>
                     <p class="section-lead">
                         Ubah informasi tentang diri Anda di halaman ini.
                     </p>
                     <div class="row justify-content-center">
                       <div class="col-12 col-md-12 col-lg-6">
                         <div class="profile-widget-header">
-                          <img alt="image" src="{{$data->ambilFoto()}}" class="rounded-circle profile-widget-picture" style="height:130px; width:130px;">
+                          <img alt="image" src="{{$pimpinan->ambilFoto()}}" class="rounded-circle profile-widget-picture" style="height:130px; width:130px;">
                         </div>
                       </div>
                       <div class="col-11 col-md-11 col-lg-5">
                         <div class="form-group">
                           <label>Ganti Foto</label>
-                          <input name="foto" type="file" class="form-control">
+                          <input name="file_gambar" type="file" class="form-control">
                         </div>
                       </div>
                     </div>
                   <div class="profile-widget-description">
-                    <div class="profile-widget-name">{{$data->nama}} <div class="text-muted d-inline font-weight-normal"><div class="slash"></div>Pimpinan Ecoranger</div></div>
-                        {{$data->bio}}
+                    <div class="profile-widget-name">{{$pimpinan->nama}} <div class="text-muted d-inline font-weight-normal"><div class="slash"></div>Pimpinan Ecoranger</div></div>
+                        {{$pimpinan->bio}}
                 </div>
                 </div>
               </div>
@@ -58,14 +50,14 @@
                         <div class="row">
                           <div class="form-group col-md-7 col-12">
                             <label>Nama Lengkap</label>
-                            <input name="namalengkap" type="text" class="form-control" value="{{$data->nama}}" required="">
+                            <input name="namalengkap" type="text" class="form-control" value="{{$pimpinan->nama}}" required="">
                             <div class="invalid-feedback">
                               Silahkan isi Nama Lengkap Anda
                             </div>
                           </div>
                           <div class="form-group col-md-5 col-12">
                             <label>Username</label>
-                            <input name="username" type="text" class="form-control" value="{{$data->pimpinan->nama}}" required="">
+                            <input name="username" type="text" class="form-control" value="{{$pimpinan->pimpinan->username}}" required="">
                             <div class="invalid-feedback">
                               Silahkan isi Username Anda
                             </div>
@@ -74,14 +66,14 @@
                         <div class="row">
                           <div class="form-group col-md-7 col-12">
                             <label>Email</label>
-                            <input name="email" type="email" class="form-control" value="{{$data->pimpinan->email}}" required="">
+                            <input name="email" type="email" class="form-control" value="{{$pimpinan->pimpinan->email}}" required="">
                             <div class="invalid-feedback">
                               Silahkan isi Email Anda
                             </div>
                           </div>
                           <div class="form-group col-md-5 col-12">
                             <label>Ponsel</label>
-                            <input name="nohp" type="tel" class="form-control" value="{{$data->nohp}}" required="">
+                            <input name="nohp" type="tel" class="form-control" value="{{$pimpinan->nohp}}" required="">
                             <div class="invalid-feedback">
                               Silahkan isi No Hp Anda
                             </div>
@@ -97,13 +89,13 @@
                         <div class="row">
                           <div class="form-group col-12">
                             <label>Alamat</label>
-                            <input name="alamat" type="text" class="form-control" value="{{$data->alamat}}">
+                            <input name="alamat" type="text" class="form-control" value="{{$pimpinan->alamat}}">
                           </div>
                         </div>
                         <div class="row">
                           <div class="form-group col-12">
                             <label>Bio</label>
-                            <textarea name="bio" class="form-control summernote-simple" style="margin-top: 0px; margin-bottom: 0px; height: 86px;">{{$data->bio}}</textarea>
+                            <textarea name="bio" class="form-control summernote-simple" style="margin-top: 0px; margin-bottom: 0px; height: 86px;">{{$pimpinan->bio}}</textarea>
                           </div>
                         </div>
                         

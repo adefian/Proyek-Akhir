@@ -60,7 +60,7 @@
                                 <td class="text-center">{{$no++}}</td>
                                 <td>{{$datas->nama}}</td>
                                 <td>{{$datas->akun->email}}</td>
-                                <td>+62 {{$datas->nohp}}</td>
+                                <td> {{$datas->nohp}}</td>
                                 <td>{{$datas->alamat}}</td>
                                 <td>{{$datas->wilayah}}</td>
                                 <td style="display:none;">{{$datas->id}}</td>

@@ -41,7 +41,7 @@ class EcobrickController extends Controller
             'keterangan' => $request->keterangan,
             'level' => 1,
             'user_id' => auth()->user()->id,
-            'nama_pengirimsaran' => auth()->user()->nama,
+            'nama_pengirimsaran' => auth()->user()->username,
         ];
 
         if ($file = $request->file('foto_diaplikasikan')) {

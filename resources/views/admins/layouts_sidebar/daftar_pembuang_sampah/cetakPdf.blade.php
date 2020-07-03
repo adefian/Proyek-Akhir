@@ -27,7 +27,7 @@
 		<div class="container-fluid">	
 			<div class="row justify-content-center">
 				<div class="col-10">
-					<h4 class="m-4" style="text-align: center; font:">List Poin Tertinggi
+					<h4 class="m-4" style="text-align: center; font:">Daftar Poin Tertinggi
                         @if($periode == 'hari')
                             Hari ini
                         @elseif ($periode == 'minggu')
@@ -61,7 +61,7 @@
 									<!-- Nomor -->
 									<td width="15">{{$i++}}</td>
 									<td width="70">{{$datas->nama}}</td>
-									<td width="80">+62 {{$datas->nohp}}</td>							
+									<td width="80"> {{$datas->nohp}}</td>							
 									<td width="85">{{$datas->alamat}}</td>							
 									<td width="80">{{$datas->total_poin}}</td>							
 								</tr>

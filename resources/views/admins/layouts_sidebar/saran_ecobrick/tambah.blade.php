@@ -23,7 +23,7 @@
                 <div class="form-group">
                     <label for="foto_diaplikasikan">Foto</label> 
                     <div class="input-group">   
-                        <input name="foto_diaplikasikan" type="file" class="form-control" placeholder="Foto" required>      
+                        <input name="foto_diaplikasikan" type="file" class="form-control" placeholder="file_gambar" required>      
                     </div>
                 </div>
                 <div class="form-group">

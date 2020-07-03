@@ -16,9 +16,9 @@ class CreateAnggotaKomunitasTable extends Migration
         Schema::create('anggota_komunitas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nama');
-            $table->bigInteger('nohp');
+            $table->string('nohp');
             $table->string('alamat');
-            $table->string('foto');
+            $table->string('file_gambar');
             $table->string('jenis_kelamin');
             $table->string('level')->default(0);
             $table->timestamps();

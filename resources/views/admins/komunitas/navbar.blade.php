@@ -1,6 +1,6 @@
 <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
     <!-- <img alt="image" src="{{asset('assets/img/avatar/avatar-3.png')}}" class="rounded-circle mr-1"> -->
-    <div class="d-sm-none d-lg-inline-block">Hai, {{auth()->user()->nama}}</div></a>
+    <div class="d-sm-none d-lg-inline-block">Hai, {{auth()->user()->username}}</div></a>
     <div class="dropdown-menu dropdown-menu-right">
         <div class="dropdown-title">Anggota {{auth()->user()->role}}</div>
         <a href="/komunitas/{{auth()->user()->id}}" class="dropdown-item has-icon">

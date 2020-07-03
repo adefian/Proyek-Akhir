@@ -17,13 +17,13 @@ class CreateFeedbackTable extends Migration
             $table->bigIncrements('id');
             $table->string('nama');
             $table->string('email');
-            $table->string('usulan');
-            $table->string('gambar');
+            $table->string('kritik_saran');
+            $table->string('file_gambar');
             $table->timestamps();
-            $table->bigInteger('id_masyarakat')->unsigned();
-            $table->foreign('id_masyarakat')
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')
                     ->references('id')
-                    ->on('masyarakat')
+                    ->on('user')
                     ->onDelete('cascade')
                     ->onUpdate('cascade');
         });

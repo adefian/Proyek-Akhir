@@ -48,7 +48,7 @@
                           <div id="map" style="border-radius: 3px;"></div>
                         </div>
                         <div class="col-lg-6 col-12">
-                          <h7 class="text-center mb-4 mt-4">Titik Lokasi Komunitas</h7>
+                          <h4 class="text-center mb-4 mt-4">Titik Lokasi Komunitas</h4>
                           @if(auth()->user()->role == 'pimpinanecoranger')
                               <button data-toggle="modal" data-target="#modalCreate" class="btn btn-success btn-sm fas fa-plus float-right mr-4" title="Tambahkan disini" style="margin-left: auto;"></button>
                           @endif
@@ -206,7 +206,7 @@
                   '<p>Titik Koordinat : '+array[i][0]+', '+array[i][1]+'<br/>'+
                   'Daerah : '+array[i][2]+'<br/>'+
                   'Keterangan : '+array[i][3]+'<br/>'+
-                  'Email yang menambahkan : '+array[i][4]+'</p>'+
+                  'Email Penanggung Jawab : '+array[i][4]+'</p>'+
 
                   '</div>';
 

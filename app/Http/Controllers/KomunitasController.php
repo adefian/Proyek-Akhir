@@ -68,9 +68,9 @@ class KomunitasController extends Controller
     {
         $user = Auth::user();
 
-        $data = AnggotaKomunitas::where('user_id', $id)->first();
+        $komunitas = AnggotaKomunitas::where('user_id', $id)->first();
         
-        return view('admins.komunitas.profile', compact('data'));
+        return view('admins.komunitas.profile', compact('komunitas'));
     }
 
     /**
@@ -109,16 +109,16 @@ class KomunitasController extends Controller
             'bio' => $request->bio,
         ]);
 
-        if ($file = $request->file('foto')) {
+        if ($file = $request->file('file_gambar')) {
             $nama = time() . $file->getClientOriginalName();
             $file->move('assets/img/avatar/', $nama);  
-            $input['foto'] = $nama;
+            $input['file_gambar'] = $nama;
         }
 
         $ed = $komunitas->user_id;
         $user = User::findOrFail($ed);
         $input2 = ([
-            'nama' => $request->username,
+            'username' => $request->username,
             'email' => $request->email,
         ]);
 

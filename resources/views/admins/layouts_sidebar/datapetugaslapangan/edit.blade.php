@@ -36,7 +36,7 @@
                     <label for="nohp">No Hp</label>
                     <div class="input-group">    
                         <div class="input-group-prepend">
-                          <span class="input-group-text">+62</span>
+                          <span class="input-group-text"></span>
                         </div>
                         <input name="nohp" type="text" id="nohp" class="form-control" placeholder="No Hp">
                     </div>

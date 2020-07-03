@@ -70,7 +70,12 @@ class PimpinanKomunitasController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = Auth::user();
+
+        $pimpinankom = PetugasLapangan::where('user_id', $id)->first();
+        
+        return view('admins.petugas_lapangan.profile', compact('pimpinankom'));
+
     }
 
     /**

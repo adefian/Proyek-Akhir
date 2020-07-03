@@ -240,7 +240,7 @@
              '<div class="content"><p>'+
              '<h6>'+array[i][0]+'</h6>'+
              '<img height="130" style="margin:0 auto; display:block;" src="assets/img/tempatsampah/'+array[i][4]+'"/><br/>'+
-             'Petugas yang Menambahkan : '+array[i][3]+'<br/>'+
+             'Penanggung Jawab : '+array[i][3]+'<br/>'+
              'Titik Koordinat : '+array[i][1]+', '+array[i][2]+'<br/>'+
              '</p></div>';
 
@@ -279,7 +279,7 @@
                   '<p>Titik Koordinat : '+array2[a][0]+', '+array2[a][1]+'<br/>'+
                   'Daerah : '+array2[a][2]+'<br/>'+
                   'Keterangan : '+array2[a][3]+'<br/>'+
-                  'Email yang menambahkan : '+array2[a][4]+'</p>'+
+                  'Email Penanggung Jawab : '+array2[a][4]+'</p>'+
 
                   '</div>';
 

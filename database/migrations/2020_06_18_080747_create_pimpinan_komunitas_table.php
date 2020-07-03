@@ -16,10 +16,10 @@ class CreatePimpinanKomunitasTable extends Migration
         Schema::create('pimpinan_komunitas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nama');
-            $table->biginteger('nohp');
+            $table->string('nohp');
             $table->string('alamat');   
             $table->string('bio')->nullable();
-            $table->string('foto')->nullable();
+            $table->string('file_gambar')->nullable();
             $table->timestamps();
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')

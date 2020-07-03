@@ -18,7 +18,7 @@ class CreateTempatSampahsTable extends Migration
             $table->string('nama');
             $table->string('latitude');
             $table->string('longitude');
-            $table->string('foto')->default('default.jpg');
+            $table->string('file_gambar')->default('default.jpg');
             $table->integer('status')->default(0);
             $table->timestamps();
             $table->bigInteger('user_id')->unsigned()->nullable();
@@ -27,18 +27,6 @@ class CreateTempatSampahsTable extends Migration
                     ->on('user')
                     ->onDelete('cascade')
                     ->onUpdate('cascade');
-            // $table->bigInteger('id_pimpinan_ecoranger')->unsigned()->nullable();
-            // $table->foreign('id_pimpinan_ecoranger')
-            //         ->references('id')
-            //         ->on('pimpinan_ecoranger')
-            //         ->onDelete('cascade')
-            //         ->onUpdate('cascade');
-            // $table->bigInteger('id_petugas_lapangan')->unsigned()->nullable();
-            // $table->foreign('id_petugas_lapangan')
-            //         ->references('id')
-            //         ->on('petugas_lapangan')
-            //         ->onDelete('cascade')
-            //         ->onUpdate('cascade');
         });
     }
 

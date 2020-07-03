@@ -23,6 +23,7 @@ class HomeController extends Controller
         
         $list = Agenda::where('tanggal', '>',$tgl)->get();
         
+        $listagenda = 0;
         foreach($list as $data=>$v){
 
             $listagenda[]= array(

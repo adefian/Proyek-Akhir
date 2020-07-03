@@ -35,16 +35,18 @@
                 <div class="form-group">
                     <label for="tanggal">Tanggal</label>
                     <div class="input-group">    
-                        <input name="tanggal" placeholder="Pilih Tanggal" type="datetime-local" class="form-control" min="{{Carbon\Carbon::now()->format('Y-m-d\TH:i')}}" required>
+                        <input name="tanggal" id="tanggal-max" placeholder="Pilih Tanggal" type="datetime-local" class="form-control" min="{{Carbon\Carbon::now()->format('Y-m-d\TH:i')}}" required>
                     </div>
+                        <small id="pemberitahuan"></small>
                 </div>
                 <div class="form-group">
                     <label for="jenis_agenda">Jenis Agenda</label>
                     <div class="input-group">    
-                      <select name="jenis_agenda" type="text" class="form-control">
+                      <select name="jenis_agenda" id="jenisagenda" type="text" class="form-control">
                         <option selected disabled>Pilih Jenis Agenda</option>
                         <option value="1">Mendesak</option>
-                        <option value="0">Tidak Mendesak</option>
+                        <option value="2">Penting</option>
+                        <option value="3">Rutin</option>
                       </select>
                     </div>
                 </div>

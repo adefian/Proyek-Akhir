@@ -17,7 +17,7 @@ class CreatePointsTable extends Migration
             $table->bigIncrements('id');
             $table->string('status');
             $table->string('kode_reward');
-            $table->string('nilai');
+            $table->integer('nilai');
             $table->timestamps();
             $table->bigInteger('masyarakat_id')->unsigned();
             $table->foreign('masyarakat_id')

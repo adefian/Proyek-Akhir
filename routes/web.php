@@ -60,6 +60,7 @@ Route::group(['middleware' => ['auth','petugaslapangan']],function(){
     Route::resource('dataanggotakomunitas-petugaslap', 'DatakomunitasController');
     Route::resource('reviewsaranecobrick-petugaslap', 'EcobrickController');
     Route::resource('riwayatpembuangan-petugaslap', 'SampahController');
+    Route::get('poin-petugaslap', 'SampahController@poin');
     Route::get('feedbacks-petugaslap', 'HomeController@feedbacks');
     Route::post('hapusfeedback-petugaslap/{id}', 'HomeController@hapusfeedback')->name('hapusfeedback-petugaslap');
     Route::get('logout-petugaslap','AuthController@logout')->name('logout-petugaslapangan'); 
@@ -95,8 +96,6 @@ Route::group(['middleware' => ['auth','pimpinankomunitas']],function(){
     Route::resource('datapetugaslapangan-pimpinankom', 'DatapetugaslapanganController');
     Route::resource('dataanggotakomunitas-pimpinankom', 'DatakomunitasController');
     Route::resource('reviewsaranecobrick-pimpinankom', 'EcobrickController');
-    Route::resource('riwayatpembuangan-pimpinankom', 'SampahController');
-    Route::get('poin-pimpinankom', 'SampahController@poin');
     Route::resource('laporan-pimpinankom', 'LaporanController');
     Route::get('feedbacks-pimpinankom', 'HomeController@feedbacks');
     Route::post('hapusfeedback-pimpinankom/{id}', 'HomeController@hapusfeedback')->name('hapusfeedback-pimpinankom');

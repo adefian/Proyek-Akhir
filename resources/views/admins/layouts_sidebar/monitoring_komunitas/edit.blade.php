@@ -39,13 +39,15 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="jenis_agenda">Jenis Agenda saat ini <p id="jenis_agenda"></p>
+                    <label for="jenis_agenda">Jenis Agenda saat ini 
+                    <p id="jenis_ag">asas</p> 
                     </label>
                     <div class="input-group">    
                         <select name="jenis_agenda" type="text" class="form-control">
                             <option selected disabled>Pilih Jenis Agenda</option>
                             <option value="1">Mendesak</option>
-                            <option value="0">Tidak Mendesak</option>
+                            <option value="2">Penting</option>
+                            <option value="3">Rutin</option>
                         </select>
                     </div>
                 </div>

@@ -63,9 +63,9 @@ class PetugaslapanganController extends Controller
     {
         $user = Auth::user();
 
-        $data = PetugasLapangan::where('user_id', $id)->first();
+        $petugaslapangan = PetugasLapangan::where('user_id', $id)->first();
         
-        return view('admins.petugas_lapangan.profile', compact('data'));
+        return view('admins.petugas_lapangan.profile', compact('petugaslapangan'));
     }
 
     /**
@@ -104,16 +104,16 @@ class PetugaslapanganController extends Controller
             'bio' => $request->bio,
         ]);
 
-        if ($file = $request->file('foto')) {
+        if ($file = $request->file('file_gambar')) {
             $nama = time() . $file->getClientOriginalName();
             $file->move('assets/img/avatar/', $nama);  
-            $input['foto'] = $nama;
+            $input['file_gambar'] = $nama;
         }
 
         $ed = $petugas_lapangan->user_id;
         $user = User::findOrFail($ed);
         $input2 = ([
-            'nama' => $request->username,
+            'username' => $request->username,
             'email' => $request->email,
         ]);
 

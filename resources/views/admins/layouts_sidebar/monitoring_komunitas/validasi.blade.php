@@ -46,7 +46,7 @@
                                     <th>No</th>
                                     <th>Daerah</th>
                                     <th>Keterangan</th>
-                                    <th>Email yang Menambahkan</th>
+                                    <th>Email Penanggung Jawab</th>
                                     <th>diajukan pada</th>
                                     <th>Status</th>
                                     <th class="text-center">Aksi</th>
@@ -231,7 +231,7 @@
              '<p>Titik Koordinat : '+array[i][1]+', '+array[i][2]+'<br/>'+
              'Daerah : '+array[i][0]+'<br/>'+
              'Keterangan : '+array[i][3]+'<br/>'+
-             'Email yang menambahkan : '+array[i][4]+'</p>'+
+             'Email Penanggung Jawab : '+array[i][4]+'</p>'+
              '</p></div>';
 
              infoWindow.setContent(infoWindowContent);

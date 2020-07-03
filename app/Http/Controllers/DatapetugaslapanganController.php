@@ -47,7 +47,7 @@ class DatapetugaslapanganController extends Controller
             return back();
         } else {
         $akun = ([
-            'nama' => $request->nama,
+            'username' => $request->nama,
             'role' => 'petugaslapangan',
             'email' => $request->email,
             'password' => bcrypt('password')
@@ -123,7 +123,7 @@ class DatapetugaslapanganController extends Controller
         $id = $petugaslap->user_id;
         $user = User::findOrFail($id);
         $input2 = ([
-            'nama' => $request->nama,
+            'username' => $request->username,
             'email' => $request->email,
         ]);
         

@@ -49,10 +49,10 @@ class MonitoringsampahController extends Controller
             'user_id' => $user,
         ]);
 
-        if ($file = $request->file('foto')) {
+        if ($file = $request->file('file_gambar')) {
             $nama = time() .'_'. $file->getClientOriginalName();
             $file->move('assets/img/tempatsampah/', $nama);  
-            $input['foto'] = $nama;
+            $input['file_gambar'] = $nama;
         }
 
         TempatSampah::create($input);
@@ -113,10 +113,10 @@ class MonitoringsampahController extends Controller
             'status' => $request->status
         ]);
 
-        if ($file = $request->file('foto')) {
+        if ($file = $request->file('file_gambar')) {
             $nama = time() .'_'. $file->getClientOriginalName();
             $file->move('assets/img/tempatsampah/', $nama);  
-            $input['foto'] = $nama;
+            $input['file_gambar'] = $nama;
         }
 
         $tempatsampah->update($input);

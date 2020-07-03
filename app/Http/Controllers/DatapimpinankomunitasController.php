@@ -47,7 +47,7 @@ class DatapimpinankomunitasController extends Controller
             return back();
         } else {
         $akun = ([
-            'nama' => $request->nama,
+            'username' => $request->nama,
             'role' => 'pimpinankomunitas',
             'email' => $request->email,
             'password' => bcrypt('rahasia')
@@ -124,7 +124,7 @@ class DatapimpinankomunitasController extends Controller
         $id = $petugaslap->user_id;
         $user = User::findOrFail($id);
         $input2 = ([
-            'nama' => $request->nama,
+            'username' => $request->username,
             'email' => $request->email,
         ]);
         

@@ -18,7 +18,7 @@ class CreateKomunitasTable extends Migration
             $table->string('email');
             $table->string('daerah');
             $table->string('keterangan')->nullable();
-            $table->string('level');
+            $table->string('level')->nullable();
             $table->string('latitude');
             $table->string('longitude');
             $table->timestamps();

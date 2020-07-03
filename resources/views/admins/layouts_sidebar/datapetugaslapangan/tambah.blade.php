@@ -35,7 +35,7 @@
                     <label for="nohp">No Hp</label>
                     <div class="input-group">    
                         <div class="input-group-prepend">
-                          <span class="input-group-text">+62</span>
+                          <span class="input-group-text"></span>
                         </div>
                         <input name="nohp" type="number" class="form-control" placeholder="No Handphone/WA" required>
                     </div>

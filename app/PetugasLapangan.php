@@ -9,7 +9,7 @@ class PetugasLapangan extends Model
     protected $table = 'petugas_lapangan';
 
     protected $fillable = [
-        'nama', 'nohp', 'alamat', 'wilayah', 'user_id','pimpinan_ecoranger_id', 'foto', 'bio'
+        'nama', 'nohp', 'alamat', 'wilayah', 'user_id','pimpinan_ecoranger_id', 'file_gambar', 'bio'
     ];
 
     public function petugasygmenambahkan()
@@ -23,10 +23,10 @@ class PetugasLapangan extends Model
     
     public function ambilFoto()
     {
-        if (!$this->foto) {
+        if (!$this->file_gambar) {
             return asset('assets/img/avatar/avatar-2.png');
         }
 
-        return asset('assets/img/avatar/'.$this->foto);
+        return asset('assets/img/avatar/'.$this->file_gambar);
     }
 }

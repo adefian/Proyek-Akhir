@@ -74,9 +74,9 @@ class PimpinanController extends Controller
     {
         $user = Auth::user();
 
-        $data = PimpinanEcoranger::where('user_id', $id)->first();
+        $pimpinan = PimpinanEcoranger::where('user_id', $id)->first();
         
-        return view('admins.pimpinan.profile', compact('data','password'));
+        return view('admins.pimpinan.profile', compact('pimpinan'));
     }
 
     /**
@@ -115,16 +115,16 @@ class PimpinanController extends Controller
             'bio' => $request->bio,
         ]);
 
-        if ($file = $request->file('foto')) {
+        if ($file = $request->file('file_gambar')) {
             $nama = time() . $file->getClientOriginalName();
             $file->move('assets/img/avatar/', $nama);  
-            $input['foto'] = $nama;
+            $input['file_gambar'] = $nama;
         }
 
         $ed = $pimpinan->user_id;
         $user = User::findOrFail($ed);
         $input2 = ([
-            'nama' => $request->username,
+            'username' => $request->username,
             'email' => $request->email,
         ]);
 
