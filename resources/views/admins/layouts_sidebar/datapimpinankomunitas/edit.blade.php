@@ -9,7 +9,7 @@
               </div>
         <div class="modal-body">
             @if(auth()->user()->role == 'pimpinanecoranger')
-                <form method="POST" action="/datapimpinankomunitas" class="needs-validation" novalidate="" id="editForm" enctype="multipart/form-data">
+                <form method="POST" action="" class="needs-validation" novalidate="" id="editForm" enctype="multipart/form-data">
             @endif
                 {{ csrf_field() }}
                 {{ method_field('PATCH') }}

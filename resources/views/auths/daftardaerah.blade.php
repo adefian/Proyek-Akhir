@@ -56,10 +56,11 @@
       <div class="container mt-5">
         <div class="row justify-content-center">
           <div class="col-12 col-sm-11 col-md-10 col-lg-10 col-xl-10">
-            <div class="card card-primary mb-5">
+
+            <div class="card card-info">
               <div class="card-header"><h4>Daftarkan Komunitas</h4></div>
                 <div class="card-body">
-                  <form method="POST" action="postdaftardaerah" class="needs-validation" novalidate="">
+                  <form method="POST" action="{{ route('postdaftardaerah')}}" class="needs-validation" novalidate="">
                       {{csrf_field()}}
                     <div class="row">
                       <div class="col-12 col-lg-6">
@@ -141,10 +142,15 @@
                       </div>
 
                       <div class="mt-3 text-muted text-center">
-                          Sudah memiliki akun ?  <a href="login">Login</a>
+                          Sudah memiliki akun ?  <a href="{{ route('login')}}">Login</a>
                       </div>
                   </div>
                 </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-11 col-md-10 col-lg-10 col-xl-10 mb-5">
+              <div class="card shadow" style="text-align: -webkit-center;">
+                <a href="{{route('home')}}"><button class="btn btn-klik btn-lg btn-block m-3 col-11">Kembali ke Halaman Awal</button></a>
               </div>
             </div>
           </div>

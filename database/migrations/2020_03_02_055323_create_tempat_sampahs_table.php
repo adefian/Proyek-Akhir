@@ -19,7 +19,7 @@ class CreateTempatSampahsTable extends Migration
             $table->string('latitude');
             $table->string('longitude');
             $table->string('file_gambar')->default('default.jpg');
-            $table->integer('status')->default(0);
+            $table->string('status');
             $table->timestamps();
             $table->bigInteger('user_id')->unsigned()->nullable();
             $table->foreign('user_id')

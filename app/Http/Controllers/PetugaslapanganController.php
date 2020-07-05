@@ -3,142 +3,119 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Auth;
-use App\Komunitas;
-use App\User;
-use App\TempatSampah;
-use App\AnggotaKomunitas;
-use App\Agenda;
-use App\Ecobrick;
 use App\PetugasLapangan;
-use App\Point;
-
-class PetugaslapanganController extends Controller
+use App\User;
+class PetugasLapanganController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
-    public function index()
+    
+    public function PetugasLapangan() 
     {
-        $data = PetugasLapangan::where('user_id',auth()->user()->id)->first();
-        $petugaslapangan = PetugasLapangan::all()->count();
-        $sampahpenuh = TempatSampah::where('status',1)->count();
-        $tempatsampah = TempatSampah::all()->count();
-        $sampah = Point::all()->count();
 
-        return view ('admins.petugas_lapangan.index', compact('tempatsampah','petugaslapangan','sampah','sampahpenuh','data'));
+		  $hadiahku= PetugasLapangan::all();
+
+        foreach ($hadiahku as $value) {
+            $array[]=[
+                'id'    =>$value->id,
+                'nama' =>$value->nama,
+                'nohp' =>$value->nohp,
+                'alamat'=>$value->alamat,
+                'role' => $value->user->role
+            ];        
+        }
+   		
+      return response()->json([
+              'pesan' =>'sukses lah',
+              'upload' => $array
+
+      	],200);
+	   }
+
+   	 public function TambahPetugasLapangan (Request $request){
+    	
+      $data = new PetugasLapangan;
+    	$data->nama = $request->input('nama');
+    	$data->nohp = $request->input('nohp');
+    	$data->alamat = $request->input('alamat');
+    	$data->save();
+
+    	return "Berhasil";
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function DataPetugasLapangan( $id)
     {
-        //
+    
+      $data =  PetugasLapangan::where('user_id',$id)->first();
+      $array[]=[
+          'id'=> $data->id,
+          'nama'=> $data->nama,
+          'nohp'=> $data->nohp,
+          'alamat'=>   $data->alamat,
+          'username'=> $data->user->username,
+          'email'=>   $data->user->email,
+          'file_gambar'=>$data->file_gambar
+      
+    ];
+
+    return response()->json($array);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function edit(Request $request, $id)
     {
-        //
-    }
+    
+      $file = $request->input('file_gambar');
+      $nama= $request->input('nama');
+      $nohp= $request->input('nohp');
+      $alamat= $request->input('alamat');
+      $nama_file = time()."_".".jpeg";
+      // $tujuan_upload = '../resource/gambar/';
+      $tujuan_upload = 'foto_user/';
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $user = Auth::user();
+        if (file_put_contents($tujuan_upload . $nama_file , base64_decode($file))) 
+        {
+     
+          $pesan ="Kritik dan Saran Berhasil Ditambahkan";
 
-        $petugaslapangan = PetugasLapangan::where('user_id', $id)->first();
+        } else if ($nama&&$nohp&&$alamat) {
         
-        return view('admins.petugas_lapangan.profile', compact('petugaslapangan'));
-    }
+          $pesan ="Kritik dan Saran Berhasil Ditambahkan";
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        $user = PetugasLapangan::findOrFail($id);
-        $email = User::all()->except($user->user_id);
-        $cekemail = $email->where('email', $request->email)->first();
-
-        if ($cekemail) {
-            alert()->error('Email yang digunakan sudah terdaftar', 'Gagal');
-            return back();
-        } else {
-        $petugas_lapangan = PetugasLapangan::findOrFail($id);
-        $input = ([
-            'nama' => $request->namalengkap,
-            'nohp' => $request->nohp,
-            'alamat' => $request->alamat,
-            'bio' => $request->bio,
-        ]);
-
-        if ($file = $request->file('file_gambar')) {
-            $nama = time() . $file->getClientOriginalName();
-            $file->move('assets/img/avatar/', $nama);  
-            $input['file_gambar'] = $nama;
+        }else{
+          
+          $pesan ="Terjadi Kesalahan";
         }
-
-        $ed = $petugas_lapangan->user_id;
-        $user = User::findOrFail($ed);
-        $input2 = ([
-            'username' => $request->username,
-            'email' => $request->email,
-        ]);
-
-        if ($request->password) {
-            $pass = bcrypt($request->password);
-            $input2['password'] = $pass;
-        }
-
         
-        $petugas_lapangan->update($input);
-        $user->update($input2);
+          $data =  PetugasLapangan::where('user_id',$id)->first();
+        
+         $input =([
+          
+            'nama'=> $request->nama,
+            'nohp'=> $request->nohp,
+            'alamat'=> $request->alamat,
+            'user_id'=>$data->user->id
+          
+          ]);
 
-        alert()->success('Berhasil','Berhasil merubah profile anda');
-        return back();
-        }
-    }
+          if ($request->input('file_gambar')) {
+              $input['file_gambar'] = $nama_file;
+          }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+          $i =$data->user_id;
+          $user=User::findOrFail($i);
+
+          $input2 =([
+          'username'=> $request->username,
+            'email'=> $request->email
+          ]);
+
+          $user->update($input2);
+          $data->update($input);
+
+          return response()->json([
+               'pesan' =>'sukses lah',
+               'upload' => $user,$data
+
+        ],200);
+          
     }
+   
 }

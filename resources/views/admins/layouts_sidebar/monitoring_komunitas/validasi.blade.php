@@ -140,13 +140,13 @@
 
           <h3><p id="val"></p></h3>
             @if(auth()->user()->role == 'pimpinanecoranger')
-                <form method="POST" action="/editvalidasi" class="needs-validation" novalidate="" id="editForm" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('editvalidasi.update')}}" class="needs-validation" novalidate="" id="editForm" enctype="multipart/form-data">
             @endif
             @if(auth()->user()->role == 'petugaslapangan')
-                <form method="POST" action="/editvalidasi-petugaslap" class="needs-validation" novalidate="" id="editFormpetugaslap" method="POST" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('editvalidasi-petugaslap.update')}}" class="needs-validation" novalidate="" id="editFormpetugaslap" method="POST" enctype="multipart/form-data">
             @endif
             @if(auth()->user()->role == 'komunitas')
-                <form method="POST" action="/editvalidasi-komunitas" class="needs-validation" novalidate="" id="editFormkomunitas" method="POST" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('editvalidasi-komunitas.update')}}" class="needs-validation" novalidate="" id="editFormkomunitas" method="POST" enctype="multipart/form-data">
             @endif
                 {{ csrf_field() }}
                 {{ method_field('PATCH') }}
@@ -268,9 +268,9 @@
              var element = document.getElementById("daerah");
              element.innerHTML = data[1];
             //  
-             $('#editForm').attr('action', '/validasi/'+data[6]);
-             $('#editFormpetugaslap').attr('action', '/validasi-petugaslap/'+data[6]);
-             $('#editFormkomunitas').attr('action', '/validasi-komunitas/'+data[6]);
+             $('#editForm').attr('action', 'validasi/'+data[6]);
+             $('#editFormpetugaslap').attr('action', 'validasi-petugaslap/'+data[6]);
+             $('#editFormkomunitas').attr('action', 'validasi-komunitas/'+data[6]);
              $('#editModal').modal('show');
          });
  

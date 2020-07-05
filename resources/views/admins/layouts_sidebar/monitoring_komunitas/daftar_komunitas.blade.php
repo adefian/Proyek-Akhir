@@ -367,9 +367,9 @@
              $('#lat2').val(data[5]);
              $('#leng2').val(data[6]);
              
-             $('#editForm').attr('action', '/daftarkomunitas/'+data[4]);
-             $('#editFormpetugaslap').attr('action', '/daftarkomunitas-petugaslap/'+data[4]);
-             $('#editFormkomunitas').attr('action', '/daftarkomunitas-komunitas/'+data[4]);
+             $('#editForm').attr('action', 'daftarkomunitas/'+data[4]);
+             $('#editFormpetugaslap').attr('action', 'daftarkomunitas-petugaslap/'+data[4]);
+             $('#editFormkomunitas').attr('action', 'daftarkomunitas-komunitas/'+data[4]);
              $('#editModal').modal('show');
          });
  

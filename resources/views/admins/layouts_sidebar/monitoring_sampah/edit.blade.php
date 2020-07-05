@@ -15,13 +15,13 @@
                     </div>
                     <div class="col-lg-6 col-sm-12 col-12">
                         @if(auth()->user()->role == 'pimpinanecoranger')
-                            <form id="editForm" class="needs-validation" novalidate="" action="indikasi" method="POST" enctype="multipart/form-data">
+                            <form id="editForm" class="needs-validation" novalidate="" action="" method="POST" enctype="multipart/form-data">
                         @endif
                         @if(auth()->user()->role == 'petugaslapangan')
-                            <form id="editFormpetugaslap" class="needs-validation" novalidate="" action="indikasi-petugaslap" method="POST" enctype="multipart/form-data">
+                            <form id="editFormpetugaslap" class="needs-validation" novalidate="" action="" method="POST" enctype="multipart/form-data">
                         @endif
                         @if(auth()->user()->role == 'komunitas')
-                            <form id="editFormkomunitas" class="needs-validation" novalidate="" action="indikasi-komunitas" method="POST" enctype="multipart/form-data">
+                            <form id="editFormkomunitas" class="needs-validation" novalidate="" action="" method="POST" enctype="multipart/form-data">
                         @endif
                             {{ csrf_field() }}
                             {{ method_field('PATCH') }}

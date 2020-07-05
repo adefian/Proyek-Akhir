@@ -83,7 +83,7 @@
                                         @endif
 									</td>		
 									<td width="90">{{ Carbon\Carbon::parse($datas->tanggal)->isoFormat('LLLL') }} WIB</td>
-									<td width="50">{{$datas->petugasygmenambahkan->nama}}</td>    					
+									<td width="50">{{$datas->petugasygmenambahkan->username}}</td>    					
 								</tr>
 							@endforeach
 						@elseif(auth()->user()->role == 'pimpinankomunitas' || auth()->user()->role == 'komunitas')
@@ -104,7 +104,7 @@
                                         @endif
 									</td>		
 									<td width="90">{{ Carbon\Carbon::parse($datas->tanggal)->isoFormat('LLLL') }} WIB</td>
-									<td width="50">{{$datas->petugasygmenambahkan->nama}}</td>    					
+									<td width="50">{{$datas->petugasygmenambahkan->username}}</td>    					
 								</tr>
 							@endforeach
 						@endif

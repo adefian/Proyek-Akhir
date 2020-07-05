@@ -3,153 +3,116 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
-
-use Auth;
-use App\TempatSampah;
-use App\User;
-use App\Komunitas;
-use App\AnggotaKomunitas;
 use App\PimpinanEcoranger;
-use App\Agenda;
-use App\Point;
+use App\User;
 
 class PimpinanController extends Controller
 {
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+     public function Pimpinan()
+	   {
+  		$hadiahku= PimpinanEcoranger::all();
+
+      foreach ($hadiahku as $value) {
+          $array[]=[
+              'nama' =>$value->nama,
+              'nohp' =>$value->nohp,
+              'alamat'=>$value->alamat,
+              'role' => $value->user->role
+          ];
+         
+       }
+     		return response()->json([
+                'pesan' =>'sukses lah',
+                'upload' => $array
+
+        	],200);
+	   }
+
+   	public function TambahPimpinan (Request $request){
+    	$data = new PimpinanEcoranger;
+    	$data->nama = $request->input('nama');
+    	$data->nohp = $request->input('nohp');
+    	$data->alamat = $request->input('alamat');
+    	$data->save();
+
+    	return "Berhasil";
+    }
+
+      
+    public function showpimpinan( $id)
+    {
+   
+      $data =  PimpinanEcoranger::where('user_id',$id)->first();
+      $array[]=[
+          'id'=> $data->id,
+          'nama'=> $data->nama,
+          'nohp'=> $data->nohp,
+          'alamat'=>   $data->alamat,
+          'username'=> $data->user->username,
+          'email'=>   $data->user->email,
+          'file_gambar'=>$data->file_gambar
+    ];
+
+    return response()->json($array);
+  }
+   
+   public function edit(Request $request, $id)
+  {
     
-    public function index()
-    {
-        $user = User::all()->count();
-        $komunitas = Komunitas::all()->count();
-        $tempatsampah = TempatSampah::all()->count();
-        $anggotakomunitas = AnggotaKomunitas::all()->count();
-        $pimpinan = PimpinanEcoranger::where('user_id', auth()->user()->id)->first();
+    $file = $request->input('file_gambar');
+    $nama= $request->input('nama');
+    $nohp= $request->input('nohp');
+    $alamat= $request->input('alamat');
+    $nama_file = time()."_".".jpeg";
+    // $tujuan_upload = '../resource/gambar/';
+    $tujuan_upload = 'foto_user/';
 
-        $ts = TempatSampah::all();
-        $tempat = Arr::pluck($ts ,'nama');
+      if (file_put_contents($tujuan_upload . $nama_file , base64_decode($file))) 
+      {
 
-        $b = Point::where('status', 1)->count();
-        $s = Point::where('status', 0)->count();
+        $pesan ="Kritik dan Saran Berhasil Ditambahkan";
 
-        $nilai = [$b, $s];
-        // dd($nilai);
+      } else if ($nama&&$nohp&&$alamat) {
+       
+        $pesan ="Kritik dan Saran Berhasil Ditambahkan";
 
-        return view ('admins.pimpinan.index2',compact('tempatsampah','user','komunitas','anggotakomunitas', 'tempat', 'nilai','pimpinan'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $user = Auth::user();
-
-        $pimpinan = PimpinanEcoranger::where('user_id', $id)->first();
+      }else{
         
-        return view('admins.pimpinan.profile', compact('pimpinan'));
-    }
-
-    /**
-     * Show the form for editing the specified resource. 
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        $user = PimpinanEcoranger::findOrFail($id);
-        $email = User::all()->except($user->user_id);
-        $cekemail = $email->where('email', $request->email)->first();
-
-        if ($cekemail) {
-            alert()->error('Email yang digunakan sudah terdaftar', 'Gagal');
-            return back();
-        } else {
-        $pimpinan = PimpinanEcoranger::findOrFail($id);
-        $input = ([
-            'nama' => $request->namalengkap,
-            'nohp' => $request->nohp,
-            'alamat' => $request->alamat,
-            'bio' => $request->bio,
+        $pesan ="Terjadi Kesalahan";
+      }
+       
+        $data =  PimpinanEcoranger::where('user_id',$id)->first();
+      
+       $input =([
+          // 'file'=> $nama_file,
+          'nama'=> $request->nama,
+          'nohp'=> $request->nohp,
+          'alamat'=> $request->alamat,
+          'user_id'=>$data->user->id
+        
         ]);
 
-        if ($file = $request->file('file_gambar')) {
-            $nama = time() . $file->getClientOriginalName();
-            $file->move('assets/img/avatar/', $nama);  
-            $input['file_gambar'] = $nama;
+        if ($request->input('file_gambar')) {
+            $input['file_gambar'] = $nama_file;
         }
 
-        $ed = $pimpinan->user_id;
-        $user = User::findOrFail($ed);
-        $input2 = ([
-            'username' => $request->username,
-            'email' => $request->email,
+        $i =$data->user_id;
+        $user=User::findOrFail($i);
+
+        $input2 =([
+        'username'=> $request->username,
+        'email'=> $request->email
         ]);
 
-        if ($request->password) {
-            $pass = bcrypt($request->password);
-            $input2['password'] = $pass;
-        }
-
-        
-        $pimpinan->update($input);
         $user->update($input2);
+        $data->update($input);
 
-        alert()->success('Berhasil','Berhasil merubah profile anda');
-        return back();
-        }
-    }
+        return response()->json([
+             'pesan' =>'sukses lah',
+             'upload' => $user,$data
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+      ],200);
+        // return "Berhasil";
     }
 }

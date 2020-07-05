@@ -49,13 +49,13 @@
                 <div class="card-body pr-3 pl-4 m-1 table-responsive">
                     <div class="col-12">
                         @if(auth()->user()->role == 'pimpinanecoranger')
-                        <form action="/kelolaagenda" method="get">
+                        <form action="{{ route('kelolaagenda.update')}}" method="get">
                         @endif
                         @if(auth()->user()->role == 'pimpinankomunitas')
-                        <form action="/kelolaagenda-pimpinankom" method="get">
+                        <form action="{{ route('kelolaagenda-pimpinankom.update')}}" method="get">
                         @endif
                         @if(auth()->user()->role == 'komunitas')
-                        <form action="/kelolaagenda-komunitas" method="get">
+                        <form action="{{ route('kelolaagenda-komunitas.update')}}" method="get">
                         @endif
                             
                             <div class="form-group" style="display:inline-block">
@@ -146,7 +146,7 @@
                                         @endif
                                         </td>
                                         <td>{{ Carbon\Carbon::parse($datas->tanggal)->isoFormat('LLLL') }} WIB</td>
-                                        <td>{{$datas->petugasygmenambahkan->nama}}</td>
+                                        <td>{{$datas->petugasygmenambahkan->username}}</td>
                                         <td style="display:none;">{{$datas->id}}</td>
                                         <td class="text-center">
 
@@ -191,7 +191,7 @@
                                         @endif
                                         </td>
                                         <td>{{ Carbon\Carbon::parse($kom->tanggal)->isoFormat('LLLL') }}</td>
-                                        <td>{{$kom->petugasygmenambahkan->nama}}</td>
+                                        <td>{{$kom->petugasygmenambahkan->username}}</td>
                                         <td style="display:none;">{{$kom->id}}</td>
                                         <td class="text-center">
 
@@ -317,9 +317,9 @@
              var element = document.getElementById('jenis_ag');
              element.innerHTML = data[4];
              
-             $('#editForm').attr('action', '/kelolaagenda/'+data[7]);
-             $('#editFormpimpinankom').attr('action', '/kelolaagenda-pimpinankom/'+data[7]);
-             $('#editFormkomunitas').attr('action', '/kelolaagenda-komunitas/'+data[7]);
+             $('#editForm').attr('acti routeon', '/{{('kelolaagenda/'+.update')}}data[7]);
+             $('#editFormpimpinankom').attr('action', 'kelolaagenda-pimpinankom/'+data[7]);
+             $('#editFormkomunitas').attr('action', 'kelolaagenda-komunitas/'+data[7]);
              $('#editModal').modal('show');
          });
  

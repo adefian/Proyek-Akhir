@@ -33,7 +33,7 @@
 
                 <div class="card-body">
 
-                    <form action="/pushtukarcode/1" method="POST">
+                    <form action="{{route('pushtukarcode', [1])}}" method="POST">
                     
                 {{ csrf_field() }}
                 {{ method_field('POST') }}

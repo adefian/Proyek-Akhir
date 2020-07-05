@@ -6,10 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Transaksi extends Model
 {
-    protected $table = 'transaksi';
-
+    protected $table='transaksi';
     protected $fillable = [
-        'masyarakat_id', 'point_id', 'nama'
+        'poin_id','masyarakat_id','hadiah_id','file_gambar'
     ];
 
     public function Point()
@@ -17,8 +16,20 @@ class Transaksi extends Model
         return $this->belongsTo('App\Point', 'point_id');
     }
 
-    public function Masyarakat()
-    {
-        return $this->belongsTo('App\Masyarakat', 'point_id');
+    public function User() {
+    
+    	return $this->belongsTo('App\User','user_id','id');
+    }
+    public function poin() {
+    
+        return $this->belongsTo('App\Poin','poin_id','id');
+    }
+    public function hadiah() {
+    
+        return $this->belongsTo('App\hadiah','hadiah_id','id');
+    }
+    public function masyarakat() {
+    
+        return $this->belongsTo('App\Masyarakat','masyarakat_id','id');
     }
 }

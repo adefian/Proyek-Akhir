@@ -163,8 +163,8 @@
  
              $('#keterangan').val(data[3]);
              
-             $('#editForm').attr('action', '/reviewsaranecobrick/'+data[6]);
-             $('#editFormpetugaslap').attr('action', '/reviewsaranecobrick-petugaslap/'+data[6]);
+             $('#editForm').attr('action', 'reviewsaranecobrick/'+data[6]);
+             $('#editFormpetugaslap').attr('action', 'reviewsaranecobrick-petugaslap/'+data[6]);
              $('#editFormkomunitas').attr('action', '/reviewsaranecobrick-komunitas/'+data[6]);
              $('#editModal').modal('show');
          });

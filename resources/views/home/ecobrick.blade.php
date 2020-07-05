@@ -6,20 +6,20 @@
           <li class="active"><a href="#header">Ecobrick</a></li>
           <li><a href="#about">Tentang Ecobrick</a></li>
           <li><a href="#gallery">Gambar</a></li>
-          <li><a href="/">Home</a></li>
+          <li><a href="{{ route('home')}}">Home</a></li>
           @if (Route::has('login'))
               @auth
                 @if(Auth()->user()->role == 'pimpinanecoranger')
-                  <li><a href="/pimpinan">Masuk</a></li>
+                  <li><a href="{{route('pimpinan.index')}}">Masuk</a></li>
                 @elseif(Auth()->user()->role == 'komunitas')
-                  <li><a href="/komunitas">Masuk</a></li>
+                  <li><a href="{{route('komunitas.index')}}">Masuk</a></li>
                 @elseif(Auth()->user()->role == 'petugaslapangan')
-                  <li><a href="petugaslapangan">Masuk</a></li>
+                  <li><a href="{{route('petugaslapangan.index')}}">Masuk</a></li>
                 @endif
               @else
                 <li class="drop-down"><a>Akun</a>
                   <ul>
-                  <li><a href="login">Login</a></li>
+                  <li><a href="{{route('login')}}">Login</a></li>
                 @if (Route::has('register'))
                   <li><a href="{{ route('register') }}">Daftar Komunitas</a></li>
                 @endif

@@ -9,7 +9,7 @@
               </div>
         <div class="modal-body">
             @if(auth()->user()->role == 'pimpinanecoranger')
-                <form class="needs-validation" novalidate="" action="datapimpinankomunitas" method="POST" enctype="multipart/form-data">
+                <form class="needs-validation" novalidate="" action="{{ route('datapimpinankomunitas.store')}}" method="POST" enctype="multipart/form-data">
             @endif
                 {{csrf_field()}}
 
@@ -27,10 +27,7 @@
                 </div>
                 <div class="form-group">
                     <label for="nohp">No Hp</label>
-                    <div class="input-group">    
-                        <div class="input-group-prepend">
-                          <span class="input-group-text"></span>
-                        </div>
+                    <div class="input-group"> 
                         <input name="nohp" type="number" class="form-control" placeholder="No Handphone/WA" required>
                     </div>
                 </div>

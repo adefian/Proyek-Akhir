@@ -138,7 +138,7 @@
 
           <div class="col-lg-10 mt-5 mt-lg-0 aos-init aos-animate" data-aos="fade-left" data-aos-delay="200">
 
-            <form action="kirimfeedback" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('kirimfeedback')}}" method="POST" enctype="multipart/form-data">
               {{csrf_field()}}
               <div class="row">
                 <div class="col-md-6 form-group">
@@ -177,7 +177,7 @@
     <script type="text/javascript">
 
         //Memasukkan data tabel tempat sampah ke array
-        array.push(['<?php echo $tempatsampahs->nama?>','<?php echo $tempatsampahs->latitude?>','<?php echo $tempatsampahs->longitude?>','<?php echo $tempatsampahs->petugasygmenambahkan->nama?>','<?php echo $tempatsampahs->foto ?>']);
+        array.push(['<?php echo $tempatsampahs->nama?>','<?php echo $tempatsampahs->latitude?>','<?php echo $tempatsampahs->longitude?>','<?php echo $tempatsampahs->petugasygmenambahkan->username?>','<?php echo $tempatsampahs->file_gambar ?>']);
 
     </script> 
 

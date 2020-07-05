@@ -96,13 +96,13 @@
 
           <h3>Status saat ini <h3 id="status"></h3> </h3>
             @if(auth()->user()->role == 'pimpinanecoranger')
-                <form method="POST" action="/ubahstatussampah" class="needs-validation" novalidate="" id="editForm" enctype="multipart/form-data">
+                <form method="POST" action="" class="needs-validation" novalidate="" id="editForm" enctype="multipart/form-data">
             @endif
             @if(auth()->user()->role == 'petugaslapangan')
-                <form method="POST" action="/ubahstatussampah-petugaslap" class="needs-validation" novalidate="" id="editFormpetugaslap" method="POST" enctype="multipart/form-data">
+                <form method="POST" action="" class="needs-validation" novalidate="" id="editFormpetugaslap" method="POST" enctype="multipart/form-data">
             @endif
             @if(auth()->user()->role == 'komunitas')
-                <form method="POST" action="/ubahstatussampah-komunitas" class="needs-validation" novalidate="" id="editFormkomunitas" method="POST" enctype="multipart/form-data">
+                <form method="POST" action="" class="needs-validation" novalidate="" id="editFormkomunitas" method="POST" enctype="multipart/form-data">
             @endif
                 {{ csrf_field() }}
                 {{ method_field('POST') }}
@@ -140,7 +140,7 @@
     <script type="text/javascript">
 
         //Memasukkan data tabel ke array
-        array.push(['<?php echo $datas->nama?>','<?php echo $datas->latitude?>','<?php echo $datas->longitude?>','<?php echo $datas->petugasygmenambahkan->nama?>','<?php echo $datas->foto ?>']);
+        array.push(['<?php echo $datas->nama?>','<?php echo $datas->latitude?>','<?php echo $datas->longitude?>','<?php echo $datas->petugasygmenambahkan->username?>','<?php echo $datas->file_gambar ?>']);
 
     </script> 
 
@@ -224,9 +224,9 @@
              var element = document.getElementById("status");
              element.innerHTML = data[2];
             //  
-             $('#editForm').attr('action', '/ubahstatussampah/'+data[3]);
-             $('#editFormpetugaslap').attr('action', '/ubahstatussampah-petugaslap/'+data[3]);
-             $('#editFormkomunitas').attr('action', '/ubahstatussampah-komunitas/'+data[3]);
+            $('#editForm').attr('action', 'ubahstatussampah/'+data[3]);
+             $('#editFormpetugaslap').attr('action', 'ubahstatussampah-petugaslap/'+data[3]);
+             $('#editFormkomunitas').attr('action', 'ubahstatussampah-komunitas/'+data[3]);
              $('#editModal').modal('show');
          });
  

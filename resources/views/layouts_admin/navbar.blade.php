@@ -34,7 +34,7 @@
               </div>
               <div class="dropdown-list-content dropdown-list-icons">
               @foreach($notifagenda as $data)
-                <a href="#" class="dropdown-item dropdown-item">
+                <a href="{{ route('kelolaagenda.index')}}" class="dropdown-item dropdown-item">
                   <div class="dropdown-item-icon bg-primary text-white">
                     <i class="fas fa-calendar"></i>
                   </div>
@@ -47,7 +47,7 @@
                     @else
                     <div class="time text-warning">Telah Diperbarui {{$data->updated_at->diffForHumans()}}</div>
                     @endif
-                    <p>Oleh {{$data->petugasygmenambahkan->nama}}</p>
+                    <p>Oleh {{$data->petugasygmenambahkan->username}}</p>
                   </div>
                 </a>
               @endforeach
@@ -61,7 +61,11 @@
                     </div>
                     <div class="dropdown-list-content dropdown-list-icons">
                       @foreach($notifsampahmasuk as $data)
-                        <a href="daftarmasuk" class="dropdown-item dropdown-item">
+                        @if(auth()->user()->role == 'pimpinanecoranger')
+                        <a href="{{ route('riwayatpembuangan.index')}}" class="dropdown-item dropdown-item">
+                        @elseif(auth()->user()->role == 'petugaslapangan')
+                        <a href="{{ route('riwayatpembuangan-petugaslap.index')}}" class="dropdown-item dropdown-item">
+                        @endif
                           <div class="dropdown-item-icon bg-danger text-white">
                             <i class="fas fa-trash"></i>
                           </div>
@@ -89,7 +93,7 @@
                     </div>
                     <div class="dropdown-list-content dropdown-list-icons">
                       @foreach($notifvalidasi as $data)
-                        <a href="daftarmasuk" class="dropdown-item dropdown-item">
+                        <a href="{{ route('validasi.index')}}" class="dropdown-item dropdown-item">
                           <div class="dropdown-item-icon bg-warning text-white">
                             <i class="fas fa-tag"></i>
                           </div>
@@ -133,7 +137,13 @@
             </div>
             <div class="dropdown-list-content dropdown-list-icons">
             @foreach($notifagendamendesak as $data)
-                  <a href="/kelolaagenda" class="dropdown-item dropdown">
+              @if(auth()->user()->role == 'pimpinanecoranger')
+                  <a href="{{ route('kelolaagenda.index')}}" class="dropdown-item dropdown">
+              @elseif(auth()->user()->role == 'komunitas')
+                  <a href="{{ route('kelolaagenda-komunitas.index')}}" class="dropdown-item dropdown">
+              @elseif(auth()->user()->role == 'pimpinankomunitas')
+                  <a href="{{ route('kelolaagenda-pimpinankom.index')}}" class="dropdown-item dropdown">
+              @endif
                     <div class="dropdown-item-icon bg-primary text-white">
                       <i class="fas fa-calendar"></i>
                     </div>
@@ -147,7 +157,11 @@
             @endforeach
               @if(auth()->user()->role == 'pimpinanecoranger' || auth()->user()->role == 'petugaslapangan')
                 @foreach($notiftempatsampah as $data)
-                  <a href="/indikasi" class="dropdown-item dropdown">
+                      @if(auth()->user()->role == 'pimpinanecoranger')
+                      <a href="{{ route('indikasi.index')}}" class="dropdown-item dropdown-item">
+                      @elseif(auth()->user()->role == 'petugaslapangan')
+                      <a href="{{ route('indikasi-petugaslap.index')}}" class="dropdown-item dropdown-item">
+                      @endif
                     <div class="dropdown-item-icon bg-danger text-white">
                       <i class="fas fa-trash"></i>
                     </div>
@@ -159,14 +173,18 @@
                   </a>
                 @endforeach
                   @foreach($notifambilsampah as $data)
-                    <a href="/indikasi" class="dropdown-item dropdown">
+                      @if(auth()->user()->role == 'pimpinanecoranger')
+                      <a href="{{ route('indikasi.index')}}" class="dropdown-item dropdown-item">
+                      @elseif(auth()->user()->role == 'petugaslapangan')
+                      <a href="{{ route('indikasi-petugaslap.index')}}" class="dropdown-item dropdown-item">
+                      @endif
                       <div class="dropdown-item-icon bg-warning text-white">
                         <i class="fas fa-trash"></i>
                       </div>
                       <div class="dropdown-item-desc">
                         <b>Pengambilan Sampah Penuh<br></b>
                         {{$data->nama}}
-                        <div class="time">{{$data->petugasygmenambahkan->nama}}</div>
+                        <div class="time">{{$data->petugasygmenambahkan->username}}</div>
                         <div class="time text-danger">{{$data->updated_at->diffForHumans()}}</div>
                       </div>
                     </a>

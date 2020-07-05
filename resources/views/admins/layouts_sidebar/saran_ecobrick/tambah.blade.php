@@ -10,13 +10,13 @@
         <div class="modal-body">
 
             @if(auth()->user()->role == 'pimpinanecoranger')
-                <form class="needs-validation" novalidate="" action="reviewsaranecobrick" method="POST" enctype="multipart/form-data">
+                <form class="needs-validation" novalidate="" action="{{ route('reviewsaranecobrick.store')}}" method="POST" enctype="multipart/form-data">
             @endif
             @if(auth()->user()->role == 'petugaslapangan')
-                <form class="needs-validation" novalidate="" action="reviewsaranecobrick-petugaslap" method="POST" enctype="multipart/form-data">
+                <form class="needs-validation" novalidate="" action="{{ route('reviewsaranecobrick-petugaslap.store')}}" method="POST" enctype="multipart/form-data">
             @endif
             @if(auth()->user()->role == 'komunitas')
-                <form class="needs-validation" novalidate="" action="reviewsaranecobrick-komunitas" method="POST" enctype="multipart/form-data">
+                <form class="needs-validation" novalidate="" action="{{ route('reviewsaranecobrick-komunitas.store')}}" method="POST" enctype="multipart/form-data">
             @endif
                 {{csrf_field()}}
 

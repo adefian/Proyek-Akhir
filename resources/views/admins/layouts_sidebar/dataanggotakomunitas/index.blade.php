@@ -193,9 +193,9 @@
              $('#nohp').val(data[7]);
              $('#alamat').val(data[4]);
              
-             $('#editForm').attr('action', '/dataanggotakomunitas/'+data[6]);
-             $('#editFormpimpinankom').attr('action', '/dataanggotakomunitas-pimpinankom/'+data[6]);
-             $('#editFormkomunitas').attr('action', '/dataanggotakomunitas-komunitas/'+data[6]);
+             $('#editForm').attr('action', 'dataanggotakomunitas/'+data[6]);
+             $('#editFormpimpinankom').attr('action', 'dataanggotakomunitas-pimpinankom/'+data[6]);
+             $('#editFormkomunitas').attr('action', 'dataanggotakomunitas-komunitas/'+data[6]);
              $('#editModal').modal('show');
          });
  

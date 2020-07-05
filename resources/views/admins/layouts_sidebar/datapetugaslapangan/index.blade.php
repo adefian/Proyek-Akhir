@@ -156,9 +156,9 @@
              $('#alamat').val(data[4]);
              $('#wilayah').val(data[5]);
              
-             $('#editForm').attr('action', '/datapetugaslapangan/'+data[6]);
-             $('#editFormpetugaslap').attr('action', '/datapetugaslapangan-petugaslap/'+data[6]);
-             $('#editFormkomunitas').attr('action', '/datapetugaslapangan-komunitas/'+data[6]);
+             $('#editForm').attr('action', 'datapetugaslapangan/'+data[6]);
+             $('#editFormpetugaslap').attr('action', 'datapetugaslapangan-petugaslap/'+data[6]);
+             $('#editFormkomunitas').attr('action', 'datapetugaslapangan-komunitas/'+data[6]);
              $('#editModal').modal('show');
          });
  

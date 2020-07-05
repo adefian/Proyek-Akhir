@@ -190,9 +190,9 @@
              $('.longit').val(data[3]);
             //  $('#status').val(data[5]);
              
-             $('#editForm').attr('action', '/indikasi/'+data[4]);
-             $('#editFormpetugaslap').attr('action', '/indikasi-petugaslap/'+data[4]);
-             $('#editFormkomunitas').attr('action', '/indikasi-komunitas/'+data[4]);
+             $('#editForm').attr('action', 'indikasi/'+data[4]);
+             $('#editFormpetugaslap').attr('action', 'indikasi-petugaslap/'+data[4]);
+             $('#editFormkomunitas').attr('action', 'indikasi-komunitas/'+data[4]);
              $('#editModal').modal('show');
          });
 

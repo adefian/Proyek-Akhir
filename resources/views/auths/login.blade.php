@@ -61,11 +61,11 @@
               <img src="../assets/img/stisla-fill.svg" alt="logo" width="100" class="shadow-light rounded-circle">
             </div> -->
 
-            <div class="card card-primary shadow">
+            <div class="card card-info shadow">
               <div class="card-header"><h4>Login</h4></div>
 
               <div class="card-body">
-              <form method="POST" action="postlogin" class="needs-validation" novalidate="">
+              <form method="POST" action="{{ route('postlogin')}}" class="needs-validation" novalidate="">
                   {{csrf_field()}}
                   <div class="form-group">
                     <label for="email" class="control-label">Email / Username</label>
@@ -106,11 +106,14 @@
                 </div>
                 <div class="row sm-gutters">
                     <div class="mt-4 mb-2 text-muted text-center">
-                        Ingin gabung sebagai anggota komunitas ? <a href="register">Daftar</a>
+                        Ingin gabung sebagai anggota komunitas ? <a href="{{route('register')}}">Daftar</a>
                     </div>
                 </div>
 
               </div>
+            </div>
+            <div class="card shadow mb-5" style="text-align: -webkit-center;">
+              <a href="{{route('home')}}"><button class="btn btn-klik btn-lg btn-block m-3 col-11 center">Kembali ke Halaman Awal</button></a>
             </div>
           </div>
         </div>

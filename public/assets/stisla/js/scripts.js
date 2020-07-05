@@ -26,7 +26,7 @@ if(window.Dropzone) {
 
 // Basic confirm box
 $('[data-confirm]').each(function() {
-  var userId = $(this).data('id');
+  var userId = $(this).data('href');
   var me = $(this),
       me_data = me.data('confirm');
 
@@ -39,7 +39,7 @@ $('[data-confirm]').each(function() {
         text: me.data('confirm-text-yes') || 'Iya',
         class: 'btn btn-danger btn-shadow',
         handler: function() {
-          window.location.href = "/"+ userId ;
+          window.location.href = userId ;
         }
       },
       {

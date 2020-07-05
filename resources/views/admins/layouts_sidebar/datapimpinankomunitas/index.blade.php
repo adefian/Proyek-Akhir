@@ -132,7 +132,7 @@
              $('#alamat').val(data[4]);
              $('#wilayah').val(data[5]);
              
-             $('#editForm').attr('action', '/datapimpinankomunitas/'+data[6]);
+             $('#editForm').attr('action', 'datapimpinankomunitas/'+data[6]);
              $('#editModal').modal('show');
          });
  

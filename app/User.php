@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'email', 'password', 'role', 
+        'username', 'email', 'password', 'role', 'token'
     ];
 
     /**
@@ -39,10 +39,28 @@ class User extends Authenticatable
 
     protected $table = "user";
 
-    // public function role()
-    // {
-    //     return $this->belongsTo('App\Role', 'id_role');
-    // }
+    public function masyarakat() {
+    
+        return $this->belongsTo('App\Masyarakat','id');
+    }
+       public function pimpinanecoranger() {
+    
+        return $this->belongsTo('App\PimpinanEcoranger','id');
+    }
+
+     public function feedback() {
+    
+        return $this->belongsTo('App\Feedback','id');
+    }
+   
+   public function poin() {
+    
+        return $this->belongsTo('App\Poin','id');
+    }
+       public function transaksi() {
+    
+        return $this->belongsTo('App\Transaksi','id');
+    }
 
     //membuat fungsi isPimpinan untuk Pimpinan
     public function isPimpinan(){

@@ -39,7 +39,9 @@
                         @else
 
                         @endif
-                    </h4>
+					</h4>
+					<p class="mt-3">{{ Carbon\Carbon::now()->isoFormat('LLLL')}} WIB</p>
+					
                     <table border="1" width="100%">
 						<thead>
 							<tr align="center" height="20">
@@ -69,7 +71,6 @@
 
 						</tbody>
 					</table>
-					<p class="mt-3">{{ Carbon\Carbon::now()->isoFormat('LLLL')}} WIB</p>
 				</div>
 	 		</div>
 
@@ -79,8 +80,8 @@
 	 			</div>
 	 		</div>
 		</div>
-	 <!-- <script type="text/javascript">
+	 <script type="text/javascript">
 	 	window.print();
-	 </script> -->
+	 </script>
 	</body>
 </html>

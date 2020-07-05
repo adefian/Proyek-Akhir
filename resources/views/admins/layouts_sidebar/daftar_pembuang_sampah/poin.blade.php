@@ -37,18 +37,18 @@
                   </div>
                     <div class="card-body pr-3 pl-4 m-1 table-responsive">        
                     @if(auth()->user()->role == 'pimpinanecoranger')
-                    <a href="/riwayatpembuangan"><button class="btn btn-primary mb-3">Riwayat Pembuangan Sampah</button></a>
+                    <a href="{{route('riwayatpembuangan.index')}}"><button class="btn btn-primary mb-3">Riwayat Pembuangan Sampah</button></a>
                     @elseif(auth()->user()->role == 'petugaslapangan')
-                    <a href="/riwayatpembuangan-petugaslap"><button class="btn btn-success mb-3">Riwayat Pembuangan Sampah</button></a>
+                    <a href="{{route('riwayatpembuangan-petugaslap.index')}}"><button class="btn btn-success mb-3">Riwayat Pembuangan Sampah</button></a>
                     @endif
 
                     @if(auth()->user()->role == 'petugaslapangan' || auth()->user()->role == 'pimpinanecoranger')
                       <div class="col-12">
                         @if(auth()->user()->role == 'pimpinanecoranger')
-                        <form action="/poin" method="get">
+                        <form action="{{ route('poin')}}" method="get">
                         @endif
                         @if(auth()->user()->role == 'petugaslapangan')
-                        <form action="/poin-petugaslap" method="get">
+                        <form action="{{ route('poin-petugaslap')}}" method="get">
                         @endif
                             <div class="form-group" style="display:inline-block">
                                 <div class="input-group">    

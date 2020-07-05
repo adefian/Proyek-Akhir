@@ -9,13 +9,13 @@
               </div>
         <div class="modal-body">
             @if(auth()->user()->role == 'pimpinanecoranger')
-                <form method="POST" action="/kelolaagenda" class="needs-validation" novalidate="" id="editForm" enctype="multipart/form-data">
+                <form method="POST" action="" class="needs-validation" novalidate="" id="editForm" enctype="multipart/form-data">
             @endif
             @if(auth()->user()->role == 'pimpinankomunitas')
-                <form method="POST" action="/kelolaagenda-pimpinankom" class="needs-validation" novalidate="" id="editFormpimpinankom" method="POST" enctype="multipart/form-data">
+                <form method="POST" action="" class="needs-validation" novalidate="" id="editFormpimpinankom" method="POST" enctype="multipart/form-data">
             @endif
             @if(auth()->user()->role == 'komunitas')
-                <form method="POST" action="/kelolaagenda-komunitas" class="needs-validation" novalidate="" id="editFormkomunitas" method="POST" enctype="multipart/form-data">
+                <form method="POST" action="" class="needs-validation" novalidate="" id="editFormkomunitas" method="POST" enctype="multipart/form-data">
             @endif
                 {{ csrf_field() }}
                 {{ method_field('PATCH') }}
@@ -33,12 +33,6 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="tanggal">Tanggal</label>
-                    <div class="input-group">    
-                        <input name="tanggal" placeholder="Pilih Tanggal" id="tanggal" type="datetime-local" class="form-control" min="{{Carbon\Carbon::now()->format('Y-m-d\TH:i')}}"  required>
-                    </div>
-                </div>
-                <div class="form-group">
                     <label for="jenis_agenda">Jenis Agenda saat ini 
                     <p id="jenis_ag">asas</p> 
                     </label>
@@ -51,6 +45,13 @@
                         </select>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="tanggal">Tanggal</label>
+                    <div class="input-group">    
+                        <input name="tanggal" placeholder="Pilih Tanggal" id="tanggal" type="datetime-local" class="form-control" min="{{Carbon\Carbon::now()->format('Y-m-d\TH:i')}}"  required>
+                    </div>
+                </div>
+                
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-warning">Edit</button>
                     <button type="button" class="btn btn-secondary float-right" data-dismiss="modal">Batal</button>

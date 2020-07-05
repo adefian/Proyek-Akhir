@@ -10,13 +10,16 @@
         <div class="modal-body">
 
             @if(auth()->user()->role == 'pimpinanecoranger')
-                <form class="needs-validation" novalidate="" action="kelolaagenda" method="POST" enctype="multipart/form-data">
+                <form class="needs-validation" novalidate="" action="{{ route('kelolaagenda.store')}}" method="POST" enctype="multipart/form-data">
             @endif
             @if(auth()->user()->role == 'petugaslapangan')
-                <form class="needs-validation" novalidate="" action="kelolaagenda-petugaslap" method="POST" enctype="multipart/form-data">
+                <form class="needs-validation" novalidate="" action="{{ route('kelolaagenda-petugaslap.store')}}" method="POST" enctype="multipart/form-data">
             @endif
             @if(auth()->user()->role == 'komunitas')
-                <form class="needs-validation" novalidate="" action="kelolaagenda-komunitas" method="POST" enctype="multipart/form-data">
+                <form class="needs-validation" novalidate="" action="{{ route('kelolaagenda-komunitas.store')}}" method="POST" enctype="multipart/form-data">
+            @endif
+            @if(auth()->user()->role == 'pimpinankomunitas')
+                <form class="needs-validation" novalidate="" action="{{ route('kelolaagenda-pimpinankom.store')}}" method="POST" enctype="multipart/form-data">
             @endif
                 {{csrf_field()}}
 
@@ -31,13 +34,7 @@
                     <div class="input-group">  	
                         <textarea type="text" name="keterangan" class="form-control" placeholder="Keterangan" style="min-height:43px;" required></textarea>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="tanggal">Tanggal</label>
-                    <div class="input-group">    
-                        <input name="tanggal" id="tanggal-max" placeholder="Pilih Tanggal" type="datetime-local" class="form-control" min="{{Carbon\Carbon::now()->format('Y-m-d\TH:i')}}" required>
-                    </div>
-                        <small id="pemberitahuan"></small>
+                    <small class="text-danger">Kenapa anda ingin mengadakan agenda ini.</small>
                 </div>
                 <div class="form-group">
                     <label for="jenis_agenda">Jenis Agenda</label>
@@ -50,6 +47,13 @@
                       </select>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="tanggal">Tanggal</label>
+                    <div class="input-group">    
+                        <input name="tanggal" id="tanggal-max" placeholder="Pilih Tanggal" type="datetime-local" class="form-control" min="{{Carbon\Carbon::now()->format('Y-m-d\TH:i')}}" required>
+                    </div>
+                        <small id="pemberitahuan"></small>
+                </div>                
                 @if(auth()->user()->role === 'pimpinanecoranger')
                 <div class="form-group">
                     <label for="komunitas_id">Dari Komunitas</label>

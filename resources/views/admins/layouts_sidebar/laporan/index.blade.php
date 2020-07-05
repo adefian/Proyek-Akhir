@@ -63,7 +63,7 @@
                                             <td>{{$datas->komunitas->daerah}}</td>
                                             <td>{{$datas->keterangan}}</td>
                                             <td>{{ Carbon\Carbon::parse($datas->tanggal)->isoFormat('LLLL') }} WIB</td>
-                                            <td>{{$datas->petugasygmenambahkan->nama}}</td>
+                                            <td>{{$datas->petugasygmenambahkan->username}}</td>
                                             <td style="display:none;">{{$datas->id}}</td>
                                             <td style="display:none;">{{date("Y-m-d\TH:i",strtotime($datas->tanggal))}}</td>
                                         </tr>
@@ -79,7 +79,7 @@
                                             <td>{{$datas->komunitas->daerah}}</td>
                                             <td>{{$datas->keterangan}}</td>
                                             <td>{{ Carbon\Carbon::parse($datas->tanggal)->isoFormat('LLLL') }}</td>
-                                            <td>{{$datas->petugasygmenambahkan->nama}}</td>
+                                            <td>{{$datas->petugasygmenambahkan->username}}</td>
                                             <td style="display:none;">{{$datas->id}}</td>
                                             <td style="display:none;">{{date("Y-m-d\TH:i",strtotime($datas->tanggal))}}</td>
                                         </tr>

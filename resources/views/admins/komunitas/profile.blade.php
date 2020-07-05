@@ -17,7 +17,7 @@
             <h1>Profile</h1>
           </div>
 
-        <form action="/komunitas/{{$komunitas->id}}" method="POST" class="needs-validation" novalidate="" enctype="multipart/form-data">
+        <form action="{{ route('komunitas.update', [$komunitas->id])}}" method="POST" class="needs-validation" novalidate="" enctype="multipart/form-data">
           <div class="section-body">
             <div class="row">
               <div class="col-12 col-md-12 col-lg-5">
@@ -26,7 +26,7 @@
                     <p class="section-lead">
                         Ubah informasi tentang diri Anda di halaman ini.
                     </p>
-                  <form action="/komunitas/{{$komunitas->id}}" method="POST" class="needs-validation" novalidate="" enctype="multipart/form-data">
+                  <form action="{{ route('komunitas.update', [$komunitas->id])}}" method="POST" class="needs-validation" novalidate="" enctype="multipart/form-data">
                     <div class="row justify-content-center">
                       <div class="col-12 col-md-12 col-lg-6">
                         <div class="profile-widget-header">

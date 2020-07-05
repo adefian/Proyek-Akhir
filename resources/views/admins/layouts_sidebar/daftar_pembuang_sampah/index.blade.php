@@ -37,9 +37,9 @@
                   </div>
                     <div class="card-body pr-3 pl-4 m-1 table-responsive">
                     @if(auth()->user()->role == 'pimpinanecoranger')
-                    <a href="/poin"><button class="btn btn-primary mb-3">Poin Terbesar</button></a>
+                    <a href="{{route('poin')}}"><button class="btn btn-primary mb-3">Poin Terbesar</button></a>
                     @elseif(auth()->user()->role == 'petugaslapangan')
-                    <a href="/poin-petugaslap"><button class="btn btn-success mb-3">Poin Terbesar</button></a>
+                    <a href="{{route('poin-petugaslap')}}"><button class="btn btn-success mb-3">Poin Terbesar</button></a>
                     @endif
                         <table id="dataTable" class="table table-sm" style="width:100%">
                             <thead>

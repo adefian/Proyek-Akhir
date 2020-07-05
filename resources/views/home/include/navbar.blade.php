@@ -8,13 +8,13 @@
             @if (Route::has('login'))
               @auth
                 @if(Auth()->user()->role == 'pimpinanecoranger')
-                  <li><a href="/pimpinan">Masuk</a></li>
+                  <li><a href="{{route('pimpinan.index')}}">Masuk</a></li>
                 @elseif(Auth()->user()->role == 'komunitas')
-                  <li><a href="/komunitas">Masuk</a></li>
+                  <li><a href="{{route('komunitas.index')}}">Masuk</a></li>
                 @elseif(Auth()->user()->role == 'petugaslapangan')
-                  <li><a href="petugaslapangan">Masuk</a></li>
+                  <li><a href="{{route('petugaslapangan.index')}}">Masuk</a></li>
                 @elseif(Auth()->user()->role == 'pimpinankomunitas')
-                  <li><a href="pimpinan-komunitas">Masuk</a></li>
+                  <li><a href="{{route('pimpinan-komunitas.index')}}">Masuk</a></li>
                 @endif
               @else
                 <li class="drop-down"><a>Akun</a>
@@ -22,12 +22,12 @@
                   @if (Route::has('register'))
                     <li><a href="{{ route('register') }}">Daftar sebagai Anggota Komunitas</a></li>
                   @endif
-                  <li><a href="login">Login</a></li>
+                  <li><a href="{{ route('login')}}">Login</a></li>
                   </ul>
                 </li>
               @endauth
             @endif
-          <li><a href="/ecobrick">Ecobrick</a></li>
+          <li><a href="{{ route('ecobrick')}}">Ecobrick</a></li>
 
 
         </ul>

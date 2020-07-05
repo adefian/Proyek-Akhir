@@ -20,7 +20,7 @@
             <h1>Profile</h1>
           </div>
 
-        <form action="/pimpinan-komunitas/{{$pimpinankom->id}}" method="POST" class="needs-validation" novalidate="" enctype="multipart/form-data">
+        <form action="{{('pimpinan-komunitas.update', [$pimpinankom->id])}}" method="POST" class="needs-validation" novalidate="" enctype="multipart/form-data">
           <div class="section-body"> 
             <div class="row">
               <div class="col-12 col-md-12 col-lg-5">

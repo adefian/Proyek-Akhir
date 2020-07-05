@@ -9,7 +9,7 @@
             <h1>Profile</h1>
           </div>
 
-        <form action="/pimpinan/{{$pimpinan->id}}" method="POST" class="needs-validation" novalidate="" enctype="multipart/form-data">
+        <form action="{{ route('pimpinan.update', [$pimpinan->id])}}" method="POST" class="needs-validation" novalidate="" enctype="multipart/form-data">
           <div class="section-body"> 
             <div class="row">
               <div class="col-12 col-md-12 col-lg-5">

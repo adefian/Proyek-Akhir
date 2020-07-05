@@ -60,12 +60,12 @@ s0.parentNode.insertBefore(s1,s0);
               <img src="../assets/img/stisla-fill.svg" alt="logo" width="100" class="shadow-light rounded-circle">
             </div> -->
 
-            <div class="card card-primary">
+            <div class="card card-info">
               <div class="card-header"><h4>Daftar Anggota Komunitas</h4></div>
 
               <div class="card-body">
               
-              <form method="POST" action="postregister" class="needs-validation" novalidate="">
+              <form method="POST" action="{{ route('postregister')}}" class="needs-validation" novalidate="">
                   {{csrf_field()}}
 
                 <div class="row">
@@ -108,10 +108,12 @@ s0.parentNode.insertBefore(s1,s0);
                     <div class="d-block">
                     	<label for="password" class="control-label">Password</label>
                     </div>
-                    <input id="password" type="password" class="form-control" name="password" tabindex="2" required>
-                    <div class="invalid-feedback">
-                    Silahkan isi Password Anda
-                    </div>
+                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" tabindex="2" required autocomplete="new-password">
+                      @error('password')
+                          <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
                   </div>
                  </div> 
 
@@ -122,9 +124,6 @@ s0.parentNode.insertBefore(s1,s0);
                       </div>
                       <input id="konfirmasipassword" type="password" class="form-control" tabindex="2" required>
                       <p style="font-size: 11px;" id="message"></p>
-                      <div class="invalid-feedback">
-                      Silahkan isi Konfirmasi Password Anda
-                      </div>
                     </div>
                   </div> 
                 </div>
@@ -148,9 +147,6 @@ s0.parentNode.insertBefore(s1,s0);
                     	<label for="nohp" class="control-label">No Hp</label>
                     </div>
                     <div class="input-group">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text"></span>
-                      </div>
                       <input id="nohp" type="nohp" class="form-control" name="nohp" tabindex="2" required>
                     <div class="invalid-feedback">
                     Silahkan isi No Handphone Anda / yang dapat dihubungi
@@ -165,30 +161,33 @@ s0.parentNode.insertBefore(s1,s0);
                     <div class="d-block">
                     	<label for="jenis_kelamin" class="control-label">Jenis Kelamin</label>
                     </div>
-                      <select name="jenis_kelamin" type="text" class="form-control">
+                      <select id="jenis_kelamin" name="jenis_kelamin" type="text" class="form-control @error('jenis_kelamin') is-invalid @enderror" required autocomplete="jenis_kelamin">
                         <option selected disabled>Pilih Jenis kelamin</option>
                         <option value="laki-laki">Laki-laki</option>
                         <option value="Perempuan">Perempuan</option>
                       </select>
-                    <div class="invalid-feedback">
-                    Silahkan isi Jenis Kelamin Anda
-                    </div>
+                      @error('jenis_kelamin')
+                          <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
                   </div>
 
                  <div class="form-group col-6">
                     <div class="d-block">
                         <label for="daerah" class="control-label">Daerah</label>
                     </div>
-                        <select name="daerah" type="text" class="form-control">
+                        <select id="daerah" name="daerah" type="text" class="form-control @error('daerah') is-invalid @enderror" required autocomplete="daerah">
                             <option selected disabled>Pilih Daerah</option>
                             @foreach($data as $datas)
                                 <option value="{{$datas->id}}">{{$datas->daerah}}</option>
                             @endforeach
-                            
                         </select>
-                    <div class="invalid-feedback">
-                      please fill in your daerah 
-                    </div>
+                      @error('daerah')
+                          <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
                   </div>
                 </div>
 
@@ -204,11 +203,15 @@ s0.parentNode.insertBefore(s1,s0);
                     </div>
 
                     <div class="mt-3 text-muted text-center">
-                        Sudah memiliki akun ?  <a href="login">Masuk</a>
+                        Sudah memiliki akun ?  <a href="{{ route('login')}}">Masuk</a>
                     </div>
                 </div>
 
               </div>
+            </div>
+
+            <div class="card shadow mb-5" style="text-align: -webkit-center;">
+              <a href="{{ route('home')}}"><button class="btn btn-klik btn-lg btn-block m-3 col-11">Kembali ke Halaman Awal</button></a>
             </div>
           </div>
         </div>

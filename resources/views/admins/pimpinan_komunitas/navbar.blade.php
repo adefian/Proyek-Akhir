@@ -3,18 +3,18 @@
     <div class="d-sm-none d-lg-inline-block">Hai, {{auth()->user()->username}}</div></a>
     <div class="dropdown-menu dropdown-menu-right">
         <div class="dropdown-title">{{auth()->user()->role}}</div>
-        <a href="/pimpinan/{{auth()->user()->id}}" class="dropdown-item has-icon">
+        <a href="{{route('pimpinan-komunitas.show', [auth()->user()->id])}}" class="dropdown-item has-icon">
         <i class="fas fa-user"></i> Profile
         </a>
-        <a href="/pimpinan/{{auth()->user()->id}}" class="dropdown-item has-icon">
+        <a href="{{route('pimpinan-komunitas.show', [auth()->user()->id])}}" class="dropdown-item has-icon">
         <i class="fas fa-key"></i> Ganti Password
         </a>
-        <a href="/pimpinan/{{auth()->user()->id}}" class="dropdown-item has-icon">
+        <a href="{{route('pimpinan-komunitas.show', [auth()->user()->id])}}" class="dropdown-item has-icon">
         <i class="fas fa-cog"></i> Settings
         </a>
         <div class="dropdown-divider"></div>
             
-            <a href="#" data-id="logout-pimpinankom" class="dropdown-item has-icon text-danger" data-confirm="Keluar|Apakah anda yakin ingin keluar sekarang ?">
+            <a href="#" data-id="{{ route('logout-pimpinankom')}}" class="dropdown-item has-icon text-danger" data-confirm="Keluar|Apakah anda yakin ingin keluar sekarang ?">
                 <button class="btn btn-danger far fa-sign-out-alt">Logout
                 </button>
             </a>
