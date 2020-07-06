@@ -939,7 +939,7 @@ section {
 --------------------------------------------------------------*/
 .testimonials {
   padding: 80px 0;
-  background: url("../img/cta-bg.jpg") no-repeat;
+  background: url("../img/hero.jpeg") no-repeat;
   background-position: center center;
   background-size: cover;
   position: relative;
@@ -952,7 +952,7 @@ section {
   right: 0;
   top: 0;
   bottom: 0;
-  background: rgba(1, 3, 111, 0.8);
+  background: #3195ffd1;
 }
 
 .testimonials .section-header {

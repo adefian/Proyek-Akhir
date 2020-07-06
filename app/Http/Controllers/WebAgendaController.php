@@ -816,26 +816,37 @@ class WebAgendaController extends Controller
             $komunitas_id = $anggota->komunitas_id;
         }
 
-        // if ($request->jenis_agenda == "3") {
-        //     foreach ($request->jenis_agenda as $item => $v) {
-        //         $input = ([
-        //             'nama' => $request->nama,
-        //             'keterangan' => $request->keterangan,
-        //             'jenis_agenda' => $request->jenis_agenda,
-        //             'tanggal' => $request->tanggal,
-        //             'user_id' => $user,
+        $tanggal_rutin = ([
+            $e = Carbon::parse($request->tanggal),
+            $e = Carbon::parse($request->tanggal)->addDays(7),
+            $e = Carbon::parse($request->tanggal)->addDays(14),
+            $e = Carbon::parse($request->tanggal)->addDays(21),
+        ]);
+
+            
+        if ($request->jenis_agenda == "3") {
+            foreach ($tanggal_rutin as $item => $v) {
+                $input = ([
+                    'nama' => $request->nama,
+                    'keterangan' => $request->keterangan,
+                    'jenis_agenda' => $request->jenis_agenda,
+                    'tanggal' => $v,
+                    'user_id' => $user,
                     
-        //             ]);
+                    ]);
         
-        //         if (auth()->user()->role == 'komunitas') {
-        //             $input ['komunitas_id'] = $komunitas_id;
-        //         }
+                if (auth()->user()->role == 'komunitas') {
+                    $input ['komunitas_id'] = $komunitas_id;
+                }
         
-        //         if (auth()->user()->role == 'pimpinanecoranger') {
-        //             $input ['komunitas_id'] = $request->komunitas_id;
-        //         }   
-        //     }
-        // } else {
+                if (auth()->user()->role == 'pimpinanecoranger') {
+                    $input ['komunitas_id'] = $request->komunitas_id;
+                }   
+
+                Agenda::create($input);
+
+            }
+        } else {
 
             $input = ([
                 'nama' => $request->nama,
@@ -853,18 +864,16 @@ class WebAgendaController extends Controller
             if (auth()->user()->role == 'pimpinanecoranger') {
                 $input ['komunitas_id'] = $request->komunitas_id;
             }   
-        // }
+            Agenda::create($input);
+        }
         
 
-        dd($input);
-        Agenda::create($input);
         
         	
     	$fcmUrl = 'https://fcm.googleapis.com/fcm/send';
         $tok = User::all(); //ambil data user
         // $tok = Token::all()->except(3,4); //ambil data user
-
-        $notif = Agenda::all()->orderBy('updated_at', 'DESC')->first();
+        $notif = Agenda::orderBy('updated_at', 'DESC')->first();
 
         $tokenList = Arr::pluck($tok,'token');  // Array data token 
         

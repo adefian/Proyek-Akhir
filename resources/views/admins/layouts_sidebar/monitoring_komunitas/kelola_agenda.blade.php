@@ -49,13 +49,13 @@
                 <div class="card-body pr-3 pl-4 m-1 table-responsive">
                     <div class="col-12">
                         @if(auth()->user()->role == 'pimpinanecoranger')
-                        <form action="{{ route('kelolaagenda.update')}}" method="get">
+                        <form action="{{ route('kelolaagenda.index')}}" method="get">
                         @endif
                         @if(auth()->user()->role == 'pimpinankomunitas')
-                        <form action="{{ route('kelolaagenda-pimpinankom.update')}}" method="get">
+                        <form action="{{ route('kelolaagenda-pimpinankom.index')}}" method="get">
                         @endif
                         @if(auth()->user()->role == 'komunitas')
-                        <form action="{{ route('kelolaagenda-komunitas.update')}}" method="get">
+                        <form action="{{ route('kelolaagenda-komunitas.index')}}" method="get">
                         @endif
                             
                             <div class="form-group" style="display:inline-block">
@@ -317,7 +317,7 @@
              var element = document.getElementById('jenis_ag');
              element.innerHTML = data[4];
              
-             $('#editForm').attr('acti routeon', '/{{('kelolaagenda/'+.update')}}data[7]);
+             $('#editForm').attr('action', 'kelolaagenda/'+data[7]);
              $('#editFormpimpinankom').attr('action', 'kelolaagenda-pimpinankom/'+data[7]);
              $('#editFormkomunitas').attr('action', 'kelolaagenda-komunitas/'+data[7]);
              $('#editModal').modal('show');

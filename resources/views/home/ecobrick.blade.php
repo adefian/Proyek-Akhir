@@ -21,7 +21,7 @@
                   <ul>
                   <li><a href="{{route('login')}}">Login</a></li>
                 @if (Route::has('register'))
-                  <li><a href="{{ route('register') }}">Daftar Komunitas</a></li>
+                  <li><a href="{{ route('register') }}">Daftar Sebagai </br> Anggota Komunitas</a></li>
                 @endif
                   </ul>
                 </li>

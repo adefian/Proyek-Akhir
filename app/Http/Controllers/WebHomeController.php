@@ -18,7 +18,7 @@ class WebHomeController extends Controller
         $tgl = Carbon::now();
         $tempatsampah = TempatSampah::all();
         $komunitas = Komunitas::where('level', 1)->get();
-        $agenda = Agenda::where('tanggal', '>',$tgl)->orderBy('tanggal', 'ASC')->get();
+        $agenda = Agenda::where('tanggal', '>',$tgl)->orderBy('tanggal', 'ASC')->paginate(10);
 
         
         $list = Agenda::where('tanggal', '>',$tgl)->get();

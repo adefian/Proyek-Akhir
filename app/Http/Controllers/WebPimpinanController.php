@@ -13,6 +13,8 @@ use App\AnggotaKomunitas;
 use App\PimpinanEcoranger;
 use App\Agenda;
 use App\Point;
+use DB;
+use Carbon\Carbon;
 
 class WebPimpinanController extends Controller
 {
@@ -26,7 +28,7 @@ class WebPimpinanController extends Controller
     public function index()
     {
         $user = User::all()->count();
-        $komunitas = Komunitas::all()->count();
+        $komunitas = Komunitas::where('level', 1)->count();
         $tempatsampah = TempatSampah::all()->count();
         $anggotakomunitas = AnggotaKomunitas::all()->count();
         $pimpinan = PimpinanEcoranger::where('user_id', auth()->user()->id)->first();
@@ -38,9 +40,18 @@ class WebPimpinanController extends Controller
         $s = Point::where('status', 0)->count();
 
         $nilai = [$b, $s];
-        // dd($nilai);
 
-        return view ('admins.pimpinan.index2',compact('tempatsampah','user','komunitas','anggotakomunitas', 'tempat', 'nilai','pimpinan'));
+        $bln = Carbon::now()->subMonth(1);
+
+        $join = Komunitas::Join('agenda','agenda.komunitas_id','=','komunitas.id')->where('agenda.updated_at', '>',$bln)
+                ->select(DB::raw('COUNT(DISTINCT agenda.id) AS a'),'komunitas.daerah')
+                ->groupBy('komunitas.daerah')->orderBy('a','desc')->get();
+
+        
+        // return $join;
+
+
+        return view ('admins.pimpinan.index2',compact('tempatsampah','user','komunitas','anggotakomunitas', 'tempat', 'nilai','pimpinan', 'join'));
     }
 
     /**

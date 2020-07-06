@@ -4,6 +4,7 @@
           <li><a href="#features">Agenda</a></li>
           <li><a href="#details">Maps</a></li>
           <li><a href="#contact">Feedback</a></li>
+          <li><a href="{{ route('ecobrick')}}">Ecobrick</a></li>
               
             @if (Route::has('login'))
               @auth
@@ -19,15 +20,14 @@
               @else
                 <li class="drop-down"><a>Akun</a>
                   <ul>
-                  @if (Route::has('register'))
-                    <li><a href="{{ route('register') }}">Daftar sebagai Anggota Komunitas</a></li>
-                  @endif
                   <li><a href="{{ route('login')}}">Login</a></li>
+                  @if (Route::has('register'))
+                    <li><a href="{{ route('register') }}">Daftar sebagai </br>Anggota Komunitas</a></li>
+                  @endif
                   </ul>
                 </li>
               @endauth
             @endif
-          <li><a href="{{ route('ecobrick')}}">Ecobrick</a></li>
 
 
         </ul>

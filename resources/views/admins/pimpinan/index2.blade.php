@@ -86,25 +86,37 @@
             <div class="row justify-content-center">
               <div class="col-12">
                 <div class="card card-primary">
-                    <div class="card-header">
-                      <h4>Data Pembuang Sampah</h4>
-                    </div>
                     <div class="card-body">
                       <div class="row">
-                        <div class="col-lg-7 col-12">
+                        <div class="col-lg-6 col-12 form-group">
+                         <label class="control-label" style="font-size:20px;">Data Pembuang Sampah</label>
                           <canvas id="myChart3"></canvas>
                         </div>
-                          <div class="col-lg-5 col-12">
+                          <div class="col-lg-6 col-12">
                             <div class="form-group">
-                              <label class="control-label">Date</label>
-                              <div class="input-group">
-                                <div class="input-group-prepend">
-                                  <div class="input-group-text">
-                                    <i class="fas fa-calendar"></i>
-                                  </div>
-                                </div>
-                                <input type="text" class="form-control" name="daterange" id="daterange">
-                              </div>
+                              <label class="control-label" style="font-size:20px;">Data Komunitas</label>
+                              <p>Data komunitas aktif selama 1 bulan kebelakang</p>
+                              <table class="table table-sm" style="100%">
+                                <thead>
+                                  <tr>
+                                    <th class="text-center">No</th>
+                                    <th>Komunitas</th>
+                                    <th class="text-center">Jumlah Agenda</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  @if($join)
+                                  @php $no = 1 @endphp
+                                  @foreach($join as $datas)
+                                  <tr>
+                                    <td class="text-center">{{$no++}}</td>
+                                    <td>{{$datas->daerah}}</td>
+                                    <td class="text-center">{{$datas->a}}</td>
+                                  </tr>
+                                  @endforeach
+                                  @endif
+                                </tbody>
+                              </table>
                             </div>
                           </div>
                       </div>
