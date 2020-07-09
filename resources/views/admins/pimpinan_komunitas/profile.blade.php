@@ -1,15 +1,6 @@
 @extends('layouts_admin.admin')
 
-@if(auth()->user()->role == 'pimpinanecoranger')
-    @include('admins.pimpinan.include')
-@endif
-@if(auth()->user()->role == 'petugaslapangan')
-    @include('admins.petugas_lapangan.include')
-@endif
-@if(auth()->user()->role == 'komunitas')
-    @include('admins.komunitas.include')
-@endif
-@if(auth()->user()->role == 'komunitas')
+@if(auth()->user()->role == 'pimpinankomunitas')
     @include('admins.pimpinan_komunitas.include')
 @endif
 
@@ -20,7 +11,7 @@
             <h1>Profile</h1>
           </div>
 
-        <form action="{{('pimpinan-komunitas.update', [$pimpinankom->id])}}" method="POST" class="needs-validation" novalidate="" enctype="multipart/form-data">
+        <form action="{{route('pimpinan-komunitas.update', [$pimpinankom->id])}}" method="POST" class="needs-validation" novalidate="" enctype="multipart/form-data">
           <div class="section-body"> 
             <div class="row">
               <div class="col-12 col-md-12 col-lg-5">

@@ -15,13 +15,13 @@
           </div>
           <div class="col-lg-6 col-sm-12 col-12">
             @if(auth()->user()->role == 'pimpinanecoranger')
-                <form class="needs-validation" novalidate="" action="{{ route('indikasi.store')}}" method="POST" enctype="multipart/form-data">
+                <form class="needs-validation" novalidate="" action="{{route('indikasi.store')}}" method="POST" enctype="multipart/form-data">
             @endif
             @if(auth()->user()->role == 'petugaslapangan')
-                <form class="needs-validation" novalidate="" action="{{ route('indikasi-petugaslap.store')}}" method="POST" enctype="multipart/form-data">
+                <form class="needs-validation" novalidate="" action="{{route('indikasi-petugaslap.store')}}" method="POST" enctype="multipart/form-data">
             @endif
             @if(auth()->user()->role == 'komunitas')
-                <form class="needs-validation" novalidate="" action="{{ route('indikasi-komunitas.store')}}" method="POST" enctype="multipart/form-data">
+                <form class="needs-validation" novalidate="" action="{{route('indikasi-komunitas.store')}}" method="POST" enctype="multipart/form-data">
             @endif
                 {{csrf_field()}}
 

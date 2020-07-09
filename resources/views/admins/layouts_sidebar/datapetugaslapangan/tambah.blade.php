@@ -9,13 +9,13 @@
               </div>
         <div class="modal-body">
             @if(auth()->user()->role == 'pimpinanecoranger')
-                <form class="needs-validation" novalidate="" action="{{ route('datapetugaslapangan.store')}}" method="POST" enctype="multipart/form-data">
+                <form class="needs-validation" novalidate="" action="{{route('datapetugaslapangan.store')}}" method="POST" enctype="multipart/form-data">
             @endif
             @if(auth()->user()->role == 'petugaslapangan')
-                <form class="needs-validation" novalidate="" action="{{ route('datapetugaslapangan-petugaslap.store')}}" method="POST" enctype="multipart/form-data">
+                <form class="needs-validation" novalidate="" action="{{route('datapetugaslapangan-petugaslap.store')}}" method="POST" enctype="multipart/form-data">
             @endif
             @if(auth()->user()->role == 'komunitas')
-                <form class="needs-validation" novalidate="" action="{{ route('datapetugaslapangan-komunitas.store')}}" method="POST" enctype="multipart/form-data">
+                <form class="needs-validation" novalidate="" action="{{route('datapetugaslapangan-komunitas.store')}}" method="POST" enctype="multipart/form-data">
             @endif
                 {{csrf_field()}}
 
@@ -48,9 +48,11 @@
                         <label for="wilayah" class="control-label">Wilayah</label>
                         <select name="wilayah" type="text" class="form-control">
                             <option selected disabled>Pilih Wilayah</option>
+                            @if($komunitas)
                             @foreach($komunitas as $datas)
                                 <option value="{{$datas->daerah}}">{{$datas->daerah}}</option>
                             @endforeach
+                            @endif
                         </select>
                     </div>
                 </div>

@@ -145,7 +145,7 @@
       function deleteData(id)
       {
           var id = id;
-          var url = '{{ route("datapimpinankomunitas.destroy", ":id") }}';
+          var url = '{{route("datapimpinankomunitas.destroy", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }

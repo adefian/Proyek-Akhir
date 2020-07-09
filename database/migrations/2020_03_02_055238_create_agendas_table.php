@@ -15,8 +15,8 @@ class CreateAgendasTable extends Migration
     {
         Schema::create('agenda', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nama');
-            $table->string('keterangan');
+            $table->string('nama')->nullable();
+            $table->string('keterangan')->nullable();
             $table->string('jenis_agenda')->default(0);
             $table->string('file_gambar')->nullable();
             $table->string('tanggal');

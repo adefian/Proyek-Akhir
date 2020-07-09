@@ -22,13 +22,20 @@ class UserController extends Controller
 
         }else{
 
+          $tok = User::where('token', $request->token)->get();
+          if($tok){
+            $a = null;
+          }else{
+            $a = $request->token;
+          }
+
           $data = ([
           'username' => $request->username,
           'email' => $request->email,
           // 'email' => $request->get('email'),
           'password' =>bcrypt($request->password),
           'role' => 'masyarakat',
-          'token'=>$request->token,
+          'token'=>$a,
 
         ]);
 
@@ -53,8 +60,14 @@ class UserController extends Controller
       $email=$request->input('email');
       $password=$request->input('password');
       $logins= User::where('email', $email)->orWhere('username', $email)->first();
+        $tok = User::where('token', $request->token)->get();
+          if($tok){
+            $a = null;
+          }else{
+            $a = $request->token;
+          }
         $token =([
-        'token'=> $request->token
+        'token'=> $a
         ]);
         $logins->update($token);
 

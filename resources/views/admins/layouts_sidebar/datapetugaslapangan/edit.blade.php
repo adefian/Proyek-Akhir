@@ -34,10 +34,7 @@
                 </div>
                 <div class="form-group">
                     <label for="nohp">No Hp</label>
-                    <div class="input-group">    
-                        <div class="input-group-prepend">
-                          <span class="input-group-text"></span>
-                        </div>
+                    <div class="input-group">  
                         <input name="nohp" type="text" id="nohp" class="form-control" placeholder="No Hp">
                     </div>
                 </div>
@@ -52,9 +49,11 @@
                         <label for="wilayah" class="control-label">Wilayah</label>
                         <select name="wilayah" type="text" class="form-control">
                         <option selected disabled>Tetap</option>
+                            @if($komunitas)
                             @foreach($komunitas as $datas)
                                 <option value="{{$datas->daerah}}">{{$datas->daerah}}</option>
                             @endforeach
+                            @endif
                         </select>
                     </div>  
                 </div>

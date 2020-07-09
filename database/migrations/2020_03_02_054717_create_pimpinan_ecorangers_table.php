@@ -15,9 +15,9 @@ class CreatePimpinanEcorangersTable extends Migration
     {
         Schema::create('pimpinan_ecoranger', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nama');
-            $table->string('nohp');
-            $table->string('alamat');
+            $table->string('nama')->nullable();
+            $table->string('nohp')->nullable();
+            $table->string('alamat')->nullable();
             $table->string('bio')->nullable();
             $table->string('file_gambar')->nullable();
             $table->timestamps();

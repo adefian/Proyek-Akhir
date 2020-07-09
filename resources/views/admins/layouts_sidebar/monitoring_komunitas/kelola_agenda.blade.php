@@ -49,13 +49,13 @@
                 <div class="card-body pr-3 pl-4 m-1 table-responsive">
                     <div class="col-12">
                         @if(auth()->user()->role == 'pimpinanecoranger')
-                        <form action="{{ route('kelolaagenda.index')}}" method="get">
+                        <form action="{{route('kelolaagenda.index')}}" method="get">
                         @endif
                         @if(auth()->user()->role == 'pimpinankomunitas')
-                        <form action="{{ route('kelolaagenda-pimpinankom.index')}}" method="get">
+                        <form action="{{route('kelolaagenda-pimpinankom.index')}}" method="get">
                         @endif
                         @if(auth()->user()->role == 'komunitas')
-                        <form action="{{ route('kelolaagenda-komunitas.index')}}" method="get">
+                        <form action="{{route('kelolaagenda-komunitas.index')}}" method="get">
                         @endif
                             
                             <div class="form-group" style="display:inline-block">
@@ -333,7 +333,7 @@
       function deleteData(id)
       {
           var id = id;
-          var url = '{{ route("kelolaagenda.destroy", ":id") }}';
+          var url = '{{route("kelolaagenda.destroy", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }
@@ -341,7 +341,7 @@
       function deleteDatapimpinankom(id)
       {
           var id = id;
-          var url = '{{ route("kelolaagenda-komunitas.destroy", ":id") }}';
+          var url = '{{route("kelolaagenda-komunitas.destroy", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }

@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="{{asset('assets/stisla/css/components.css')}}">
 
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <link rel="shortcut icon" href="{{asset('assets/img/pick me up.png')}}">
+  <link rel="shortcut icon" href="{{asset('assets-landingpage/img/logo-L.png')}}">
 
 </head>
 <style>
@@ -60,7 +60,7 @@
             <div class="card card-info">
               <div class="card-header"><h4>Daftarkan Komunitas</h4></div>
                 <div class="card-body">
-                  <form method="POST" action="{{ route('postdaftardaerah')}}" class="needs-validation" novalidate="">
+                  <form method="POST" action="{{route('postdaftardaerah')}}" class="needs-validation" novalidate="">
                       {{csrf_field()}}
                     <div class="row">
                       <div class="col-12 col-lg-6">
@@ -138,11 +138,11 @@
 
                   <div class="row sm-gutters">
                       <div class="mt-3 mr-5 text-muted text-center">
-                          Daftar sebagai anggota komunitas ? <a href="{{ route('register')}}">Daftar</a>
+                          Daftar sebagai anggota komunitas ? <a href="{{route('register')}}">Daftar</a>
                       </div>
 
                       <div class="mt-3 text-muted text-center">
-                          Sudah memiliki akun ?  <a href="{{ route('login')}}">Login</a>
+                          Sudah memiliki akun ?  <a href="{{route('login')}}">Login</a>
                       </div>
                   </div>
                 </div>

@@ -24,7 +24,7 @@ class AgendaController extends Controller
     $tok =User::all();
 		$file = $request->input('file_gambar');
 		$nama_file = time().".jpeg";
-		$tujuan_upload = 'agenda/';
+		$tujuan_upload = public_path() . '/agenda/';
 
       if (file_put_contents($tujuan_upload . $nama_file , base64_decode($file))) 
       {
@@ -55,7 +55,7 @@ class AgendaController extends Controller
         'title'=>$agenda->nama,
         'body' => $agenda->keterangan,
         'sound' => true,
-        'image'=>'http://192.168.43.229/relasi/public/agenda/'.$foto,
+        'image'=>'https://ta.poliwangi.ac.id/~ti17136/agenda/'.$foto,
       ];
     
       $extraNotificationData = ["message" => $notification,"moredata" =>'dd'];
@@ -97,8 +97,8 @@ class AgendaController extends Controller
   
 
     $nama_file = time()."_".".jpeg";
-    // $tujuan_upload = '../resource/gambar/';
-    $tujuan_upload = 'agenda/';
+    // $tujuan_upload = public_path() . '../resource/gambar/';
+    $tujuan_upload = public_path() . '/agenda/';
 
       if (file_put_contents($tujuan_upload . $nama_file , base64_decode($file))) {
        $pesan = "Update Berhasil";

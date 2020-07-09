@@ -15,11 +15,11 @@ class CreateTransaksisTable extends Migration
     {
         Schema::create('transaksi', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nama_hadiah');
-            $table->string('harga_hadiah');
-            $table->integer('sisapoin');
-            $table->integer('jumlah_hadiah');
-            $table->string('file_gambar');
+            $table->string('nama_hadiah')->nullable();
+            $table->integer('harga_hadiah')->dafult(0);
+            $table->integer('sisapoin')->default(0);
+            $table->integer('jumlah_hadiah')->default(0);
+            $table->string('file_gambar')->nullable();
             $table->bigInteger('masyarakat_id')->unsigned()->nullable();
             $table->foreign('masyarakat_id')
                     ->references('id')

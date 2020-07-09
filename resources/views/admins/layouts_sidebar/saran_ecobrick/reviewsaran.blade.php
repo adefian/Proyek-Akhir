@@ -179,7 +179,7 @@
       function deleteData(id)
       {
           var id = id;
-          var url = '{{ route("reviewsaranecobrick.destroy", ":id") }}';
+          var url = '{{route("reviewsaranecobrick.destroy", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }
@@ -187,7 +187,7 @@
       function deleteDatakomunitas(id)
       {
           var id = id;
-          var url = '{{ route("reviewsaranecobrick-komunitas.destroy", ":id") }}';
+          var url = '{{route("reviewsaranecobrick-komunitas.destroy", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }
@@ -195,7 +195,7 @@
       function deleteDatapetugaslap(id)
       {
           var id = id;
-          var url = '{{ route("reviewsaranecobrick-petugaslap.destroy", ":id") }}';
+          var url = '{{route("reviewsaranecobrick-petugaslap.destroy", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }

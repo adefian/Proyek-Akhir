@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="{{asset('assets/stisla/css/components.css')}}">
   
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <link rel="shortcut icon" href="{{asset('assets/img/pick me up.png')}}">
+  <link rel="shortcut icon" href="{{asset('assets-landingpage/img/logo-L.png')}}">
 </head>
 <style>
     body {
@@ -65,7 +65,7 @@ s0.parentNode.insertBefore(s1,s0);
 
               <div class="card-body">
               
-              <form method="POST" action="{{ route('postregister')}}" class="needs-validation" novalidate="">
+              <form method="POST" action="{{route('postregister')}}" class="needs-validation" novalidate="">
                   {{csrf_field()}}
 
                 <div class="row">
@@ -199,11 +199,11 @@ s0.parentNode.insertBefore(s1,s0);
                 </form>
                 <div class="row sm-gutters">
                     <div class="mt-3 mr-3 text-muted text-center">
-                        Daerah anda belum terdaftar ? <a href="{{ route('daftardaerah')}}">Daftarkan Daerah</a>
+                        Daerah anda belum terdaftar ? <a href="{{route('daftardaerah')}}">Daftarkan Daerah</a>
                     </div>
 
                     <div class="mt-3 text-muted text-center">
-                        Sudah memiliki akun ?  <a href="{{ route('login')}}">Masuk</a>
+                        Sudah memiliki akun ?  <a href="{{route('login')}}">Masuk</a>
                     </div>
                 </div>
 
@@ -211,7 +211,7 @@ s0.parentNode.insertBefore(s1,s0);
             </div>
 
             <div class="card shadow mb-5" style="text-align: -webkit-center;">
-              <a href="{{ route('home')}}"><button class="btn btn-klik btn-lg btn-block m-3 col-11">Kembali ke Halaman Awal</button></a>
+              <a href="{{route('home')}}"><button class="btn btn-klik btn-lg btn-block m-3 col-11">Kembali ke Halaman Awal</button></a>
             </div>
           </div>
         </div>

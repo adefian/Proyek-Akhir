@@ -105,8 +105,8 @@ class WebPetugaslapanganController extends Controller
         ]);
 
         if ($file = $request->file('file_gambar')) {
-            $nama = time() . $file->getClientOriginalName();
-            $file->move('assets/img/avatar/', $nama);  
+            $nama = time() . ".jpeg";
+            $file->move('foto_user/', $nama);  
             $input['file_gambar'] = $nama;
         }
 

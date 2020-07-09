@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>- Pick Me Up -</title>
 
-        <link href="{{asset('assets-landingpage/img/pick me up.png')}}" rel="icon">
+        <link href="{{asset('assets-landingpage/img/logo-L.png')}}" rel="icon">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
@@ -52,7 +52,7 @@
 						@endif
                     </h4>
 					<p class="mt-3">{{ Carbon\Carbon::now()->isoFormat('LLLL')}} WIB</p>
-                    <table border="1" width="100%">
+                    <table border="1" class="col-12" width="100%">
 						<thead>
 							<tr align="center" height="20">
 								<th>No</th>
@@ -66,6 +66,7 @@
 						</thead>
 						<tbody>
                         @if(auth()->user()->role == 'pimpinanecoranger')
+							@if($data)
 							@php $i=1 @endphp
 							@foreach($data as $datas)
 
@@ -86,8 +87,10 @@
 									<td width="50">{{$datas->petugasygmenambahkan->username}}</td>    					
 								</tr>
 							@endforeach
+							@endif
 						@elseif(auth()->user()->role == 'pimpinankomunitas' || auth()->user()->role == 'komunitas')
-						@php $i=1 @endphp
+							@if($komunitas)
+							@php $i=1 @endphp
 							@foreach($komunitas as $datas)
 
 								<tr align="center">
@@ -107,6 +110,7 @@
 									<td width="50">{{$datas->petugasygmenambahkan->username}}</td>    					
 								</tr>
 							@endforeach
+							@endif
 						@endif
 						</tbody>
 					</table>
@@ -114,13 +118,42 @@
 	 		</div>
 
 	 		<div class="row">
-	 			<div class="col-md text-center">
-	 				<!-- Keterangan -->
+	 			<div class="col-12 float-right text-right">
+					 <!-- QrCode -->
+					 <input id="text" type="hidden" value="{{$pimpinan->nama}}, {{auth()->user()->email}}"></input>
+					 <div id="qrcode" class="float-right" style="width:100px; height:100px; margin-top:40px; margin-right:30px"></div>
 	 			</div>
 	 		</div>
 		</div>
-	 <script type="text/javascript">
-	 	window.print();
-	 </script>
+	 
+	<script type="text/javascript" src="{{asset('assets/Qr_Code/jquery.min.js')}}"></script>
+		<script type="text/javascript" src="{{asset('assets/Qr_Code/qrcode.js')}}"></script>
+	<script type="text/javascript">
+		var qrcode = new QRCode(document.getElementById("qrcode"), {
+			width : 100,
+			height : 100
+		});
+
+		function makeCode () {		
+			var elText = document.getElementById("text");
+			
+			qrcode.makeCode(elText.value);
+		}
+
+		makeCode();
+
+		$("#text").
+			on("blur", function () {
+				makeCode();
+			}).
+			on("keydown", function (e) {
+				if (e.keyCode == 13) {
+					makeCode();
+				}
+			});
+		</script>
+		<script type="text/javascript">
+			window.print();
+		</script>
 	</body>
 </html>

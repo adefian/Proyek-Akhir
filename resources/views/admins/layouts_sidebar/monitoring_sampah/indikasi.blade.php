@@ -53,6 +53,7 @@
                                 </tr>
                               </thead>
                               <tbody>
+                              @if($data)
                               @foreach($data as $datas)
                                 <tr>
                                   <td scope="row"> <i class="fas fa-trash"></i></td>
@@ -69,6 +70,7 @@
                                   <td style="display:none;">{{$datas->id}}</td>
                                 </tr>
                               @endforeach
+                              @endif
                               </tbody>
                             </table>
                           </div>

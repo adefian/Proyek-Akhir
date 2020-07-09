@@ -18,17 +18,19 @@ class WebHomeController extends Controller
         $tgl = Carbon::now();
         $tempatsampah = TempatSampah::all();
         $komunitas = Komunitas::where('level', 1)->get();
-        $agenda = Agenda::where('tanggal', '>',$tgl)->orderBy('tanggal', 'ASC')->paginate(10);
+        $agenda = Agenda::where('tanggal', '>',$tgl)->orderBy('tanggal', 'ASC')->paginate(5);
 
         
         $list = Agenda::where('tanggal', '>',$tgl)->get();
         
-        $listagenda = array();
+        $listagenda = [];
         foreach($list as $data=>$v){
 
             $listagenda[]= array(
                 'title' => $v->nama,
                 'start' => $v->tanggal,
+                'display' => 'background',
+                'classNames' => [$v->keterangan, $v->komunitas->daerah]
             );
         }
 
@@ -40,17 +42,17 @@ class WebHomeController extends Controller
         $input = ([
             'nama' => $request->nama,
             'email' => $request->email,
-            'usulan' => $request->usulan,
+            'kritik_saran' => $request->kritik_saran,
         ]);
 
-        if ($file = $request->file('gambar')) {
-            $nama = time() .'_'. $file->getClientOriginalName();
-            $file->move('assets/img/feedback/', $nama);  
-            $input['gambar'] = $nama;
+        if ($file = $request->file('file_gambar')) {
+            $nama = time() . ".jpeg";
+            $file->move('feedback/', $nama);  
+            $input['file_gambar'] = $nama;
         }
 
         Feedback::create($input);
-        alert()->success('Berhasil','Terima kasih sudah mem');
+        alert()->success('Berhasil','Terima kasih sudah memberikan Masukan.');
         return back();
     }
 
@@ -74,5 +76,10 @@ class WebHomeController extends Controller
     public function webview()
     {
         return view('webview');
+    }
+
+    public function crop()
+    {
+        return view('imageUpload');
     }
 }

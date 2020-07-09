@@ -73,7 +73,7 @@ class Controller extends BaseController
                 'title'=> 'Sampah Penuh',
                 'body' => $dat,
                 'sound' => true,
-                // 'image' => 'http://192.168.43.229/relasi/public/foto_user/1589960002_.jpeg'
+                // 'image' => 'https://ta.poliwangi.ac.id/~ti17136/foto_user/1589960002_.jpeg'
             ];
         
         $extraNotificationData = ["message" => $notification,"moredata" =>'dd'];

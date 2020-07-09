@@ -29,9 +29,9 @@ class PetugasLapangan extends Model
     public function ambilFoto()
     {
         if (!$this->file_gambar) {
-            return asset('assets/img/avatar/avatar-2.png');
+            return asset('foto_user/avatar-2.png');
         }
 
-        return asset('assets/img/avatar/'.$this->file_gambar);
+        return asset('foto_user/'.$this->file_gambar);
     }
 }

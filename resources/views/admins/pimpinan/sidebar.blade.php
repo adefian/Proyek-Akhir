@@ -1,7 +1,7 @@
 <ul class="sidebar-menu">
   <li class="menu-header">Beranda</li>
   <li class="active">
-      <a class="nav-link active" href="{{ route('pimpinan.index')}}"><i class="fas fa-seedling"></i><span>Beranda</span></a>
+      <a class="nav-link active" href="{{route('pimpinan.index')}}"><i class="fas fa-seedling"></i><span>Beranda</span></a>
   </li>
   <li class="menu-header">Monitoring</li>
   <li class="nav-item dropdown">
@@ -27,6 +27,7 @@
       <li><a class="nav-link" href="{{route('datapimpinankomunitas.index')}}">Data Pimpinan Komunitas</a></li>
       <li><a class="nav-link" href="{{route('dataanggotakomunitas.index')}}">Data Anggota Komunitas</a></li>
       <li><a class="nav-link" href="{{route('datapetugaslapangan.index')}}">Data Petugas Lapangan</a></li>
+      <li><a class="nav-link" href="{{route('datapetugaskontenreward.index')}}">Data Petugas Konten Reward</a></li>
 
     </ul>
   </li>
@@ -44,7 +45,7 @@
 </ul>
 
   <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
-    <a href="{{ route('home')}}" class="btn btn-primary btn-lg btn-block btn-icon-split">
+    <a href="{{route('home')}}" class="btn btn-primary btn-lg btn-block btn-icon-split">
       <i class="fas fa-rocket"></i> Halaman Awal
     </a>
   </div>

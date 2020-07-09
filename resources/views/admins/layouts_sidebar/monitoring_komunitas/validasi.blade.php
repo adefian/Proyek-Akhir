@@ -54,6 +54,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            @if($data)
                             @php $no = 1 @endphp
                             @foreach($data as $datas)
                                 <tr>
@@ -88,6 +89,7 @@
                                     </td>
                                 </tr>
                             @endforeach
+                            @endif
                             </tbody>
                         </table>
                     </div>
@@ -140,13 +142,13 @@
 
           <h3><p id="val"></p></h3>
             @if(auth()->user()->role == 'pimpinanecoranger')
-                <form method="POST" action="{{ route('editvalidasi.update')}}" class="needs-validation" novalidate="" id="editForm" enctype="multipart/form-data">
+                <form method="POST" action="" class="needs-validation" novalidate="" id="editForm" enctype="multipart/form-data">
             @endif
             @if(auth()->user()->role == 'petugaslapangan')
-                <form method="POST" action="{{ route('editvalidasi-petugaslap.update')}}" class="needs-validation" novalidate="" id="editFormpetugaslap" method="POST" enctype="multipart/form-data">
+                <form method="POST" action="" class="needs-validation" novalidate="" id="editFormpetugaslap" method="POST" enctype="multipart/form-data">
             @endif
             @if(auth()->user()->role == 'komunitas')
-                <form method="POST" action="{{ route('editvalidasi-komunitas.update')}}" class="needs-validation" novalidate="" id="editFormkomunitas" method="POST" enctype="multipart/form-data">
+                <form method="POST" action="" class="needs-validation" novalidate="" id="editFormkomunitas" method="POST" enctype="multipart/form-data">
             @endif
                 {{ csrf_field() }}
                 {{ method_field('PATCH') }}
@@ -284,7 +286,7 @@
       function deleteData(id)
       {
           var id = id;
-          var url = '{{ route("validasi.destroy", ":id") }}';
+          var url = '{{route("validasi.destroy", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }
@@ -292,7 +294,7 @@
       function deleteDatakomunitas(id)
       {
           var id = id;
-          var url = '{{ route("validasi-komunitas.destroy", ":id") }}';
+          var url = '{{route("validasi-komunitas.destroy", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }
@@ -300,7 +302,7 @@
       function deleteDatapetugaslap(id)
       {
           var id = id;
-          var url = '{{ route("validasi-petugaslap.destroy", ":id") }}';
+          var url = '{{route("validasi-petugaslap.destroy", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }

@@ -1,5 +1,5 @@
 <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-    <!-- <img alt="image" src="{{asset('assets/img/avatar/avatar-3.png')}}" class="rounded-circle mr-1"> -->
+    <!-- <img alt="image" src="{{asset('foto_user/avatar-3.png')}}" class="rounded-circle mr-1"> -->
     <div class="d-sm-none d-lg-inline-block">Hai, {{auth()->user()->username}}</div></a>
     <div class="dropdown-menu dropdown-menu-right">
         <div class="dropdown-title">{{auth()->user()->role}}</div>

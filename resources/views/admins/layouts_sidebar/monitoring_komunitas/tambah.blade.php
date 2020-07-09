@@ -10,16 +10,16 @@
         <div class="modal-body">
 
             @if(auth()->user()->role == 'pimpinanecoranger')
-                <form class="needs-validation" novalidate="" action="{{ route('kelolaagenda.store')}}" method="POST" enctype="multipart/form-data">
+                <form class="needs-validation" novalidate="" action="{{route('kelolaagenda.store')}}" method="POST" enctype="multipart/form-data">
             @endif
             @if(auth()->user()->role == 'petugaslapangan')
-                <form class="needs-validation" novalidate="" action="{{ route('kelolaagenda-petugaslap.store')}}" method="POST" enctype="multipart/form-data">
+                <form class="needs-validation" novalidate="" action="{{route('kelolaagenda-petugaslap.store')}}" method="POST" enctype="multipart/form-data">
             @endif
             @if(auth()->user()->role == 'komunitas')
-                <form class="needs-validation" novalidate="" action="{{ route('kelolaagenda-komunitas.store')}}" method="POST" enctype="multipart/form-data">
+                <form class="needs-validation" novalidate="" action="{{route('kelolaagenda-komunitas.store')}}" method="POST" enctype="multipart/form-data">
             @endif
             @if(auth()->user()->role == 'pimpinankomunitas')
-                <form class="needs-validation" novalidate="" action="{{ route('kelolaagenda-pimpinankom.store')}}" method="POST" enctype="multipart/form-data">
+                <form class="needs-validation" novalidate="" action="{{route('kelolaagenda-pimpinankom.store')}}" method="POST" enctype="multipart/form-data">
             @endif
                 {{csrf_field()}}
 

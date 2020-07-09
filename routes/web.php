@@ -39,6 +39,7 @@ Route::group(['middleware' => ['auth','pimpinanecoranger']],function(){
     Route::resource('datapimpinankomunitas', 'WebDatapimpinankomunitasController');
     Route::resource('datapetugaslapangan', 'WebDatapetugaslapanganController');
     Route::resource('dataanggotakomunitas', 'WebDatakomunitasController');
+    Route::resource('datapetugaskontenreward', 'WebDatapetugaskontenController');
     Route::resource('reviewsaranecobrick', 'WebEcobrickController');
     Route::resource('riwayatpembuangan', 'WebSampahController');
     Route::get('poin', 'WebSampahController@poin')->name('poin');
@@ -102,10 +103,18 @@ Route::group(['middleware' => ['auth','pimpinankomunitas']],function(){
     Route::get('logout-pimpinankom','WebAuthController@logout')->name('logout-pimpinankom'); 
 });
 
+Route::get('/feedbac', function(){
+    return view('feedback');
+});
+
 // Route::get('tukarcode','WebSampahController@tukarcode');
 // Route::post('pushtukarcode/{id}','WebSampahController@pushtukarcode');
 // Route::get('/api','WebMonitoringsampahController@PushNotifSampah');
 // Route::get('/webview','WebHomeController@webview');
+
+// Route::get('crop-image', 'WebHomeController@crop');
+
+// Route::post('crop-image', ['as'=>'upload.image','uses'=>'WebHomeController@uploadImage']);
 
 
 

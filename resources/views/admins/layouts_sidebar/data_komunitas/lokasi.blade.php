@@ -54,6 +54,7 @@
                                 </tr>
                               </thead>
                               <tbody>
+                              @if($datas)
                               @foreach($data as $datas)
                                 <tr>
                                   <th scope="row"> <i class="fas fa-users"></i> </th>
@@ -81,6 +82,7 @@
                                   <td style="display:none;">{{$datas->id}}</td>
                                 </tr>
                               @endforeach
+                              @endif
                               </tbody>
                             </table>
                           </div>
@@ -127,6 +129,7 @@
       var array = [];
     </script>
 
+    @if($data)
     @foreach ($data as $datas)
     <script>
 
@@ -134,6 +137,7 @@
       array.push(['<?php echo $datas->latitude ?>','<?php echo $datas->longitude ?>','<?php echo $datas->daerah ?>','<?php echo $datas->keterangan ?>']);
     </script>
     @endforeach
+    @endif
   <!-- ====================== end Array ================== -->
 @endsection
 
@@ -361,7 +365,7 @@
       function deleteData(id)
       {
           var id = id;
-          var url = '{{ route("daftarkomunitas.destroy", ":id") }}';
+          var url = '{{route("daftarkomunitas.destroy", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }
@@ -369,7 +373,7 @@
       function deleteDatakomunitas(id)
       {
           var id = id;
-          var url = '{{ route("daftarkomunitas-komunitas.destroy", ":id") }}';
+          var url = '{{route("daftarkomunitas-komunitas.destroy", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }
@@ -377,7 +381,7 @@
       function deleteDatapetugaslap(id)
       {
           var id = id;
-          var url = '{{ route("daftarkomunitas-petugaslap.destroy", ":id") }}';
+          var url = '{{route("daftarkomunitas-petugaslap.destroy", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }

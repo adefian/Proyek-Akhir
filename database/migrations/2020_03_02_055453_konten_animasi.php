@@ -13,11 +13,11 @@ class KontenAnimasi extends Migration
      */
     public function up()
     {
-        Schema::create('konten_animasi', function (Blueprint $table) {
+        Schema::create('konten_edukasi', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nama');
-            $table->string('deskripsi');
-            $table->string('file_gambar');
+            $table->string('deskripsi')->nullable();
+            $table->string('file_gambar')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class KontenAnimasi extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('konten_animasi');
+        Schema::dropIfExists('konten_edukasi');
     }
 }

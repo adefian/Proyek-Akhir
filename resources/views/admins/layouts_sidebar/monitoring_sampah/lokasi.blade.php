@@ -139,7 +139,7 @@
       function deleteData(id)
       {
           var id = id;
-          var url = '{{ route("indikasi.destroy", ":id") }}';
+          var url = '{{route("indikasi.destroy", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }
@@ -147,7 +147,7 @@
       function deleteDatakomunitas(id)
       {
           var id = id;
-          var url = '{{ route("indikasi-komunitas.destroy", ":id") }}';
+          var url = '{{route("indikasi-komunitas.destroy", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }
@@ -155,7 +155,7 @@
       function deleteDatapetugaslap(id)
       {
           var id = id;
-          var url = '{{ route("indikasi-petugaslap.destroy", ":id") }}';
+          var url = '{{route("indikasi-petugaslap.destroy", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }
@@ -219,7 +219,7 @@
             }
             else{
 
-            swal("Maaf Browser tidak Support HTML 5");
+            swal("Maaf Browser tidak Support Untuk Menambahkan lokasi map");
             }
 
 

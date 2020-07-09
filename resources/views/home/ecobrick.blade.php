@@ -6,7 +6,7 @@
           <li class="active"><a href="#header">Ecobrick</a></li>
           <li><a href="#about">Tentang Ecobrick</a></li>
           <li><a href="#gallery">Gambar</a></li>
-          <li><a href="{{ route('home')}}">Home</a></li>
+          <li><a href="{{route('home')}}">Beranda</a></li>
           @if (Route::has('login'))
               @auth
                 @if(Auth()->user()->role == 'pimpinanecoranger')
@@ -21,7 +21,7 @@
                   <ul>
                   <li><a href="{{route('login')}}">Login</a></li>
                 @if (Route::has('register'))
-                  <li><a href="{{ route('register') }}">Daftar Sebagai </br> Anggota Komunitas</a></li>
+                  <li><a href="{{route('register') }}">Daftar Sebagai </br> Anggota Komunitas</a></li>
                 @endif
                   </ul>
                 </li>

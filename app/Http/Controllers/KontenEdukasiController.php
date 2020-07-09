@@ -20,12 +20,11 @@ class KontenEdukasiController extends Controller
  
 	   public function tambahkonten(Request $request){
 
-        $tok =User::all();
     		// menyimpan data file yang diupload ke variabel $file
     		$file = $request->input('file_gambar');
     		$nama_file = time().".jpeg";
-    		// $tujuan_upload = '../resource/gambar/';
-    		$tujuan_upload = 'animasi/';
+    		// $tujuan_upload = public_path() . '../resource/gambar/';
+    		$tujuan_upload = public_path() . '/konten_edukasi/';
 
         if (file_put_contents($tujuan_upload . $nama_file , base64_decode($file))) {
         
@@ -40,7 +39,9 @@ class KontenEdukasiController extends Controller
     			'file_gambar' => $nama_file,
     			'nama' => $request->input('nama'),
     			'deskripsi' =>$request->input('deskripsi'),
-    		]);
+        ]);
+        
+        $tok =User::where('role', 'masyarakat')->where('role','pimpinanecoranger')->get();
 
         $konten= KontenEdukasi::where('nama',$request->nama)->orderBy('updated_at', 'DESC')->first();
         $tokenList = Arr::pluck($tok,'token');  // Array data token 
@@ -53,7 +54,7 @@ class KontenEdukasiController extends Controller
           'title'=>$konten->nama,
           'body' => $konten->deskripsi,
           'sound' => true,
-          'image'=>'http://192.168.43.229/relasi/public/animasi/'.$foto,
+          'image'=>'https://ta.poliwangi.ac.id/~ti17136/konten_edukasi/'.$foto,
            
         ];
       
@@ -92,8 +93,8 @@ class KontenEdukasiController extends Controller
       $nama= $request->input('nama_konten');
       $nohp= $request->input('deskripsi');
       $nama_file = time()."_".".jpeg";
-      // $tujuan_upload = '../resource/gambar/';
-      $tujuan_upload = 'animasi/';
+      // $tujuan_upload = public_path() . '../resource/gambar/';
+      $tujuan_upload = public_path() . '/konten_edukasi/';
 
       if (file_put_contents($tujuan_upload . $nama_file , base64_decode($file))){
         // code...

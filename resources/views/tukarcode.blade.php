@@ -21,7 +21,7 @@
   <link rel="stylesheet" href="{{asset('assets/stisla/css/custom.css')}}">
   <link rel="stylesheet" href="{{asset('assets/stisla/css/components.css')}}">
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <link rel="shortcut icon" href="{{asset('assets/img/pick me up.png')}}">
+  <link rel="shortcut icon" href="{{asset('assets-landingpage/img/logo-L.png')}}">
 </head>
 <body>
     

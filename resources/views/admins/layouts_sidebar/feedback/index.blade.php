@@ -43,6 +43,7 @@
                                     <th>Nama</th>
                                     <th>Email</th>
                                     <th>Kritik & Saran</th>
+                                    <th>Gambar</th>
                                     <th>Tanggal</th>
                                 </tr>
                             </thead>
@@ -55,6 +56,13 @@
                                             <td>{{$datas->nama}}</td>
                                             <td>{{$datas->email}}</td>
                                             <td>{{$datas->kritik_saran}}</td>
+                                            <td class="align-middle">
+                                            @if($datas->foto_diaplikasikan)
+                                                <img height="100" id="myImg" src="{{asset('feedback')}}/{{$datas->foto_diaplikasikan}}" data-toggle="modal" data-target="#myModal"></img>
+                                                @else
+                                                -
+                                            @endif
+                                            </td>
                                             <td>{{$datas->created_at->diffForhumans()}}</td>
                                             <td class="text-center align-middle">
 
@@ -126,7 +134,7 @@
       function deleteData(id)
       {
           var id = id;
-          var url = '{{ route("hapusfeedback", ":id") }}';
+          var url = '{{route("hapusfeedback", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }
@@ -134,7 +142,7 @@
       function deleteDatakomunitas(id)
       {
           var id = id;
-          var url = '{{ route("hapusfeedback-komunitas", ":id") }}';
+          var url = '{{route("hapusfeedback-komunitas", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }
@@ -142,7 +150,7 @@
       function deleteDatapetugaslap(id)
       {
           var id = id;
-          var url = '{{ route("hapusfeedback-petugaslap", ":id") }}';
+          var url = '{{route("hapusfeedback-petugaslap", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }
@@ -150,7 +158,7 @@
       function deleteDatapimpinankom(id)
       {
           var id = id;
-          var url = '{{ route("hapusfeedback-pimpinankom", ":id") }}';
+          var url = '{{route("hapusfeedback-pimpinankom", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }

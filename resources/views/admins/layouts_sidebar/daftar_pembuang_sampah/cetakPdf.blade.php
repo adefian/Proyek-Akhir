@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>- Pick Me Up -</title>
 
-        <link href="{{asset('assets-landingpage/img/pick me up.png')}}" rel="icon">
+        <link href="{{asset('assets-landingpage/img/logo-L.png')}}" rel="icon">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
@@ -54,7 +54,7 @@
 						</thead>
 
 						<tbody>
-
+							@if($data)
 							@php $i=1 @endphp
 
 							@foreach($data as $datas)
@@ -68,6 +68,7 @@
 									<td width="80">{{$datas->total_poin}}</td>							
 								</tr>
 							@endforeach
+							@endif
 
 						</tbody>
 					</table>

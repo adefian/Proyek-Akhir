@@ -41,8 +41,8 @@
 
         <div class="row" data-aos="fade-left">
           <div class="col-12">
-            <div class="response"></div>
-              <div id="calendar"></div>
+            <!-- <div class="response">{{ Carbon\Carbon::now()->isoFormat('dddd, D MMMM Y')}}</div> -->
+              <div class="mb-5" id="calendar"></div>
               <table class="table table-hover" style="width:100%">
                 <thead>
                     <tr>
@@ -288,7 +288,7 @@
 
           <div class="col-lg-10 mt-5 mt-lg-0 aos-init aos-animate" data-aos="fade-left" data-aos-delay="200">
 
-            <form action="{{ route('kirimfeedback')}}" method="POST" enctype="multipart/form-data">
+            <form action="{{route('kirimfeedback')}}" method="POST" enctype="multipart/form-data">
               {{csrf_field()}}
               <div class="row">
                 <div class="col-md-6 form-group">
@@ -299,10 +299,10 @@
                 </div>
               </div>
               <div class="form-group">
-                <input type="file" class="form-control" name="gambar" id="subject">
+                <input type="file" class="form-control" name="file_gambar" id="subject" required>
               </div>
               <div class="form-group">
-                <textarea class="form-control" name="usulan" rows="5" placeholder="Masukkan Usulan Anda" required></textarea>
+                <textarea class="form-control" name="kritik_saran" rows="5" placeholder="Masukkan Usulan Anda" required></textarea>
               </div>
             
               <div class="text-center"><button class="btn btn-primary" style="width:100%" type="submit">Kirim</button></div>
@@ -454,14 +454,35 @@
     var calendarEl = document.getElementById('calendar');
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
+      lang: 'id',
       plugins: [ 'interaction', 'dayGrid' ],
+      eventClick: function(info) {
+      var eventObj = info.event;
+
+      if (eventObj.url) {
+          swal(
+            'Clicked ' + eventObj.title + '.\n' +
+            'Will open ' + eventObj.url + ' in a new tab'
+          );
+
+          window.open(eventObj.url);
+
+          info.jsEvent.preventDefault(); // prevents browser from following link in current tab.
+        } else {
+          swal('Agenda ' + eventObj.title + '\n'+
+            eventObj.classNames + '\n' + eventObj.start
+          );
+          info.el.style.borderColor = 'black';
+        }
+      },
+      height: 500,
       header: {
-        left: 'prevYear,prev,next,nextYear today',
-        center: 'title',
-        right: 'dayGridMonth,dayGridWeek,dayGridDay'
+        start: 'title',
+        center: '',
+        right: 'prev,next,dayGridMonth,today'
       },
       defaultDate: {!! json_encode($tgl) !!},
-      navLinks: true, // can click day/week names to navigate views
+      navLinks: true, 
       editable: false,
       eventLimit: true, // allow "more" link when too many events
       events: {!! json_encode($listagenda) !!},
@@ -472,7 +493,7 @@
 
 </script>
 <!-- ============================ End Kalender ===================== -->
-
+<script src="{{ asset('assets/fullcalendar/packages/core/locales/id.js')}}"></script>
 
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDv-h2II7DbFQkpL9pDxNRq3GWXqS5Epts&callback=initMap" type="text/javascript"></script>
 

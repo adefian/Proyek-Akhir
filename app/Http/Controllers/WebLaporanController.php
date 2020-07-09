@@ -17,6 +17,8 @@ class WebLaporanController extends Controller
     public function index()
     {
         $tgl = Carbon::now();
+
+        $agenda = [];
         if (auth()->user()->role == 'pimpinankomunitas') {
             
             $user = PimpinanKomunitas::where('user_id', auth()->user()->id)->first();

@@ -29,7 +29,7 @@ class FeedbackController extends Controller
       $kritik_saran= $request->input('kritik_saran');
   		$nama_file = time().".jpeg";
   		// $tujuan_upload = '../resource/gambar/';
-  		$tujuan_upload = 'feedback/';
+  		$tujuan_upload = public_path() ."feedback/";
 
       if (file_put_contents($tujuan_upload . $nama_file , base64_decode($file))) {
          
@@ -61,7 +61,7 @@ class FeedbackController extends Controller
           'title'=>$feedback->email,
           'body' => $feedback->kritik_saran,
           'sound' => true,
-          'image'=>'http://192.168.43.229/relasi/public/feedback/'.$foto,   
+          'image'=>'https://ta.poliwangi.ac.id/~ti17136/feedback/'.$foto,   
       ];
       
       $extraNotificationData = ["message" => $notification,"moredata" =>'dd'];

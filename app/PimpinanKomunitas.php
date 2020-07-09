@@ -15,10 +15,10 @@ class PimpinanKomunitas extends Model
     public function ambilFoto()
     {
         if (!$this->file_gambar) {
-            return asset('assets/img/avatar/avatar-3.png');
+            return asset('foto_user/avatar-3.png');
         }
 
-        return asset('assets/img/avatar/'.$this->file_gambar);
+        return asset('foto_user/'.$this->file_gambar);
     }
 
     public function pimpinan()

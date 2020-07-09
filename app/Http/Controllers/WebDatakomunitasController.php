@@ -19,6 +19,7 @@ class WebDatakomunitasController extends Controller
     {
         $data = AnggotaKomunitas::all();
 
+        $dataperkomunitas = [];
         if (auth()->user()->role == 'pimpinankomunitas') {
             $pimpinankomunitas = PimpinanKomunitas::where('user_id',auth()->user()->id)->first();
             $komunitas_id = $pimpinankomunitas->komunitas_id;

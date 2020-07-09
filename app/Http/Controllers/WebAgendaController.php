@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use App\Agenda;
 use App\User;
+use App\PimpinanEcoranger;
 use App\PimpinanKomunitas;
 use App\AnggotaKomunitas;
 use App\Komunitas;
@@ -35,12 +36,18 @@ class WebAgendaController extends Controller
         }   
         $jenis_agenda = $request->jenis_agenda;
         $tahun = $request->tahun;
-        
+        $pimpinan = [];
+        if (auth()->user()->role == 'pimpinanecoranger') {
+            $pimpinan = PimpinanEcoranger::where('user_id', auth()->user()->id)->first();
+        }
+
         $option = Agenda::select(DB::raw('YEAR(agenda.tanggal) as year'))
                 ->where('tanggal', '>',$tgl)
                 ->groupBy('year')->orderBy('year','ASC')->get();
         
         $daerah = Komunitas::where('level', 1)->get();
+        $komunitas = [];
+        $namakomunitas = [];
 
         // Filter Tahun jika tidak dipilih
         if($request->tahun == 0){
@@ -783,10 +790,10 @@ class WebAgendaController extends Controller
                     $data = Agenda::whereYear('tanggal', $tahun)->where('tanggal', '>',$tgl)->orderBy('tanggal','ASC')->get();
                 }
             }
-            return view('admins.layouts_sidebar.monitoring_komunitas.cetakPdf', compact('data','komunitas','daerah','option','tahun','periode','kom','jenis_agenda','namakomunitas'));
+            return view('admins.layouts_sidebar.monitoring_komunitas.cetakPdf', compact('pimpinan','data','komunitas','daerah','option','tahun','periode','kom','jenis_agenda','namakomunitas'));
         }
         else {
-            return view('admins.layouts_sidebar.monitoring_komunitas.kelola_agenda', compact('data','komunitas','daerah','option','tahun','periode','kom','jenis_agenda','namakomunitas'));
+            return view('admins.layouts_sidebar.monitoring_komunitas.kelola_agenda', compact('pimpinan','data','komunitas','daerah','option','tahun','periode','kom','jenis_agenda','namakomunitas'));
         }
 
     }
@@ -884,7 +891,7 @@ class WebAgendaController extends Controller
                 'title'=> $notif->nama,
                 'body' => $notif->keterangan.'. '.$dat,
                 'sound' => true,
-                'image' => 'http://192.168.43.229/relasi/public/foto_user/1589960002_.jpeg'
+                'image' => 'https://ta.poliwangi.ac.id/~ti17136/foto_user/1589960002_.jpeg'
             ];
         
         $extraNotificationData = ["message" => $notification,"moredata" =>'dd'];
@@ -984,7 +991,7 @@ class WebAgendaController extends Controller
                 'title'=> $notif->nama,
                 'body' => 'Agenda Mendesak, '.$notif->keterangan.'. '.$dat,
                 'sound' => true,
-                'image' => ('assets/img/avatar/avatar-3.png'),
+                'image' => ('foto_user/avatar-3.png'),
             ];
         
         $extraNotificationData = ["message" => $notification,"moredata" =>'dd'];

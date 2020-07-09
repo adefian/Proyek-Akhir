@@ -3,25 +3,25 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Poin;
+use App\Point;
 use App\User;
 use App\Kode;
 use App\Transaksi;
 use App\Masyarakat;
 
-class PoinController extends Controller
+class PointController extends Controller
 
 {
 
   public function LihatPoin(){
 
-    $poin =Poin::all();
+    $poin =Point::all();
     return response()->json($poin);
     
   }
 
   public function TambahPoin(Request $request){
-    	$data = new Poin;
+    	$data = new Point;
     	$data->poin = $request->input('poin');
     	$data->save();
 
@@ -30,7 +30,9 @@ class PoinController extends Controller
 
   public function show($id){
     $username =  Masyarakat::where('user_id',$id)->first();
-    $poin =  Poin::where('masyarakat_id',$username->id)->get();
+    $poin =  Point::where('masyarakat_id',$username->id)->get();
+
+    $array = [];
 
     foreach ($poin as $datas => $data) {
 
@@ -61,7 +63,7 @@ class PoinController extends Controller
         
     }
 
-   public function UpdatePoin(Request $request, $id){
+   public function UpdatePoint(Request $request, $id){
 
       $data =  Masyarakat::where('user_id',$id)->first();
 
@@ -101,7 +103,7 @@ class PoinController extends Controller
 
     public function pushtukarcode(Request $request, $id)
     {
-        $poin = Poin::where('kode_reward', $request->kode_reward)->first();
+        $poin = Point::where('kode_reward', $request->kode_reward)->first();
            $datas =  Masyarakat::where('user_id',$id)->first();
 
         $data = ([

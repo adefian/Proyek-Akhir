@@ -63,8 +63,8 @@ class PetugasKontenRewardController extends Controller
       $nohp= $request->input('nohp');
       $alamat= $request->input('alamat');
       $nama_file = time()."_".".jpeg";
-      // $tujuan_upload = '../resource/gambar/';
-      $tujuan_upload = 'foto_user/';
+      // $tujuan_upload = public_path() . '../resource/gambar/';
+      $tujuan_upload = public_path() . '/foto_user/';
 
       if (file_put_contents($tujuan_upload . $nama_file , base64_decode($file))) {
         

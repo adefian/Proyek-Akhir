@@ -21,12 +21,12 @@ class HadiahController extends Controller
     }
 
     public function tambahhadiah(Request $request){
-    $tok =User::all();
-		// menyimpan data file yang diupload ke variabel $file
+
+      // menyimpan data file yang diupload ke variabel $file
 		$file = $request->input('file_gambar');
 		$nama_file = time().".jpeg";
-		// $tujuan_upload = '../resource/gambar/';
-		$tujuan_upload = 'hadiah/';
+		// $tujuan_upload = public_path() . '../resource/gambar/';
+		$tujuan_upload = public_path() . '/hadiah/';
 
       if (file_put_contents($tujuan_upload . $nama_file , base64_decode($file))) {
         // code...
@@ -44,7 +44,8 @@ class HadiahController extends Controller
   			'deskripsi' => $request->input('deskripsi'),
   			'harga_hadiah'	=> $request->input('harga_hadiah'),
         'jumlah_hadiah' => $request->input('jumlah_hadiah'),
-  		]);
+      ]);
+      $tok =User::where('role', 'masyarakat')->where('role','pimpinanecoranger')->get();
 
       $hadiah= Hadiah::where('nama',$request->nama)->orderBy('updated_at', 'DESC')->first();
       $tokenList = Arr::pluck($tok,'token');  // Array data token 
@@ -58,7 +59,7 @@ class HadiahController extends Controller
             'title'=>$hadiah->nama,
             'body' => $hadiah->deskripsi.''.$hadiah->harga_hadiah.''.$hadiah->jumlah_hadiah,
             'sound' => true,
-            'image'=>'http://192.168.43.229/relasi/public/hadiah/'.$foto,
+            'image'=>'https://ta.poliwangi.ac.id/~ti17136/hadiah/'.$foto,
            
           ];
         
@@ -101,8 +102,8 @@ class HadiahController extends Controller
     $jlm_hadiah= $request->input('jumlah_hadiah');
 
     $nama_file = time().".jpeg";
-    // $tujuan_upload = '../resource/gambar/';
-    $tujuan_upload = 'hadiah/';
+    // $tujuan_upload = public_path() . '../resource/gambar/';
+    $tujuan_upload = public_path() . '/hadiah/';
 
       if (file_put_contents($tujuan_upload . $nama_file , base64_decode($file))) {
       

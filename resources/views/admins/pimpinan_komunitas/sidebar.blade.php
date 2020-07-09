@@ -1,7 +1,7 @@
 <ul class="sidebar-menu-pimpinankomunitas">
   <li class="menu-header">Beranda</li>
   <li class="active">
-      <a class="nav-link active" href="{{ route('pimpinan-komunitas.index')}}"><i class="fas fa-seedling"></i><span>Beranda</span></a>
+      <a class="nav-link active" href="{{route('pimpinan-komunitas.index')}}"><i class="fas fa-seedling"></i><span>Beranda</span></a>
   </li>
   <li class="menu-header">Monitoring</li>
   <li class="nav-item dropdown">
@@ -30,7 +30,7 @@
 </ul>
 
   <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
-    <a href="{{ route('home')}}" class="btn btn-primary-pimpinankomunitas btn-lg btn-block btn-icon-split">
+    <a href="{{route('home')}}" class="btn btn-primary-pimpinankomunitas btn-lg btn-block btn-icon-split">
       <i class="fas fa-rocket"></i> Halaman Awal
     </a>
   </div>

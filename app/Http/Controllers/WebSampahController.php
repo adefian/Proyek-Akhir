@@ -21,7 +21,7 @@ class WebSampahController extends Controller
     {
         $data = Point::orderBy('updated_at','DESC')->get();
         
-        return view ('admins.layouts_sidebar.daftar_pembuang_sampah.index', compact('data','data2'));
+        return view ('admins.layouts_sidebar.daftar_pembuang_sampah.index', compact('data'));
     }
 
     /**

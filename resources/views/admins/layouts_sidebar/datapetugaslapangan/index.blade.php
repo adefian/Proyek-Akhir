@@ -171,7 +171,7 @@
       function deleteData(id)
       {
           var id = id;
-          var url = '{{ route("datapetugaslapangan.destroy", ":id") }}';
+          var url = '{{route("datapetugaslapangan.destroy", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }
@@ -179,7 +179,7 @@
       function deleteDatakomunitas(id)
       {
           var id = id;
-          var url = '{{ route("datapetugaslapangan-komunitas.destroy", ":id") }}';
+          var url = '{{route("datapetugaslapangan-komunitas.destroy", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }
@@ -187,7 +187,7 @@
       function deleteDatapetugaslap(id)
       {
           var id = id;
-          var url = '{{ route("datapetugaslapangan-petugaslap.destroy", ":id") }}';
+          var url = '{{route("datapetugaslapangan-petugaslap.destroy", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }

@@ -14,7 +14,7 @@
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
   
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <link rel="shortcut icon" href="{{asset('assets/img/pick me up.png')}}">
+  <link rel="shortcut icon" href="{{asset('assets-landingpage/img/logo-L.png')}}">
 
 </head>
 <style>
@@ -65,7 +65,7 @@
               <div class="card-header"><h4>Login</h4></div>
 
               <div class="card-body">
-              <form method="POST" action="{{ route('postlogin')}}" class="needs-validation" novalidate="">
+              <form method="POST" action="{{route('postlogin')}}" class="needs-validation" novalidate="">
                   {{csrf_field()}}
                   <div class="form-group">
                     <label for="email" class="control-label">Email / Username</label>

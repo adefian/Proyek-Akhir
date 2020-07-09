@@ -95,7 +95,7 @@
                           <div class="col-lg-6 col-12">
                             <div class="form-group">
                               <label class="control-label" style="font-size:20px;">Data Komunitas</label>
-                              <p>Data komunitas aktif selama 1 bulan kebelakang</p>
+                              <p>Data komunitas aktif selama 1 bulan terakhir</p>
                               <table class="table table-sm" style="100%">
                                 <thead>
                                   <tr>

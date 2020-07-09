@@ -9,7 +9,7 @@
               </div>
         <div class="modal-body">
             @if(auth()->user()->role == 'pimpinanecoranger')
-                <form class="needs-validation" novalidate="" action="{{ route('datapimpinankomunitas.store')}}" method="POST" enctype="multipart/form-data">
+                <form class="needs-validation" novalidate="" action="{{route('datapimpinankomunitas.store')}}" method="POST" enctype="multipart/form-data">
             @endif
                 {{csrf_field()}}
 
@@ -42,9 +42,11 @@
                         <label for="komunitas_id" class="control-label">Dari Komunitas</label>
                         <select name="komunitas_id" type="text" class="form-control">
                             <option selected disabled>Pilih Komunitas</option>
+                            @if($komunitas)
                             @foreach($komunitas as $datas)
                                 <option value="{{$datas->id}}">{{$datas->daerah}}</option>
                             @endforeach
+                            @endif
                         </select>
                     </div>
                 </div>

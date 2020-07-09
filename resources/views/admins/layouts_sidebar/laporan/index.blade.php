@@ -129,7 +129,7 @@
       function deleteData(id)
       {
           var id = id;
-          var url = '{{ route("hapusfeedback", ":id") }}';
+          var url = '{{route("hapusfeedback", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }
@@ -137,7 +137,7 @@
       function deleteDatakomunitas(id)
       {
           var id = id;
-          var url = '{{ route("hapusfeedback-komunitas", ":id") }}';
+          var url = '{{route("hapusfeedback-komunitas", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }
@@ -145,7 +145,7 @@
       function deleteDatapetugaslap(id)
       {
           var id = id;
-          var url = '{{ route("hapusfeedback-petugaslap", ":id") }}';
+          var url = '{{route("hapusfeedback-petugaslap", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }
@@ -153,7 +153,7 @@
       function deleteDatapimpinankom(id)
       {
           var id = id;
-          var url = '{{ route("hapusfeedback-pimpinankom", ":id") }}';
+          var url = '{{route("hapusfeedback-pimpinankom", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }

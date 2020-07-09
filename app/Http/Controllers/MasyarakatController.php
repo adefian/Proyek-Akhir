@@ -20,7 +20,7 @@ class MasyarakatController extends Controller
             'nama' =>$value->nama,
             'nohp' =>$value->nohp,
             'alamat'=>$value->alamat,
-            'poin'  =>$value->poin,
+            'total_poin'  =>$value->total_poin,
             'email' => $value->user->email,
             'username'=>$value->user->username
             ];
@@ -48,8 +48,8 @@ class MasyarakatController extends Controller
       $nohp= $request->input('nohp');
       $alamat= $request->input('alamat');
       $nama_file = time()."_".".jpeg";
-      // $tujuan_upload = '../resource/gambar/';
-      $tujuan_upload = 'foto_user/';
+      // $tujuan_upload = public_path() . '../resource/gambar/';
+      $tujuan_upload = public_path() . '/foto_user/';
 
         if (file_put_contents($tujuan_upload . $nama_file , base64_decode($file))) 
         {
@@ -107,7 +107,7 @@ class MasyarakatController extends Controller
           'nama'=> $data->nama,
           'nohp'=> $data->nohp,
           'alamat'=>   $data->alamat,
-          'poin' => $data->poin,
+          'total_poin' => $data->total_poin,
           'username'=> $data->user->username,
           'email'=>   $data->user->email,
           'file_gambar'=>$data->file_gambar

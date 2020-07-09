@@ -47,9 +47,6 @@ class WebPimpinanController extends Controller
                 ->select(DB::raw('COUNT(DISTINCT agenda.id) AS a'),'komunitas.daerah')
                 ->groupBy('komunitas.daerah')->orderBy('a','desc')->get();
 
-        
-        // return $join;
-
 
         return view ('admins.pimpinan.index2',compact('tempatsampah','user','komunitas','anggotakomunitas', 'tempat', 'nilai','pimpinan', 'join'));
     }
@@ -127,8 +124,9 @@ class WebPimpinanController extends Controller
         ]);
 
         if ($file = $request->file('file_gambar')) {
-            $nama = time() . $file->getClientOriginalName();
-            $file->move('assets/img/avatar/', $nama);  
+            // $nama = time() . $file->getClientOriginalName();
+            $nama = time() . ".jpeg";
+            $file->move('foto_user/', $nama);  
             $input['file_gambar'] = $nama;
         }
 

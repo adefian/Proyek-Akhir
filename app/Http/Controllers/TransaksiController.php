@@ -11,26 +11,6 @@ use App\Masyarakat;
 
 class TransaksiController extends Controller
 {
-    //
-     public function show( $id){
-        // $data =  Masyarakat::findOrFail($id);
-          $data =  Transaksi::where('user_id',$id)->first();
-
-        $array[]=[
-            'id'=> $data->id,
-            'username'=>$data->user->username,
-            'nama_hadiah'=>$data->hadiah->nama_hadiah,
-             'harga_hadiah'=>$data->hadiah->jumlah_poin,
-             'poinsaya'=>$data->poin->poin
-
-        ];
-          // return response()->json([
-   //          'pesan' =>'sukses lah',
-   //          'upload' => $hadiahku
-
-   //   ],200);
-        return response()->json($array);
-    }
 
      public function transaksi(Request $request, $id){
 
@@ -40,8 +20,8 @@ class TransaksiController extends Controller
        $sisapoin= $request->sisapoin;
     
     $nama_file = time()."_".".jpeg";
-    // $tujuan_upload = '../resource/gambar/';
-      $tujuan_upload = 'transaksi/';
+    // $tujuan_upload = public_path() . '../resource/gambar/';
+      $tujuan_upload = public_path() . '/transaksi/';
 
  if (file_put_contents($tujuan_upload . $nama_file , base64_decode($file))) {
         // code...
@@ -61,7 +41,7 @@ class TransaksiController extends Controller
      	     $data =  Masyarakat::where('user_id',$id)->first();
 
        $input =([
-          'poin'=>$request->poin,
+          'total_poin'=>$request->total_poin,
            'masyarakat_id'=>$data->id,
       
      ]);
@@ -95,6 +75,7 @@ class TransaksiController extends Controller
            $username =  Masyarakat::where('user_id',$id)->first();
           $trans =  Transaksi::where('masyarakat_id',$username->id)->get();
 
+      $array = [];
     foreach ($trans as $datas => $data) {
         $array[]=[
             'id'=> $data->id,

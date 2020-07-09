@@ -1,7 +1,7 @@
 <ul class="sidebar-menu-petugaslap">
   <li class="menu-header">Dashboard</li>
   <li class="active">
-      <a class="nav-link active-petugaslapangan" href="{{ route('petugaslapangan.index')}}"><i class="fas fa-fire"></i><span>Dashboard</span></a>
+      <a class="nav-link active-petugaslapangan" href="{{route('petugaslapangan.index')}}"><i class="fas fa-fire"></i><span>Dashboard</span></a>
   </li>
   <li class="menu-header">Monitoring</li>
   <li class="nav-item dropdown">
@@ -24,7 +24,7 @@
 </ul>
 
   <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
-    <a href="{{ route('home')}}" class="btn btn-primary-petugaslap btn-lg btn-block btn-icon-split">
+    <a href="{{route('home')}}" class="btn btn-primary-petugaslap btn-lg btn-block btn-icon-split">
       <i class="fas fa-rocket"></i> Halaman Awal
     </a>
   </div>

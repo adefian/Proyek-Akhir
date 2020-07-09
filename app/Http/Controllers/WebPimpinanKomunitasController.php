@@ -72,9 +72,9 @@ class WebPimpinanKomunitasController extends Controller
     {
         $user = Auth::user();
 
-        $pimpinankom = PetugasLapangan::where('user_id', $id)->first();
+        $pimpinankom = PimpinanKomunitas::where('user_id', $id)->first();
         
-        return view('admins.petugas_lapangan.profile', compact('pimpinankom'));
+        return view('admins.pimpinan_komunitas.profile', compact('pimpinankom'));
 
     }
 
@@ -98,7 +98,47 @@ class WebPimpinanKomunitasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = PimpinanKomunitas::findOrFail($id);
+        $email = User::all()->except($user->user_id);
+        $cekemail = $email->where('email', $request->email)->first();
+
+        if ($cekemail) {
+            alert()->error('Email yang digunakan sudah terdaftar', 'Gagal');
+            return back();
+        } else {
+        $petugas_lapangan = PimpinanKomunitas::findOrFail($id);
+        $input = ([
+            'nama' => $request->namalengkap,
+            'nohp' => $request->nohp,
+            'alamat' => $request->alamat,
+            'bio' => $request->bio,
+        ]);
+
+        if ($file = $request->file('file_gambar')) {
+            $nama = time() . ".jpeg";
+            $file->move('foto_user/', $nama);  
+            $input['file_gambar'] = $nama;
+        }
+
+        $ed = $petugas_lapangan->user_id;
+        $user = User::findOrFail($ed);
+        $input2 = ([
+            'username' => $request->username,
+            'email' => $request->email,
+        ]);
+
+        if ($request->password) {
+            $pass = bcrypt($request->password);
+            $input2['password'] = $pass;
+        }
+
+        
+        $petugas_lapangan->update($input);
+        $user->update($input2);
+
+        alert()->success('Berhasil','Berhasil merubah profile anda');
+        return back();
+        }
     }
 
     /**

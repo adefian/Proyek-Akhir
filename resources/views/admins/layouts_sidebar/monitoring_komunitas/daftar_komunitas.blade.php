@@ -66,37 +66,39 @@
                                 </tr>
                               </thead>
                               <tbody>
-                              @foreach($data as $datas)
-                                <tr>
-                                  <th scope="row"> <i class="fas fa-users"></i> </th>
-                                  <td>{{$datas->daerah}}</td>
-                                  <td>{{$datas->keterangan}}</td>
-                                  <td class="text-right">
-                                  @if(auth()->user()->role == 'pimpinanecoranger')
-                                  <button class="edit btn btn-warning btn-sm fa fa-edit" title="Edit disini"></button>
+                              @if($data)
+                                @foreach($data as $datas)
+                                  <tr>
+                                    <th scope="row"> <i class="fas fa-users"></i> </th>
+                                    <td>{{$datas->daerah}}</td>
+                                    <td>{{$datas->keterangan}}</td>
+                                    <td class="text-right">
+                                    @if(auth()->user()->role == 'pimpinanecoranger')
+                                    <button class="edit btn btn-warning btn-sm fa fa-edit" title="Edit disini"></button>
 
-                                      @if(auth()->user()->role == 'pimpinanecoranger')
-                                          <a href="javascript:;" data-toggle="modal" onclick="deleteData({{$datas->id}})" data-target="#DeleteModal">
-                                          <button class="btn btn-danger btn-sm fa fa-trash" title="Hapus disini"></button>
-                                          </a>
-                                      @endif
-                                      @if(auth()->user()->role == 'petugaslapangan')
-                                          <a href="javascript:;" data-toggle="modal" onclick="deleteDatapetugaslap({{$datas->id}})" data-target="#DeleteModal">
-                                          <button class="btn btn-danger btn-sm fa fa-trash" title="Hapus disini"></button>
-                                          </a>
-                                      @endif
-                                      @if(auth()->user()->role == 'komunitas')
-                                          <a href="javascript:;" data-toggle="modal" onclick="deleteDatakomunitas({{$datas->id}})" data-target="#DeleteModal">
-                                          <button class="btn btn-danger btn-sm fa fa-trash" title="Hapus disini"></button>
-                                          </a>
-                                      @endif
-                                  @endif
-                                  </td>
-                                  <td style="display:none;">{{$datas->id}}</td>
-                                  <td style="display:none;">{{$datas->latitude}}</td>
-                                  <td style="display:none;">{{$datas->longitude}}</td>
-                                </tr>
-                              @endforeach
+                                        @if(auth()->user()->role == 'pimpinanecoranger')
+                                            <a href="javascript:;" data-toggle="modal" onclick="deleteData({{$datas->id}})" data-target="#DeleteModal">
+                                            <button class="btn btn-danger btn-sm fa fa-trash" title="Hapus disini"></button>
+                                            </a>
+                                        @endif
+                                        @if(auth()->user()->role == 'petugaslapangan')
+                                            <a href="javascript:;" data-toggle="modal" onclick="deleteDatapetugaslap({{$datas->id}})" data-target="#DeleteModal">
+                                            <button class="btn btn-danger btn-sm fa fa-trash" title="Hapus disini"></button>
+                                            </a>
+                                        @endif
+                                        @if(auth()->user()->role == 'komunitas')
+                                            <a href="javascript:;" data-toggle="modal" onclick="deleteDatakomunitas({{$datas->id}})" data-target="#DeleteModal">
+                                            <button class="btn btn-danger btn-sm fa fa-trash" title="Hapus disini"></button>
+                                            </a>
+                                        @endif
+                                    @endif
+                                    </td>
+                                    <td style="display:none;">{{$datas->id}}</td>
+                                    <td style="display:none;">{{$datas->latitude}}</td>
+                                    <td style="display:none;">{{$datas->longitude}}</td>
+                                  </tr>
+                                @endforeach
+                              @endif
                               </tbody>
                             </table>
                           </div>
@@ -142,7 +144,7 @@
     <script>
       var array = [];
     </script>
-
+    @if($data)
     @foreach ($data as $datas)
     <script>
 
@@ -150,6 +152,7 @@
       array.push(['<?php echo $datas->latitude ?>','<?php echo $datas->longitude ?>','<?php echo $datas->daerah ?>','<?php echo $datas->keterangan ?>','<?php echo $datas->email ?>']);
     </script>
     @endforeach
+    @endif
   <!-- ====================== end Array ================== -->
 @endsection
 
@@ -383,7 +386,7 @@
       function deleteData(id)
       {
           var id = id;
-          var url = '{{ route("daftarkomunitas.destroy", ":id") }}';
+          var url = '{{route("daftarkomunitas.destroy", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }
@@ -391,7 +394,7 @@
       function deleteDatakomunitas(id)
       {
           var id = id;
-          var url = '{{ route("daftarkomunitas-komunitas.destroy", ":id") }}';
+          var url = '{{route("daftarkomunitas-komunitas.destroy", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }
@@ -399,7 +402,7 @@
       function deleteDatapetugaslap(id)
       {
           var id = id;
-          var url = '{{ route("daftarkomunitas-petugaslap.destroy", ":id") }}';
+          var url = '{{route("daftarkomunitas-petugaslap.destroy", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }

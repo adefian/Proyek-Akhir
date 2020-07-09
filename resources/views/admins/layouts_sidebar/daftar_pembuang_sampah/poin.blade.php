@@ -45,10 +45,10 @@
                     @if(auth()->user()->role == 'petugaslapangan' || auth()->user()->role == 'pimpinanecoranger')
                       <div class="col-12">
                         @if(auth()->user()->role == 'pimpinanecoranger')
-                        <form action="{{ route('poin')}}" method="get">
+                        <form action="{{route('poin')}}" method="get">
                         @endif
                         @if(auth()->user()->role == 'petugaslapangan')
-                        <form action="{{ route('poin-petugaslap')}}" method="get">
+                        <form action="{{route('poin-petugaslap')}}" method="get">
                         @endif
                             <div class="form-group" style="display:inline-block">
                                 <div class="input-group">    

@@ -74,7 +74,8 @@ class WebAuthController extends Controller
                 'daerah' => 'required',
                 ]);
                 
-        } else {
+        }
+        
         $data = [
             'username' => $request->username,
             'role' => 'komunitas',
@@ -88,6 +89,7 @@ class WebAuthController extends Controller
         $user->nama = $request->nama;
         $user->nohp = $request->nohp;
         $user->alamat = $request->alamat;
+        $user->file_gambar = 'avatar-4.png';
         $user->jenis_kelamin = $request->jenis_kelamin;
         $user->user_id = $lastid;
         $user->komunitas_id = $request->daerah;
@@ -95,7 +97,7 @@ class WebAuthController extends Controller
 
             alert()->success('Selamat Berhasil Membuat Akun', 'Silahkan Login disini');
             return redirect()->route('login');
-        }
+        
     }
 
     public function daftardaerah()
@@ -123,7 +125,7 @@ class WebAuthController extends Controller
         Komunitas::create($data);
         alert()->info('Tunggu Proses Validasi, Akan segera diproses','Berhasil ditambahkan');
 
-        return back();
+        return redirect()->route('register');
         }
     }
 }

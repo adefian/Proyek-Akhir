@@ -25,7 +25,7 @@
          @else
           <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" title="Pesan" class="nav-link nav-link-lg message-toggle"><i class="far fa-envelope"></i></a>
         @endif
-        @if(count($notifagenda) >= 1)
+          @if(count($notifagenda) >= 1)
             <div class="dropdown-menu dropdown-list dropdown-menu-right">
               <div class="dropdown-header">Pesan
                 <div class="float-right">
@@ -34,7 +34,7 @@
               </div>
               <div class="dropdown-list-content dropdown-list-icons">
               @foreach($notifagenda as $data)
-                <a href="{{ route('kelolaagenda.index')}}" class="dropdown-item dropdown-item">
+                <a href="{{route('kelolaagenda.index')}}" class="dropdown-item dropdown-item">
                   <div class="dropdown-item-icon bg-primary text-white">
                     <i class="fas fa-calendar"></i>
                   </div>
@@ -51,7 +51,7 @@
                   </div>
                 </a>
               @endforeach
-                @elseif(count($notifsampahmasuk) >= 1)
+            @elseif(count($notifsampahmasuk) >= 1)
                   @if(auth()->user()->role == 'pimpinanecoranger' || auth()->user()->role == 'petugaslapangan')
                   <div class="dropdown-menu dropdown-list dropdown-menu-right">
                     <div class="dropdown-header">Pesan
@@ -62,9 +62,9 @@
                     <div class="dropdown-list-content dropdown-list-icons">
                       @foreach($notifsampahmasuk as $data)
                         @if(auth()->user()->role == 'pimpinanecoranger')
-                        <a href="{{ route('riwayatpembuangan.index')}}" class="dropdown-item dropdown-item">
+                        <a href="{{route('riwayatpembuangan.index')}}" class="dropdown-item dropdown-item">
                         @elseif(auth()->user()->role == 'petugaslapangan')
-                        <a href="{{ route('riwayatpembuangan-petugaslap.index')}}" class="dropdown-item dropdown-item">
+                        <a href="{{route('riwayatpembuangan-petugaslap.index')}}" class="dropdown-item dropdown-item">
                         @endif
                           <div class="dropdown-item-icon bg-danger text-white">
                             <i class="fas fa-trash"></i>
@@ -82,8 +82,9 @@
                           </div>
                         </a>
                       @endforeach
-                  @endif
-                  @elseif(count($notifvalidasi) >= 1)
+                    @endif
+                @endif
+                @if(count($notifvalidasi) >= 1)
                   @if(auth()->user()->role == 'pimpinanecoranger')
                   <div class="dropdown-menu dropdown-list dropdown-menu-right">
                     <div class="dropdown-header">Pesan
@@ -93,7 +94,7 @@
                     </div>
                     <div class="dropdown-list-content dropdown-list-icons">
                       @foreach($notifvalidasi as $data)
-                        <a href="{{ route('validasi.index')}}" class="dropdown-item dropdown-item">
+                        <a href="{{route('validasi.index')}}" class="dropdown-item dropdown-item">
                           <div class="dropdown-item-icon bg-warning text-white">
                             <i class="fas fa-tag"></i>
                           </div>
@@ -138,11 +139,11 @@
             <div class="dropdown-list-content dropdown-list-icons">
             @foreach($notifagendamendesak as $data)
               @if(auth()->user()->role == 'pimpinanecoranger')
-                  <a href="{{ route('kelolaagenda.index')}}" class="dropdown-item dropdown">
+                  <a href="{{route('kelolaagenda.index')}}" class="dropdown-item dropdown">
               @elseif(auth()->user()->role == 'komunitas')
-                  <a href="{{ route('kelolaagenda-komunitas.index')}}" class="dropdown-item dropdown">
+                  <a href="{{route('kelolaagenda-komunitas.index')}}" class="dropdown-item dropdown">
               @elseif(auth()->user()->role == 'pimpinankomunitas')
-                  <a href="{{ route('kelolaagenda-pimpinankom.index')}}" class="dropdown-item dropdown">
+                  <a href="{{route('kelolaagenda-pimpinankom.index')}}" class="dropdown-item dropdown">
               @endif
                     <div class="dropdown-item-icon bg-primary text-white">
                       <i class="fas fa-calendar"></i>
@@ -158,9 +159,9 @@
               @if(auth()->user()->role == 'pimpinanecoranger' || auth()->user()->role == 'petugaslapangan')
                 @foreach($notiftempatsampah as $data)
                       @if(auth()->user()->role == 'pimpinanecoranger')
-                      <a href="{{ route('indikasi.index')}}" class="dropdown-item dropdown-item">
+                      <a href="{{route('indikasi.index')}}" class="dropdown-item dropdown-item">
                       @elseif(auth()->user()->role == 'petugaslapangan')
-                      <a href="{{ route('indikasi-petugaslap.index')}}" class="dropdown-item dropdown-item">
+                      <a href="{{route('indikasi-petugaslap.index')}}" class="dropdown-item dropdown-item">
                       @endif
                     <div class="dropdown-item-icon bg-danger text-white">
                       <i class="fas fa-trash"></i>
@@ -174,9 +175,9 @@
                 @endforeach
                   @foreach($notifambilsampah as $data)
                       @if(auth()->user()->role == 'pimpinanecoranger')
-                      <a href="{{ route('indikasi.index')}}" class="dropdown-item dropdown-item">
+                      <a href="{{route('indikasi.index')}}" class="dropdown-item dropdown-item">
                       @elseif(auth()->user()->role == 'petugaslapangan')
-                      <a href="{{ route('indikasi-petugaslap.index')}}" class="dropdown-item dropdown-item">
+                      <a href="{{route('indikasi-petugaslap.index')}}" class="dropdown-item dropdown-item">
                       @endif
                       <div class="dropdown-item-icon bg-warning text-white">
                         <i class="fas fa-trash"></i>

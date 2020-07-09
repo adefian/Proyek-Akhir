@@ -43,9 +43,11 @@
                         <label for="wilayah" class="control-label">Wilayah</label>
                         <select name="wilayah" type="text" class="form-control">
                             <option selected disabled>Tetap</option>
+                            @if($komunitas)
                             @foreach($komunitas as $datas)
                                 <option value="{{$datas->daerah}}">{{$datas->daerah}}</option>
                             @endforeach
+                            @endif
                         </select>
                     </div>  
                 </div>

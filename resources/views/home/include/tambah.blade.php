@@ -9,7 +9,7 @@
         </div>
         <div class="modal-body">
 
-                <form action="{{ route('kirimsaranecobrick')}}" method="POST" enctype="multipart/form-data">
+                <form action="{{route('kirimsaranecobrick')}}" method="POST" enctype="multipart/form-data">
             
                 {{csrf_field()}}
 

@@ -16,10 +16,8 @@ class TempatSampahController extends Controller
 
 	public function MonitoringSampah()
 	{
-		$lihat= TempatSampah::all();
-
-
-
+        $lihat= TempatSampah::select('nama','latitude','longitude','status')->get();
+        
  		return response()->json([
             'pesan' =>'sukses',
             'monitoring' => $lihat
