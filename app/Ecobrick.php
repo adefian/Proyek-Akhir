@@ -16,4 +16,13 @@ class Ecobrick extends Model
     {
         return $this->belongsTo('App\User', 'user_id');
     }
+
+    public function ambilFoto()
+    {
+        if (!$this->foto_diaplikasikan) {
+            return asset('assets/img/ecobrick/ecobrick.jpg');
+        }
+
+        return asset('assets/img/ecobrick/'.$this->foto_diaplikasikan);
+    }
 }

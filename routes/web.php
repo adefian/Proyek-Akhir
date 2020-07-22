@@ -36,12 +36,14 @@ Route::group(['middleware' => ['auth','pimpinanecoranger']],function(){
     Route::resource('kelolaagenda', 'WebAgendaController');
     Route::resource('daftarkomunitas', 'WebMonitoringkomunitasController');
     Route::resource('validasi', 'WebValidasiController');
+    Route::resource('datapimpinan', 'WebDatapimpinanController');
     Route::resource('datapimpinankomunitas', 'WebDatapimpinankomunitasController');
     Route::resource('datapetugaslapangan', 'WebDatapetugaslapanganController');
     Route::resource('dataanggotakomunitas', 'WebDatakomunitasController');
     Route::resource('datapetugaskontenreward', 'WebDatapetugaskontenController');
     Route::resource('reviewsaranecobrick', 'WebEcobrickController');
     Route::resource('riwayatpembuangan', 'WebSampahController');
+    Route::resource('laporan', 'WebLaporanController');
     Route::get('poin', 'WebSampahController@poin')->name('poin');
     Route::get('feedbacks', 'WebHomeController@feedbacks')->name('feedbacks');
     Route::post('hapusfeedback/{id}', 'WebHomeController@hapusfeedback')->name('hapusfeedback');
@@ -103,9 +105,9 @@ Route::group(['middleware' => ['auth','pimpinankomunitas']],function(){
     Route::get('logout-pimpinankom','WebAuthController@logout')->name('logout-pimpinankom'); 
 });
 
-Route::get('/feedbac', function(){
-    return view('feedback');
-});
+Route::get('code_reward', 'WebSampahController@data')->name('code_reward'); 
+
+Route::get('datasensor', 'WebSampahController@datasensor')->name('datasensor');
 
 // Route::get('tukarcode','WebSampahController@tukarcode');
 // Route::post('pushtukarcode/{id}','WebSampahController@pushtukarcode');

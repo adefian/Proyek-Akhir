@@ -1,0 +1,9 @@
+{
+    "liveServer.settings.CustomBrowser": "chrome",
+    "liveServer.settings.multiRootWorkspaceName": "web",
+    "liveServer.settings.proxy": {
+        "proxyUri": "http://127.0.0.1:8000"
+    },
+    "liveServer.settings.useWebExt": true,
+    "liveServer.settings.root": ""
+}

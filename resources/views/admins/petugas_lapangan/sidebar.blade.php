@@ -1,7 +1,7 @@
 <ul class="sidebar-menu-petugaslap">
-  <li class="menu-header">Dashboard</li>
+  <li class="menu-header">Beranda</li>
   <li class="active">
-      <a class="nav-link active-petugaslapangan" href="{{route('petugaslapangan.index')}}"><i class="fas fa-fire"></i><span>Dashboard</span></a>
+      <a class="nav-link active-petugaslapangan" href="{{route('petugaslapangan.index')}}"><i class="fas fa-fire"></i><span>Beranda</span></a>
   </li>
   <li class="menu-header">Monitoring</li>
   <li class="nav-item dropdown">

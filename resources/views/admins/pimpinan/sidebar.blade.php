@@ -33,13 +33,16 @@
   </li>
 
   <li class="nav-item dropdown">
-    <a class="nav-link" href="{{route('reviewsaranecobrick.index')}}"><i class="fas fa-leaf"></i><span>Review Saran Ecobrick</span></a>
+    <a class="nav-link" href="{{route('reviewsaranecobrick.index')}}"><i class="fas fa-leaf"></i><span>Ulasan Saran Ecobrick</span></a>
   </li>
   <li class="nav-item dropdown">
     <a class="nav-link" href="{{route('riwayatpembuangan.index')}}"><i class="fas fa-box-open"></i><span>Riwayat Pembuangan Sampah</span></a>
   </li>
   <li class="nav-item dropdown">
     <a class="nav-link" href="{{route('feedbacks')}}"><i class="fas fa-folder"></i><span>Feedback</span></a>
+  </li>
+  <li class="nav-item dropdown">
+    <a class="nav-link" href="{{route('laporan.index')}}"><i class="fas fa-folder"></i><span>Laporan</span></a>
   </li>
 
 </ul>

@@ -7,6 +7,7 @@ use App\PetugasLapangan;
 use App\Komunitas;
 use App\PimpinanEcoranger;
 use App\User;
+use File;
 
 class WebDatapetugaslapanganController extends Controller
 {
@@ -131,7 +132,7 @@ class WebDatapetugaslapanganController extends Controller
         $id = $petugaslap->user_id;
         $user = User::findOrFail($id);
         $input2 = ([
-            'username' => $request->username,
+            'username' => $request->nama,
             'email' => $request->email,
         ]);
         
@@ -154,6 +155,7 @@ class WebDatapetugaslapanganController extends Controller
         $id = PetugasLapangan::find($id);
         $user_id = $id->user_id;
         $user = User::find($user_id);
+        File::delete('foto_user/'.$id->file_gambar);
 
         $user->delete($user);
         $id->delete($id);

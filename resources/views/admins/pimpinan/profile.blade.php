@@ -6,7 +6,7 @@
     <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>Profile</h1>
+            <h1>Profil</h1>
           </div>
 
           <form action="{{route('pimpinan.update', [$pimpinan->id])}}" method="POST" class="needs-validation" novalidate="" enctype="multipart/form-data">
@@ -14,7 +14,7 @@
               <div class="row">
                 <div class="col-12 col-md-12 col-lg-5">
                   <div class="card profile-widget card-primary">
-                      <h2 class="section-title">Hi, {{auth()->user()->username}}!</h2>
+                      <h2 class="section-title">Hai, {{auth()->user()->username}}!</h2>
                       <p class="section-lead"></p>
                       <div class="row justify-content-center">
                         <div class="col-6 col-md-8 col-lg-6">
@@ -22,20 +22,19 @@
                             <img alt="image" src="{{$pimpinan->ambilFoto()}}" class="rounded-circle profile-widget-picture align-center" style="height:150px; width:150px;">
                           </div>
                         </div>
-                        <div class="profile-widget-description">
-                          <div class="profile-widget-name">{{$pimpinan->nama}} <div class="text-muted d-inline font-weight-normal"><div class="slash"></div>Pimpinan Ecoranger</div></div>
-                          {{$pimpinan->bio}}                          
-                        </div>
                         <div class="col-11 col-md-11 col-lg-5">
                           <div class="form-group">
                             <label>Ganti Foto</label>
-                            <input name="file_gambar" type="file" id="image" class="form-control">
-                            <div class="mt-3" id="upload-demo"></div>
+                            <input name="file_gambar" type="file" class="form-control">
                           </div>
                         </div>
                       </div>
-                      </div>
-                    </div>
+                    <div class="profile-widget-description">
+                      <div class="profile-widget-name">{{$pimpinan->nama}} <div class="text-muted d-inline font-weight-normal"><div class="slash"></div>Pimpinan Ecoranger</div></div>
+                          {{$pimpinan->bio}}
+                  </div>
+                  </div>
+                </div>
                 <div class="col-12 col-md-12 col-lg-7">
                   <div class="card card-primary">
                   
@@ -43,7 +42,7 @@
                     {{method_field('PATCH')}}  
 
                       <div class="card-header">
-                        <h4>Edit Profile</h4>
+                        <h4>Edit Profil</h4>
                       </div>
                       <div class="card-body">
                           <div class="row">

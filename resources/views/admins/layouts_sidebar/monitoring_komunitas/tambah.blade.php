@@ -53,7 +53,14 @@
                         <input name="tanggal" id="tanggal-max" placeholder="Pilih Tanggal" type="datetime-local" class="form-control" min="{{Carbon\Carbon::now()->format('Y-m-d\TH:i')}}" required>
                     </div>
                         <small id="pemberitahuan"></small>
-                </div>                
+                </div>              
+                <div class="form-group">
+                    <label for="file_gambar">Gambar</label>
+                    <div class="input-group">    
+                        <input name="file_gambar" type="file" class="form-control">
+                    </div>
+                </div>
+
                 @if(auth()->user()->role === 'pimpinanecoranger')
                 <div class="form-group">
                     <label for="komunitas_id">Dari Komunitas</label>

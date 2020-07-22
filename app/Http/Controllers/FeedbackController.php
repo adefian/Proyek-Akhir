@@ -12,7 +12,7 @@ class FeedbackController extends Controller
 {
     public function lihatfeedback(){
 
-	   $feedback= Feedback::all();
+	   $feedback= Feedback::orderBy('updated_at','DESC')->get();
    		return response()->json([
             'pesan' =>'sukses lah',
             'upload' => $feedback
@@ -26,10 +26,11 @@ class FeedbackController extends Controller
   		// menyimpan data file yang diupload ke variabel $file
   		$file = $request->input('file_gambar');
       $email= $request->input('email');
+      $nama= $request->input('nama');
       $kritik_saran= $request->input('kritik_saran');
   		$nama_file = time().".jpeg";
   		// $tujuan_upload = '../resource/gambar/';
-  		$tujuan_upload = public_path() ."feedback/";
+  		$tujuan_upload = public_path() ."/feedback/";
 
       if (file_put_contents($tujuan_upload . $nama_file , base64_decode($file))) {
          
@@ -48,6 +49,7 @@ class FeedbackController extends Controller
   			'file_gambar' => $nama_file,
   			'email' => $request->input('email'),
   			'kritik_saran' => $request->input('kritik_saran'),
+  			'nama' => $request->input('nama'),
   		]);
 
       $feedback= Feedback::where('email',$request->email)->orderBy('updated_at', 'DESC')->first();

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Ecobrick;
+use File;
 
 class WebEcobrickController extends Controller
 {
@@ -98,6 +99,7 @@ class WebEcobrickController extends Controller
             $nama = time() .'_'. $file->getClientOriginalName();
             $file->move('assets/img/ecobrick/', $nama);  
             $input['foto_diaplikasikan'] = $nama;
+            $input['level'] = 1;
         }
         
         // dd($nama);
@@ -114,16 +116,20 @@ class WebEcobrickController extends Controller
      */
     public function destroy($id)
     {
-        $agenda = Ecobrick::find($id);
+        $id = Ecobrick::find($id);
+        File::delete('assets/img/ecobrick/'.$id->foto_diusulkan);
+        File::delete('assets/img/ecobrick/'.$id->foto_diaplikasikan);
 
-        $agenda->delete($id);
+        $id->delete($id);
         alert()->success('Sukses','Data berhasil dihapus');
         return back();
     }
 
     public function ecobrick()
     {
-        return view ('home.ecobrick');
+        $data = Ecobrick::where('level', 1)->get();
+
+        return view ('home.ecobrick', compact('data'));
     }
 
     public function TambahSaran(Request $request)

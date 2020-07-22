@@ -8,6 +8,7 @@ use App\PetugasKontenReward;
 use App\Komunitas;
 use App\PimpinanEcoranger;
 use App\User;
+use File;
 
 class WebDatapetugaskontenController extends Controller
 {
@@ -143,7 +144,7 @@ class WebDatapetugaskontenController extends Controller
         $id = PetugasKontenReward::find($id);
         $user_id = $id->user_id;
         $user = User::find($user_id);
-
+        File::delete('foto_user/'.$id->file_gambar);
         $user->delete($user);
         $id->delete($id);
 

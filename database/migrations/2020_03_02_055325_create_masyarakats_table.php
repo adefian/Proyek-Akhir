@@ -18,7 +18,7 @@ class CreateMasyarakatsTable extends Migration
             $table->string('nama');
             $table->string('nohp');
             $table->string('alamat');
-            $table->string('file_gambar')->nullable();
+            $table->string('file_gambar')->default('avatar-3.png');
             $table->integer('total_poin')->default(0);
             $table->timestamps();
             $table->bigInteger('user_id')->unsigned();

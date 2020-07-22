@@ -117,7 +117,7 @@
                     </div>
                     <div class="modal-body">
                         {{ csrf_field() }}
-                        {{ method_field('GET') }}
+                        {{ method_field('DELETE') }}
                         <p>Apakah anda yakin tidak melakukan validasi pada komunitas ini ?</p>
                         <button type="button" class="btn btn-secondary float-right" data-dismiss="modal">Batal</button>
                         <button type="submit" name="" class="btn btn-danger float-right mr-2" data-dismiss="modal" onclick="formSubmit()">Hapus</button>
@@ -144,21 +144,12 @@
             @if(auth()->user()->role == 'pimpinanecoranger')
                 <form method="POST" action="" class="needs-validation" novalidate="" id="editForm" enctype="multipart/form-data">
             @endif
-            @if(auth()->user()->role == 'petugaslapangan')
-                <form method="POST" action="" class="needs-validation" novalidate="" id="editFormpetugaslap" method="POST" enctype="multipart/form-data">
-            @endif
-            @if(auth()->user()->role == 'komunitas')
-                <form method="POST" action="" class="needs-validation" novalidate="" id="editFormkomunitas" method="POST" enctype="multipart/form-data">
-            @endif
                 {{ csrf_field() }}
                 {{ method_field('PATCH') }}
 
                 <div class="form-group">
                     <div class="input-group">                      
-                    <select name="level" type="text" class="form-control">
-                        <option selected disabled>Pilih</option>
-                        <option value="1">Lakukan Validasi data</option>
-                      </select>
+                    <input type="hidden" name="level" value="1"></input>
                     </div>
                 </div>
                 

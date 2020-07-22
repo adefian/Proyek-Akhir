@@ -38,10 +38,9 @@
                     </label>
                     <div class="input-group">    
                         <select name="jenis_agenda" type="text" class="form-control">
-                            <option selected disabled>Pilih Jenis Agenda</option>
+                            <option selected disabled>Tetap</option>
                             <option value="1">Mendesak</option>
                             <option value="2">Penting</option>
-                            <option value="3">Rutin</option>
                         </select>
                     </div>
                 </div>
@@ -51,7 +50,12 @@
                         <input name="tanggal" placeholder="Pilih Tanggal" id="tanggal" type="datetime-local" class="form-control" min="{{Carbon\Carbon::now()->format('Y-m-d\TH:i')}}"  required>
                     </div>
                 </div>
-                
+                <div class="form-group">
+                    <label for="file_gambar">Gambar</label>
+                    <div class="input-group">    
+                        <input name="file_gambar" type="file" class="form-control">
+                    </div>
+                </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-warning">Edit</button>
                     <button type="button" class="btn btn-secondary float-right" data-dismiss="modal">Batal</button>

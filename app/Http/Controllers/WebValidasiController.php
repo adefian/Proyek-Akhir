@@ -70,6 +70,7 @@ class WebValidasiController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
         $komunitas = Komunitas::findOrFail($id);
         
         $input = ([
@@ -79,6 +80,7 @@ class WebValidasiController extends Controller
         $komunitas->update($input);
         alert()->success('Berhasil validasi data', 'telah tervalidasi');
         return redirect('daftarkomunitas');
+        
     }
 
     /**

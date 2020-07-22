@@ -45,25 +45,26 @@
                                     <th>Kritik & Saran</th>
                                     <th>Gambar</th>
                                     <th>Tanggal</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @if($data)
                                     @php $no = 1 @endphp
                                     @foreach($data as $datas)
-                                        <tr>
-                                            <td>{{$no++}}</td>
-                                            <td>{{$datas->nama}}</td>
-                                            <td>{{$datas->email}}</td>
-                                            <td>{{$datas->kritik_saran}}</td>
-                                            <td class="align-middle">
-                                            @if($datas->foto_diaplikasikan)
-                                                <img height="100" id="myImg" src="{{asset('feedback')}}/{{$datas->foto_diaplikasikan}}" data-toggle="modal" data-target="#myModal"></img>
+                                        <tr class="align-middle">
+                                            <td class="align-middle">{{$no++}}</td>
+                                            <td class="align-middle">{{$datas->nama}}</td>
+                                            <td class="align-middle">{{$datas->email}}</td>
+                                            <td class="align-middle">{{$datas->kritik_saran}}</td>
+                                            <td class="align-middle text-center">
+                                            @if($datas->file_gambar)
+                                                <img height="100" id="myImg" src="{{asset('feedback')}}/{{$datas->file_gambar}}" data-toggle="modal" data-target="#myModal"></img>
                                                 @else
                                                 -
                                             @endif
                                             </td>
-                                            <td>{{$datas->created_at->diffForhumans()}}</td>
+                                            <td class="align-middle">{{$datas->created_at->diffForhumans()}}</td>
                                             <td class="text-center align-middle">
 
                                                 @if(auth()->user()->role == 'pimpinanecoranger')

@@ -12,7 +12,7 @@
     <a class="nav-link" href="{{route('kelolaagenda-komunitas.index')}}"><i class="fas fa-calendar-week"></i><span>Kelola Agenda</span></a>
   </li>
   <li class="nav-item dropdown">
-    <a class="nav-link" href="{{route('reviewsaranecobrick-komunitas.index')}}"><i class="fas fa-leaf"></i><span>Review Saran Ecobrick</span></a>
+    <a class="nav-link" href="{{route('reviewsaranecobrick-komunitas.index')}}"><i class="fas fa-leaf"></i><span>Ulasan Saran Ecobrick</span></a>
   </li>
 </ul>
 

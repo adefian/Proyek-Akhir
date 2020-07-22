@@ -20,7 +20,8 @@ class CreateAnggotaKomunitasTable extends Migration
             $table->string('alamat')->nullable();
             $table->string('file_gambar')->nullable();
             $table->string('jenis_kelamin')->nullable();
-            $table->string('level')->default(0);
+            $table->string('bio')->nullable();
+            $table->integer('level')->default(0);
             $table->timestamps();
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')

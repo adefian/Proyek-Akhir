@@ -9,7 +9,7 @@ class Masyarakat extends Model
 
     protected $table = "masyarakat";
          protected $fillable = [
-        'nama','nohp','alamat','user_id','file_gambar','poin'
+        'nama','nohp','alamat','user_id','file_gambar','total_poin'
     ];
 
        public function User() {

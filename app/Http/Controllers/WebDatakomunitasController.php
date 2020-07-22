@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\AnggotaKomunitas;
 use App\User;
 use App\PimpinanKomunitas;
+use File;
 
 class WebDatakomunitasController extends Controller
 {
@@ -118,7 +119,7 @@ class WebDatakomunitasController extends Controller
     public function destroy($id)
     {
         $id = AnggotaKomunitas::findOrFail($id);
-
+        File::delete('foto_user/'.$id->file_gambar);
         $id->delete($id);
 
         alert()->success('Berhasil','Data berhasil dihapus');

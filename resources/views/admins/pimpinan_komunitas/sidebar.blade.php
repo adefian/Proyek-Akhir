@@ -16,7 +16,7 @@
     <a href="#" class="nav-link has-dropdown"><i class="fas fa-leaf"></i> <span>Manajemen</span></a>
     <ul class="dropdown-menu">
       <li><a class="nav-link" href="{{route('dataanggotakomunitas-pimpinankom.index')}}">Data Anggota Komunitas</a></li>
-      <li><a class="nav-link" href="{{route('reviewsaranecobrick-pimpinankom.index')}}">Review Saran Ecobrick</a></li>
+      <li><a class="nav-link" href="{{route('reviewsaranecobrick-pimpinankom.index')}}">Ulasan Saran Ecobrick</a></li>
       <li><a class="nav-link" href="{{route('feedbacks-pimpinankom')}}">Feedback</a></li>
       <li><a class="nav-link" href="{{route('laporan-pimpinankom.index')}}">Laporan</a></li>
     </ul>

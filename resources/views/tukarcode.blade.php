@@ -39,7 +39,7 @@
                 {{ method_field('POST') }}
                     <div class="form-group">
                     <label for="kode_reward" class="control-label">Kode</label>
-                      <input id="kode_reward" type="text" class="form-control" name="kode_reward" tabindex="1" required autofocus>
+                        <input id="kode_reward" type="text" class="form-control" name="kode_reward" tabindex="1" required autofocus>
                     </div>
                     <button class="btn btn-info" type="submit">Tukar</button>
                     </form>

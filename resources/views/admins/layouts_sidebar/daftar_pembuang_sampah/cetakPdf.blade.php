@@ -61,11 +61,11 @@
 
 								<tr align="center">
 									<!-- Nomor -->
-									<td width="15">{{$i++}}</td>
-									<td width="70">{{$datas->nama}}</td>
-									<td width="80"> {{$datas->nohp}}</td>							
-									<td width="85">{{$datas->alamat}}</td>							
-									<td width="80">{{$datas->total_poin}}</td>							
+									<td width="2%">{{$i++}}</td>
+									<td width="20%">{{$datas->nama}}</td>
+									<td width="17%"> {{$datas->nohp}}</td>							
+									<td width="24%">{{$datas->alamat}}</td>							
+									<td width="10%">{{$datas->total_poin}}</td>							
 								</tr>
 							@endforeach
 							@endif
@@ -77,12 +77,40 @@
 
 	 		<div class="row">
 	 			<div class="col-md text-center">
-	 				<!-- Keterangan -->
+	 				 <!-- QrCode -->
+					  <input id="text" type="hidden" value="{{$pimpinan->nama}}, {{auth()->user()->email}}"></input>
+					 <div id="qrcode" class="float-right" style="width:100px; height:100px; margin-top:40px; margin-right:170px"></div>
 	 			</div>
 	 		</div>
 		</div>
-	 <script type="text/javascript">
-	 	window.print();
-	 </script>
+		<script type="text/javascript" src="{{asset('assets/Qr_Code/jquery.min.js')}}"></script>
+		<script type="text/javascript" src="{{asset('assets/Qr_Code/qrcode.js')}}"></script>
+	<script type="text/javascript">
+		var qrcode = new QRCode(document.getElementById("qrcode"), {
+			width : 80,
+			height : 80
+		});
+
+		function makeCode () {		
+			var elText = document.getElementById("text");
+			
+			qrcode.makeCode(elText.value);
+		}
+
+		makeCode();
+
+		$("#text").
+			on("blur", function () {
+				makeCode();
+			}).
+			on("keydown", function (e) {
+				if (e.keyCode == 13) {
+					makeCode();
+				}
+			});
+		</script>
+		<script type="text/javascript">
+			// window.print();
+		</script>
 	</body>
 </html>

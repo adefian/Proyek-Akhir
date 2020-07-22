@@ -132,7 +132,7 @@ class WebDatapimpinankomunitasController extends Controller
         $id = $petugaslap->user_id;
         $user = User::findOrFail($id);
         $input2 = ([
-            'username' => $request->username,
+            'username' => $request->nama,
             'email' => $request->email,
         ]);
         

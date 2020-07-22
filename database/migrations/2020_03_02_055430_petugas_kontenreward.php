@@ -18,7 +18,7 @@ class PetugasKontenreward extends Migration
             $table->string('nama')->nullable();
             $table->string('nohp')->nullable();
             $table->string('alamat')->nullable();
-            $table->string('file_gambar')->nullable();
+            $table->string('file_gambar')->default('avatar-4.png');
             $table->timestamps();
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')

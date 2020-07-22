@@ -54,12 +54,12 @@
 					<p class="mt-3">{{ Carbon\Carbon::now()->isoFormat('LLLL')}} WIB</p>
                     <table border="1" class="col-12" width="100%">
 						<thead>
-							<tr align="center" height="20">
+							<tr align="center" height="25">
 								<th>No</th>
 								<th>Nama Kegiatan</th>
 								<th>Komunitas</th>
 								<th>Keterangan</th>
-								<th width="50">Jenis Kegiatan</th>
+								<th>Jenis Kegiatan</th>
 								<th>Tanggal</th>
 								<th>Yang</br>Menambahkan</th>
 							</tr>
@@ -72,19 +72,21 @@
 
 								<tr align="center">
 									<!-- Nomor -->
-									<td width="15">{{$i++}}</td>
-									<td width="90">{{$datas->nama}}</td>
-									<td width="90">{{$datas->komunitas->daerah}}</td>							
-									<td width="85">{{$datas->keterangan}}</td>							
-									<td width="50">
+									<td width="3%">{{$i++}}</td>
+									<td width="13%">{{$datas->nama}}</td>
+									<td width="13%">{{$datas->komunitas->daerah}}</td>							
+									<td width="30%">{{$datas->keterangan}}</td>							
+									<td width="14%">
 										@if($datas->jenis_agenda == 1)
-                                            <span style="width:80%; align:center;" class="badge badge-warning">Agenda Mendesak</span>
+                                            <span style="width:80%; align:center;" class="badge badge-danger">Agenda Mendesak</span>
+                                            @elseif($datas->jenis_agenda == 2)
+                                            <span style="width:80%; align:center;" class="badge badge-warning">Agenda Penting</span>
                                             @else
-                                            <span style="width:80%; align:center;" class="badge badge-success">Agenda tidak Mendesak</span>
+                                            <span style="width:80%; align:center;" class="badge badge-success">Agenda Rutin</span>
                                         @endif
 									</td>		
-									<td width="90">{{ Carbon\Carbon::parse($datas->tanggal)->isoFormat('LLLL') }} WIB</td>
-									<td width="50">{{$datas->petugasygmenambahkan->username}}</td>    					
+									<td width="12%">{{ Carbon\Carbon::parse($datas->tanggal)->isoFormat('LLLL') }} WIB</td>
+									<td width="10%">{{$datas->petugasygmenambahkan->username}}</td>    					
 								</tr>
 							@endforeach
 							@endif
@@ -95,19 +97,19 @@
 
 								<tr align="center">
 									<!-- Nomor -->
-									<td width="15">{{$i++}}</td>
-									<td width="90">{{$datas->nama}}</td>
-									<td width="90">{{$datas->komunitas->daerah}}</td>							
-									<td width="85">{{$datas->keterangan}}</td>							
-									<td width="50">
+									<td width="3%">{{$i++}}</td>
+									<td width="13%">{{$datas->nama}}</td>
+									<td width="13%">{{$datas->komunitas->daerah}}</td>							
+									<td width="30%">{{$datas->keterangan}}</td>							
+									<td width="12%">
 										@if($datas->jenis_agenda == 1)
                                             <span style="width:80%; align:center;" class="badge badge-warning">Agenda Mendesak</span>
                                             @else
                                             <span style="width:80%; align:center;" class="badge badge-success">Agenda tidak Mendesak</span>
                                         @endif
 									</td>		
-									<td width="90">{{ Carbon\Carbon::parse($datas->tanggal)->isoFormat('LLLL') }} WIB</td>
-									<td width="50">{{$datas->petugasygmenambahkan->username}}</td>    					
+									<td width="12%">{{ Carbon\Carbon::parse($datas->tanggal)->isoFormat('LLLL') }} WIB</td>
+									<td width="10%">{{$datas->petugasygmenambahkan->username}}</td>    					
 								</tr>
 							@endforeach
 							@endif
@@ -121,7 +123,7 @@
 	 			<div class="col-12 float-right text-right">
 					 <!-- QrCode -->
 					 <input id="text" type="hidden" value="{{$pimpinan->nama}}, {{auth()->user()->email}}"></input>
-					 <div id="qrcode" class="float-right" style="width:100px; height:100px; margin-top:40px; margin-right:30px"></div>
+					 <div id="qrcode" class="float-right" style="width:100px; height:100px; margin-top:40px; margin-right:170px"></div>
 	 			</div>
 	 		</div>
 		</div>
@@ -130,8 +132,8 @@
 		<script type="text/javascript" src="{{asset('assets/Qr_Code/qrcode.js')}}"></script>
 	<script type="text/javascript">
 		var qrcode = new QRCode(document.getElementById("qrcode"), {
-			width : 100,
-			height : 100
+			width : 80,
+			height : 80
 		});
 
 		function makeCode () {		
@@ -153,7 +155,7 @@
 			});
 		</script>
 		<script type="text/javascript">
-			window.print();
+			 window.print();
 		</script>
 	</body>
 </html>

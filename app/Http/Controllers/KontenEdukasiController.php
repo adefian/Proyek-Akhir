@@ -10,7 +10,7 @@ use Illuminate\Support\Arr;
 class KontenEdukasiController extends Controller
 {
     public function lihatkonten(){
-		  $upload = KontenEdukasi::all();
+		  $upload = KontenEdukasi::orderBy('updated_at','DESC')->get();
         return response()->json([
             'pesan' =>'Konten Edukasi',
             'upload' => $upload

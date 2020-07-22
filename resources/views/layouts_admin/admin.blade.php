@@ -108,7 +108,7 @@
 
   <script type="text/javascript">
     window.setInterval('refresh()', 300000); 	// Call a function every 60000 milliseconds (OR 60 seconds).
-
+                                    //300000 (OR 5 menit)
     // Refresh or reload page.
     function refresh() {
         window .location.reload();

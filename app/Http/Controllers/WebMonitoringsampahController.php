@@ -8,6 +8,7 @@ use App\User;
 use App\TempatSampah;
 use App\Token;
 use App\Agenda;
+use File;
 
 class WebMonitoringsampahController extends Controller
 {
@@ -47,6 +48,7 @@ class WebMonitoringsampahController extends Controller
             'latitude' => $request->latitude,
             'longitude' => $request->longitude,
             'user_id' => $user,
+            'status' => 'kosong'
         ]);
 
         if ($file = $request->file('file_gambar')) {
@@ -132,6 +134,7 @@ class WebMonitoringsampahController extends Controller
     public function destroy($id)
     {
         $id = TempatSampah::findOrFail($id);
+        File::delete('assets/img/tempatsampah/'.$id->file_gambar);
 
         $id->delete($id);
 
@@ -145,58 +148,4 @@ class WebMonitoringsampahController extends Controller
         return view('admins.layouts_sidebar.monitoring_sampah.lokasi', compact('data'));
     }
 
-    public function PushNotifSampah()
-	{
-			
-    	$fcmUrl = 'https://fcm.googleapis.com/fcm/send';
-        $tok = User::all(); //ambil data user
-        // $tok = Token::all()->except(3,4); //ambil data user
-
-        $notif = Agenda::where('jenis_agenda', 1)->orderBy('updated_at', 'DESC')->first();
-
-        $tokenList = Arr::pluck($tok,'token');  // Array data token 
-
-        // dd($tokenList);
-
-
-        
-        // dd($notif->nama);
-        $dat = \Carbon\Carbon::parse($notif->tanggal)->isoFormat('LLLL'); //buat tanggal sesuai format Indonesia
-           
-            $notification = [
-                'image' => 'https://cdnaz.cekaja.com/media/2019/11/324_Artikel_CA19_Deretan-Hotel-Murah-untuk-Keluarga-di-Kota-Banyuwangi.-Mulai-dari-Rp.-75-Ribu-Saja.jpg',
-                'title'=> $notif->nama,
-                'body' => $notif->keterangan.'. '.$dat,
-                'sound' => true,
-            ];
-        
-        $extraNotificationData = ["message" => $notification,"moredata" =>'dd'];
-
-            $fcmNotification = [
-                'registration_ids' => $tokenList, //multple token array
-                // 'to'        => $tok, //single token
-                'notification' => $notification,
-                'data' => $extraNotificationData
-            ];
-        $headers = [
-            'Authorization: key=AAAABP4uS2A:APA91bEewylScLI5MFdjyQ_Tt67vwzZcsfqa-1d43F-6tKT98aRXbt7yAtnbQyqMT2E_uipViUYaHIDJ04Nbwcft55o0x69XIPj-WsE_jvclXoxrAqJWXK4hICYFy2dPAtcpXxKAfcdS',
-            'Content-Type: application/json'
-        ];
-
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL,$fcmUrl);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fcmNotification));
-        $result = curl_exec($ch);
-        curl_close($ch);
-
-        dd($result);
-
-
-        return response()->json($result);
-	}
 }

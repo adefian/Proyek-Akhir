@@ -11,8 +11,8 @@ class MasyarakatController extends Controller
 {
 
   public function Masyarakat()
-  	{
-		  $hadiahku= Masyarakat::all();
+    {
+      $hadiahku= Masyarakat::all();
 
       foreach ($hadiahku as $value) {
         $array[]=[
@@ -26,19 +26,19 @@ class MasyarakatController extends Controller
             ];
           }
         return response()->json($array);
-	   }
+    }
   
     public function TambahMasyarakat (Request $request)
     {
 
-    	$data = new Masyarakat;
-    	$data->nama = $request->input('nama');
-    	$data->nohp = $request->input('nohp');
-    	$data->alamat = $request->input('alamat');
-    	$data->save();
+      $data = new Masyarakat;
+      $data->nama = $request->input('nama');
+      $data->nohp = $request->input('nohp');
+      $data->alamat = $request->input('alamat');
+      $data->save();
 
-    	return "Berhasil";
-     }
+      return "Berhasil";
+    }
 
     public function edit(Request $request, $id)
     {
@@ -62,10 +62,10 @@ class MasyarakatController extends Controller
           $pesan ="Kritik dan Saran Berhasil Ditambahkan";
 
         }else{
-         
+
           $pesan ="Terjadi Kesalahan";
         }
-         
+
           $data =  Masyarakat::where('user_id',$id)->first();
         
           $input =([
@@ -87,17 +87,21 @@ class MasyarakatController extends Controller
             'email'=> $request->email
           ]);
 
+          if ($request->input('password')) {
+            $input['password'] = bcrypt($request->input('password'));
+          }
+
           $user->update($input2);
           $data->update($input);
           
           return response()->json([
-               'pesan' =>'sukses lah',
-               'upload' => $user,$data
+            'pesan' =>'sukses lah',
+            'upload' => $user,$data
 
         ],200);
           // return "Berhasil";
     }
-   
+
     public function show( $id)
     {
   
@@ -116,6 +120,6 @@ class MasyarakatController extends Controller
 
     return response()->json($array);
   }
-   
- 
+
+
 }

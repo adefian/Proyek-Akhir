@@ -12,82 +12,81 @@ class UserController extends Controller
 
 {
 
-    public function DaftarPengguna (Request $request){
-      $cekemail=User::where('email',$request->email)->first();
-      if ($cekemail) {
-     
-        $pesan ="Email Sudah Digunakan";
-  
-        return($pesan);
+  public function DaftarPengguna(Request $request)
+  {
+    $cekemail = User::where('email', $request->email)->first();
+    if ($cekemail) {
 
-        }else{
+      $pesan = "Email Sudah Digunakan";
 
-          $tok = User::where('token', $request->token)->get();
-          if($tok){
-            $a = null;
-          }else{
-            $a = $request->token;
-          }
+      return ($pesan);
+    } else {
 
-          $data = ([
-          'username' => $request->username,
-          'email' => $request->email,
-          // 'email' => $request->get('email'),
-          'password' =>bcrypt($request->password),
-          'role' => 'masyarakat',
-          'token'=>$a,
-
-        ]);
-
-        $lastid = User::create($data)->id;
-         
-          $mas = new Masyarakat;
-          $mas->nama =$request->username;
-          $mas->nohp =$request->nohp;
-          $mas->alamat =$request->alamat;
-          $mas->user_id =$lastid;
-          $mas->save();
-
-          $pesan="Selamat Anda Berhasil Daftar, Silahkan Login";
-    
-         return ($pesan);       
+      $tok = User::where('token', $request->token)->first();
+      if ($tok) {
+        $a = '';
+      } else {
+        $a = $request->token;
       }
 
+      $data = ([
+        'username' => $request->username,
+        'email' => $request->email,
+        // 'email' => $request->get('email'),
+        'password' => bcrypt($request->password),
+        'role' => 'masyarakat',
+        'token' => $a,
+
+      ]);
+
+      $lastid = User::create($data)->id;
+
+      $mas = new Masyarakat;
+      $mas->nama = $request->username;
+      $mas->nohp = '-';
+      $mas->alamat = '-';
+      $mas->user_id = $lastid;
+      $mas->save();
+
+      $pesan = "Selamat Anda Berhasil Daftar, Silahkan Login";
+
+      return ($pesan);
+    }
+  }
+
+  public function MasukPengguna(Request $request)
+  {
+
+    $email = $request->input('email');
+    $password = $request->input('password');
+    $logins = User::where('email', $email)->orWhere('username', $email)->first();
+    $tok = User::where('token', $request->token)->first();
+    
+    if (!$tok) {
+      $a = $request->token;
+      $token = ([
+        'token' => $a
+      ]);
+      $logins->update($token);
     }
 
-    public function MasukPengguna(Request $request){
-    
-      $email=$request->input('email');
-      $password=$request->input('password');
-      $logins= User::where('email', $email)->orWhere('username', $email)->first();
-        $tok = User::where('token', $request->token)->get();
-          if($tok){
-            $a = null;
-          }else{
-            $a = $request->token;
-          }
-        $token =([
-        'token'=> $a
-        ]);
-        $logins->update($token);
+    if (Hash::check($password, $logins->password)) {
 
-      if(Hash::check($password,$logins->password)){
-    
-          $result["success"] = "1";
-          $result["message"] = "success";
-          //untuk memanggil data sesi Login
-          $result["id"] = $logins->id;
-          $result["username"] = $logins->username;
-          $result["password"] = $logins->password;
-          $result["email"] = $logins->email;
-          $result["role"] = $logins->role;
+      $result["success"] = "1";
+      $result["message"] = "success";
+      //untuk memanggil data sesi Login
+      $result["id"] = $logins->id;
+      $result["username"] = $logins->username;
+      $result["password"] = $logins->password;
+      $result["email"] = $logins->email;
+      $result["role"] = $logins->role;
 
-        return response()->json($result);
-      }else{
+      return response()->json($result);
+    } else {
 
-         $result["success"] = "0";
-         $result["message"] = "error";
-         return response()->json($result);
-     }
+      $result["success"] = "0";
+      $result["message"] = "Login Gagal";
+      return response()->json($result);
     }
+  }
 }

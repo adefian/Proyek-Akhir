@@ -22,16 +22,11 @@ class CreateTransaksisTable extends Migration
             $table->string('file_gambar')->nullable();
             $table->bigInteger('masyarakat_id')->unsigned()->nullable();
             $table->foreign('masyarakat_id')
-                    ->references('id')
-                    ->on('masyarakat')
-                    ->onDelete('cascade')
-                    ->onUpdate('cascade');
+                ->references('id')
+                ->on('masyarakat')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->bigInteger('point_id')->unsigned()->nullable();
-            $table->foreign('point_id')
-                    ->references('id')
-                    ->on('point')
-                    ->onDelete('cascade')
-                    ->onUpdate('cascade');
             $table->timestamps();
         });
     }

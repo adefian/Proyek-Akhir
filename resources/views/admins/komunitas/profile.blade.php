@@ -14,7 +14,7 @@
     <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>Profile</h1>
+            <h1>Profil</h1>
           </div>
 
         <form action="{{route('komunitas.update', [$komunitas->id])}}" method="POST" class="needs-validation" novalidate="" enctype="multipart/form-data">
@@ -22,7 +22,7 @@
             <div class="row">
               <div class="col-12 col-md-12 col-lg-5">
                 <div class="card profile-widget card-warning">
-                    <h2 class="section-title-warning">Hi, {{auth()->user()->username}}!</h2>
+                    <h2 class="section-title-warning">Hai, {{auth()->user()->username}}!</h2>
                     <p class="section-lead">
                         Ubah informasi tentang diri Anda di halaman ini.
                     </p>
@@ -53,7 +53,7 @@
                   {{method_field('PATCH')}}  
 
                     <div class="card-header">
-                      <h4>Edit Profile</h4>
+                      <h4>Edit Profil</h4>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -92,6 +92,7 @@
                           <div class="form-group col-md-12 col-12">
                             <label>Password</label>
                             <input name="password" type="password" class="form-control">
+                            <small class="text-danger">Isi form diatas jika ingin mengganti password</small>
                           </div>
                         </div>
                         <div class="row">

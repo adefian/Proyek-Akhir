@@ -25,6 +25,12 @@ class WebAuthController extends Controller
             'password' => $request->password,
         ];
 
+        $user = User::where('username', $request->email)->orWhere('email', $request->email)->first();
+
+        if ($user->role == "petugaskontenreward" || $user->role == "masyarakat") {
+            $login = [];
+        }
+
         if(Auth::attempt($login)){
             
             if(auth()->user()->role == 'pimpinanecoranger'){

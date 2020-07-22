@@ -95,7 +95,7 @@
                                         <tr>
                                             <td class="text-center">{{$no++}}</td>
                                             <td>{{$datas->nama}}</td>
-                                            <td> {{$datas->nohp}}</td>
+                                            <td class="text-center"> {{$datas->nohp}}</td>
                                             <td class="text-center">{{$datas->alamat}}</td>
                                             <td class="text-center">{{$datas->total_poin}}</td>
                                             <td class="text-center">{{$datas->updated_at->diffForHumans()}}</td>

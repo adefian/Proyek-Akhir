@@ -53,7 +53,7 @@
                               <button data-toggle="modal" data-target="#modalCreate" class="btn btn-success btn-sm fas fa-plus float-right mr-4" title="Tambahkan disini" style="margin-left: auto;"></button>
                           @endif
                           <div class="table-responsive">
-                            <table class="table table-sm" id="dataTable">
+                            <table class="table table-sm" id="dataTable" width="100%">
                               <thead>
                                 <tr>
                                   <th></th>
@@ -70,8 +70,8 @@
                                 @foreach($data as $datas)
                                   <tr>
                                     <th scope="row"> <i class="fas fa-users"></i> </th>
-                                    <td>{{$datas->daerah}}</td>
-                                    <td>{{$datas->keterangan}}</td>
+                                    <td width="30%">{{$datas->daerah}}</td>
+                                    <td width="50%">{{$datas->keterangan}}</td>
                                     <td class="text-right">
                                     @if(auth()->user()->role == 'pimpinanecoranger')
                                     <button class="edit btn btn-warning btn-sm fa fa-edit" title="Edit disini"></button>
