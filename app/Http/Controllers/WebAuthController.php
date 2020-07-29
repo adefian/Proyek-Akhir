@@ -134,4 +134,5 @@ class WebAuthController extends Controller
         return redirect()->route('register');
         }
     }
+
 }

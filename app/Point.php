@@ -9,7 +9,7 @@ class Point extends Model
     protected $table = 'point';
 
     protected $fillable = [
-        'nilai', 'kode_reward', 'tempat_sampah_id', 'masyarakat_id','code_reward', 'status'
+        'nilai', 'kode_reward', 'tempat_sampah_id', 'masyarakat_id','code_reward', 'status', 'status_salah'
     ];
 
     

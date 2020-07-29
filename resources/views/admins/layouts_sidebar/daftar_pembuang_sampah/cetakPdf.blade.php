@@ -110,7 +110,11 @@
 			});
 		</script>
 		<script type="text/javascript">
-			// window.print();
+			window.print();
+
+			window.onafterprint = function(){
+				alert("Prose Printing Selesai...");
+            }
 		</script>
 	</body>
 </html>

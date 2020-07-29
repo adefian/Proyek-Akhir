@@ -73,7 +73,7 @@
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary fa fa-filter ml-3" title="Filter"></button>
-                            <button type="submit" class="btn btn-danger fa fa-print ml-3" name="cetakPdf" value="cetakPdf" title="Print"></button>
+                            <button type="submit" class="btn btn-danger fa fa-print ml-3" target="_blank" name="cetakPdf" value="cetakPdf" title="Print"></button>
                         </form>  
                         </div>
                     @endif

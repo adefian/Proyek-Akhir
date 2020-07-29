@@ -74,16 +74,20 @@
                   @elseif(auth()->user()->role == 'petugaslapangan')
                   <a href="{{route('riwayatpembuangan-petugaslap.index')}}" class="dropdown-item dropdown-item">
                   @endif
+                  @if($data->status == '1')
+                    <div class="dropdown-item-icon bg-success text-white">
+                  @else
                     <div class="dropdown-item-icon bg-danger text-white">
+                  @endif
                       <i class="fas fa-trash"></i>
                     </div>
                     <div class="dropdown-item-desc">
-                      @if($data->status == 'penuh')
+                      @if($data->status == '1')
                         <b class="text-success">Sampah Masuk dengan Benar</b> 
                         @else
                         <b class="text-danger">Sampah Salah dimasukkan</b> 
                       @endif
-                      <p>Tempat Sampah</p>
+                      <p>dari Tempat Sampah {{$data->dari_tempatsampah->nama}}</p>
                       @if($data->created_at == $data->updated_at)
                         <div class="time">{{$data->updated_at->diffForHumans()}}</div>
                       @endif

@@ -88,7 +88,7 @@ class MasyarakatController extends Controller
           ]);
 
           if ($request->input('password')) {
-            $input['password'] = bcrypt($request->input('password'));
+            $input2['password'] = bcrypt($request->input('password'));
           }
 
           $user->update($input2);

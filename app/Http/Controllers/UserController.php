@@ -89,4 +89,36 @@ class UserController extends Controller
       return response()->json($result);
     }
   }
+
+  public function logout(Request $request)
+  {
+      $id = $request->id;
+
+      $user = User::findOrFail($id);
+      $input = ([
+        'token' => null,
+      ]);
+
+      $user->update($input);
+
+      return response()->json([
+        'pesan' =>'Logout Sukses',
+
+      ],200);
+  }
+
+  public function firebase(Request $request)
+  {
+      $id = $request->id;
+      $token = $request->token;
+
+      $user = User::findOrFail($id);
+
+      if($token != $user['token']){
+        $user->token = $token;
+        $user->save();
+      }
+
+  }
+
 }

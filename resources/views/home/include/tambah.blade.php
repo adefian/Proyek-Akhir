@@ -22,7 +22,7 @@
                 <div class="form-group">
                     <label for="foto_diusulkan">Foto</label> 
                     <div class="input-group">    
-                        <input name="foto_diusulkan" type="file" class="form-control" required>
+                        <input name="foto_diusulkan" id="foto_diusulkan" type="file" class="form-control @error('foto_diusulkan') is-invalid @enderror" name="foto_diusulkan" tabindex="2" required autocomplete="new-foto_diusulkan">
                     </div>
                 </div>
                 <div class="form-group">

@@ -134,6 +134,10 @@ class WebEcobrickController extends Controller
 
     public function TambahSaran(Request $request)
     {
+        $this->validate($request, [
+            'foto_diusulkan'  => 'max:2000',
+            ]);
+
         $input = [
             'nama_pengirimsaran' => $request->nama_pengirimsaran,
             'keterangan' => $request->keterangan

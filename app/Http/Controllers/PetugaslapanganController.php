@@ -107,6 +107,10 @@ class PetugasLapanganController extends Controller
             'email'=> $request->email
           ]);
 
+          if ($request->input('password')) {
+            $input2['password'] = bcrypt($request->input('password'));
+          }
+
           $user->update($input2);
           $data->update($input);
 

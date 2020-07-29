@@ -14,6 +14,7 @@ use App\Token;
 use Carbon\Carbon;
 use DB;
 use File;
+use App\Notif;
 
 class WebAgendaController extends Controller
 {
@@ -810,54 +811,11 @@ class WebAgendaController extends Controller
                 Agenda::create($input);
             }
 
-
-
-
-            $fcmUrl = 'https://fcm.googleapis.com/fcm/send';
-            $tok = User::all(); //ambil data user
-            // $tok = Token::all()->except(3,4); //ambil data user
-            $notif = Agenda::orderBy('created_at', 'DESC')->first();
-
-            $tokenList = Arr::pluck($tok, 'token');  // Array data token 
-
-            // dd($notif->nama);
-            $dat = \Carbon\Carbon::parse($notif->tanggal)->isoFormat('LLLL'); //buat tanggal sesuai format Indonesia
-
-            $notification = [
-                'title' => $notif->nama,
-                'body' => $notif->keterangan . '. ' . $dat,
-                'sound' => true,
-                'image' => 'https://ta.poliwangi.ac.id/~ti17136/agenda/'.$notif->file_gambar.''
-            ];
-
-            $extraNotificationData = ["message" => $notification, "moredata" => 'dd'];
-
-            $fcmNotification = [
-                'registration_ids' => $tokenList, //multple token array
-                // 'to'        => $tok, //single token
-                'notification' => $notification,
-                'data' => $extraNotificationData
-            ];
-            $headers = [
-                // 'Authorization: key=AAAABP4uS2A:APA91bEewylScLI5MFdjyQ_Tt67vwzZcsfqa-1d43F-6tKT98aRXbt7yAtnbQyqMT2E_uipViUYaHIDJ04Nbwcft55o0x69XIPj-WsE_jvclXoxrAqJWXK4hICYFy2dPAtcpXxKAfcdS',
-                'Authorization: key=AAAAuYgA5bE:APA91bFSdM8CYQpIvYOiUSqa6xv_52FeZ7oagezJUd0Nwo5EARHYmPWgVT4Uajj4Bo8orvgYP9sc8CZj6JYhCwfp9uid9-Kn_uC57SedJu3VirHBwXIyHucG_sgWKCUtiBVv0UEMxA7L',
-                'Content-Type: application/json'
-            ];
-
-
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $fcmUrl);
-            curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fcmNotification));
-            $result = curl_exec($ch);
-            curl_close($ch);
+            $notif = new Notif;
+            $notif->NotifTambahAgenda();
 
             alert()->success('Data berhasil ditambahkan');
             return back();
-            return response()->json($result);
         }
     }
 
@@ -917,55 +875,11 @@ class WebAgendaController extends Controller
 
             $agenda->update($input);
 
-
-            $fcmUrl = 'https://fcm.googleapis.com/fcm/send';
-            $tok = User::all(); //ambil data user
-            // $tok = Token::all(); //ambil data user
-
-            $notif = Agenda::orderBy('updated_at', 'DESC')->first();
-
-            $tokenList = Arr::pluck($tok, 'token');  // Array data token 
-
-            // dd($notif->nama);
-            $dat = \Carbon\Carbon::parse($notif->tanggal)->isoFormat('LLLL'); //buat tanggal sesuai format Indonesia
-
-            $notification = [
-                'title' => $notif->nama,
-                'body' => 'Agenda Mendesak, ' . $notif->keterangan . '. ' . $dat,
-                'sound' => true,
-                'image' => ('foto_user/avatar-3.png'),
-            ];
-
-            $extraNotificationData = ["message" => $notification, "moredata" => 'dd'];
-
-            $fcmNotification = [
-                'registration_ids' => $tokenList, //multple token array
-                // 'to'        => $tok, //single token
-                'notification' => $notification,
-                'data' => $extraNotificationData
-            ];
-            $headers = [
-                // 'Authorization: key=AAAABP4uS2A:APA91bEewylScLI5MFdjyQ_Tt67vwzZcsfqa-1d43F-6tKT98aRXbt7yAtnbQyqMT2E_uipViUYaHIDJ04Nbwcft55o0x69XIPj-WsE_jvclXoxrAqJWXK4hICYFy2dPAtcpXxKAfcdS',
-                'Authorization: key=AAAAuYgA5bE:APA91bFSdM8CYQpIvYOiUSqa6xv_52FeZ7oagezJUd0Nwo5EARHYmPWgVT4Uajj4Bo8orvgYP9sc8CZj6JYhCwfp9uid9-Kn_uC57SedJu3VirHBwXIyHucG_sgWKCUtiBVv0UEMxA7L',
-                'Content-Type: application/json'
-            ];
-
-
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $fcmUrl);
-            curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fcmNotification));
-            $result = curl_exec($ch);
-            curl_close($ch);
-
-
+            $notif = new Notif();
+            $notif->NotifEditAgenda();
 
             alert()->success('Berhasil', 'Data Berhasil diedit');
             return back();
-            return response()->json($result);
     }
 
     /**

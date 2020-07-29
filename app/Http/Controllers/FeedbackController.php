@@ -87,6 +87,12 @@ class FeedbackController extends Controller
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
       curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
       curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fcmNotification));
+      curl_setopt($ch, CURLOPT_ENCODING, "");
+      curl_setopt($ch, CURLOPT_MAXREDIRS, 10);
+      curl_setopt($ch, CURLOPT_TIMEOUT, 0);
+      curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+      curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+      curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
       $result = curl_exec($ch);
       curl_close($ch);
 
@@ -100,7 +106,7 @@ class FeedbackController extends Controller
         $data =  Feedback::findOrFail($id);
         $input =$request->all();
         $data->delete($input);
-     return "berhasil";
+      return "berhasil";
 
 }
   public function webview()

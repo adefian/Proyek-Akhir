@@ -73,6 +73,8 @@
                       </select>
                     </div>
                 </div>
+                @elseif(auth()->user()->role === 'pimpinankomunitas')
+                    <input type="hidden" class="form-control" name="komunitas_id" value="2">
                 @endif
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-success">Tambah</button>

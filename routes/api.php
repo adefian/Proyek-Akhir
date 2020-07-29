@@ -44,6 +44,12 @@ Route::post('hapusfeedback/{id}','FeedbackController@HapusFeedback');
 Route::post('Daftar','UserController@DaftarPengguna');
 Route::post('Masuk','UserController@MasukPengguna');
 
+//logout
+Route::post('Logout','UserController@logout');
+
+//update token
+Route::post('tokenfirebase','UserController@token_firebase');
+
 // Hadiah 
 Route::post('tambahhadiah','HadiahController@TambahHadiah');
 Route::get('lihathadiah','HadiahController@LihatHadiah');

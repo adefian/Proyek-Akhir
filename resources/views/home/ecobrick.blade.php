@@ -105,6 +105,11 @@
         <button data-toggle="modal" data-target="#modalCreate" class="btn btn-primary fas float-right mr-4" style="margin-left: auto;" title="Kasih Saran disini">Kasih Saran</button>
       </div>
     </div>
+    @error('foto_diusulkan')
+        <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+        </span>
+    @enderror
 
     <div class="row no-gutters mt-3" data-aos="fade-left">
 

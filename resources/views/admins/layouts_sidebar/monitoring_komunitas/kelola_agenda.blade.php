@@ -106,7 +106,7 @@
                                                         </div>
                                                         <button id="button" type="submit" class="btn btn-primary fa fa-filter ml-3" title="Filter"></button>
                                                         @if(auth()->user()->role == 'pimpinanecoranger' || auth()->user()->role == 'pimpinankomunitas')
-                                                        <button id="button" type="submit" class="btn btn-danger fa fa-print ml-3" name="cetakPdf" value="cetakPdf" title="Print"></button>
+                                                        <button id="button" type="submit" class="btn btn-danger fa fa-print ml-3" target="_blank" name="cetakPdf" value="cetakPdf" title="Print"></button>
                                                         @endif
                                                     </form>
                                         </div>

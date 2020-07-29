@@ -19,7 +19,7 @@ class CreateAgendasTable extends Migration
             $table->string('keterangan')->nullable();
             $table->string('jenis_agenda')->default(0);
             $table->string('file_gambar')->nullable();
-            $table->string('tanggal');
+            $table->datetime('tanggal');
             $table->timestamps();
             $table->bigInteger('user_id')->unsigned()->nullable();
             $table->foreign('user_id')
