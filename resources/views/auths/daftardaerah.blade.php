@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Daftar Wilayah &mdash; TS</title>
+  <title>Daftar Komunitas &mdash; </title>
 
   <!-- General CSS Files -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="{{asset('assets/stisla/css/components.css')}}">
 
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <link rel="shortcut icon" href="{{asset('assets/img/pick me up.png')}}">
+  <link rel="shortcut icon" href="{{asset('assets-landingpage/img/logo-L.png')}}">
 
 </head>
 <style>
@@ -37,16 +37,30 @@
 </style>
 <body>
 
+  <!--Start of Tawk.to Script-->
+  <script type="text/javascript">
+  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+  (function(){
+  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+  s1.async=true;
+  s1.src='https://embed.tawk.to/5eea12909e5f69442290c021/default';
+  s1.charset='UTF-8';
+  s1.setAttribute('crossorigin','*');
+  s0.parentNode.insertBefore(s1,s0);
+  })();
+  </script>
+  <!--End of Tawk.to Script-->
   @include('sweet::alert')
   <div id="app">
     <section class="section">
       <div class="container mt-5">
         <div class="row justify-content-center">
           <div class="col-12 col-sm-11 col-md-10 col-lg-10 col-xl-10">
-            <div class="card card-primary mb-5">
+
+            <div class="card card-info">
               <div class="card-header"><h4>Daftarkan Komunitas</h4></div>
                 <div class="card-body">
-                  <form method="POST" action="postdaftarwilayah" class="needs-validation" novalidate="">
+                  <form method="POST" action="{{route('postdaftardaerah')}}" class="needs-validation" novalidate="">
                       {{csrf_field()}}
                     <div class="row">
                       <div class="col-12 col-lg-6">
@@ -73,6 +87,7 @@
                             <label for="keterangan" class="control-label">Keterangan</label>
                           </div>
                           <textarea id="keterangan" type="keterangan" class="form-control" name="keterangan" tabindex="2" required></textarea>
+                          <p class="text-danger">Kenapa anda ingin mendaftarkan daerah ini.</p>
                           <div class="invalid-feedback">
                             Silahkan isi Keterangan
                           </div>
@@ -81,7 +96,7 @@
                       
                       <div class="col-12 col-lg-6">
                         <div id="mapInput" style="width: 100%; height: 320px; border-radius: 3px;"></div>
-                        <p>klik satu kali untuk menentukan posisi</p>
+                        <p class="text-danger">klik satu kali untuk menentukan posisi.</p>
                       </div>
                     </div>
                     
@@ -123,14 +138,19 @@
 
                   <div class="row sm-gutters">
                       <div class="mt-3 mr-5 text-muted text-center">
-                          Daftar sebagai anggota komunitas ? <a href="{{ route('register')}}">Daftar</a>
+                          Daftar sebagai anggota komunitas ? <a href="{{route('register')}}">Daftar</a>
                       </div>
 
                       <div class="mt-3 text-muted text-center">
-                          Sudah memiliki akun ?  <a href="login">Login</a>
+                          Sudah memiliki akun ?  <a href="{{route('login')}}">Login</a>
                       </div>
                   </div>
                 </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-11 col-md-10 col-lg-10 col-xl-10 mb-5">
+              <div class="card shadow" style="text-align: -webkit-center;">
+                <a href="{{route('home')}}"><button class="btn btn-klik btn-lg btn-block m-3 col-11">Kembali ke Halaman Awal</button></a>
               </div>
             </div>
           </div>

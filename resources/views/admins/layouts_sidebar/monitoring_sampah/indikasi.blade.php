@@ -37,10 +37,10 @@
                   <div class="card-wrap">
                     <div class="card-body">
                     <div class="row">
-                        <div class="col-lg-6 col-12">
+                        <div class="col-lg-7 col-12">
                           <div id="map" style="border-radius: 3px;"></div>
                         </div>
-                        <div class="col-lg-6 col-12">
+                        <div class="col-lg-5 col-12">
                           <h6 class="text-center mb-4 mt-4">Titik Lokasi yang terdaftar</h6>
                           <div class="table-responsive">
                             <table class="table table-sm" id="dataTable">
@@ -53,22 +53,24 @@
                                 </tr>
                               </thead>
                               <tbody>
+                              @if($data)
                               @foreach($data as $datas)
                                 <tr>
                                   <td scope="row"> <i class="fas fa-trash"></i></td>
-                                  <td>{{$datas->namalokasi}}</td>
+                                  <td>{{$datas->nama}}</td>
                                   <td class="text-center">
-                                  @if($datas->status === 0)
+                                  @if($datas->status == 'kosong')
                                     <button class="edit btn btn-sm btn-success" style="width:100px;" title="Ubah disini">Kosong</button>
-                                   @elseif($datas->status === 1)
+                                   @elseif($datas->status == 'penuh')
                                     <button class="edit btn btn-sm btn-danger" style="width:100px;" title="Ubah disini">Penuh</button>
-                                   @elseif($datas->status === 2)
+                                   @elseif($datas->status == 'ambil')
                                     <button class="edit btn btn-sm btn-warning" style="width:100px;" title="Ubah disini">Pengambilan</button>
                                   @endif
                                   </td>
                                   <td style="display:none;">{{$datas->id}}</td>
                                 </tr>
                               @endforeach
+                              @endif
                               </tbody>
                             </table>
                           </div>
@@ -96,13 +98,13 @@
 
           <h3>Status saat ini <h3 id="status"></h3> </h3>
             @if(auth()->user()->role == 'pimpinanecoranger')
-                <form method="POST" action="/ubahstatussampah" class="needs-validation" novalidate="" id="editForm" enctype="multipart/form-data">
+                <form method="POST" action="" class="needs-validation" novalidate="" id="editForm" enctype="multipart/form-data">
             @endif
             @if(auth()->user()->role == 'petugaslapangan')
-                <form method="POST" action="/ubahstatussampah-petugaslap" class="needs-validation" novalidate="" id="editFormpetugaslap" method="POST" enctype="multipart/form-data">
+                <form method="POST" action="" class="needs-validation" novalidate="" id="editFormpetugaslap" method="POST" enctype="multipart/form-data">
             @endif
             @if(auth()->user()->role == 'komunitas')
-                <form method="POST" action="/ubahstatussampah-komunitas" class="needs-validation" novalidate="" id="editFormkomunitas" method="POST" enctype="multipart/form-data">
+                <form method="POST" action="" class="needs-validation" novalidate="" id="editFormkomunitas" method="POST" enctype="multipart/form-data">
             @endif
                 {{ csrf_field() }}
                 {{ method_field('POST') }}
@@ -111,9 +113,9 @@
                     <div class="input-group">                      
                     <select name="status" type="text" class="form-control">
                         <option selected disabled>Ubah Status</option>
-                        <option value="0">Kosong</option>
-                        <option value="2">Pengambilan</option>
-                        <option value="1">Penuh</option>
+                        <option value="kosong">Kosong</option>
+                        <option value="ambil">Pengambilan</option>
+                        <option value="penuh">Penuh</option>
                       </select>
                     </div>
                 </div>
@@ -140,19 +142,16 @@
     <script type="text/javascript">
 
         //Memasukkan data tabel ke array
-        array.push(['<?php echo $datas->namalokasi?>','<?php echo $datas->latitude?>','<?php echo $datas->longitude?>','<?php echo $datas->petugasygmenambahkan->nama?>','<?php echo $datas->foto ?>']);
+        array.push(['<?php echo $datas->nama?>','<?php echo $datas->latitude?>','<?php echo $datas->longitude?>','<?php echo $datas->petugasygmenambahkan->username?>','<?php echo $datas->file_gambar ?>']);
 
     </script> 
 
     @endforeach
   
 <!-- ============= Array ============= -->
-
 @endsection
 
 @section('js')
-    
-
 <!-- ============================ Maps ===================== -->
 
     <script>
@@ -190,7 +189,7 @@
               '<div class="content"><p>'+
               '<h6>'+array[i][0]+'</h6>'+
               '<img height="130" style="margin:0 auto; display:block;" src="assets/img/tempatsampah/'+array[i][4]+'"/><br/>'+
-              'Petugas yang Menambahkan : '+array[i][3]+'<br/>'+
+              'Penanggung Jawab : '+array[i][3]+'<br/>'+
               'Titik Koordinat : '+array[i][1]+', '+array[i][2]+'<br/>'+
               '</p></div>';
 
@@ -227,9 +226,9 @@
              var element = document.getElementById("status");
              element.innerHTML = data[2];
             //  
-             $('#editForm').attr('action', '/ubahstatussampah/'+data[3]);
-             $('#editFormpetugaslap').attr('action', '/ubahstatussampah-petugaslap/'+data[3]);
-             $('#editFormkomunitas').attr('action', '/ubahstatussampah-komunitas/'+data[3]);
+            $('#editForm').attr('action', 'ubahstatussampah/'+data[3]);
+             $('#editFormpetugaslap').attr('action', 'ubahstatussampah-petugaslap/'+data[3]);
+             $('#editFormkomunitas').attr('action', 'ubahstatussampah-komunitas/'+data[3]);
              $('#editModal').modal('show');
          });
  

@@ -9,12 +9,15 @@
 @if(auth()->user()->role == 'komunitas')
     @include('admins.komunitas.include')
 @endif
+@if(auth()->user()->role == 'pimpinankomunitas')
+    @include('admins.pimpinan_komunitas.include')
+@endif
 
 @section('content')
     <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>Review Saran Ecobrick</h1>
+            <h1>Ulasan Saran Ecobrick</h1>
           </div>
 
           <div class="section-body">
@@ -26,6 +29,9 @@
             @endif
             @if(auth()->user()->role == 'komunitas')
                 <div class="card card-warning">
+            @endif
+            @if(auth()->user()->role == 'pimpinankomunitas')
+                <div class="card">
             @endif
             <div class="row">
               <div class="col-12">
@@ -54,7 +60,7 @@
                                         <tr>
                                             <td class="text-center align-middle">{{$no++}}</td>
                                             <td class="align-middle">{{$datas->nama_pengirimsaran}}</td>
-                                            <td class="align-middle">
+                                            <td class="text-center align-middle">
                                             @if($datas->foto_diusulkan)
                                                 <img height="100" id="myImg" src="{{asset('assets/img/ecobrick')}}/{{$datas->foto_diusulkan}}" data-toggle="modal" data-target="#myModal"></img>
                                                 @else
@@ -71,7 +77,7 @@
                                             </td>
                                             <td class="text-center align-middle">
                                             @if($datas->foto_diaplikasikan)
-                                                <img height="100" src="{{asset('assets/img/ecobrick')}}/{{$datas->foto_diaplikasikan}}" alt=""></img>
+                                                <img height="100" id="myImg" src="{{asset('assets/img/ecobrick')}}/{{$datas->foto_diaplikasikan}}" data-toggle="modal" data-target="#myModal"></img>
                                                 @else
                                                 -
                                             @endif
@@ -101,18 +107,6 @@
                                     @endforeach
                                 @endif
                             </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Nama Pengirim</th>
-                                    <th>Foto Yang Diusulkan</th>
-                                    <th>Keterangan</th>
-                                    <th class="text-center">Level</th>
-                                    <th>Foto Yang Diaplikasikan</th>
-                                    <th class="text-center">Aksi</th>
-                                    <th style="display:none;">id</th>
-                                </tr>
-                            </tfoot>
                         </table>            
                     </div>
                 </div>
@@ -167,13 +161,10 @@
              var data = table.row($tr).data();
              console.log(data);
  
-             $('#nama').val(data[1]);
-             $('#keterangan').val(data[2]);
-             $('#jenis_agenda').val(data[7]);
-             $('#tanggal').val(data[4]);
+             $('#keterangan').val(data[3]);
              
-             $('#editForm').attr('action', '/reviewsaranecobrick/'+data[6]);
-             $('#editFormpetugaslap').attr('action', '/reviewsaranecobrick-petugaslap/'+data[6]);
+             $('#editForm').attr('action', 'reviewsaranecobrick/'+data[6]);
+             $('#editFormpetugaslap').attr('action', 'reviewsaranecobrick-petugaslap/'+data[6]);
              $('#editFormkomunitas').attr('action', '/reviewsaranecobrick-komunitas/'+data[6]);
              $('#editModal').modal('show');
          });
@@ -188,7 +179,7 @@
       function deleteData(id)
       {
           var id = id;
-          var url = '{{ route("reviewsaranecobrick.destroy", ":id") }}';
+          var url = '{{route("reviewsaranecobrick.destroy", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }
@@ -196,7 +187,7 @@
       function deleteDatakomunitas(id)
       {
           var id = id;
-          var url = '{{ route("reviewsaranecobrick-komunitas.destroy", ":id") }}';
+          var url = '{{route("reviewsaranecobrick-komunitas.destroy", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }
@@ -204,7 +195,7 @@
       function deleteDatapetugaslap(id)
       {
           var id = id;
-          var url = '{{ route("reviewsaranecobrick-petugaslap.destroy", ":id") }}';
+          var url = '{{route("reviewsaranecobrick-petugaslap.destroy", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }

@@ -2,20 +2,20 @@
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title">Tambahkan User</h5>
+                <h5 class="modal-title">Tambahkan</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
         <div class="modal-body">
             @if(auth()->user()->role == 'pimpinanecoranger')
-                <form class="needs-validation" novalidate="" action="datapetugaslapangan" method="POST" enctype="multipart/form-data">
+                <form class="needs-validation" novalidate="" action="{{route('datapetugaslapangan.store')}}" method="POST" enctype="multipart/form-data">
             @endif
             @if(auth()->user()->role == 'petugaslapangan')
-                <form class="needs-validation" novalidate="" action="datapetugaslapangan-petugaslap" method="POST" enctype="multipart/form-data">
+                <form class="needs-validation" novalidate="" action="{{route('datapetugaslapangan-petugaslap.store')}}" method="POST" enctype="multipart/form-data">
             @endif
             @if(auth()->user()->role == 'komunitas')
-                <form class="needs-validation" novalidate="" action="datapetugaslapangan-komunitas" method="POST" enctype="multipart/form-data">
+                <form class="needs-validation" novalidate="" action="{{route('datapetugaslapangan-komunitas.store')}}" method="POST" enctype="multipart/form-data">
             @endif
                 {{csrf_field()}}
 
@@ -33,10 +33,7 @@
                 </div>
                 <div class="form-group">
                     <label for="nohp">No Hp</label>
-                    <div class="input-group">    
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">+62</span>
-                        </div>
+                    <div class="input-group">  
                         <input name="nohp" type="number" class="form-control" placeholder="No Handphone/WA" required>
                     </div>
                 </div>
@@ -51,15 +48,16 @@
                         <label for="wilayah" class="control-label">Wilayah</label>
                         <select name="wilayah" type="text" class="form-control">
                             <option selected disabled>Pilih Wilayah</option>
-                            <option value="#">Palestine</option>
-                            <option value="#">Syria</option>
-                            <option value="#">Malaysia</option>
-                            <option value="#">Thailand</option>
+                            @if($komunitas)
+                            @foreach($komunitas as $datas)
+                                <option value="{{$datas->daerah}}">{{$datas->daerah}}</option>
+                            @endforeach
+                            @endif
                         </select>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Tambahkan User</button>
+                    <button type="submit" class="btn btn-success">Tambahkan</button>
                     <button type="button" class="btn btn-secondary float-right" data-dismiss="modal">Batal</button>
                 </div>
             </form>

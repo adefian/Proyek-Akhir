@@ -15,21 +15,21 @@
                     </div>
                     <div class="col-lg-6 col-sm-12 col-12">
                         @if(auth()->user()->role == 'pimpinanecoranger')
-                            <form id="editForm" class="needs-validation" novalidate="" action="indikasi" method="POST" enctype="multipart/form-data">
+                            <form id="editForm" class="needs-validation" novalidate="" action="" method="POST" enctype="multipart/form-data">
                         @endif
                         @if(auth()->user()->role == 'petugaslapangan')
-                            <form id="editFormpetugaslap" class="needs-validation" novalidate="" action="indikasi-petugaslap" method="POST" enctype="multipart/form-data">
+                            <form id="editFormpetugaslap" class="needs-validation" novalidate="" action="" method="POST" enctype="multipart/form-data">
                         @endif
                         @if(auth()->user()->role == 'komunitas')
-                            <form id="editFormkomunitas" class="needs-validation" novalidate="" action="indikasi-komunitas" method="POST" enctype="multipart/form-data">
+                            <form id="editFormkomunitas" class="needs-validation" novalidate="" action="" method="POST" enctype="multipart/form-data">
                         @endif
                             {{ csrf_field() }}
                             {{ method_field('PATCH') }}
 
                             <div class="form-group">
-                                <label for="namalokasi">Nama Lokasi</label> 
+                                <label for="nama">Nama Lokasi</label> 
                                 <div class="input-group">   
-                                    <input name="namalokasi" id="namalokasi" type="text" class="form-control" placeholder="Nama Lokasi" required>      
+                                    <input name="nama" id="nama" type="text" class="form-control" placeholder="Nama Lokasi" required>      
                                 </div>
                             </div>
                             <div class="form-group">
@@ -45,14 +45,14 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="foto">Foto</label> 
+                                <label for="file_gambar">Foto</label> 
                                 <div class="input-group">    
-                                    <input name="foto" type="file" class="form-control">
+                                    <input name="file_gambar" type="file" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="input-group">   
-                                    <input name="status" id="status" type="hidden" class="form-control" value="0"> 
+                                    <input name="status" id="status" type="hidden" class="form-control" value="kosong"> 
                                 </div>
                             </div>
                             <div class="modal-footer">

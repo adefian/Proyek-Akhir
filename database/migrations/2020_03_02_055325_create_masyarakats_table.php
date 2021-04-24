@@ -16,19 +16,15 @@ class CreateMasyarakatsTable extends Migration
         Schema::create('masyarakat', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nama');
-            $table->integer('nohp');
+            $table->string('nohp');
             $table->string('alamat');
+            $table->string('file_gambar')->default('avatar-3.png');
+            $table->integer('total_poin')->default(0);
             $table->timestamps();
-            $table->bigInteger('hadiah_id')->unsigned()->nullable();
-            $table->foreign('hadiah_id')
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')
                     ->references('id')
-                    ->on('hadiah')
-                    ->onDelete('cascade')
-                    ->onUpdate('cascade');
-            $table->bigInteger('point_id')->unsigned()->nullable();
-            $table->foreign('point_id')
-                    ->references('id')
-                    ->on('point')
+                    ->on('user')
                     ->onDelete('cascade')
                     ->onUpdate('cascade');
         });

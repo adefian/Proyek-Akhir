@@ -9,13 +9,13 @@
               </div>
         <div class="modal-body">
             @if(auth()->user()->role == 'pimpinanecoranger')
-                <form method="POST" action="/datapetugaslapangan" class="needs-validation" novalidate="" id="editForm" enctype="multipart/form-data">
+                <form method="POST" action="" class="needs-validation" novalidate="" id="editForm" enctype="multipart/form-data">
             @endif
             @if(auth()->user()->role == 'petugaslapangan')
-                <form method="POST" action="/datapetugaslapangan-petugaslap" class="needs-validation" novalidate="" id="editFormpetugaslap" enctype="multipart/form-data">
+                <form method="POST" action="" class="needs-validation" novalidate="" id="editFormpetugaslap" enctype="multipart/form-data">
             @endif
             @if(auth()->user()->role == 'komunitas')
-                <form method="POST" action="/datapetugaslapangan-komunitas" class="needs-validation" novalidate="" id="editFormkomunitas" enctype="multipart/form-data">
+                <form method="POST" action="" class="needs-validation" novalidate="" id="editFormkomunitas" enctype="multipart/form-data">
             @endif
                 {{ csrf_field() }}
                 {{ method_field('PATCH') }}
@@ -34,7 +34,7 @@
                 </div>
                 <div class="form-group">
                     <label for="nohp">No Hp</label>
-                    <div class="input-group">    
+                    <div class="input-group">  
                         <input name="nohp" type="text" id="nohp" class="form-control" placeholder="No Hp">
                     </div>
                 </div>
@@ -48,11 +48,12 @@
                     <div class="d-block">
                         <label for="wilayah" class="control-label">Wilayah</label>
                         <select name="wilayah" type="text" class="form-control">
-                            <option selected disabled>Pilih Wilayah</option>
-                            <option value="#">Palestine</option>
-                            <option value="#">Syria</option>
-                            <option value="#">Malaysia</option>
-                            <option value="#">Thailand</option>
+                        <option selected disabled>Tetap</option>
+                            @if($komunitas)
+                            @foreach($komunitas as $datas)
+                                <option value="{{$datas->daerah}}">{{$datas->daerah}}</option>
+                            @endforeach
+                            @endif
                         </select>
                     </div>  
                 </div>

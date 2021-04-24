@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Login &mdash; TS</title>
+  <title>Login &mdash; </title>
   
   <!-- General CSS Files -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -14,7 +14,7 @@
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
   
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <link rel="shortcut icon" href="{{asset('assets/img/pick me up.png')}}">
+  <link rel="shortcut icon" href="{{asset('assets-landingpage/img/logo-L.png')}}">
 
 </head>
 <style>
@@ -38,6 +38,19 @@
 
 <body>
   
+  <!--Start of Tawk.to Script-->
+  <script type="text/javascript">
+  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+  (function(){
+  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+  s1.async=true;
+  s1.src='https://embed.tawk.to/5eea12909e5f69442290c021/default';
+  s1.charset='UTF-8';
+  s1.setAttribute('crossorigin','*');
+  s0.parentNode.insertBefore(s1,s0);
+  })();
+  </script>
+  <!--End of Tawk.to Script-->
     
     @include('sweet::alert')
     <section class="section">
@@ -48,17 +61,17 @@
               <img src="../assets/img/stisla-fill.svg" alt="logo" width="100" class="shadow-light rounded-circle">
             </div> -->
 
-            <div class="card card-primary shadow">
+            <div class="card card-info shadow">
               <div class="card-header"><h4>Login</h4></div>
 
               <div class="card-body">
-              <form method="POST" action="postlogin" class="needs-validation" novalidate="">
+              <form method="POST" action="{{route('postlogin')}}" class="needs-validation" novalidate="">
                   {{csrf_field()}}
                   <div class="form-group">
-                    <label for="email" class="control-label">Email</label>
-                      <input id="email" type="email" class="form-control" name="email" tabindex="1" required autofocus>
+                    <label for="email" class="control-label">Email / Username</label>
+                      <input id="email" type="text" class="form-control" name="email" tabindex="1" required autofocus>
                     <div class="invalid-feedback">
-                      Silahkan isi Email Anda
+                      Silahkan isi Email / Username Anda
                     </div>
                   </div>
 
@@ -66,9 +79,9 @@
                     <div class="d-block">
                     	<label for="password" class="control-label">Password</label>
                       <div class="float-right">
-                        <a href="auth-forgot-password.html" class="text-small">
+                        <!-- <a href="auth-forgot-password.html" class="text-small">
                           Forgot Password?
-                        </a>
+                        </a> -->
                       </div>
                     </div>
                     <input id="password" type="password" class="form-control" name="password" tabindex="2" required>
@@ -92,12 +105,15 @@
                   <div class="text-job text-muted">Login disini</div>
                 </div>
                 <div class="row sm-gutters">
-                    <div class="mt-5 text-muted text-center">
-                        Ingin gabung sebagai anggota komunitas ? <a href="register">Daftar</a>
+                    <div class="mt-4 mb-2 text-muted text-center">
+                        Ingin gabung sebagai anggota komunitas ? <a href="{{route('register')}}">Daftar</a>
                     </div>
                 </div>
 
               </div>
+            </div>
+            <div class="card shadow mb-5" style="text-align: -webkit-center;">
+              <a href="{{route('home')}}"><button class="btn btn-klik btn-lg btn-block m-3 col-11 center">Kembali ke Halaman Awal</button></a>
             </div>
           </div>
         </div>

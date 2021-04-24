@@ -13,12 +13,25 @@ class PetugasKontenreward extends Migration
      */
     public function up()
     {
-        Schema::create('petugas_kontenreward', function (Blueprint $table) {
+        Schema::create('petugas_konten_reward', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nama_petugas');
-            $table->integer('nohp');
-            $table->string('alamat');
+            $table->string('nama')->nullable();
+            $table->string('nohp')->nullable();
+            $table->string('alamat')->nullable();
+            $table->string('file_gambar')->default('avatar-4.png');
             $table->timestamps();
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')
+                    ->references('id')
+                    ->on('user')
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
+            $table->bigInteger('pimpinan_ecoranger_id')->unsigned();
+            $table->foreign('pimpinan_ecoranger_id')
+                    ->references('id')
+                    ->on('pimpinan_ecoranger')
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
         });
     }
 
@@ -29,6 +42,6 @@ class PetugasKontenreward extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('petugas_kontenreward');
+        Schema::dropIfExists('petugas_konten_reward');
     }
 }

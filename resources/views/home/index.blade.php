@@ -1,16 +1,23 @@
 @extends('home.landingpage')
 
 @section('css')
+
+    <link rel="stylesheet" href="{{asset('assets/fullcalendar/packages/core/main.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/fullcalendar/packages/daygrid/main.css')}}">
     <style>
-      #map {height:450px;};
-      #mapkomunitas {height:450px;};
+      #map {
+        height:450px;
+      };
+      #mapkomunitas {
+        height:450px;
+      };
+      #calendar {
+        max-width: 900px;
+        margin: 0 auto;
+      }
     </style>
 
-    <style href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/bootstrap/main.min.css"></style>
-    <style href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/core/main.min.css"></style>
-    <style href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/daygrid/main.min.css"></style>
-    <style href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/list/main.min.css"></style>
-    <style href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/timegrid/main.min.css"></style>
+
 @endsection
 
 @section('navbar')
@@ -23,7 +30,7 @@
 
 @section('content')
 
- <!-- ======= Features Section ======= -->
+ <!-- ======= Agenda ======= -->
     <section id="features" class="features">
       <div class="container">
 
@@ -34,83 +41,78 @@
 
         <div class="row" data-aos="fade-left">
           <div class="col-12">
-            <div id="kalender"></div>
-            <table class="table table-responsive" style="width:100%">
-                        <thead>
+            <!-- <div class="response">{{ Carbon\Carbon::now()->isoFormat('dddd, D MMMM Y')}}</div> -->
+              <div class="mb-5" id="calendar"></div>
+              <!-- <table class="table table-hover" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama kegiatan</th>
+                        <th>Keterangan</th>
+                        <th>Tanggal</th>
+                        <th>Komunitas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if($agenda)
+                        @php $no = 1 @endphp
+                        @foreach($agenda as $agendas)
                             <tr>
-                                <th>No</th>
-                                <th>Nama kegiatan</th>
-                                <th>Keterangan</th>
-                                <th>Tanggal</th>
-                                <th>Komunitas</th>
+                                <td class="text-center">{{$no++}}</td>
+                                <td>{{$agendas->nama}}</td>
+                                <td>{{$agendas->keterangan}}</td>
+                                <td>{{ Carbon\Carbon::parse($agendas->tanggal)->isoFormat('LLLL') }} WIB</td>
+                                <td>{{$agendas->komunitas->daerah}}</td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            @if($agenda)
-                                @php $no = 1 @endphp
-                                @foreach($agenda as $agendas)
-                                    <tr>
-                                        <td class="text-center">{{$no++}}</td>
-                                        <td>{{$agendas->nama}}</td>
-                                        <td>{{$agendas->keterangan}}</td>
-                                        <td>{{$agendas->tanggal}}</td>
-                                        <td>{{$agendas->komunitas->daerah}}</td>
-                                    </tr>
-                                @endforeach
-                            @endif
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>No</th>
-                                <th>Nama kegiatan</th>
-                                <th>Keterangan</th>
-                                <th>Tanggal</th>
-                                <th>Komunitas</th>
-                            </tr>
-                        </tfoot>
-                    </table>
+                        @endforeach
+                    @endif
+                </tbody>
+            </table>
+            <div class="float-right">
+                        {{ $agenda->links() }}
+            </div> -->
           </div>
         </div>
 
       </div>
     </section>
-<!-- End Features Section -->
+<!-- End Agenda -->
 
- <!-- ======= map ======= -->
+<!-- ======= map ======= -->
     <section id="details" class="details">
       <div class="container">
 
         <div class="row content" style="margin-top:-50px; margin-bottom:-40px;">
           <div class="col-md-6 mb-4" data-aos="fade-up">
-            <h3 class="text-center mb-3">Tempat Sampah Pintar <img src="https://img.icons8.com/plasticine/50/000000/order-shipped.png"/></h3>
+            <h3 class="text-center mb-3">Tempat Sampah Pintar <img src="{{asset('assets-landingpage/img/marker_ts2.png')}}"/></h3>
             <p class="font-italic">
               Daftar Tempat Sampah Pintar yang sudah ada di wilayah Kabupaten Banyuwangi
             </p>
             <ul>
-             @if($tempatsampah)
+              @if($tempatsampah)
               @foreach($tempatsampah as $tempatsampahs)
-              <li><i class="icofont-check"></i> {{$tempatsampahs->namalokasi}}</li>
+              <li><i class="icofont-check"></i> {{$tempatsampahs->nama}}</li>
               @endforeach
-             @endif
+              @endif
             </ul>
             <p>
               Tempat Sampah Pintar ini dapat menjadikan bahan edukasi bagi masyarakat, agar membuang sampah dengan tepat sesuai kategorinya.
             </p>
           </div>
           <div class="col-md-6 order-2 order-md-1" data-aos="fade-up">
-            <h3>Daftar Komunitas <img src="https://img.icons8.com/plasticine/50/000000/marker.png"/></h3>
+            <h3>Daftar Komunitas   <img src="{{asset('assets-landingpage/img/marker_km2.png')}}"/></h3>
             <p class="font-italic">
-              Daftar yang tergabung dalam komunitas Ecoranger sesuai dengan daerahnya masing-masing 
+              Daftar yang tergabung dalam Komunitas Ecoranger sesuai dengan daerahnya masing-masing 
             </p>
             <ul>
-             @if($komunitas)
+              @if($komunitas)
               @foreach($komunitas as $komunitass)
               <li><i class="icofont-check"></i> {{$komunitass->daerah}}</li>
               @endforeach
-             @endif
+              @endif
             </ul>
             <p>
-              Inventore id enim dolor dicta qui et magni molestiae. Mollitia optio officia illum ut cupiditate eos autem. Soluta dolorum repellendus repellat amet autem rerum illum in. Quibusdam occaecati est nisi esse. Saepe aut dignissimos distinctio id enim.
+              Komunitas ini Tergabung dalam Komunitas EcoRanger yang menaungi setiap daerahnya masing-masing. 
             </p>
           </div>
         </div>
@@ -125,6 +127,196 @@
     </section><!-- End map -->
 
 <!-- ============= Array ============= -->
+<!-- ============= Feedback ============= -->
+<section id="contact" class="contact">
+      <div class="container">
+
+        <div class="section-title aos-init aos-animate" data-aos="fade-up">
+          <h2>Kritik & Saran</h2>
+          <p>Feedback</p>
+        </div>
+
+        <div class="row justify-content-center">
+
+          <div class="col-lg-10 mt-5 mt-lg-0 aos-init aos-animate" data-aos="fade-left" data-aos-delay="200">
+
+            <form action="{{route('kirimfeedback')}}" method="POST" enctype="multipart/form-data">
+              {{csrf_field()}}
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <input type="text" name="nama" class="form-control" id="name" placeholder="Nama Anda"  required>
+                </div>
+                <div class="col-md-6 form-group">
+                  <input type="email" class="form-control" name="email" id="email" placeholder="Email Anda" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="file" class="form-control" name="file_gambar" id="subject" required>
+              </div>
+              <div class="form-group">
+                <textarea class="form-control" name="kritik_saran" rows="5" placeholder="Masukkan Usulan Anda" required></textarea>
+              </div>
+            
+              <div class="text-center"><button class="btn btn-primary" style="width:100%" type="submit">Kirim</button></div>
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+<!-- ============= End Feedback ============= -->
+
+<!-- ======= Team Section ======= -->
+  <!-- <section id="team" class="team">
+      <div class="container">
+
+        <div class="section-title" data-aos="fade-up">
+          <h2></h2>
+          <p></p>
+        </div>
+
+        <div class="row" data-aos="fade-left">
+
+          <div class="col-lg-4 col-md-6">
+            <div class="member" data-aos="zoom-in" data-aos-delay="100">
+              <div class="pic"><img src="{{asset('assets-landingpage/img/team/team-1.jpg')}}" class="img-fluid" alt=""></div>
+              <div class="member-info">
+                <h4>Haris Abdul Azis</h4>
+                <span>Chief Executive Officer</span>
+                <div class="social">
+                  <a href=""><i class="icofont-twitter"></i></a>
+                  <a href=""><i class="icofont-facebook"></i></a>
+                  <a href=""><i class="icofont-instagram"></i></a>
+                  <a href=""><i class="icofont-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 mt-5 mt-md-0">
+            <div class="member" data-aos="zoom-in" data-aos-delay="200">
+              <div class="pic"><img src="{{asset('assets-landingpage/img/team/team-2.jpg')}}" class="img-fluid" alt=""></div>
+              <div class="member-info">
+                <h4>Khoirul Anam</h4>
+                <span>Product Manager</span>
+                <div class="social">
+                  <a href=""><i class="icofont-twitter"></i></a>
+                  <a href=""><i class="icofont-facebook"></i></a>
+                  <a href=""><i class="icofont-instagram"></i></a>
+                  <a href=""><i class="icofont-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 mt-5 mt-lg-0">
+            <div class="member" data-aos="zoom-in" data-aos-delay="300">
+              <div class="pic"><img src="{{asset('assets-landingpage/img/team/team-3.jpg')}}" class="img-fluid" alt=""></div>
+              <div class="member-info">
+                <h4>Ade Fian Galih I</h4>
+                <span>CTO</span>
+                <div class="social">
+                  <a href=""><i class="icofont-twitter"></i></a>
+                  <a href=""><i class="icofont-facebook"></i></a>
+                  <a href=""><i class="icofont-instagram"></i></a>
+                  <a href=""><i class="icofont-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section> -->
+<!-- End Team Section -->
+
+<!-- ======= Testimonials Section ======= -->
+  <section id="testimonials" class="testimonials">
+      <div class="container">
+
+        <div class="owl-carousel testimonials-carousel" data-aos="zoom-in">
+        
+        @if($pimpinan)
+          @foreach($pimpinan as $data)
+          <div class="testimonial-item">
+            <img src="{{$data->ambilFoto()}}" style="height:100px; width:100px;" class="testimonial-img" alt="image">
+            <h3>{{$data->nama}}</h3>
+            <h4>Pimpinan EcoRanger</h4>
+            <p>
+              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                {{$data->bio}}
+              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+            </p>
+          </div>
+          @endforeach
+        @endif
+        @if($pimpinankom)
+          @foreach($pimpinankom as $data)
+          <div class="testimonial-item">
+            <img src="{{$data->ambilFoto()}}" style="height:100px; width:100px;" class="testimonial-img" alt="image">
+            <h3>{{$data->nama}}</h3>
+            <h4>Pimpinan Komunitas {{$data->daerahygdipilih->daerah}}</h4>
+            <p>
+              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                {{$data->bio}}
+              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+            </p>
+          </div>
+          @endforeach
+        @endif
+        @if($anggota_komunitas)
+          @foreach($anggota_komunitas as $data)
+          <div class="testimonial-item">
+            <img src="{{$data->ambilFoto()}}" style="height:100px; width:100px;" class="testimonial-img" alt="image">
+            <h3>{{$data->nama}}</h3>
+            <h4>Anggota Komunitas {{$data->daerahygdipilih->daerah}}</h4>
+            <p>
+              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                {{$data->bio}}
+              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+            </p>
+          </div>
+          @endforeach
+        @endif
+        @if($petugaslap)
+          @foreach($petugaslap as $data)
+          <div class="testimonial-item">
+            <img src="{{$data->ambilFoto()}}" style="height:100px; width:100px;" class="testimonial-img" alt="image">
+            <h3>{{$data->nama}}</h3>
+            <h4>Petugas Lapangan {{$data->wilayah}}</h4>
+            <p>
+              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                {{$data->bio}}
+              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+            </p>
+          </div>
+          @endforeach
+        @endif
+        @if($petugaskonten)
+          @foreach($petugaskonten as $data)
+          <div class="testimonial-item">
+            <img src="{{$data->ambilFoto()}}" style="height:100px; width:100px;" class="testimonial-img" alt="image">
+            <h3>{{$data->nama}}</h3>
+            <h4>Petugas Konten Reward</h4>
+            <p>
+              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                {{$data->bio}}
+              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+            </p>
+          </div>
+          @endforeach
+        @endif
+
+        </div>
+
+      </div>
+    </section><!-- End Testimonials Section -->
+
+
+
 
     <script>
       var array =[];
@@ -136,7 +328,7 @@
     <script type="text/javascript">
 
         //Memasukkan data tabel tempat sampah ke array
-        array.push(['<?php echo $tempatsampahs->namalokasi?>','<?php echo $tempatsampahs->latitude?>','<?php echo $tempatsampahs->longitude?>','<?php echo $tempatsampahs->petugasygmenambahkan->nama?>','<?php echo $tempatsampahs->foto ?>']);
+        array.push(['<?php echo $tempatsampahs->nama?>','<?php echo $tempatsampahs->latitude?>','<?php echo $tempatsampahs->longitude?>','<?php echo $tempatsampahs->petugasygmenambahkan->username?>','<?php echo $tempatsampahs->file_gambar ?>']);
 
     </script> 
 
@@ -154,60 +346,68 @@
     @endforeach
   
 <!-- ============= Array ============= -->
+
 @endsection
 
 @section('js')
+
+    <script src="{{asset('assets/fullcalendar/packages/core/main.js')}}"></script>
+    <script src="{{asset('assets/fullcalendar/packages/interaction/main.js')}}"></script>
+    <script src="{{asset('assets/fullcalendar/packages/daygrid/main.js')}}"></script>
+    <script src="{{asset('assets/fullcalendar/packages/core/locale-all.js')}}"></script>
+    <script src="{{ asset('assets/fullcalendar/packages/core/locales/id.js')}}"></script>
+
 <!-- ============================ Maps ===================== -->
 
   <script>
-     
-     function initMap() {
+      
+      function initMap() {
 
-       var bounds = new google.maps.LatLngBounds();
+        var bounds = new google.maps.LatLngBounds();
 
-       var peta = new google.maps.Map(document.getElementById("map"), {
-         center : {lat: -8.408698, lng: 114.2339090},
-         zoom : 9.5
-       });
+        var peta = new google.maps.Map(document.getElementById("map"), {
+          center : {lat: -8.408698, lng: 114.2339090},
+          zoom : 9.5
+        });
 
-       var infoWindow = new google.maps.InfoWindow(), marker, i;
+        var infoWindow = new google.maps.InfoWindow(), marker, i;
 
-       for (var i = 0; i < array.length; i++) {
-         
-         var position = new google.maps.LatLng(array[i][1],array[i][2]);
+        for (var i = 0; i < array.length; i++) {
+          
+          var position = new google.maps.LatLng(array[i][1],array[i][2]);
 
-         bounds.extend(position);
+          bounds.extend(position);
 
-         var marker = new google.maps.Marker({
+          var marker = new google.maps.Marker({
 
-           position : position,
-           map : peta,
-           icon : 'https://img.icons8.com/plasticine/40/000000/order-shipped.png',
-           title : array[i][0]
-         });
+            position : position,
+            map : peta,
+            icon : '{{asset('assets-landingpage/img/marker_ts.png')}}',
+            title : array[i][0]
+          });
 
-         google.maps.event.addListener(marker, 'click', (function(marker, i) {
+          google.maps.event.addListener(marker, 'click', (function(marker, i) {
 
-           return function() {
+            return function() {
 
-             var infoWindowContent = 
-             '<div class="content"><p>'+
-             '<h6>'+array[i][0]+'</h6>'+
-             '<img height="130" style="margin:0 auto; display:block;" src="assets/img/tempatsampah/'+array[i][4]+'"/><br/>'+
-             'Petugas yang Menambahkan : '+array[i][3]+'<br/>'+
-             'Titik Koordinat : '+array[i][1]+', '+array[i][2]+'<br/>'+
-             '</p></div>';
+              var infoWindowContent = 
+              '<div class="content"><p>'+
+              '<h6>'+array[i][0]+'</h6>'+
+              '<img height="130" style="margin:0 auto; display:block;" src="assets/img/tempatsampah/'+array[i][4]+'"/><br/>'+
+              'Penanggung Jawab : '+array[i][3]+'<br/>'+
+              'Titik Koordinat : '+array[i][1]+', '+array[i][2]+'<br/>'+
+              '</p></div>';
 
-             infoWindow.setContent(infoWindowContent);
+              infoWindow.setContent(infoWindowContent);
 
-             infoWindow.open(peta, marker);
-           }
+              infoWindow.open(peta, marker);
+            }
 
-         })(marker, i));
-       }
+          })(marker, i));
+        }
     //
 
-       var infoWindow2 = new google.maps.InfoWindow(), marker2, a;
+        var infoWindow2 = new google.maps.InfoWindow(), marker2, a;
 
             for (var a = 0; a < array2.length; a++) {
               
@@ -219,7 +419,7 @@
 
                 position : position2,
                 map : peta,
-                icon : 'https://img.icons8.com/plasticine/40/000000/marker.png',
+                icon : '{{asset('assets-landingpage/img/marker_km.png')}}',
                 title : array2[a][2]
               });
 
@@ -233,7 +433,7 @@
                   '<p>Titik Koordinat : '+array2[a][0]+', '+array2[a][1]+'<br/>'+
                   'Daerah : '+array2[a][2]+'<br/>'+
                   'Keterangan : '+array2[a][3]+'<br/>'+
-                  'Email yang menambahkan : '+array2[a][4]+'</p>'+
+                  'Email Penanggung Jawab : '+array2[a][4]+'</p>'+
 
                   '</div>';
 
@@ -245,103 +445,60 @@
               })(marker2, a));
             }
       
-     }
-     
-   </script>
+      }
+      
+    </script>
 <!-- ============================ End Maps ===================== -->
 
 <!-- ============================ Kalender ===================== -->
+    
 <script>
-    $('#kalender').fullCalendar({
-        defaultView: 'month',
-        defaultDate: '2018-11-12',
 
-        eventRender: function (eventObj, $el) {
-            $el.popover({
-                title: eventObj.title,
-                content: eventObj.description,
-                trigger: 'hover',
-                placement: 'top',
-                container: 'body'
-            });
-        },
+  document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
 
-        events: [{
-                title: 'All Day Event',
-                description: 'description for All Day Event',
-                start: '2018-11-01'
-            },
-            {
-                title: 'Long Event',
-                description: 'description for Long Event',
-                start: '2018-10-07',
-                end: '2018-11-10'
-            },
-            {
-                id: 999,
-                title: 'Repeating Event',
-                description: 'description for Repeating Event',
-                start: '2018-11-09T16:00:00'
-            },
-            {
-                id: 999,
-                title: 'Repeating Event',
-                description: 'description for Repeating Event',
-                start: '2018-11-16T16:00:00'
-            },
-            {
-                title: 'Conference',
-                description: 'description for Conference',
-                start: '2018-11-11',
-                end: '2018-11-13'
-            },
-            {
-                title: 'Meeting',
-                description: 'description for Meeting',
-                start: '2018-11-12T10:30:00',
-                end: '2018-11-12T12:30:00'
-            },
-            {
-                title: 'Lunch',
-                description: 'description for Lunch',
-                start: '2018-11-12T12:00:00'
-            },
-            {
-                title: 'Meeting',
-                description: 'description for Meeting',
-                start: '2018-11-12T14:30:00'
-            },
-            {
-                title: 'Birthday Party',
-                description: 'description for Birthday Party',
-                start: '2018-11-13T07:00:00'
-            },
-            {
-                title: 'Click for Google',
-                description: 'description for Click for Google',
-                url: 'http://google.com/',
-                start: '2018-11-28'
-            }
-        ]
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      lang: 'id',
+      plugins: [ 'interaction', 'dayGrid' ],
+      eventClick: function(info) {
+      var eventObj = info.event;
+
+      if (eventObj.url) {
+          swal(
+            'Clicked ' + eventObj.title + '.\n' +
+            'Will open ' + eventObj.url + ' in a new tab'
+          );
+
+          window.open(eventObj.url);
+
+          info.jsEvent.preventDefault(); // prevents browser from following link in current tab.
+        } else {
+          swal('Agenda ' + eventObj.title + '\n'+
+            eventObj.classNames + '\n' + eventObj.start
+          );
+          info.el.style.borderColor = 'black';
+        }
+      },
+      height: 500,
+      header: {
+        start: 'title',
+        center: '',
+        right: 'prev,next,dayGridMonth,today'
+      },
+      defaultDate: {!! json_encode($tgl) !!},
+      navLinks: true, 
+      editable: false,
+      eventLimit: true, // allow "more" link when too many events
+      events: {!! json_encode($listagenda) !!},
     });
-    </script>
-<!-- ============================ End Kalender ===================== -->
 
+    calendar.render();
+  });
+
+</script>
+<!-- ============================ End Kalender ===================== -->
 
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDv-h2II7DbFQkpL9pDxNRq3GWXqS5Epts&callback=initMap" type="text/javascript"></script>
 
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/bootstrap/main.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/core/locales-all.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/core/main.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/daygrid/main.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/google-calendar/main.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/interaction/main.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/list/main.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/luxon/main.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/moment-timezone/main.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/moment/main.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/rrule/main.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/timegrid/main.min.js"></script>
 
 @endsection

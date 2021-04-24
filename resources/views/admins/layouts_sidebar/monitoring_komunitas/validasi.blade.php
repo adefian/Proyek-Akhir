@@ -46,7 +46,7 @@
                                     <th>No</th>
                                     <th>Daerah</th>
                                     <th>Keterangan</th>
-                                    <th>Email yang Menambahkan</th>
+                                    <th>Email Penanggung Jawab</th>
                                     <th>diajukan pada</th>
                                     <th>Status</th>
                                     <th class="text-center">Aksi</th>
@@ -62,7 +62,7 @@
                                     <td>{{$datas->daerah}}</td>
                                     <td>{{$datas->keterangan}}</td>
                                     <td>{{$datas->email}}</td>
-                                    <td>{{$datas->created_at}}</td>
+                                    <td>{{$datas->created_at->diffForHumans()}}</td>
                                     <td>
                                         <span class="badge badge-warning">Belum Tervalidasi</span>
                                     </td>
@@ -86,24 +86,11 @@
                                             <button class="btn btn-danger btn-sm fa fa-trash" title="Validasi ditolak"></button>
                                             </a>
                                         @endif
-                                        
-                                        
                                     </td>
                                 </tr>
                             @endforeach
                             @endif
                             </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Daerah</th>
-                                    <th>Keterangan</th>
-                                    <th>Email yang Menambahkan</th>
-                                    <th>diajukan pada</th>
-                                    <th class="text-center">Aksi</th>
-                                    <th style="display:none;">id</th>
-                                </tr>
-                            </tfoot>
                         </table>
                     </div>
                     <div class="card-footer">
@@ -130,7 +117,7 @@
                     </div>
                     <div class="modal-body">
                         {{ csrf_field() }}
-                        {{ method_field('GET') }}
+                        {{ method_field('DELETE') }}
                         <p>Apakah anda yakin tidak melakukan validasi pada komunitas ini ?</p>
                         <button type="button" class="btn btn-secondary float-right" data-dismiss="modal">Batal</button>
                         <button type="submit" name="" class="btn btn-danger float-right mr-2" data-dismiss="modal" onclick="formSubmit()">Hapus</button>
@@ -155,23 +142,14 @@
 
           <h3><p id="val"></p></h3>
             @if(auth()->user()->role == 'pimpinanecoranger')
-                <form method="POST" action="/editvalidasi" class="needs-validation" novalidate="" id="editForm" enctype="multipart/form-data">
-            @endif
-            @if(auth()->user()->role == 'petugaslapangan')
-                <form method="POST" action="/editvalidasi-petugaslap" class="needs-validation" novalidate="" id="editFormpetugaslap" method="POST" enctype="multipart/form-data">
-            @endif
-            @if(auth()->user()->role == 'komunitas')
-                <form method="POST" action="/editvalidasi-komunitas" class="needs-validation" novalidate="" id="editFormkomunitas" method="POST" enctype="multipart/form-data">
+                <form method="POST" action="" class="needs-validation" novalidate="" id="editForm" enctype="multipart/form-data">
             @endif
                 {{ csrf_field() }}
                 {{ method_field('PATCH') }}
 
                 <div class="form-group">
                     <div class="input-group">                      
-                    <select name="level" type="text" class="form-control">
-                        <option selected disabled>Pilih</option>
-                        <option value="1">Lakukan Validasi data</option>
-                      </select>
+                    <input type="hidden" name="level" value="1"></input>
                     </div>
                 </div>
                 
@@ -188,7 +166,7 @@
 
 <!-- ============= Array ============= -->
 
-<script>
+    <script>
       var array =[];
     </script>
 
@@ -246,7 +224,7 @@
              '<p>Titik Koordinat : '+array[i][1]+', '+array[i][2]+'<br/>'+
              'Daerah : '+array[i][0]+'<br/>'+
              'Keterangan : '+array[i][3]+'<br/>'+
-             'Email yang menambahkan : '+array[i][4]+'</p>'+
+             'Email Penanggung Jawab : '+array[i][4]+'</p>'+
              '</p></div>';
 
              infoWindow.setContent(infoWindowContent);
@@ -283,9 +261,9 @@
              var element = document.getElementById("daerah");
              element.innerHTML = data[1];
             //  
-             $('#editForm').attr('action', '/validasi/'+data[6]);
-             $('#editFormpetugaslap').attr('action', '/validasi-petugaslap/'+data[6]);
-             $('#editFormkomunitas').attr('action', '/validasi-komunitas/'+data[6]);
+             $('#editForm').attr('action', 'validasi/'+data[6]);
+             $('#editFormpetugaslap').attr('action', 'validasi-petugaslap/'+data[6]);
+             $('#editFormkomunitas').attr('action', 'validasi-komunitas/'+data[6]);
              $('#editModal').modal('show');
          });
  
@@ -299,7 +277,7 @@
       function deleteData(id)
       {
           var id = id;
-          var url = '{{ route("validasi.destroy", ":id") }}';
+          var url = '{{route("validasi.destroy", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }
@@ -307,7 +285,7 @@
       function deleteDatakomunitas(id)
       {
           var id = id;
-          var url = '{{ route("validasi-komunitas.destroy", ":id") }}';
+          var url = '{{route("validasi-komunitas.destroy", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }
@@ -315,7 +293,7 @@
       function deleteDatapetugaslap(id)
       {
           var id = id;
-          var url = '{{ route("validasi-petugaslap.destroy", ":id") }}';
+          var url = '{{route("validasi-petugaslap.destroy", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }

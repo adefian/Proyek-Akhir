@@ -26,7 +26,7 @@ if(window.Dropzone) {
 
 // Basic confirm box
 $('[data-confirm]').each(function() {
-  var userId = $(this).data('id');
+  var userId = $(this).data('href');
   var me = $(this),
       me_data = me.data('confirm');
 
@@ -39,7 +39,7 @@ $('[data-confirm]').each(function() {
         text: me.data('confirm-text-yes') || 'Iya',
         class: 'btn btn-danger btn-shadow',
         handler: function() {
-          window.location.href = "/"+ userId ;
+          window.location.href = userId ;
         }
       },
       {
@@ -183,6 +183,37 @@ $(function() {
         return false;
       });
 
+      $(".main-sidebar .sidebar-menu-pimpinankomunitas li a.has-dropdown").off('click').on('click', function() {
+        var me     = $(this);
+        var active = false;
+        if(me.parent().hasClass("active")){
+          active = true;
+        }
+        
+        $('.main-sidebar .sidebar-menu-pimpinankomunitas li.active > .dropdown-menu').slideUp(500, function() {
+          update_sidebar_nicescroll();          
+          return false;
+        });
+        
+        $('.main-sidebar .sidebar-menu-pimpinankomunitas li.active').removeClass('active');
+
+        if(active==true) {
+          me.parent().removeClass('active');          
+          me.parent().find('> .dropdown-menu').slideUp(500, function() {            
+            update_sidebar_nicescroll();
+            return false;
+          });
+        }else{
+          me.parent().addClass('active');          
+          me.parent().find('> .dropdown-menu').slideDown(500, function() {            
+            update_sidebar_nicescroll();
+            return false;
+          });
+        }
+
+        return false;
+      });
+
       $('.main-sidebar .sidebar-menu li.active > .dropdown-menu').slideDown(500, function() {
         update_sidebar_nicescroll();        
         return false;
@@ -192,6 +223,10 @@ $(function() {
         return false;
       });
       $('.main-sidebar .sidebar-menu-komunitas li.active > .dropdown-menu').slideDown(500, function() {
+        update_sidebar_nicescroll();        
+        return false;
+      });
+      $('.main-sidebar .sidebar-menu-pimpinankomunitas li.active > .dropdown-menu').slideDown(500, function() {
         update_sidebar_nicescroll();        
         return false;
       });
@@ -242,6 +277,10 @@ $(function() {
       $(".main-sidebar .sidebar-menu-komunitas > li > a").removeAttr('data-toggle');
       $(".main-sidebar .sidebar-menu-komunitas > li > a").removeAttr('data-original-title');
       $(".main-sidebar .sidebar-menu-komunitas > li > a").removeAttr('title');
+      $(".main-sidebar .sidebar-menu-pimpinankomunitas > li > ul .dropdown-title").remove();
+      $(".main-sidebar .sidebar-menu-pimpinankomunitas > li > a").removeAttr('data-toggle');
+      $(".main-sidebar .sidebar-menu-pimpinankomunitas > li > a").removeAttr('data-original-title');
+      $(".main-sidebar .sidebar-menu-pimpinankomunitas > li > a").removeAttr('title');
     }else{
       body.addClass('sidebar-mini');
       body.removeClass('sidebar-show');
@@ -276,6 +315,20 @@ $(function() {
         }
       });
       $(".main-sidebar .sidebar-menu-komunitas > li").each(function() {
+        let me = $(this);
+
+        if(me.find('> .dropdown-menu').length) {
+          me.find('> .dropdown-menu').hide();
+          me.find('> .dropdown-menu').prepend('<li class="dropdown-title pt-3">'+ me.find('> a').text() +'</li>');
+        }else{
+          me.find('> a').attr('data-toggle', 'tooltip');
+          me.find('> a').attr('data-original-title', me.find('> a').text());
+          $("[data-toggle='tooltip']").tooltip({
+            placement: 'right'
+          });
+        }
+      });
+      $(".main-sidebar .sidebar-menu-pimpinankomunitas > li").each(function() {
         let me = $(this);
 
         if(me.find('> .dropdown-menu').length) {
@@ -369,6 +422,8 @@ $(function() {
         main_sidebar.find('.sidebar-menu-petugaslap .nav-item.dropdown.show a').click();
         main_sidebar.find('.navbar-nav').addClass('sidebar-menu-komunitas').removeClass('navbar-nav');
         main_sidebar.find('.sidebar-menu-komunitas .nav-item.dropdown.show a').click();
+        main_sidebar.find('.navbar-nav').addClass('sidebar-menu-pimpinankomunitas').removeClass('navbar-nav');
+        main_sidebar.find('.sidebar-menu-pimpinankomunitas .nav-item.dropdown.show a').click();
         main_sidebar.find('.sidebar-brand').remove();
         main_sidebar.find('.sidebar-menu').before($('<div>', {
           class: 'sidebar-brand'
@@ -385,6 +440,13 @@ $(function() {
           }).html($('.navbar-brand').html())
         ));
         main_sidebar.find('.sidebar-menu-komunitas').before($('<div>', {
+          class: 'sidebar-brand'
+        }).append(
+          $('<a>', {
+            href: $('.navbar-brand').attr('href'),
+          }).html($('.navbar-brand').html())
+        ));
+        main_sidebar.find('.sidebar-menu-pimpinankomunitas').before($('<div>', {
           class: 'sidebar-brand'
         }).append(
           $('<a>', {
@@ -411,6 +473,7 @@ $(function() {
         nav_second.find(".sidebar-menu li a.has-dropdown").off('click');
         nav_second.find(".sidebar-menu-petugaslap li a.has-dropdown").off('click');
         nav_second.find(".sidebar-menu-komunitas li a.has-dropdown").off('click');
+        nav_second.find(".sidebar-menu-pimpinankomunitas li a.has-dropdown").off('click');
         nav_second.find('.sidebar-brand').remove();
         nav_second.removeAttr('class');
         nav_second.addClass(nav_second_classes);
@@ -420,6 +483,7 @@ $(function() {
         main_sidebar.find('.sidebar-menu').addClass('navbar-nav').removeClass('sidebar-menu');
         main_sidebar.find('.sidebar-menu-petugaslap').addClass('navbar-nav').removeClass('sidebar-menu-petugaslap');
         main_sidebar.find('.sidebar-menu-komunitas').addClass('navbar-nav').removeClass('sidebar-menu-komunitas');
+        main_sidebar.find('.sidebar-menu-pimpinankomunitas').addClass('navbar-nav').removeClass('sidebar-menu-pimpinankomunitas');
         main_sidebar.find('.dropdown-menu').hide();
         main_sidebar.removeAttr('style');
         main_sidebar.removeAttr('tabindex');

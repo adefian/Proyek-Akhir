@@ -53,14 +53,14 @@
                         @foreach($data as $datas)
                             <tr>
                                 <td class="text-center">{{$no++}}</td>
-                                <td>{{$datas->namalokasi}}</td>
+                                <td>{{$datas->nama}}</td>
                                 <td>{{$datas->latitude}}</td>
                                 <td>{{$datas->longitude}}</td>
                                 <td style="display:none;">{{$datas->id}}</td>
                                 <td>
-                                    @if($datas->status === 0)
+                                    @if($datas->status === 'kosong')
                                         <span class="badge badge-success">Kosong</span>
-                                        @elseif($datas->status === 1)
+                                        @elseif($datas->status === 'penuh')
                                         <span class="badge badge-danger">Penuh</span>
                                         @else
                                         <span class="badge badge-warning">Pengambilan</span>
@@ -92,16 +92,6 @@
                         @endforeach
                         @endif
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>No</th>
-                                <th>Nama Lokasi</th>
-                                <th>Latitude</th>
-                                <th>Longitude</th>
-                                <th>Status</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </tfoot>
                     </table>
                   </div>
                 </div>
@@ -149,7 +139,7 @@
       function deleteData(id)
       {
           var id = id;
-          var url = '{{ route("indikasi.destroy", ":id") }}';
+          var url = '{{route("indikasi.destroy", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }
@@ -157,7 +147,7 @@
       function deleteDatakomunitas(id)
       {
           var id = id;
-          var url = '{{ route("indikasi-komunitas.destroy", ":id") }}';
+          var url = '{{route("indikasi-komunitas.destroy", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }
@@ -165,7 +155,7 @@
       function deleteDatapetugaslap(id)
       {
           var id = id;
-          var url = '{{ route("indikasi-petugaslap.destroy", ":id") }}';
+          var url = '{{route("indikasi-petugaslap.destroy", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }
@@ -195,14 +185,14 @@
              var data = table.row($tr).data();
              console.log(data);
  
-             $('#namalokasi').val(data[1]);
+             $('#nama').val(data[1]);
              $('.latude').val(data[2]);
              $('.longit').val(data[3]);
             //  $('#status').val(data[5]);
              
-             $('#editForm').attr('action', '/indikasi/'+data[4]);
-             $('#editFormpetugaslap').attr('action', '/indikasi-petugaslap/'+data[4]);
-             $('#editFormkomunitas').attr('action', '/indikasi-komunitas/'+data[4]);
+             $('#editForm').attr('action', 'indikasi/'+data[4]);
+             $('#editFormpetugaslap').attr('action', 'indikasi-petugaslap/'+data[4]);
+             $('#editFormkomunitas').attr('action', 'indikasi-komunitas/'+data[4]);
              $('#editModal').modal('show');
          });
 
@@ -229,7 +219,7 @@
             }
             else{
 
-            swal("Maaf Browser tidak Support HTML 5");
+            swal("Maaf Browser tidak Support Untuk Menambahkan lokasi map");
             }
 
 

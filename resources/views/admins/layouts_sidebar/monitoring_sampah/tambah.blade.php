@@ -2,7 +2,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title">Tambahkan Lokasi</h5>
+            <h5 class="modal-title">Tambahkan Lokasi Tempat Sampah</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -15,20 +15,20 @@
           </div>
           <div class="col-lg-6 col-sm-12 col-12">
             @if(auth()->user()->role == 'pimpinanecoranger')
-                <form class="needs-validation" novalidate="" action="indikasi" method="POST" enctype="multipart/form-data">
+                <form class="needs-validation" novalidate="" action="{{route('indikasi.store')}}" method="POST" enctype="multipart/form-data">
             @endif
             @if(auth()->user()->role == 'petugaslapangan')
-                <form class="needs-validation" novalidate="" action="indikasi-petugaslap" method="POST" enctype="multipart/form-data">
+                <form class="needs-validation" novalidate="" action="{{route('indikasi-petugaslap.store')}}" method="POST" enctype="multipart/form-data">
             @endif
             @if(auth()->user()->role == 'komunitas')
-                <form class="needs-validation" novalidate="" action="indikasi-komunitas" method="POST" enctype="multipart/form-data">
+                <form class="needs-validation" novalidate="" action="{{route('indikasi-komunitas.store')}}" method="POST" enctype="multipart/form-data">
             @endif
                 {{csrf_field()}}
 
                 <div class="form-group">
-                    <label for="namalokasi">Nama Lokasi</label> 
+                    <label for="nama">Nama Tempat Sampah</label> 
                     <div class="input-group">   
-                        <input name="namalokasi" type="text" class="form-control" placeholder="Nama Lokasi" required>      
+                        <input name="nama" type="text" class="form-control" placeholder="Nama Lokasi" required>      
                     </div>
                 </div>
                 <div class="form-group">
@@ -44,14 +44,14 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="foto">Foto</label> 
+                    <label for="file_gambar">Foto</label> 
                     <div class="input-group">    
-                        <input name="foto" type="file" class="form-control">
+                        <input name="file_gambar" type="file" class="form-control">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="input-group">   
-                        <input name="status" type="hidden" class="form-control" value="0"> 
+                        <input name="status" type="hidden" class="form-control" value="kosong"> 
                     </div>
                 </div>
                     <button type="button" class="btn btn-secondary float-right ml-2" data-dismiss="modal">Batal</button>

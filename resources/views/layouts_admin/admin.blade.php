@@ -12,7 +12,8 @@
   @yield('css')
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" >
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" >
- 
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.min.css">
 
   <!-- CSS Libraries -->
 
@@ -21,7 +22,7 @@
   <link rel="stylesheet" href="{{asset('assets/stisla/css/custom.css')}}">
   <link rel="stylesheet" href="{{asset('assets/stisla/css/components.css')}}">
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <link rel="shortcut icon" href="{{asset('assets/img/pick me up.png')}}">
+  <link rel="shortcut icon" href="{{asset('assets-landingpage/img/logo-L.png')}}">
   
 </head>
 
@@ -43,6 +44,10 @@
       <div class="navbar-komunitas"></div>
     @endif  
     
+    @if(auth()->user()->role == 'pimpinankomunitas')
+      <div class="navbar-pimpinankomunitas"></div>
+    @endif  
+
       @include('layouts_admin.navbar')
 
       @include('layouts_admin.sidebar')
@@ -55,33 +60,6 @@
     </div>
   </div>
 
-<div class="modal fade" id="logout" tabindex="-1" role="dialog" aria-labelledby="logoutLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-      </div>
-      <div class="modal-body">
-        <h5>Apakah anda yakin ingin keluar ?</h5>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      @if(auth()->user()->role == 'pimpinanecoranger')
-        <a href="logout-pimpinan">
-      @endif
-
-      @if(auth()->user()->role == 'petugaslapangan')
-        <a href="logout-petugaslap">
-      @endif
-
-      @if(auth()->user()->role == 'komunitas')
-        <a href="logout-komunitas">
-      @endif  
-          <button type="button" class="btn btn-danger">Logout</button>
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
 
   <!-- The Modal -->
     <div id="myModal" class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="logoutLabel" aria-hidden="true">
@@ -118,6 +96,8 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.js"></script>
+
   <script src="{{asset('assets/stisla/js/stisla.js')}}"></script>
 
   <!-- JS Libraies -->
@@ -125,7 +105,15 @@
   <!-- Template JS File -->
   <script src="{{asset('assets/stisla/js/scripts.js')}}"></script>
   <script src="{{asset('assets/stisla/js/custom.js')}}"></script>
-  
+
+  <script type="text/javascript">
+    window.setInterval('refresh()', 300000); 	// Call a function every 60000 milliseconds (OR 60 seconds).
+                                    //300000 (OR 5 menit)
+    // Refresh or reload page.
+    function refresh() {
+        window .location.reload();
+    }
+  </script>
   <!-- Page Specific JS File -->
 
   

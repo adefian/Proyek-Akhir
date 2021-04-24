@@ -13,23 +13,12 @@ class KontenAnimasi extends Migration
      */
     public function up()
     {
-        Schema::create('konten_animasi', function (Blueprint $table) {
+        Schema::create('konten_edukasi', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nama_konten');
-            $table->string('animasi');
+            $table->string('nama');
+            $table->string('deskripsi')->nullable();
+            $table->string('file_gambar')->nullable();
             $table->timestamps();
-            $table->bigInteger('id_petugas_kontenreward')->unsigned();
-            $table->foreign('id_petugas_kontenreward')
-                    ->references('id')
-                    ->on('petugas_kontenreward')
-                    ->onDelete('cascade')
-                    ->onUpdate('cascade');
-            $table->bigInteger('id_pimpinan_ecoranger')->unsigned();
-            $table->foreign('id_pimpinan_ecoranger')
-                    ->references('id')
-                    ->on('pimpinan_ecoranger')
-                    ->onDelete('cascade')
-                    ->onUpdate('cascade');
         });
     }
 
@@ -40,6 +29,6 @@ class KontenAnimasi extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('konten_animasi');
+        Schema::dropIfExists('konten_edukasi');
     }
 }

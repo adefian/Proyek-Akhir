@@ -5,146 +5,147 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Agenda;
 use App\User;
-use App\AnggotaKomunitas;
-use App\Komunitas;
+use Illuminate\Support\Arr;
 use Carbon\Carbon;
 
 class AgendaController extends Controller
 {
-    
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {   
-        \Carbon\Carbon::setLocale('id');
 
-        $data = Agenda::all();
+  public function lihatagenda()
+  {
+    $tgl = Carbon::now();
+    $upload = Agenda::where('tanggal', '>', $tgl)->orderBy('updated_at','DESC')->get();
+    return response()->json([
+      'pesan' => 'sukses lah',
+      'upload' => $upload
+    ], 200);
+  }
 
-        if (auth()->user()->role == 'komunitas') {
-            
-            $user = AnggotaKomunitas::where('user_id', auth()->user()->id)->first();
-            $komunitas_id = $user->komunitas_id;
-            
-            $komunitas  = Agenda::where('komunitas_id', $komunitas_id)->get();
-        }
+  //
+  public function tambahagenda(Request $request)
+  {
+    //$TGL= \Carbon\Carbon::parse($notif->tanggal)->isoFormat('LLL');
+    $tok = User::all();
+    $file = $request->input('file_gambar');
+    $nama_file = time() . ".jpeg";
+    $tujuan_upload = public_path() . '/agenda/';
 
-        $daerah = Komunitas::all();
-
-        return view('admins.layouts_sidebar.monitoring_komunitas.kelola_agenda', compact('data','komunitas','daerah'));
+    if (file_put_contents($tujuan_upload . $nama_file, base64_decode($file))) {
+      // code...
+      $response['msg'] = "Sukses";
+      echo "Sukses Photo" . $response['msg'];
+    } else {
+      // code...
+      $response['msg'] = "error";
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    Agenda::create([
+      'file_gambar' => $nama_file,
+      'nama' => $request->input('nama'),
+      'keterangan' => $request->input('keterangan'),
+
+    ]);
+
+    $agenda = Agenda::where('nama', $request->nama)->orderBy('updated_at', 'DESC')->first();
+    $tokenList = Arr::pluck($tok, 'token');  // Array data token 
+
+
+    $fcmUrl = 'https://fcm.googleapis.com/fcm/send';
+    $token = 'eCxZoXAFRu-SD_LdGTjjDd:APA91bGdUK_jG6dfEPHOOGqf4tbrQJjuhbMIyikoQI6bzfcYZ2_mqBnLqcSvRS_YB2Imm15De-Z9fxRWSux5rfOu6KxkWAJKIpaoX9bZ1rg4T9HFBCh5RipTKM0wwUh30d3_mUZ5tb-s';
+
+    $foto = $agenda->file_gambar;
+    $notification = [
+      'title' => $agenda->nama,
+      'body' => $agenda->keterangan,
+      'sound' => true,
+      'image' => 'https://ta.poliwangi.ac.id/~ti17136/agenda/' . $foto,
+    ];
+
+    $extraNotificationData = ["message" => $notification, "moredata" => 'dd'];
+    $fcmNotification = [
+      'registration_ids' => $tokenList, //multple token array
+      // 'to'        => $token, //single token
+      'notification' => $notification,
+      'data' => $extraNotificationData
+    ];
+
+    $headers = [
+      'Authorization: key=AAAAuYgA5bE:APA91bFSdM8CYQpIvYOiUSqa6xv_52FeZ7oagezJUd0Nwo5EARHYmPWgVT4Uajj4Bo8orvgYP9sc8CZj6JYhCwfp9uid9-Kn_uC57SedJu3VirHBwXIyHucG_sgWKCUtiBVv0UEMxA7L',
+      'Content-Type: application/json'
+    ];
+
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $fcmUrl);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fcmNotification));$ch = curl_init();
+    curl_setopt($ch, CURLOPT_ENCODING, "");
+    curl_setopt($ch, CURLOPT_MAXREDIRS, 10);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 0);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+    curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+    $result = curl_exec($ch);
+    curl_close($ch);
+
+
+
+    return response()->json([$response, $result]);
+  }
+
+  public function UpdateAgenda(Request $request, $id)
+  {
+
+    $file = $request->input('file_gambar');
+    $nama = $request->input('nama');
+    $nohp = $request->input('keterangan');
+
+
+    $nama_file = time() . "_" . ".jpeg";
+    // $tujuan_upload = public_path() . '../resource/gambar/';
+    $tujuan_upload = public_path() . '/agenda/';
+
+    if (file_put_contents($tujuan_upload . $nama_file, base64_decode($file))) {
+      $pesan = "Update Berhasil";
+    } else if ($nama || $nohp) {
+
+      $pesan = "Update Berhasil ";
+    } else {
+
+      $pesan = "Update Gagal";
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $user = auth()->user()->id;
-        
-        if (auth()->user()->role == 'komunitas') {
-            $anggota = AnggotaKomunitas::where('user_id', $user)->first();
-            $komunitas_id = $anggota->komunitas_id;
-        }
+    $data =  Agenda::findOrFail($id);
+    // $input =$request->all();
+    $input = ([
+      // 'file'=> $nama_file,
+      'nama' => $request->nama,
+      'keterangan' => $request->keterangan
 
-        $input = ([
-            'nama' => $request->nama,
-            'keterangan' => $request->keterangan,
-            'jenis_agenda' => $request->jenis_agenda,
-            'tanggal' => $request->tanggal,
-            'user_id' => $user,
-        ]);
-        
-            $input = [
-                'komunitas_id' => $komunitas_id
-            ];
+    ]);
 
-        Agenda::create($input);
-
-        alert()->success('Data berhasil ditambahkan','Selamat');
-        return back();
+    if ($request->input('file_gambar')) {
+      $input['file_gambar'] = $nama_file;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+    $data->update($input);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+    return response()->json([
+      'pesan' => 'sukses lah',
+      'upload' => $data
+    ], 200);
+  }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        $agenda = Agenda::findOrFail($id);
-        
-        $user =  auth()->user()->id;
-        
-        $input = ([
-            'nama' => $request->nama,
-            'keterangan' => $request->keterangan,
-            'user_id' => $user,
-            'tanggal' => $request->tanggal
-        ]);
+  public function HapusAgenda(Request $request, $id)
+  {
 
-        $a = $request->jenis_agenda;
-        
-        if ($request->jenis_agenda === '1') {
-            $input['jenis_agenda'] = $a;
-        }
-        
-        $agenda->update($input);
-
-        alert()->success('Berhasil','Data Berhasil diedit');
-        return back();
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $agenda = Agenda::find($id);
-
-        $agenda->delete($id);
-        alert()->success('Sukses','Data berhasil dihapus');
-        return back();
-    }
+    $data =  Agenda::findOrFail($id);
+    $input = $request->all();
+    $data->delete($input);
+    // return "sukses";
+    return "berhasil";
+  }
 }

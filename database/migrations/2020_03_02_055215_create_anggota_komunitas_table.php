@@ -15,20 +15,22 @@ class CreateAnggotaKomunitasTable extends Migration
     {
         Schema::create('anggota_komunitas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nama');
-            $table->bigInteger('nohp');
-            $table->string('alamat');
-            $table->string('jenis_kelamin');
-            $table->string('level')->default(0);
+            $table->string('nama')->nullable();
+            $table->string('nohp')->nullable();
+            $table->string('alamat')->nullable();
+            $table->string('file_gambar')->nullable();
+            $table->string('jenis_kelamin')->nullable();
+            $table->string('bio')->nullable();
+            $table->integer('level')->default(0);
             $table->timestamps();
-            $table->bigInteger('id_user')->unsigned();
-            $table->foreign('id_user')
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')
                     ->references('id')
                     ->on('user')
                     ->onDelete('cascade')
                     ->onUpdate('cascade');
-            $table->bigInteger('id_komunitas')->unsigned();
-            $table->foreign('id_komunitas')
+            $table->bigInteger('komunitas_id')->unsigned();
+            $table->foreign('komunitas_id')
                     ->references('id')
                     ->on('komunitas')
                     ->onDelete('cascade')

@@ -15,13 +15,13 @@
             </div>
             <div class="col-lg-6 col-sm-12 col-12">
                 @if(auth()->user()->role == 'pimpinanecoranger')
-                    <form class="needs-validation" novalidate="" action="daftarkomunitas" method="POST" enctype="multipart/form-data">
+                    <form class="needs-validation" novalidate="" action="{{route('daftarkomunitas.store')}}" method="POST" enctype="multipart/form-data">
                 @endif
                 @if(auth()->user()->role == 'petugaslapangan')
-                    <form class="needs-validation" novalidate="" action="daftarkomunitas-petugaslap" method="POST" enctype="multipart/form-data">
+                    <form class="needs-validation" novalidate="" action="{{route('daftarkomunitas-petugaslap.store')}}" method="POST" enctype="multipart/form-data">
                 @endif
                 @if(auth()->user()->role == 'komunitas')
-                    <form class="needs-validation" novalidate="" action="daftarkomunitas-komunitas" method="POST" enctype="multipart/form-data">
+                    <form class="needs-validation" novalidate="" action="{{route('daftarkomunitas-komunitas.store')}}" method="POST" enctype="multipart/form-data">
                 @endif
                     {{csrf_field()}}
 
@@ -36,6 +36,7 @@
                         <div class="input-group">   
                             <textarea name="keterangan" type="text" class="form-control" placeholder="Keterangan" required></textarea>
                         </div>
+                        <small class="text-danger">Kenapa anda ingin mendaftarkan daerah ini.</small>
                     </div>
                     <div class="form-group">
                         <label for="latitude">Latitude</label> 

@@ -11,73 +11,112 @@
 |
 */
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'WebHomeController@index')->name('home');
 
-Route::get('login','AuthController@login')->middleware('guest')->name('login');
-Route::post('postlogin','AuthController@postlogin')->middleware('guest');
+Route::get('login','WebAuthController@login')->middleware('guest')->name('login');
+Route::post('postlogin','WebAuthController@postlogin')->middleware('guest')->name('postlogin');
 
-Route::get('register','AuthController@register')->middleware('guest')->name('register');
-Route::post('postregister','AuthController@postregister')->middleware('guest');
+Route::get('register','WebAuthController@register')->middleware('guest')->name('register');
+Route::post('postregister','WebAuthController@postregister')->middleware('guest')->name('postregister');
 
-Route::get('daftardaerah','AuthController@daftardaerah')->name('daftardaerah');
-Route::post('postdaftardaerah','AuthController@postdaftardaerah');
+Route::get('daftardaerah','WebAuthController@daftardaerah')->name('daftardaerah');
+Route::post('postdaftardaerah','WebAuthController@postdaftardaerah')->name('postdaftardaerah');
 
-Route::get('ecobrick', 'EcobrickController@ecobrick');
-Route::post('kirimsaranecobrick', 'EcobrickController@TambahSaran');
+Route::get('ecobrick', 'WebEcobrickController@ecobrick')->name('ecobrick');
+Route::post('kirimsaranecobrick', 'WebEcobrickController@TambahSaran')->name('kirimsaranecobrick');
+
+Route::post('kirimfeedback', 'WebHomeController@feedback')->name('kirimfeedback');
 
 Route::group(['middleware' => ['auth','pimpinanecoranger']],function(){
     
-    Route::resource('pimpinan', 'PimpinanController');
-    Route::resource('indikasi', 'MonitoringsampahController');
-        Route::post('ubahstatussampah/{id}', 'MonitoringsampahController@ubahstatus');
-        Route::get('lokasisampah', 'MonitoringsampahController@lokasi')->name('lokasisampah');
-    Route::resource('kelolaagenda', 'AgendaController');
-    Route::resource('daftarkomunitas', 'MonitoringkomunitasController');
-    Route::resource('validasi', 'ValidasiController');
-        Route::get('dataanggotakomunitas', 'MonitoringkomunitasController@dataanggotakomunitas');
-        Route::post('editdataanggotakomunitas/{id}', 'MonitoringkomunitasController@editanggota');
-        Route::post('hapusdataanggotakomunitas/{id}', 'MonitoringkomunitasController@hapusanggota')->name('hapusanggotakomunitas');
-    Route::resource('datapetugaslapangan', 'DatapetugaslapanganController');
-    Route::resource('reviewsaranecobrick', 'EcobrickController');
-    Route::resource('daftarsampah', 'SampahController');
-    Route::get('logout-pimpinan','AuthController@logout')->name('logout-pimpinan'); 
+    Route::resource('pimpinan', 'WebPimpinanController');
+    Route::resource('indikasi', 'WebMonitoringsampahController');
+        Route::post('ubahstatussampah/{id}', 'WebMonitoringsampahController@ubahstatus')->name('ubahstatussampah');
+        Route::get('lokasisampah', 'WebMonitoringsampahController@lokasi')->name('lokasisampah');
+    Route::resource('kelolaagenda', 'WebAgendaController');
+    Route::resource('daftarkomunitas', 'WebMonitoringkomunitasController');
+    Route::resource('validasi', 'WebValidasiController');
+    Route::resource('datapimpinan', 'WebDatapimpinanController');
+    Route::resource('datapimpinankomunitas', 'WebDatapimpinankomunitasController');
+    Route::resource('datapetugaslapangan', 'WebDatapetugaslapanganController');
+    Route::resource('dataanggotakomunitas', 'WebDatakomunitasController');
+    Route::resource('datapetugaskontenreward', 'WebDatapetugaskontenController');
+    Route::resource('reviewsaranecobrick', 'WebEcobrickController');
+    Route::resource('riwayatpembuangan', 'WebSampahController');
+    Route::resource('laporan', 'WebLaporanController');
+    Route::get('poin', 'WebSampahController@poin')->name('poin');
+    Route::get('feedbacks', 'WebHomeController@feedbacks')->name('feedbacks');
+    Route::post('hapusfeedback/{id}', 'WebHomeController@hapusfeedback')->name('hapusfeedback');
+    Route::get('logout-pimpinan','WebAuthController@logout')->name('logout-pimpinan'); 
 });
 
 Route::group(['middleware' => ['auth','petugaslapangan']],function(){
     
-    Route::resource('petugaslapangan', 'PetugaslapanganController');
-    Route::resource('indikasi-petugaslap', 'MonitoringsampahController');
-        Route::post('ubahstatussampah-petugaslap/{id}', 'MonitoringsampahController@ubahstatus');
-        Route::get('lokasisampah-petugaslap', 'MonitoringsampahController@lokasi')->name('lokasisampah-petugaslapangan');
-    Route::resource('kelolaagenda-petugaslap', 'AgendaController');
-    Route::resource('daftarkomunitas-petugaslap', 'MonitoringkomunitasController');
-    Route::resource('validasi-petugaslap', 'ValidasiController');
-        Route::get('dataanggotakomunitas-petugaslap', 'MonitoringkomunitasController@dataanggotakomunitas');
-        Route::post('editdataanggotakomunitas-petugaslap/{id}', 'MonitoringkomunitasController@editanggota');
-        Route::post('hapusdataanggotakomunitas-petugaslap/{id}', 'MonitoringkomunitasController@hapusanggota')->name('hapusanggotakomunitas-petugaslap');
-    Route::resource('datapetugaslapangan-petugaslap', 'DatapetugaslapanganController');
-    Route::resource('reviewsaranecobrick-petugaslap', 'EcobrickController');
-    Route::resource('daftarsampah-petugaslap', 'SampahController');
-    Route::get('logout-petugaslap','AuthController@logout')->name('logout-petugaslapangan'); 
+    Route::resource('petugaslapangan', 'WebPetugaslapanganController');
+    Route::resource('indikasi-petugaslap', 'WebMonitoringsampahController');
+    Route::post('ubahstatussampah-petugaslap/{id}', 'WebMonitoringsampahController@ubahstatus')->name('ubahstatussampah-petugaslap');
+    Route::get('lokasisampah-petugaslap', 'WebMonitoringsampahController@lokasi')->name('lokasisampah-petugaslap');
+    Route::resource('kelolaagenda-petugaslap', 'WebAgendaController');
+    Route::resource('daftarkomunitas-petugaslap', 'WebMonitoringkomunitasController');
+    Route::resource('validasi-petugaslap', 'WebValidasiController');
+    Route::resource('datapetugaslapangan-petugaslap', 'WebDatapetugaslapanganController');
+    Route::resource('dataanggotakomunitas-petugaslap', 'WebDatakomunitasController');
+    Route::resource('reviewsaranecobrick-petugaslap', 'WebEcobrickController');
+    Route::resource('riwayatpembuangan-petugaslap', 'WebSampahController');
+    Route::get('poin-petugaslap', 'WebSampahController@poin')->name('poin-petugaslap');
+    Route::get('feedbacks-petugaslap', 'WebHomeController@feedbacks')->name('feedbacks-petugaslap');
+    Route::post('hapusfeedback-petugaslap/{id}', 'WebHomeController@hapusfeedback')->name('hapusfeedback-petugaslap');
+    Route::get('logout-petugaslap','WebAuthController@logout')->name('logout-petugaslap'); 
 });
 
 Route::group(['middleware' => ['auth','komunitas']],function(){
     
-    Route::resource('komunitas', 'KomunitasController');
-    Route::resource('indikasi-komunitas', 'MonitoringsampahController');
-        Route::post('ubahstatussampah-komunitas/{id}', 'MonitoringsampahController@ubahstatus');
-        Route::get('lokasisampah-komunitas', 'MonitoringsampahController@lokasi')->name('lokasisampah-komunitas');
-    Route::resource('kelolaagenda-komunitas', 'AgendaController');
-    Route::resource('daftarkomunitas-komunitas', 'MonitoringkomunitasController');
-    Route::resource('validasi-komunitas', 'ValidasiController');
-        Route::get('dataanggotakomunitas-komunitas', 'MonitoringkomunitasController@dataanggotakomunitas');
-        Route::post('editdataanggotakomunitas-komunitas/{id}', 'MonitoringkomunitasController@editanggota');
-        Route::post('hapusdataanggotakomunitas-komunitas/{id}', 'MonitoringkomunitasController@hapusanggota')->name('hapusanggotakomunitas-komunitas');
-    Route::resource('datapetugaslapangan-komunitas', 'DatapetugaslapanganController');
-    Route::resource('reviewsaranecobrick-komunitas', 'EcobrickController');
-    Route::resource('daftarsampah-komunitas', 'SampahController');
-    Route::get('logout-komunitas','AuthController@logout')->name('logout-komunitas'); 
+    Route::resource('komunitas', 'WebKomunitasController');
+    Route::resource('indikasi-komunitas', 'WebMonitoringsampahController');
+        Route::post('ubahstatussampah-komunitas/{id}', 'WebMonitoringsampahController@ubahstatus')->name('ubahstatussampah-komunitas');
+        Route::get('lokasisampah-komunitas', 'WebMonitoringsampahController@lokasi')->name('lokasisampah-komunitas');
+    Route::resource('kelolaagenda-komunitas', 'WebAgendaController');
+    Route::resource('daftarkomunitas-komunitas', 'WebMonitoringkomunitasController');
+    Route::resource('validasi-komunitas', 'WebValidasiController');
+    Route::resource('datapetugaslapangan-komunitas', 'WebDatapetugaslapanganController');
+    Route::resource('dataanggotakomunitas-komunitas', 'WebDatakomunitasController');
+    Route::resource('reviewsaranecobrick-komunitas', 'WebEcobrickController');
+    Route::resource('riwayatpembuangan-komunitas', 'WebSampahController');
+    Route::get('feedbacks-komunitas', 'WebHomeController@feedbacks')->name('feedbacks-komunitas');
+    Route::post('hapusfeedback-komunitas/{id}', 'WebHomeController@hapusfeedback')->name('hapusfeedback-komunitas');
+    Route::get('logout-komunitas','WebAuthController@logout')->name('logout-komunitas'); 
 });
+
+Route::group(['middleware' => ['auth','pimpinankomunitas']],function(){
+    
+    Route::resource('pimpinan-komunitas', 'WebPimpinanKomunitasController');
+    Route::resource('indikasi-pimpinankom', 'WebMonitoringsampahController');
+        Route::post('ubahstatussampah-pimpinankom/{id}', 'WebMonitoringsampahController@ubahstatus')->name('ubahstatussampah-pimpinankom');
+        Route::get('lokasisampah-pimpinankom', 'WebMonitoringsampahController@lokasi')->name('lokasisampah-pimpinankom');
+    Route::resource('kelolaagenda-pimpinankom', 'WebAgendaController');
+    Route::resource('daftarkomunitas-pimpinankom', 'WebMonitoringkomunitasController');
+    Route::resource('validasi-pimpinankom', 'WebValidasiController');
+    Route::resource('datapetugaslapangan-pimpinankom', 'WebDatapetugaslapanganController');
+    Route::resource('dataanggotakomunitas-pimpinankom', 'WebDatakomunitasController');
+    Route::resource('reviewsaranecobrick-pimpinankom', 'WebEcobrickController');
+    Route::resource('laporan-pimpinankom', 'WebLaporanController');
+    Route::get('feedbacks-pimpinankom', 'WebHomeController@feedbacks')->name('feedbacks-pimpinankom');
+    Route::post('hapusfeedback-pimpinankom/{id}', 'WebHomeController@hapusfeedback')->name('hapusfeedback-pimpinankom');
+    Route::get('logout-pimpinankom','WebAuthController@logout')->name('logout-pimpinankom'); 
+});
+
+Route::get('code_reward', 'WebSampahController@data')->name('code_reward'); 
+
+Route::get('datasensor', 'WebSampahController@datasensor')->name('datasensor');
+
+// Route::get('tukarcode','WebSampahController@tukarcode');
+// Route::post('pushtukarcode/{id}','WebSampahController@pushtukarcode');
+// Route::get('/api','WebMonitoringsampahController@PushNotifSampah');
+// Route::get('/webview','WebHomeController@webview');
+
+// Route::get('crop-image', 'WebHomeController@crop');
+
+// Route::post('crop-image', ['as'=>'upload.image','uses'=>'WebHomeController@uploadImage']);
 
 
 

@@ -11,7 +11,7 @@ class TempatSampah extends Model
     use Notifiable;
 
     protected $fillable = [
-        'namalokasi', 'latitude', 'longitude', 'status', 'user_id', 'foto',
+        'nama', 'latitude', 'longitude', 'status', 'user_id', 'file_gambar',
     ];
 
     protected $table = 'tempat_sampah';
@@ -20,4 +20,5 @@ class TempatSampah extends Model
     {
         return $this->belongsTo('App\User', 'user_id');
     }
+
 }

@@ -9,12 +9,12 @@
         </div>
         <div class="modal-body">
 
-                <form action="kirimsaranecobrick" method="POST" enctype="multipart/form-data">
+                <form action="{{route('kirimsaranecobrick')}}" method="POST" enctype="multipart/form-data">
             
                 {{csrf_field()}}
 
                 <div class="form-group">
-                    <label for="namalokasi">Nama Lengkap</label> 
+                    <label for="nama">Nama Lengkap</label> 
                     <div class="input-group">   
                         <input name="nama_pengirimsaran" type="text" class="form-control" placeholder="Nama Lengkap" required>      
                     </div>
@@ -22,7 +22,7 @@
                 <div class="form-group">
                     <label for="foto_diusulkan">Foto</label> 
                     <div class="input-group">    
-                        <input name="foto_diusulkan" type="file" class="form-control" required>
+                        <input name="foto_diusulkan" id="foto_diusulkan" type="file" class="form-control @error('foto_diusulkan') is-invalid @enderror" name="foto_diusulkan" tabindex="2" required autocomplete="new-foto_diusulkan">
                     </div>
                 </div>
                 <div class="form-group">

@@ -9,13 +9,13 @@
               </div>
         <div class="modal-body">
             @if(auth()->user()->role == 'pimpinanecoranger')
-                <form method="POST" action="/kelolaagenda" class="needs-validation" novalidate="" id="editForm" enctype="multipart/form-data">
+                <form method="POST" action="" class="needs-validation" novalidate="" id="editForm" enctype="multipart/form-data">
             @endif
-            @if(auth()->user()->role == 'petugaslapangan')
-                <form method="POST" action="/kelolaagenda-petugaslap" class="needs-validation" novalidate="" id="editFormpetugaslap" method="POST" enctype="multipart/form-data">
+            @if(auth()->user()->role == 'pimpinankomunitas')
+                <form method="POST" action="" class="needs-validation" novalidate="" id="editFormpimpinankom" method="POST" enctype="multipart/form-data">
             @endif
             @if(auth()->user()->role == 'komunitas')
-                <form method="POST" action="/kelolaagenda-komunitas" class="needs-validation" novalidate="" id="editFormkomunitas" method="POST" enctype="multipart/form-data">
+                <form method="POST" action="" class="needs-validation" novalidate="" id="editFormkomunitas" method="POST" enctype="multipart/form-data">
             @endif
                 {{ csrf_field() }}
                 {{ method_field('PATCH') }}
@@ -33,20 +33,27 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label for="jenis_agenda">Jenis Agenda saat ini 
+                    <p id="jenis_ag">asas</p> 
+                    </label>
+                    <div class="input-group">    
+                        <select name="jenis_agenda" type="text" class="form-control">
+                            <option selected disabled>Tetap</option>
+                            <option value="1">Mendesak</option>
+                            <option value="2">Penting</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label for="tanggal">Tanggal</label>
                     <div class="input-group">    
                         <input name="tanggal" placeholder="Pilih Tanggal" id="tanggal" type="datetime-local" class="form-control" min="{{Carbon\Carbon::now()->format('Y-m-d\TH:i')}}"  required>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="jenis_agenda">Jenis Agenda saat ini <p id="jenis_agenda"></p>
-                    </label>
+                    <label for="file_gambar">Gambar</label>
                     <div class="input-group">    
-                        <select name="jenis_agenda" type="text" class="form-control">
-                            <option selected disabled>Pilih Jenis Agenda</option>
-                            <option value="1">Mendesak</option>
-                            <option value="0">Tidak Mendesak</option>
-                        </select>
+                        <input name="file_gambar" type="file" class="form-control">
                     </div>
                 </div>
                 <div class="modal-footer">

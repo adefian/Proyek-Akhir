@@ -9,7 +9,7 @@ class AnggotaKomunitas extends Model
     protected $table = 'anggota_komunitas';
 
     protected $fillable = [
-        'nama', 'nohp', 'alamat', 'jenis_kelamin', 'level', 'user_id', 'komunitas_id'
+        'nama', 'nohp', 'alamat', 'jenis_kelamin', 'level', 'user_id', 'komunitas_id', 'file_gambar', 'bio'
     ];
 
     public function akun()
@@ -20,5 +20,14 @@ class AnggotaKomunitas extends Model
     public function daerahygdipilih()
     {
         return $this->belongsTo('App\Komunitas','komunitas_id');
+    }
+
+    public function ambilFoto()
+    {
+        if (!$this->file_gambar) {
+            return asset('foto_user/avatar-4.png');
+        }
+
+        return asset('foto_user/'.$this->file_gambar);
     }
 }

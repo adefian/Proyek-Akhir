@@ -1,21 +1,21 @@
 <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-    <!-- <img alt="image" src="{{asset('assets/img/avatar/avatar-3.png')}}" class="rounded-circle mr-1"> -->
-    <div class="d-sm-none d-lg-inline-block">Hi, {{auth()->user()->nama}}</div></a>
+    <!-- <img alt="image" src="{{asset('foto_user/avatar-3.png')}}" class="rounded-circle mr-1"> -->
+    <div class="d-sm-none d-lg-inline-block">Hai, {{auth()->user()->username}}</div></a>
     <div class="dropdown-menu dropdown-menu-right">
-        <div class="dropdown-title">Logged in 5 min ago</div>
-        <a href="/pimpinan/{{auth()->user()->id}}" class="dropdown-item has-icon">
-        <i class="far fa-user"></i> Profile
+        <div class="dropdown-title">{{auth()->user()->role}}</div>
+        <a href="{{route('pimpinan.show', [auth()->user()->id])}}" class="dropdown-item has-icon">
+        <i class="fas fa-user"></i> Profil
         </a>
-        <a href="features-activities.html" class="dropdown-item has-icon">
-        <i class="fas fa-bolt"></i> Activities
+        <a href="{{route('pimpinan.show', [auth()->user()->id])}}" class="dropdown-item has-icon">
+        <i class="fas fa-key"></i> Ganti Password
         </a>
-        <a href="features-settings.html" class="dropdown-item has-icon">
-        <i class="fas fa-cog"></i> Settings
+        <a href="{{route('pimpinan.show', [auth()->user()->id])}}" class="dropdown-item has-icon">
+        <i class="fas fa-cog"></i> Pengaturan
         </a>
         <div class="dropdown-divider"></div>
             
-            <a href="#" data-id="logout-pimpinan" class="dropdown-item has-icon text-danger" data-confirm="Keluar|Apakah anda yakin ingin keluar sekarang ?">
-                <button class="btn btn-danger fas fa-sign-out-alt">Logout
+            <a data-href="{{route('logout-pimpinan')}}" class="dropdown-item has-icon text-danger" data-confirm="Keluar|Apakah anda yakin ingin keluar sekarang ?">
+                <button class="btn btn-danger far fa-sign-out-alt">Keluar
                 </button>
             </a>
 

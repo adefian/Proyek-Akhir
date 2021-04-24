@@ -16,6 +16,10 @@
     @include('admins.komunitas.include')
 @endif
 
+@if(auth()->user()->role == 'pimpinankomunitas')
+    @include('admins.pimpinan_komunitas.include')
+@endif
+
 @section('content')
     <div class="main-content">
         <section class="section">
@@ -34,6 +38,9 @@
               @if(auth()->user()->role == 'komunitas')
                   <div class="card card-warning">
               @endif
+              @if(auth()->user()->role == 'pimpinankomunitas')
+                  <div class="card">
+              @endif
                   <div class="card-wrap">
                     <div class="card-body">
                     <div class="row">
@@ -41,12 +48,12 @@
                           <div id="map" style="border-radius: 3px;"></div>
                         </div>
                         <div class="col-lg-6 col-12">
-                          <h6 class="text-center mb-4 mt-4">Titik Lokasi Komunitas</h6>
+                          <h4 class="text-center mb-4 mt-4">Titik Lokasi Komunitas</h4>
                           @if(auth()->user()->role == 'pimpinanecoranger')
                               <button data-toggle="modal" data-target="#modalCreate" class="btn btn-success btn-sm fas fa-plus float-right mr-4" title="Tambahkan disini" style="margin-left: auto;"></button>
                           @endif
                           <div class="table-responsive">
-                            <table class="table table-sm" id="dataTable">
+                            <table class="table table-sm" id="dataTable" width="100%">
                               <thead>
                                 <tr>
                                   <th></th>
@@ -59,37 +66,39 @@
                                 </tr>
                               </thead>
                               <tbody>
-                              @foreach($data as $datas)
-                                <tr>
-                                  <th scope="row"> <i class="fas fa-users"></i> </th>
-                                  <td>{{$datas->daerah}}</td>
-                                  <td>{{$datas->keterangan}}</td>
-                                  <td class="text-right">
-                                  @if(auth()->user()->role == 'pimpinanecoranger')
-                                  <button class="edit btn btn-warning btn-sm fa fa-edit" title="Edit disini"></button>
+                              @if($data)
+                                @foreach($data as $datas)
+                                  <tr>
+                                    <th scope="row"> <i class="fas fa-users"></i> </th>
+                                    <td width="30%">{{$datas->daerah}}</td>
+                                    <td width="50%">{{$datas->keterangan}}</td>
+                                    <td class="text-right">
+                                    @if(auth()->user()->role == 'pimpinanecoranger')
+                                    <button class="edit btn btn-warning btn-sm fa fa-edit" title="Edit disini"></button>
 
-                                      @if(auth()->user()->role == 'pimpinanecoranger')
-                                          <a href="javascript:;" data-toggle="modal" onclick="deleteData({{$datas->id}})" data-target="#DeleteModal">
-                                          <button class="btn btn-danger btn-sm fa fa-trash" title="Hapus disini"></button>
-                                          </a>
-                                      @endif
-                                      @if(auth()->user()->role == 'petugaslapangan')
-                                          <a href="javascript:;" data-toggle="modal" onclick="deleteDatapetugaslap({{$datas->id}})" data-target="#DeleteModal">
-                                          <button class="btn btn-danger btn-sm fa fa-trash" title="Hapus disini"></button>
-                                          </a>
-                                      @endif
-                                      @if(auth()->user()->role == 'komunitas')
-                                          <a href="javascript:;" data-toggle="modal" onclick="deleteDatakomunitas({{$datas->id}})" data-target="#DeleteModal">
-                                          <button class="btn btn-danger btn-sm fa fa-trash" title="Hapus disini"></button>
-                                          </a>
-                                      @endif
-                                  @endif
-                                  </td>
-                                  <td style="display:none;">{{$datas->id}}</td>
-                                  <td style="display:none;">{{$datas->latitude}}</td>
-                                  <td style="display:none;">{{$datas->longitude}}</td>
-                                </tr>
-                              @endforeach
+                                        @if(auth()->user()->role == 'pimpinanecoranger')
+                                            <a href="javascript:;" data-toggle="modal" onclick="deleteData({{$datas->id}})" data-target="#DeleteModal">
+                                            <button class="btn btn-danger btn-sm fa fa-trash" title="Hapus disini"></button>
+                                            </a>
+                                        @endif
+                                        @if(auth()->user()->role == 'petugaslapangan')
+                                            <a href="javascript:;" data-toggle="modal" onclick="deleteDatapetugaslap({{$datas->id}})" data-target="#DeleteModal">
+                                            <button class="btn btn-danger btn-sm fa fa-trash" title="Hapus disini"></button>
+                                            </a>
+                                        @endif
+                                        @if(auth()->user()->role == 'komunitas')
+                                            <a href="javascript:;" data-toggle="modal" onclick="deleteDatakomunitas({{$datas->id}})" data-target="#DeleteModal">
+                                            <button class="btn btn-danger btn-sm fa fa-trash" title="Hapus disini"></button>
+                                            </a>
+                                        @endif
+                                    @endif
+                                    </td>
+                                    <td style="display:none;">{{$datas->id}}</td>
+                                    <td style="display:none;">{{$datas->latitude}}</td>
+                                    <td style="display:none;">{{$datas->longitude}}</td>
+                                  </tr>
+                                @endforeach
+                              @endif
                               </tbody>
                             </table>
                           </div>
@@ -135,7 +144,7 @@
     <script>
       var array = [];
     </script>
-
+    @if($data)
     @foreach ($data as $datas)
     <script>
 
@@ -143,6 +152,7 @@
       array.push(['<?php echo $datas->latitude ?>','<?php echo $datas->longitude ?>','<?php echo $datas->daerah ?>','<?php echo $datas->keterangan ?>','<?php echo $datas->email ?>']);
     </script>
     @endforeach
+    @endif
   <!-- ====================== end Array ================== -->
 @endsection
 
@@ -199,7 +209,7 @@
                   '<p>Titik Koordinat : '+array[i][0]+', '+array[i][1]+'<br/>'+
                   'Daerah : '+array[i][2]+'<br/>'+
                   'Keterangan : '+array[i][3]+'<br/>'+
-                  'Email yang menambahkan : '+array[i][4]+'</p>'+
+                  'Email Penanggung Jawab : '+array[i][4]+'</p>'+
 
                   '</div>';
 
@@ -360,9 +370,9 @@
              $('#lat2').val(data[5]);
              $('#leng2').val(data[6]);
              
-             $('#editForm').attr('action', '/daftarkomunitas/'+data[4]);
-             $('#editFormpetugaslap').attr('action', '/daftarkomunitas-petugaslap/'+data[4]);
-             $('#editFormkomunitas').attr('action', '/daftarkomunitas-komunitas/'+data[4]);
+             $('#editForm').attr('action', 'daftarkomunitas/'+data[4]);
+             $('#editFormpetugaslap').attr('action', 'daftarkomunitas-petugaslap/'+data[4]);
+             $('#editFormkomunitas').attr('action', 'daftarkomunitas-komunitas/'+data[4]);
              $('#editModal').modal('show');
          });
  
@@ -376,7 +386,7 @@
       function deleteData(id)
       {
           var id = id;
-          var url = '{{ route("daftarkomunitas.destroy", ":id") }}';
+          var url = '{{route("daftarkomunitas.destroy", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }
@@ -384,7 +394,7 @@
       function deleteDatakomunitas(id)
       {
           var id = id;
-          var url = '{{ route("daftarkomunitas-komunitas.destroy", ":id") }}';
+          var url = '{{route("daftarkomunitas-komunitas.destroy", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }
@@ -392,7 +402,7 @@
       function deleteDatapetugaslap(id)
       {
           var id = id;
-          var url = '{{ route("daftarkomunitas-petugaslap.destroy", ":id") }}';
+          var url = '{{route("daftarkomunitas-petugaslap.destroy", ":id") }}';
           url = url.replace(':id', id);
           $("#deleteForm").attr('action', url);
       }

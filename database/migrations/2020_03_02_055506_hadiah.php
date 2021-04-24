@@ -15,28 +15,12 @@ class Hadiah extends Migration
     {
         Schema::create('hadiah', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nama_hadiah');
-            $table->integer('jumlah');
-            $table->string('keterangan');
+            $table->string('nama');
+            $table->integer('harga_hadiah');
+            $table->string('deskripsi');
+            $table->integer('jumlah_hadiah');
+            $table->string('file_gambar');
             $table->timestamps();
-            $table->bigInteger('id_petugas_kontenreward')->unsigned();
-            $table->foreign('id_petugas_kontenreward')
-                    ->references('id')
-                    ->on('petugas_kontenreward')
-                    ->onDelete('cascade')
-                    ->onUpdate('cascade');
-            $table->bigInteger('id_pimpinan_ecoranger')->unsigned();
-            $table->foreign('id_pimpinan_ecoranger')
-                    ->references('id')
-                    ->on('pimpinan_ecoranger')
-                    ->onDelete('cascade')
-                    ->onUpdate('cascade');
-            $table->bigInteger('id_masyarakat')->unsigned();
-            $table->foreign('id_masyarakat')
-                    ->references('id')
-                    ->on('masyarakat')
-                    ->onDelete('cascade')
-                    ->onUpdate('cascade');
         });
     }
 

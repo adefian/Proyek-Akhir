@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Register &mdash; TS</title>
+  <title>Daftar Anggota Komunitas &mdash;</title>
 
   <!-- General CSS Files -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="{{asset('assets/stisla/css/components.css')}}">
   
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <link rel="shortcut icon" href="{{asset('assets/img/pick me up.png')}}">
+  <link rel="shortcut icon" href="{{asset('assets-landingpage/img/logo-L.png')}}">
 </head>
 <style>
     body {
@@ -35,6 +35,20 @@
 </style>
 <body>
 
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/5eea12909e5f69442290c021/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+
   @include('sweet::alert')
 
   <div id="app">
@@ -46,11 +60,12 @@
               <img src="../assets/img/stisla-fill.svg" alt="logo" width="100" class="shadow-light rounded-circle">
             </div> -->
 
-            <div class="card card-primary">
-              <div class="card-header"><h4>Register</h4></div>
+            <div class="card card-info">
+              <div class="card-header"><h4>Daftar Anggota Komunitas</h4></div>
 
               <div class="card-body">
-              <form method="POST" action="postregister" class="needs-validation" novalidate="">
+              
+              <form method="POST" action="{{route('postregister')}}" class="needs-validation" novalidate="">
                   {{csrf_field()}}
 
                 <div class="row">
@@ -86,17 +101,33 @@
                     Silahkan isi Email Anda
                     </div>
                   </div>
-
+                
+                <div class="row">
+                 <div class="col-6">
                   <div class="form-group">
                     <div class="d-block">
                     	<label for="password" class="control-label">Password</label>
                     </div>
-                    <input id="password" type="password" class="form-control" name="password" tabindex="2" required>
-                    <div class="invalid-feedback">
-                    Silahkan isi Password Anda
-                    </div>
+                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" tabindex="2" required autocomplete="new-password">
+                      @error('password')
+                          <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
                   </div>
-                
+                 </div> 
+
+                  <div class="col-6">
+                    <div class="form-group">
+                      <div class="d-block">
+                        <label for="konfirmasipassword" class="control-label">Konfirmasi Password</label>
+                      </div>
+                      <input id="konfirmasipassword" type="password" class="form-control" tabindex="2" required>
+                      <p style="font-size: 11px;" id="message"></p>
+                    </div>
+                  </div> 
+                </div>
+
                 <div class="row">
                  <div class="col-6">
                   <div class="form-group">
@@ -116,13 +147,10 @@
                     	<label for="nohp" class="control-label">No Hp</label>
                     </div>
                     <div class="input-group">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text">+62</span>
-                      </div>
                       <input id="nohp" type="nohp" class="form-control" name="nohp" tabindex="2" required>
-                    </div>
                     <div class="invalid-feedback">
                     Silahkan isi No Handphone Anda / yang dapat dihubungi
+                    </div>
                     </div>
                   </div>
                  </div> 
@@ -133,53 +161,57 @@
                     <div class="d-block">
                     	<label for="jenis_kelamin" class="control-label">Jenis Kelamin</label>
                     </div>
-                      <select name="jenis_kelamin" type="text" class="form-control">
+                      <select id="jenis_kelamin" name="jenis_kelamin" type="text" class="form-control @error('jenis_kelamin') is-invalid @enderror" required autocomplete="jenis_kelamin">
                         <option selected disabled>Pilih Jenis kelamin</option>
                         <option value="laki-laki">Laki-laki</option>
                         <option value="Perempuan">Perempuan</option>
                       </select>
-                    <div class="invalid-feedback">
-                    Silahkan isi Jenis Kelamin Anda
-                    </div>
+                      @error('jenis_kelamin')
+                          <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
                   </div>
 
                  <div class="form-group col-6">
                     <div class="d-block">
                         <label for="daerah" class="control-label">Daerah</label>
                     </div>
-                        <select name="daerah" type="text" class="form-control">
+                        <select id="daerah" name="daerah" type="text" class="form-control @error('daerah') is-invalid @enderror" required autocomplete="daerah">
                             <option selected disabled>Pilih Daerah</option>
                             @foreach($data as $datas)
                                 <option value="{{$datas->id}}">{{$datas->daerah}}</option>
                             @endforeach
-                            
                         </select>
-                    <div class="invalid-feedback">
-                      please fill in your daerah 
-                    </div>
+                      @error('daerah')
+                          <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
                   </div>
                 </div>
 
                   <div class="form-group">
-                    <button type="submit" class="btn btn-klik btn-lg btn-block" tabindex="4">
-                      Register
+                    <button id="button" type="submit" class="btn btn-klik btn-lg btn-block" tabindex="4" disabled>
+                      Daftar
                     </button>
                   </div>
                 </form>
-                <div class="text-center mt-4 mb-3">
-                  <div class="text-job text-muted">Register With Me</div>
-                </div>
                 <div class="row sm-gutters">
                     <div class="mt-3 mr-3 text-muted text-center">
-                        Daerah anda belum terdaftar ? <a href="{{ route('daftardaerah')}}">Daftarkan Daerah</a>
+                        Daerah anda belum terdaftar ? <a href="{{route('daftardaerah')}}">Daftarkan Daerah</a>
                     </div>
 
                     <div class="mt-3 text-muted text-center">
-                        Sudah memiliki akun ?  <a href="login">Login</a>
+                        Sudah memiliki akun ?  <a href="{{route('login')}}">Masuk</a>
                     </div>
                 </div>
 
               </div>
+            </div>
+
+            <div class="card shadow mb-5" style="text-align: -webkit-center;">
+              <a href="{{route('home')}}"><button class="btn btn-klik btn-lg btn-block m-3 col-11">Kembali ke Halaman Awal</button></a>
             </div>
           </div>
         </div>
@@ -201,6 +233,8 @@
       </g>
     </svg>
 
+    
+
   <!-- General JS Scripts -->
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -209,6 +243,19 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
   <script src="{{asset('assets/stisla/js/stisla.js')}}"></script>
 
+    <script>
+      $('#password, #konfirmasipassword').on('keyup', function () {
+        if ($('#password').val() == $('#konfirmasipassword').val()) {
+          $('#message').html('Password Cocok').css('color', 'green');
+          $('#button').removeAttr("disabled");
+        } else {
+          $('#message').html('Password Tidak Cocok').css('color', 'red');
+        
+          var element = document.getElementById('button');
+          element.setAttribute("disabled", "disabled");
+        }
+      });
+    </script>
   <!-- JS Libraies -->
 
   <!-- Template JS File -->

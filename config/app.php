@@ -162,6 +162,8 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         UxWeb\SweetAlert\SweetAlertServiceProvider::class,
+        LaravelFullCalendar\FullCalendarServiceProvider::class,
+
 
         /*
          * Package Service Providers...
@@ -228,6 +230,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Input' => Illuminate\Support\Facades\Input::class,
         'Alert' => UxWeb\SweetAlert\SweetAlert::class,
+        'Calendar' => LaravelFullCalendar\Facades\Calendar::class,
         'timezone' => 'Asia/Jakarta',
         'locale' => 'id',
         'faker_locale' => 'id_ID',

@@ -3,138 +3,120 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-use Auth;
-use App\TempatSampah;
-use App\User;
-use App\Komunitas;
-use App\AnggotaKomunitas;
 use App\PimpinanEcoranger;
-use App\Agenda;
+use App\User;
 
 class PimpinanController extends Controller
 {
 
-    public function __construct(){
-        parent::__construct();
-     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+     public function Pimpinan()
+	   {
+  		$hadiahku= PimpinanEcoranger::all();
+
+      foreach ($hadiahku as $value) {
+          $array[]=[
+              'nama' =>$value->nama,
+              'nohp' =>$value->nohp,
+              'alamat'=>$value->alamat,
+              'role' => $value->user->role
+          ];
+         
+       }
+     		return response()->json([
+                'pesan' =>'sukses lah',
+                'upload' => $array
+
+        	],200);
+	   }
+
+   	public function TambahPimpinan (Request $request){
+    	$data = new PimpinanEcoranger;
+    	$data->nama = $request->input('nama');
+    	$data->nohp = $request->input('nohp');
+    	$data->alamat = $request->input('alamat');
+    	$data->save();
+
+    	return "Berhasil";
+    }
+
+      
+    public function showpimpinan( $id)
+    {
+   
+      $data =  PimpinanEcoranger::where('user_id',$id)->first();
+      $array[]=[
+          'id'=> $data->id,
+          'nama'=> $data->nama,
+          'nohp'=> $data->nohp,
+          'alamat'=>   $data->alamat,
+          'username'=> $data->user->username,
+          'email'=>   $data->user->email,
+          'file_gambar'=>$data->file_gambar
+    ];
+
+    return response()->json($array);
+  }
+   
+   public function edit(Request $request, $id)
+  {
     
-    public function index()
-    {
-        $user = User::all()->count();
-        $komunitas = Komunitas::all()->count();
-        $tempatsampah = TempatSampah::all()->count();
-        $anggotakomunitas = AnggotaKomunitas::all()->count();
+    $file = $request->input('file_gambar');
+    $nama= $request->input('nama');
+    $nohp= $request->input('nohp');
+    $alamat= $request->input('alamat');
+    $nama_file = time().".jpeg";
+    // $tujuan_upload = public_path() . '../resource/gambar/';
+    $tujuan_upload = public_path() . '/foto_user/';
 
-        return view ('admins.pimpinan.index',compact('tempatsampah','user','komunitas','anggotakomunitas'));
-    }
+      if (file_put_contents($tujuan_upload . $nama_file , base64_decode($file))) 
+      {
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+        $pesan ="Kritik dan Saran Berhasil Ditambahkan";
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+      } else if ($nama&&$nohp&&$alamat) {
+       
+        $pesan ="Kritik dan Saran Berhasil Ditambahkan";
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $user = Auth::user();
-
-        $data = PimpinanEcoranger::where('user_id', $id)->first();
+      }else{
         
-        return view('admins.pimpinan.profile', compact('data','password'));
-    }
-
-    /**
-     * Show the form for editing the specified resource. 
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        // fetching the user model 
-        $user = Auth::user();
-
-        $pimpinan = PimpinanEcoranger::findOrFail($id);
-        $input = ([
-            'nama' => $request->namalengkap,
-            'nohp' => $request->nohp,
-            'alamat' => $request->alamat,
-            'bio' => $request->bio,
+        $pesan ="Terjadi Kesalahan";
+      }
+       
+        $data =  PimpinanEcoranger::where('user_id',$id)->first();
+      
+       $input =([
+          // 'file'=> $nama_file,
+          'nama'=> $request->nama,
+          'nohp'=> $request->nohp,
+          'alamat'=> $request->alamat,
+          'user_id'=>$data->user->id
+        
         ]);
 
-        if ($file = $request->file('foto')) {
-            $nama = time() . $file->getClientOriginalName();
-            $file->move('assets/img/avatar/', $nama);  
-            $input['foto'] = $nama;
+        if ($request->input('file_gambar')) {
+            $input['file_gambar'] = $nama_file;
         }
 
-        $ed = $pimpinan->user_id;
-        $user = User::findOrFail($ed);
-        $input2 = ([
-            'nama' => $request->username,
-            'email' => $request->email,
+        $i =$data->user_id;
+        $user=User::findOrFail($i);
+
+        $input2 =([
+        'username'=> $request->username,
+        'email'=> $request->email
         ]);
 
-        if ($request->password) {
-            $pass = bcrypt($request->password);
-            $input2['password'] = $pass;
+        if ($request->input('password')) {
+          $input2['password'] = bcrypt($request->input('password'));
         }
 
-        
-        $pimpinan->update($input);
         $user->update($input2);
+        $data->update($input);
 
-        alert()->success('Berhasil','Data berhasil diedit');
-        return back();
-    }
+        return response()->json([
+             'pesan' =>'sukses lah',
+             'upload' => $user,$data
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+      ],200);
+        // return "Berhasil";
     }
 }
